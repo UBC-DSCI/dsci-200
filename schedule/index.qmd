@@ -30,9 +30,7 @@ Instructions to create `.pdf`s of the lecture slides (works in Google Chrome or 
 
 | Date      | Slides                                                            | Deadlines |
 |:----------|:------------------------------------------------------------------|:----------|
-| 03 Sep 24  | (no class, Imagine UBC)                                          |           |
-| 05 Sep 24  | [Intro to class](slides/00-intro-to-class.qmd), Git |  (Quiz 0 due tomorrow)         |
-| 10 Sep 24 | Understanding R                 | Lab 00        |
+| 03 Jan 26  | [Intro to class](slides/00-intro-to-class.qmd), Git |  (Quiz 0 due tomorrow)         |
 
 ## Final exam
 
