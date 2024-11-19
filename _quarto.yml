@@ -34,7 +34,7 @@ website:
       - text: Schedule
         url: schedule/index.qmd
       - text: Worksheets
-        url: https://github.com/UBC-STAT/dsci-200
+        url: https://github.com/UBC-STAT/dsci-200/worksheets
       - text: Computing
         url: computing/index.qmd
       - text: Case Studies
