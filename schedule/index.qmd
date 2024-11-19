@@ -30,7 +30,7 @@ Instructions to create `.pdf`s of the lecture slides (works in Google Chrome or 
 
 | Date      | Slides                                                            | Deadlines |
 |:----------|:------------------------------------------------------------------|:----------|
-| 03 Jan 26  | [Intro to class](slides/00-intro-to-class.qmd), Git |  (Quiz 0 due tomorrow)         |
+| 03 Jan 26  | [Intro to class](slides/00-intro-to-class.qmd) |           |
 
 ## Final exam
 
