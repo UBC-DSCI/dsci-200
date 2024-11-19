@@ -6,8 +6,8 @@ knitr::opts_chunk$set(
   fig.align = "center"
 )
 options(htmltools.dir.version = FALSE)
-secondary = "#e98a15"
-primary = "#2c365e"
+primary = "#89ABE3"
+secondary = "c88b8b"
 tertiary = "#0a8754"
 fourth_color = "#a8201a"
 
@@ -24,6 +24,6 @@ library(knitr)
 theme_set(theme_bw(18))
 
 pro = fa("thumbs-up", fill = green)
-con = fa("bomb", fill = orange)
+con = fa("bomb", fill = blue)
 
 set.seed(12345)

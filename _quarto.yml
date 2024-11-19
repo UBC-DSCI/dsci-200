@@ -17,6 +17,8 @@ execute:
 
 editor: source
 
+repo-actions: false
+
 website:
   title: UBC DSCI 200
   repo-url: https://github.com/ubc-stat/stat-406/
@@ -34,7 +36,7 @@ website:
       - text: Schedule
         url: schedule/index.qmd
       - text: Worksheets
-        url: https://github.com/UBC-STAT/dsci-200/worksheets
+        url: https://github.com/UBC-STAT/dsci-200
       - text: Computing
         url: computing/index.qmd
       - text: Case Studies
@@ -42,7 +44,7 @@ website:
       - text: FAQ
         url: faq.qmd
       - text: "{{< fa brands github >}} Github"
-        url: https://github.com/stat-406-2024
+        url: https://github.com/UBC-STAT/dsci-200
 
 format:
   html:

@@ -1,4 +1,4 @@
-## {{< meta lecture >}} {.large background-image="gfx/smooths.svg" background-opacity="0.3"}
+## {{< meta lecture >}} {.large background-image="gfx/smooths.svg" background-opacity="0.3" background-size="50%"}
 
 [DSCI 200]{.secondary}
 
