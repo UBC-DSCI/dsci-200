@@ -11,6 +11,7 @@ project:
     - schedule/index.qmd
     - schedule/slides/*.qmd
     - schedule/handouts/*.qmd
+  output-dir: docs
 
 execute:
   freeze: auto
