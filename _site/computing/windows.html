@@ -131,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/UBC-STAT/dsci-200"> 
+    <a class="nav-link" href="https://github.com/UBC-STAT/dsci-200/worksheets"> 
 <span class="menu-text">Worksheets</span></a>
   </li>  
   <li class="nav-item">
@@ -178,8 +178,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
   <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
   <li><a href="#rtools" id="toc-rtools" class="nav-link" data-scroll-target="#rtools">Rtools</a></li>
-  <li><a href="#installing-r-packages" id="toc-installing-r-packages" class="nav-link" data-scroll-target="#installing-r-packages">Installing R packages</a></li>
-  <li><a href="#latex" id="toc-latex" class="nav-link" data-scroll-target="#latex">LaTeX</a></li>
   <li><a href="#github-pat" id="toc-github-pat" class="nav-link" data-scroll-target="#github-pat">Github PAT</a></li>
   <li><a href="#post-installation-notes" id="toc-post-installation-notes" class="nav-link" data-scroll-target="#post-installation-notes">Post-installation notes</a></li>
   <li><a href="#attributions" id="toc-attributions" class="nav-link" data-scroll-target="#attributions">Attributions</a></li>
@@ -221,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="github" class="level2">
 <h2 class="anchored" data-anchor-id="github">GitHub</h2>
-<p>In Stat 406 we will use the publicly available <a href="https://github.com/">GitHub.com</a>. If you do not already have an account, please sign up for one at <a href="https://github.com/">GitHub.com</a></p>
+<p>In this course we will use the publicly available <a href="https://github.com/">GitHub.com</a>. If you do not already have an account, please sign up for one at <a href="https://github.com/">GitHub.com</a></p>
 <p>Sign up for a free account at <a href="https://github.com/">GitHub.com</a> if you don’t have one already.</p>
 </section>
 <section id="git-bash-and-windows-terminal" class="level2">
@@ -346,48 +344,12 @@ Important
 <div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"jsonlite"</span>, <span class="at">type =</span> <span class="st">"source"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If the <code>jsonlite</code> package installs without errors, Rtools is setup correctly.</p>
 </section>
-<section id="installing-r-packages" class="level3">
-<h3 class="anchored" data-anchor-id="installing-r-packages">Installing R packages</h3>
-<p>Next, install the key R packages needed for the course by opening up RStudio and typing the following into the R console inside RStudio:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"ubc-stat/stat-406-rpackage"</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>With luck, that will install everything you need.</p>
-</section>
-<section id="latex" class="level2">
-<h2 class="anchored" data-anchor-id="latex">LaTeX</h2>
-<p>It is possible you already have this installed.</p>
-<p>First try the following check in RStudio</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Stat406<span class="sc">::</span><span class="fu">test_latex_installation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you see Green checkmarks, then you’re good.</p>
-<p>Even if it fails, follow the instructions, and try it again.</p>
-<p>Note that you might see two error messages regarding lua during the installation, you can safely ignore these, the installation will complete successfully after clicking “OK”.</p>
-<p>If it still fails, proceed with the instructions</p>
-<hr>
-<p>In RStudio, run the following commands to install the <code>tinytex</code> package and setup <code>tinytex</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'tinytex'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In order for Git Bash to be able to find the location of TinyTex, you will need to <a href="https://support.microsoft.com/en-us/windows/sign-out-of-windows-346925bb-024c-cd86-7a53-9066242a9ed3">sign out of Windows</a> and back in again. After doing that, you can check that the installation worked by opening a terminal and asking for the version of latex:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">latex</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You should see something like this if you were successful:</p>
-<pre><code>pdfTeX 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX)
-kpathsea version 6.3.3
-Copyright 2021 Han The Thanh (pdfTeX) et al.
-There is NO warranty.  Redistribution of this software is
-covered by the terms of both the pdfTeX copyright and
-the Lesser GNU General Public License.
-For more information about these matters, see the file
-named COPYING and the pdfTeX source.
-Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
-Compiled with libpng 1.6.37; using libpng 1.6.37
-Compiled with zlib 1.2.11; using zlib 1.2.11
-Compiled with xpdf version 4.03</code></pre>
-</section>
 <section id="github-pat" class="level2">
 <h2 class="anchored" data-anchor-id="github-pat">Github PAT</h2>
 <p>You’re probably familiar with 2-factor authentication for your UBC account or other accounts which is a very secure way to protect sensitive information (in case your password gets exposed). Github uses a Personal Access Token (PAT) for the Command Line Interface (CLI) and RStudio. This is different from the password you use to log in with a web browser. You will have to create one. There are some nice <code>R</code> functions that will help you along, and I find that easiest.</p>
 <p>Complete instructions are in <a href="https://happygitwithr.com/https-pat.html">Chapter 9 of Happy Git With R</a>. Here’s the quick version (you need the <code>usethis</code> and <code>gitcreds</code> libraries, which you can install with <code>install.packages(c("usethis", "gitcreds"))</code>):</p>
 <ol type="1">
-<li>In the RStudio Console, call <code>usethis::create_github_token()</code> This should open a webbrowser. In the Note field, write what you like, perhaps “Stat 406 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in <code>repo</code> is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.</li>
+<li>In the RStudio Console, call <code>usethis::create_github_token()</code> This should open a webbrowser. In the Note field, write what you like, perhaps “DSCI 200 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in <code>repo</code> is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.</li>
 <li>This should now give you a long string to Copy. It often looks like <code>ghp_0asfjhlasdfhlkasjdfhlksajdhf9234u</code>. Copy that. (You would use this instead of the browser password in RStudio when it asks for a password).</li>
 <li>To store the PAT permanently in <code>R</code> (so you’ll never have to do this again, hopefully) call <code>gitcreds::gitcreds_set()</code> and paste the thing you copied there.</li>
 </ol>
