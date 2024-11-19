@@ -1,0 +1,50 @@
+project:
+  type: website
+  lib-dir: site_libs
+  render:
+    - index.qmd
+    - faq.qmd
+    - computing/*.qmd
+    - case-studies/*.qmd
+    - syllabus.qmd
+    - course-setup.qmd
+    - schedule/index.qmd
+    - schedule/slides/*.qmd
+    - schedule/handouts/*.qmd
+
+execute:
+  freeze: auto
+
+editor: source
+
+website:
+  title: UBC DSCI 200
+  repo-url: https://github.com/ubc-stat/stat-406/
+  issue-url: https://github.com/ubc-stat/stat-406/issues/new/
+  repo-actions: [source, issue, edit]
+  page-footer:
+    background: primary
+    center: "This work by [Katie Burak](https://katieburak.github.io/) and [Gabriela V. Cohen Freue](https://gcohenfr.github.io/) is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0)<img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1'><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1' /><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1' />"
+  navbar:
+    pinned: true
+    title: "{{< fa chart-column >}} UBC DSCI 200"
+    right:
+      - text: Syllabus
+        url: syllabus.qmd
+      - text: Schedule
+        url: schedule/index.qmd
+      - text: Worksheets
+        url: https://ubc-stat.github.io/stat-406-worksheets/
+      - text: Computing
+        url: computing/index.qmd
+      - text: Case Studies
+        url: index.qmd
+      - text: FAQ
+        url: faq.qmd
+      - text: "{{< fa brands github >}} Github"
+        url: https://github.com/stat-406-2024
+
+format:
+  html:
+    theme: [cosmo, assets/styles.scss]
+    toc: true

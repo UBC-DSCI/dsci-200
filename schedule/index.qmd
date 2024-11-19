@@ -1,0 +1,120 @@
+---
+title: "{{< fa calendar-alt >}} Schedule"
+format:
+  html:
+    toc: true
+---
+
+Required readings slides are listed below for each module.
+Readings from [\[ISLR\]](https://www.statlearning.com) are always required
+while those from [\[ESL\]](https://web.stanford.edu/~hastie/ElemStatLearn/) 
+are optional and supplemental. 
+
+
+::: {.callout-note appearance="minimal"}
+All lecture slides as `.qmd` files are available [here](https://github.com/UBC-STAT/stat-406/tree/main/schedule/slides/).
+
+<details>
+`R` code for all lectures is available [here](https://github.com/UBC-STAT/stat-406/tree/main/schedule/Rcode/).
+</details>
+:::
+
+::: {.callout-note appearance="minimal"}
+Handouts for some lectures (coding files, pdfs) are available [here](https://github.com/UBC-STAT/stat-406/tree/main/schedule/handouts/).
+:::
+
+::: {.callout-note appearance="minimal"}
+Instructions to create `.pdf`s of the lecture slides (works in Google Chrome or Chromium). 
+
+<details>
+1.  Open some Slides in the browser.
+1.  Toggle into Print View by pressing the <kbd>E</kbd> key. (It may not appear that anything has happened)
+1.  Open the Print dialog: <kbd>CTRL</kbd> / <kbd>CMD</kbd> + <kbd>P</kbd>.
+1.  Change the **Destination** setting to **Save as PDF**.
+1.  Change the **Layout** to **Landscape**.
+1.  Change the **Margins** to **None**.
+1.  Enable the **Background graphics** option.
+1.  Click **Save** 🎉
+
+</details>
+
+:::
+
+## 0 Introduction and Review
+
+Required reading below is meant to reengage brain cells which have no doubt
+forgotten all the material that was covered in STAT 306 or CPSC 340. We don't
+presume that you remember all these details, but that, upon rereading, they at 
+least sound familiar. If this all strikes you as completely foreign, this class
+may not be for you.
+
+Required reading  
+: \[ISLR\] 2.1, 2.2, and Chapter 3 (this material is review)
+
+Optional reading
+: \[ESL\] 2.4 and 2.6
+
+Handouts
+: Programming in `R` [`.Rmd`](handouts/00-programming.Rmd), [`.pdf`](handouts/00-programming.pdf)
+: Using in RMarkdown [`.Rmd`](handouts/00-rmarkdown.Rmd), [`.pdf`](handouts/00-rmarkdown.pdf)
+
+
+| Date      | Slides                                                            | Deadlines |
+|:----------|:------------------------------------------------------------------|:----------|
+| 03 Sep 24  | (no class, Imagine UBC)                                          |           |
+| 05 Sep 24  | [Intro to class](slides/00-intro-to-class.qmd), [Git](slides/00-version-control.qmd) |  (Quiz 0 due tomorrow)         |
+| 10 Sep 24 | [Understanding R / Rmd](slides/00-r-review.qmd)                   | [Lab 00](handouts/lab00-git.qmd), (Labs begin)         |
+| 12 Sep 24 | [LM review](slides/01-lm-review.qmd), [LM Example](slides/02-lm-example.qmd) |           |
+
+## F Final exam
+
+::: {.callout-important}
+Do not make any plans to leave Vancouver before the final exam date is announced.
+:::
+
+* In person attendance is required (per Faculty of Science guidelines)
+* You must bring your computer as the exam will be given through Canvas
+* Please [arrange to borrow](https://services.library.ubc.ca/computers-technology/technology-borrowing/) one from the library if you do not have your own. Let me know ASAP if this may pose a problem.
+* You may bring 2 sheets of front/back 8.5x11 paper with _handwritten_ notes you want to use. No other materials will be allowed.
+* There will be no required coding, but I may show code or output and ask questions about it.
+* It will be entirely multiple choice / True-False / matching, etc. Delivered on Canvas.
+
+
+
+<!--
+### Schedule of Office Hours before the Final
+
+* December 11, 5-6pm on Zoom (use the link on Canvas, TA)
+* December 12, 3-4:30 in ESB 4192 (Daniel)
+* December 13, 10-11 in ESB 4192 (TA)
+* December 14, 10-11 in ESB 3174 (Daniel)
+* December 15, 2-3 on Zoom (use the link on Canvas, TA)
+-->
+
+
+<!--
+
+### Procedures (shown in Canvas Announcement)
+
+I know many of you are concerned about rapidly escalating case numbers, and I share your concerns. According to Dr. Henry's press briefing today, there has (until now) been very little spread in lecture halls, in stark contrast to what happens in parties or social gatherings. Here is the current plan (subject to change if the University makes changes). The room is very large (holds 260 people), so there should be plenty of space to spread out.
+
+
+1. The Exam remains in-person as scheduled. This is UBC policy until it changes. I was told explicitly that ONLY the Dean can decide to move it online. See also the most recent message from Pres. OnoLinks to an external site.. 
+1. If you are feeling ill, please contact your Faculty Advising office for an SD. I was told that this will likely be granted. Please do not come to the exam.
+1. Please wear a high quality mask if you can (rather than a non-medical mask). Please keep it on at all times (fitting tightly over your nose and mouth) and refrain from drinking. No eating is allowed.
+1. Please arrive early. We will let you in as you arrive to try to minimize close-quarters gathering.
+1. The Canvas Exam will not open until 8:45. This should allow us a bit of extra time to seat you and go over instructions.
+1. We will check your UBC ID as you arrive. You will not be allowed to take the exam without it. See UBC Policy hereLinks to an external site..
+1. You may bring 2 sheets of paper, with handwritten notes. Front and back. We will glance at these at the same time we check your ID. We will not collect them.
+1. We will NOT use Lockdown browser, but any student caught looking at any window or program other than Canvas will be warned, and their mark may be lowered, potentially to 0. 
+1. I would like students to remain seated until 10am. At 10, we will allow any students who are done to leave all at once. After that, we will ask students to remain until the Exam ends at 10:45. This is to minimize possibly contagious students from climbing over others. We will conduct both these exoduses in an organized fashion, row by row.
+1. For the same reason, we will limit bathroom breaks to emergencies only. If truly necessary, we can let you go at 10am with the first exodus. Please plan accordingly.
+1. We will not be mingling to answer clarifying questions. We will handle any "inaccurate questions" afterward as needed. This is for everyone's safety.
+1. All told, you will have 1 hour 55 minutes for the exam (begin at 8:45, end at 10:45, 5 minute break at 10 for early departures).
+1. There have been reports of students pulling fire alarms during exams in the last week. If this or something else disrupts the exam, there are official policies that apply. They sound "not fun", so hopefully this can be avoided.
+
+### Office Hours
+
+See Canvas/Zoom for links.
+
+-->

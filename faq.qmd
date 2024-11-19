@@ -1,0 +1,16 @@
+---
+title: "{{< fa circle-question >}} Frequently asked questions"
+---
+
+## FAQ 1 
+
+* Answer 1 
+
+### Asking for a HW regrade.
+
+::: {.callout-tip}
+## To be eligible
+
+1. Condition 1
+2. Condition 2
+:::
