@@ -2104,7 +2104,7 @@
     "href": "schedule/index.html",
     "title": " Schedule",
     "section": "",
-    "text": "Required readings slides are listed below for each module. Readings from [ISLR] are always required while those from [ESL] are optional and supplemental."
+    "text": "Slides are listed below for each lesson."
   },
   {
     "objectID": "schedule/index.html#introduction-and-review",
@@ -4702,5 +4702,12 @@
     "title": "UBC DSCI 200",
     "section": "Check vs. glm()",
     "text": "Check vs. glm()\n\nsummary(glm(y ~ x - 1, family = \"binomial\"))\n\n\nCall:\nglm(formula = y ~ x - 1, family = \"binomial\")\n\nCoefficients:\n  Estimate Std. Error z value Pr(&gt;|z|)    \nx   1.9174     0.4785   4.008 6.13e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 138.629  on 100  degrees of freedom\nResidual deviance:  32.335  on  99  degrees of freedom\nAIC: 34.335\n\nNumber of Fisher Scoring iterations: 7\n\n\n\n\n\nUBC Stat 406 - 2024"
+  },
+  {
+    "objectID": "schedule/index.html#final-exam",
+    "href": "schedule/index.html#final-exam",
+    "title": " Schedule",
+    "section": "Final exam",
+    "text": "Final exam\n\n\n\n\n\n\nImportant\n\n\n\nDo not make any plans to leave Vancouver before the final exam date is announced.\n\n\n\nIn person attendance is required (per Faculty of Science guidelines)"
   }
 ]
