@@ -28,9 +28,7 @@ Instructions to create `.pdf`s of the lecture slides (works in Google Chrome or 
 :::
 
 
-| Date      | Slides                                                            | Deadlines |
-|:----------|:------------------------------------------------------------------|:----------|
-| 03 Jan 26  | [Intro to class](slides/00-intro-to-class.qmd) |           |
+{{< include schedule-table.md >}}
 
 ## Final exam
 
