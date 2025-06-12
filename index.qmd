@@ -27,10 +27,10 @@ At the end of the course, you will be able to:
 
 * Address missing data, apply handling strategies, and assess their effect on conclusions.
 
-* Perform exploratory data analysis with statistical and visualization methods to generate hypotheses.
+* Perform exploratory data analysis and understand its role in the data science pipeline.
 
 * Evaluate the impact of measurement scales, units, and errors, and apply methods to minimize them.
 
-* Assess data privacy needs, apply techniques where necessary, and reflect on their impact.
+* Assess data privacy needs, apply techniques where necessary and reflect on their impact.
 
 * Evaluate who owns the data in a given case.

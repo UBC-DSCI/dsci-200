@@ -25,7 +25,7 @@
     "href": "syllabus.html#course-info",
     "title": " Syllabus",
     "section": "Course info",
-    "text": "Course info\nInstructors:\nKatie Burak\nWebsite: https://katieburak.github.io/\nEmail: kburak@stat.ubc.ca\nSlack: @Katie Burak\nGabriela V. Cohen Freue\nWebsite: https://gcohenfr.github.io/\nEmail: gcohen@stat.ubc.ca\nSlack: @gcohenfr\nOffice hours:\nSee Canvas for times and locations.\nCourse webpage:\nWWW: https://ubc-stat.github.io/dsci-200/\nCanvas: https://canvas.ubc.ca/courses/\nLectures/Labs:\nSee Canvas for times and locations.\nPrerequisite:\nDSCI 100"
+    "text": "Course info\nInstructors:\nKatie Burak\nWebsite: https://katieburak.github.io/\nEmail: kburak@stat.ubc.ca\n\nGabriela V. Cohen Freue\nWebsite: https://gcohenfr.github.io/\nEmail: gcohen@stat.ubc.ca\n\nOffice hours:\nSee Canvas for times and locations.\nCourse webpage:\nWWW: https://ubc-stat.github.io/dsci-200/\nCanvas: https://canvas.ubc.ca/courses/\nLectures/Labs:\nSee Canvas for times and locations.\nPrerequisite:\nDSCI 100"
   },
   {
     "objectID": "syllabus.html#course-objectives",
@@ -172,7 +172,7 @@
     "href": "index.html",
     "title": "DSCI 200",
     "section": "",
-    "text": "Schedule Syllabus\n\n\nAt the end of the course, you will be able to:\n\nChoose a data acquisition strategy and write reproducible scripts to read data.\nDetermine when data simulation is useful for analysis and plan appropriate simulations.\nIdentify and manage outliers and anomalies, reflecting on their impact on conclusions.\nAddress missing data, apply handling strategies, and assess their effect on conclusions.\nPerform exploratory data analysis with statistical and visualization methods to generate hypotheses.\nEvaluate the impact of measurement scales, units, and errors, and apply methods to minimize them.\nAssess data privacy needs, apply techniques where necessary, and reflect on their impact.\nEvaluate who owns the data in a given case."
+    "text": "Schedule Syllabus\n\n\nAt the end of the course, you will be able to:\n\nChoose a data acquisition strategy and write reproducible scripts to read data.\nDetermine when data simulation is useful for analysis and plan appropriate simulations.\nIdentify and manage outliers and anomalies, reflecting on their impact on conclusions.\nAddress missing data, apply handling strategies, and assess their effect on conclusions.\nPerform exploratory data analysis and understand its role in the data science pipeline.\nEvaluate the impact of measurement scales, units, and errors, and apply methods to minimize them.\nAssess data privacy needs, apply techniques where necessary and reflect on their impact.\nEvaluate who owns the data in a given case."
   },
   {
     "objectID": "faq.html",

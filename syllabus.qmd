@@ -13,12 +13,10 @@ __Instructors__:\
 Katie Burak\
 Website: <https://katieburak.github.io/>\
 Email: <kburak@stat.ubc.ca>\
-Slack: [@`Katie Burak`]()
 
 Gabriela V. Cohen Freue\
 Website: <https://gcohenfr.github.io/>\
 Email: <gcohen@stat.ubc.ca>\
-Slack: [@gcohenfr]()
 
 __Office hours__:\
 See [Canvas](https://canvas.ubc.ca/courses/) for times and locations.
