@@ -28,7 +28,7 @@ slide_titles <- case_when(
 slide_paths <- if_else(
 	slide_titles %in% c("READING WEEK", "HOLIDAY"),
 	slide_titles,
- glue("[{slide_titles}]()")
+  glue("[{slide_titles}]()")
 )
 
 # Build schedule table
