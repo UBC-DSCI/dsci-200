@@ -1,6 +1,7 @@
 library(lubridate)
 library(dplyr)
 library(tibble)
+library(tidyverse)
 library(glue)
 library(knitr)
 library(purrr)
@@ -21,7 +22,7 @@ class_dates <- seq(start_date, end_date, by = "1 day") %>%
 slide_titles <- case_when(
 	class_dates %within% reading_week ~ "READING WEEK",
 	class_dates %in% holidays ~ "HOLIDAY",
-	TRUE ~ "Topic"
+	TRUE ~ "Slides"
 )
 
 # Create slide links only for regular topics
@@ -34,11 +35,12 @@ slide_paths <- if_else(
 # Build schedule table
 schedule <- tibble(
 	Date = format(class_dates, "%d %b %y"),
-	Slides = slide_paths,
+  Topic = " ",
+	Material = slide_paths,
 	Deadlines = ""
 )
 
 # Output as markdown table
 schedule_md <- knitr::kable(schedule, format = "markdown")
-writeLines(schedule_md, "schedule-table.md")
+writeLines(schedule_md, "schedule/schedule-table.md")
 

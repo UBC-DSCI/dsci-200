@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DSCI 200 – UBC DSCI 200</title>
+<title>web-data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,147 +23,889 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-95d9d02bd968d6ef5b8fede0a93f2559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
+<script src="web-data_files/libs/clipboard/clipboard.min.js"></script>
+<script src="web-data_files/libs/quarto-html/quarto.js"></script>
+<script src="web-data_files/libs/quarto-html/popper.min.js"></script>
+<script src="web-data_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="web-data_files/libs/quarto-html/anchor.min.js"></script>
+<link href="web-data_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="web-data_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="web-data_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="web-data_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="web-data_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
-<link rel="stylesheet" href="assets/index.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="fullcontent">
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title"><i class="fa-solid fa-chart-column" aria-label="chart-column"></i> UBC DSCI 200</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
-<span class="menu-text">Syllabus</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./schedule/index.html"> 
-<span class="menu-text">Schedule</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/UBC-STAT/dsci-200"> 
-<span class="menu-text">Worksheets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./computing/index.html"> 
-<span class="menu-text">Computing</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Case Studies</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./faq.html"> 
-<span class="menu-text">FAQ</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/UBC-DSCI/dsci-200"> 
-<span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i> Github</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    
-<!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
-    <img src="assets/img/smooths.svg" class="about-image
-  rounded " style="width: 20em;">
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">DSCI 200</h1>
-<p class="subtitle lead">Navigating Data: Acquisition, Exploration and Management</p>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-<div class="align-center">
-<div class="hero-buttons">
-<p><a href="./schedule/index.html" class="btn-action-primary btn-action btn btn-lg" role="button">Schedule</a> <a href="./syllabus.html" class="btn-action-secondary btn-action btn btn-lg" role="button">Syllabus</a></p>
-</div>
-</div>
-<p>At the end of the course, you will be able to:</p>
-<ul>
-<li><p>Choose a data acquisition strategy and write reproducible scripts to read data.</p></li>
-<li><p>Determine when data simulation is useful for analysis and plan appropriate simulations.</p></li>
-<li><p>Identify and manage outliers and anomalies, reflecting on their impact on conclusions.</p></li>
-<li><p>Address missing data, apply handling strategies, and assess their effect on conclusions.</p></li>
-<li><p>Perform exploratory data analysis and understand its role in the data science pipeline.</p></li>
-<li><p>Evaluate the impact of measurement scales, units, and errors, and apply methods to minimize them.</p></li>
-<li><p>Assess data privacy needs, apply techniques where necessary and reflect on their impact.</p></li>
-<li><p>Evaluate who owns the data in a given case.</p></li>
-</ul>
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
 
 
-</main></div>
+
+
+<section id="fictional-tech-startup-job-applicant-tracker" class="level2">
+<h2 class="anchored" data-anchor-id="fictional-tech-startup-job-applicant-tracker">Fictional Tech Startup Job Applicant Tracker</h2>
+<p>This table shows simulated job applicant data for a fictional tech startup based in Vancouver. It includes fake information like applicant ID, first name, email, position applied for, years of experience, degree major, postal code, salary expectation, and willingness to relocate. All data is synthetic and is meant for practicing web scraping and data privacy techniques.</p>
+<style>
+  /* Full width container with padding and horizontal scroll */
+  div.table-container {
+    width: 100vw; /* full viewport width */
+    padding: 40px;
+    overflow-x: auto;
+    box-sizing: border-box; /* include padding in width */
+  }
+
+  table.custom-table {
+    border-collapse: collapse;
+    width: 100%;  /* stretch to fill container */
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+    table-layout: auto; 
+  }
+
+  table.custom-table thead {
+    background-color: #d0e7f9;
+  }
+
+  table.custom-table th,
+  table.custom-table td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  table.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  table.custom-table tr:hover {
+    background-color: #eef6fc;
+  }
+</style>
+<div class="table-container">
+<table class="custom-table">
+<thead>
+<tr>
+<th>
+Applicant ID
+</th>
+<th>
+First Name
+</th>
+<th>
+Position Applied
+</th>
+<th>
+Years of Experience
+</th>
+<th>
+Degree Major
+</th>
+<th>
+Current Location
+</th>
+<th>
+Salary Expectation
+</th>
+<th>
+Willing to Relocate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+10001
+</td>
+<td>
+Amira
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+3
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$85,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10002
+</td>
+<td>
+Jacob
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+7
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$110,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10003
+</td>
+<td>
+Sofia
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+2
+</td>
+<td>
+Data Science
+</td>
+<td>
+Calgary
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10004
+</td>
+<td>
+Raj
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+12
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Toronto
+</td>
+<td>
+$150,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10005
+</td>
+<td>
+Emily
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+5
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$95,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10006
+</td>
+<td>
+Wei
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+9
+</td>
+<td>
+Statistics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$125,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10007
+</td>
+<td>
+Hassan
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+1
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Montreal
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10008
+</td>
+<td>
+Isabella
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+4
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$90,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10009
+</td>
+<td>
+Liam
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+15
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$180,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10010
+</td>
+<td>
+Olivia
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+8
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$110,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10011
+</td>
+<td>
+Mateo
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+6
+</td>
+<td>
+Data Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$105,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10012
+</td>
+<td>
+Zara
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+10
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$130,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10013
+</td>
+<td>
+Omar
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+3
+</td>
+<td>
+Statistics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$85,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10014
+</td>
+<td>
+Maya
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+13
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Montreal
+</td>
+<td>
+$155,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10015
+</td>
+<td>
+Ethan
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+4
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$90,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10016
+</td>
+<td>
+Yuna
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+7
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$115,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10017
+</td>
+<td>
+Alex
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+5
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$100,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10018
+</td>
+<td>
+Fatima
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+2
+</td>
+<td>
+Data Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10019
+</td>
+<td>
+David
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+16
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$190,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10020
+</td>
+<td>
+Claire
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+9
+</td>
+<td>
+Data Science
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$120,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10021
+</td>
+<td>
+Kai
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+1
+</td>
+<td>
+Data Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10022
+</td>
+<td>
+Sana
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+8
+</td>
+<td>
+Statistics
+</td>
+<td>
+Toronto
+</td>
+<td>
+$115,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10023
+</td>
+<td>
+Leo
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+6
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$105,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10024
+</td>
+<td>
+Jasmine
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+14
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$165,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10025
+</td>
+<td>
+Michael
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+3
+</td>
+<td>
+Statistics
+</td>
+<td>
+Montreal
+</td>
+<td>
+$85,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10026
+</td>
+<td>
+Aisha
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+10
+</td>
+<td>
+Statistics
+</td>
+<td>
+Toronto
+</td>
+<td>
+$130,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10027
+</td>
+<td>
+Jason
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+4
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Calgary
+</td>
+<td>
+$95,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10028
+</td>
+<td>
+Nina
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+7
+</td>
+<td>
+Data Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$115,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10029
+</td>
+<td>
+Ravi
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+11
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$140,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10030
+</td>
+<td>
+Grace
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+5
+</td>
+<td>
+Data Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$100,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+</tbody>
+</table>
 </div>
- <!-- /main -->
+</section>
+
+</main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -184,6 +926,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -575,19 +1324,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">
-<p>This work by <a href="https://katieburak.github.io/">Katie Burak</a> and <a href="https://gcohenfr.github.io/">Gabriela V. Cohen Freue</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></p>
-</div>
-    <div class="nav-footer-right">
-      &nbsp;
-    </div>
-  </div>
-</footer>
 
 
 

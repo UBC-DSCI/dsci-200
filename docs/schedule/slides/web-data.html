@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
 
-<title> Ubuntu – UBC DSCI 200</title>
+<title>Web Data Table – UBC DSCI 200</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,60 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-95d9d02bd968d6ef5b8fede0a93f2559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-95d9d02bd968d6ef5b8fede0a93f2559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,6 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="no-style.css">
 </head>
 
 <body class="nav-fixed">
@@ -112,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title"><i class="fa-solid fa-chart-column" aria-label="chart-column"></i> UBC DSCI 200</span>
     </a>
   </div>
@@ -123,11 +91,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus.html"> 
+    <a class="nav-link" href="../../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../schedule/index.html"> 
+    <a class="nav-link" href="../../schedule/index.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
@@ -135,15 +103,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Worksheets</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../computing/index.html"> 
+    <a class="nav-link" href="../../computing/index.html"> 
 <span class="menu-text">Computing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Case Studies</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../faq.html"> 
+    <a class="nav-link" href="../../faq.html"> 
 <span class="menu-text">FAQ</span></a>
   </li>  
   <li class="nav-item">
@@ -162,40 +130,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#installation-notes" id="toc-installation-notes" class="nav-link active" data-scroll-target="#installation-notes">Installation notes</a></li>
-  <li><a href="#ubuntu-software-settings" id="toc-ubuntu-software-settings" class="nav-link" data-scroll-target="#ubuntu-software-settings">Ubuntu software settings</a></li>
-  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github">GitHub</a></li>
-  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">Git</a>
-  <ul class="collapse">
-  <li><a href="#configuring-git-user-info" id="toc-configuring-git-user-info" class="nav-link" data-scroll-target="#configuring-git-user-info">Configuring Git user info</a></li>
-  </ul></li>
-  <li><a href="#r-xquartz-and-rstudio" id="toc-r-xquartz-and-rstudio" class="nav-link" data-scroll-target="#r-xquartz-and-rstudio">R, XQuartz, and RStudio</a>
-  <ul class="collapse">
-  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
-  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
-  <li><a href="#github-pat" id="toc-github-pat" class="nav-link" data-scroll-target="#github-pat">Github PAT</a></li>
-  <li><a href="#post-installation-notes" id="toc-post-installation-notes" class="nav-link" data-scroll-target="#post-installation-notes">Post-installation notes</a></li>
-  <li><a href="#attributions" id="toc-attributions" class="nav-link" data-scroll-target="#attributions">Attributions</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="web-data.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><i class="fa-brands fa-linux" aria-label="linux"></i> Ubuntu</h1>
+<h1 class="title">Web Data Table</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Katie Burak, Gabriela V. Cohen Freue </p>
+          </div>
+  </div>
     
   
     
@@ -206,149 +159,862 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="installation-notes" class="level2">
-<h2 class="anchored" data-anchor-id="installation-notes">Installation notes</h2>
-<p>If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.</p>
-<p>In order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.</p>
-</section>
-<section id="ubuntu-software-settings" class="level2">
-<h2 class="anchored" data-anchor-id="ubuntu-software-settings">Ubuntu software settings</h2>
-<p>To ensure that you are installing the right version of the software in this guide, open “Software &amp; Updates” and make sure that the boxes in the screenshot are checked (this is the default configuration).</p>
-<p><img src="../assets/img/ubuntu_settings.png" class="img-fluid"></p>
-</section>
-<section id="github" class="level2">
-<h2 class="anchored" data-anchor-id="github">GitHub</h2>
-<p>In this course we will use the publicly available <a href="https://github.com/">GitHub.com</a>. If you do not already have an account, please sign up for one at <a href="https://github.com/">GitHub.com</a></p>
-<p>Sign up for a free account at <a href="https://github.com/">GitHub.com</a> if you don’t have one already.</p>
-</section>
-<section id="git" class="level2">
-<h2 class="anchored" data-anchor-id="git">Git</h2>
-<p>We will be using the command line version of Git as well as Git through RStudio. Some of the Git commands we will use are only available since Git 2.23, so if your Git is older than this version, so if your Git is older than this version, we ask you to update it using the following commands:</p>
-<pre><code>sudo apt update
-sudo apt install git</code></pre>
-<p>You can check your git version with the following command:</p>
-<pre><code>git --version</code></pre>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If you run into trouble, please see the Install Git Linux section from <a href="http://happygitwithr.com/install-git.html#mac-os">Happy Git and GitHub for the useR</a> for additional help or strategies for Git installation.</p>
-</div>
-</div>
-<section id="configuring-git-user-info" class="level3">
-<h3 class="anchored" data-anchor-id="configuring-git-user-info">Configuring Git user info</h3>
-<p>Next, we need to configure Git by telling it your name and email. To do this, type the following into the terminal (replacing Jane Doe and janedoe@example.com, with your name and email that you used to sign up for GitHub, respectively):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Jane Doe"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email janedoe@example.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To ensure that you haven’t made a typo in any of the above, you can view your global Git configurations by either opening the configuration file in a text editor (e.g.&nbsp;via the command <code>nano ~/.gitconfig</code>) or by typing <code>git config --list --global</code>).</p>
-</div>
-</div>
-<p>If you have never used Git before, we recommend also setting the default editor:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> core.editor nano</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you prefer VScode (and know how to set it up) or something else, feel free.</p>
-</section>
-</section>
-<section id="r-xquartz-and-rstudio" class="level1">
-<h1>R, XQuartz, and RStudio</h1>
-<p>R is the only language that we will be using in this course. We will generally (always?) use R in RStudio.</p>
-<section id="r" class="level3">
-<h3 class="anchored" data-anchor-id="r">R</h3>
-<p>The version of R available in the default Ubuntu repositories is older than the one we will be using in this course. To obtain the latest R packages, we need to add a new repository which is maintained directly by the r-project. To do this, first add the key for this repository by typing the following:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then add the URL to the repository:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> add-apt-repository <span class="st">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Next, install <code>r-base</code> and <code>r-base-dev</code> (useful for compiling R packages from source):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install r-base r-base-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>After installation, type the following in a new terminal window:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You should see something like this if you were successful:</p>
-<pre><code>R version 4.4.1 (2024-06-14) -- "Race for Your Life"
-Copyright (C) 2024 The R Foundation for Statistical Computing
-Platform: aarch64-apple-darwin23.4.0
+<p>This table shows simulated job applicant data for a fictional tech startup based in Vancouver. It includes fake information like applicant ID, first name, email, position applied for, years of experience, degree major, postal code, salary expectation, and willingness to relocate. All data is synthetic and is meant for practicing web scraping and data privacy techniques.</p>
+<style>
+  /* Full width container with padding and horizontal scroll */
+  div.table-container {
+    width: 100vw; /* full viewport width */
+    padding: 40px;
+    overflow-x: auto;
+    box-sizing: border-box; /* include padding in width */
+  }
 
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
+  table.custom-table {
+    border-collapse: collapse;
+    width: 100%;  /* stretch to fill container */
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+    table-layout: auto; 
+  }
 
-  Natural language support but running in an English locale
+  table.custom-table thead {
+    background-color: #d0e7f9;
+  }
 
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
+  table.custom-table th,
+  table.custom-table td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.</code></pre>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+  table.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  table.custom-table tr:hover {
+    background-color: #eef6fc;
+  }
+</style>
+<div class="table-container">
+<table class="custom-table">
+<thead>
+<tr>
+<th>
+Applicant ID
+</th>
+<th>
+First Name
+</th>
+<th>
+Position Applied
+</th>
+<th>
+Years of Experience
+</th>
+<th>
+Degree Major
+</th>
+<th>
+Current Location
+</th>
+<th>
+Salary Expectation
+</th>
+<th>
+Willing to Relocate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+10001
+</td>
+<td>
+Amira
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+3
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$85,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10002
+</td>
+<td>
+Jacob
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+7
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$110,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10003
+</td>
+<td>
+Sofia
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+2
+</td>
+<td>
+Data Science
+</td>
+<td>
+Calgary
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10004
+</td>
+<td>
+Raj
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+12
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Toronto
+</td>
+<td>
+$150,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10005
+</td>
+<td>
+Emily
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+5
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$95,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10006
+</td>
+<td>
+Wei
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+9
+</td>
+<td>
+Statistics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$125,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10007
+</td>
+<td>
+Hassan
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+1
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Montreal
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10008
+</td>
+<td>
+Isabella
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+4
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$90,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10009
+</td>
+<td>
+Liam
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+15
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$180,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10010
+</td>
+<td>
+Olivia
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+8
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$110,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10011
+</td>
+<td>
+Mateo
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+6
+</td>
+<td>
+Data Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$105,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10012
+</td>
+<td>
+Zara
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+10
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$130,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10013
+</td>
+<td>
+Omar
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+3
+</td>
+<td>
+Statistics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$85,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10014
+</td>
+<td>
+Maya
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+13
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Montreal
+</td>
+<td>
+$155,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10015
+</td>
+<td>
+Ethan
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+4
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$90,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10016
+</td>
+<td>
+Yuna
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+7
+</td>
+<td>
+Statistics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$115,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10017
+</td>
+<td>
+Alex
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+5
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$100,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10018
+</td>
+<td>
+Fatima
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+2
+</td>
+<td>
+Data Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10019
+</td>
+<td>
+David
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+16
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$190,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10020
+</td>
+<td>
+Claire
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+9
+</td>
+<td>
+Data Science
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$120,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10021
+</td>
+<td>
+Kai
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+1
+</td>
+<td>
+Data Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$80,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10022
+</td>
+<td>
+Sana
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+8
+</td>
+<td>
+Statistics
+</td>
+<td>
+Toronto
+</td>
+<td>
+$115,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10023
+</td>
+<td>
+Leo
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+6
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Calgary
+</td>
+<td>
+$105,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10024
+</td>
+<td>
+Jasmine
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+14
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$165,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10025
+</td>
+<td>
+Michael
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+3
+</td>
+<td>
+Statistics
+</td>
+<td>
+Montreal
+</td>
+<td>
+$85,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10026
+</td>
+<td>
+Aisha
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+10
+</td>
+<td>
+Statistics
+</td>
+<td>
+Toronto
+</td>
+<td>
+$130,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10027
+</td>
+<td>
+Jason
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+4
+</td>
+<td>
+Computer Science
+</td>
+<td>
+Calgary
+</td>
+<td>
+$95,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+10028
+</td>
+<td>
+Nina
+</td>
+<td>
+Data Engineer
+</td>
+<td>
+7
+</td>
+<td>
+Data Science
+</td>
+<td>
+Toronto
+</td>
+<td>
+$115,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10029
+</td>
+<td>
+Ravi
+</td>
+<td>
+Machine Learning Engineer
+</td>
+<td>
+11
+</td>
+<td>
+Mathematics
+</td>
+<td>
+Vancouver
+</td>
+<td>
+$140,000
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+10030
+</td>
+<td>
+Grace
+</td>
+<td>
+Data Scientist
+</td>
+<td>
+5
+</td>
+<td>
+Data Science
+</td>
+<td>
+Montreal
+</td>
+<td>
+$100,000
+</td>
+<td>
+Yes
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="https://cloud.r-project.org/bin/linux/ubuntu/">See this page for additional instructions if you run into trouble while installing R</a>.</p>
-<p>Although it is possible to install R through conda, we highly recommend not doing so. In case you have already installed R using conda you can remove it by executing <code>conda uninstall r-base</code>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course requires <code>R</code> version 4.2 or higher. You may need to update.</p>
-<p>The course package will error on install if this is not the case.</p>
-</div>
-</div>
-</section>
-<section id="rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
-<p>Download the Ubuntu 18/Debian 10 Desktop version (not Pro) of RStudio Preview from <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>. Open the file and follow the installer instructions.</p>
-</section>
-<section id="github-pat" class="level2">
-<h2 class="anchored" data-anchor-id="github-pat">Github PAT</h2>
-<p>You’re probably familiar with 2-factor authentication for your UBC account or other accounts which is a very secure way to protect sensitive information (in case your password gets exposed). Github uses a Personal Access Token (PAT) for the Command Line Interface (CLI) and RStudio. This is different from the password you use to log in with a web browser. You will have to create one. There are some nice <code>R</code> functions that will help you along, and I find that easiest.</p>
-<p>Complete instructions are in <a href="https://happygitwithr.com/https-pat.html">Chapter 9 of Happy Git With R</a>. Here’s the quick version (you need the <code>usethis</code> and <code>gitcreds</code> libraries, which you can install with <code>install.packages(c("usethis", "gitcreds"))</code>):</p>
-<ol type="1">
-<li>In the RStudio Console, call <code>usethis::create_github_token()</code> This should open a webbrowser. In the Note field, write what you like, perhaps “DSCI 200 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in <code>repo</code> is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.</li>
-<li>This should now give you a long string to Copy. It often looks like <code>ghp_0asfjhlasdfhlkasjdfhlksajdhf9234u</code>. Copy that. (You would use this instead of the browser password in RStudio when it asks for a password).</li>
-<li>To store the PAT permanently in <code>R</code> (so you’ll never have to do this again, hopefully) call <code>gitcreds::gitcreds_set()</code> and paste the thing you copied there.</li>
-</ol>
-</section>
-<section id="post-installation-notes" class="level2">
-<h2 class="anchored" data-anchor-id="post-installation-notes">Post-installation notes</h2>
-<p>You have completed the installation instructions, well done 🙌!</p>
-</section>
-<section id="attributions" class="level2">
-<h2 class="anchored" data-anchor-id="attributions">Attributions</h2>
-<p>The <a href="https://ubc-dsci.github.io/dsci-310-student/computer-setup.html">DSCI 310 Teaching Team</a>, notably, Anmol Jawandha, Tomas Beuzen, Rodolfo Lourenzutti, Joel Ostblom, Arman Seyed-Ahmadi, Florencia D’Andrea, and Tiffany Timbers.</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
