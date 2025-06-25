@@ -1,6 +1,6 @@
-## Fictional Job Applicant Data
+## Synthetic job applicant dataset for a tech startup
 
-This table shows simulated job applicant data for a fictional tech startup based in Vancouver. It includes fake information like applicant ID, first name, email, position applied for, years of experience, degree major, postal code, salary expectation, and willingness to relocate. All data is synthetic and is meant for practicing web scraping and data privacy techniques.
+This table shows simulated job applicant data for a fictional tech startup based in Vancouver. It includes fake information like applicant ID, first name, position applied for, years of experience, degree major, salary expectation and willingness to relocate. All data is synthetic and is meant for practicing web scraping and data privacy techniques.
 
 
 <style>
