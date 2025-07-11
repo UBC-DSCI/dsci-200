@@ -21,9 +21,9 @@
 |09 Mar 26 | Case Study 2 Work Period       |[Slides]()   |          |
 |11 Mar 26 | Data Acquisition     |[Slides]()   |          |
 |16 Mar 26 | Data Acquisition     |[Slides]()   |          |
-|18 Mar 26 | Data Acquisition      |[Slides]()   |          |
+|18 Mar 26 | Data Acquisition      |[Slides](); [Worksheet data](data/currency-data.html)    |          |
 |23 Mar 26 | Data Privacy     |[Slides]()   |          |
-|25 Mar 26 | Data Privacy    |[Slides](); [Worksheet data](web-data.html)     |          |
+|25 Mar 26 | Data Privacy    |[Slides](); [Worksheet data](data/web-data.html)     |          |
 |30 Mar 26 |  Data Ownership    |[Slides]()   |          |
 |01 Apr 26 |  Data Ownership    |[Slides]()   |          |
 |06 Apr 26 |      |HOLIDAY      |          |
