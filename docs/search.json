@@ -35,286 +35,6 @@
     "text": "Course objectives\nThe course objective is to train students in navigating the many aspects of data needed to successfully work through the data stage of the data analysis lifecycle. Students will broaden their applied statistical knowledge base and skillset required to dive into statistical and computational modelling in subsequent courses. Students will learn how to explore different layers of the data structure, consider the limitations introduced by the study design, acknowledge security and ownership features related to data, and address problems encountered in the data at hand. The course also aims to demonstrate how simulation studies can be carried out to examine properties of estimators and algorithms (i.e., beyond the data stage). The course reinforces and refines the computational skills (i.e., writing computer scripts), tools and resources learned in DSCI_V 100 to analyze data, as well as to draw and communicate appropriate conclusions."
   },
   {
-    "objectID": "computing/windows.html",
-    "href": "computing/windows.html",
-    "title": " Windows",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.\nIn all the sections below, if you are presented with the choice to download either a 64-bit (also called x64) or a 32-bit (also called x86) version of the application always choose the 64-bit version."
-  },
-  {
-    "objectID": "computing/windows.html#installation-notes",
-    "href": "computing/windows.html#installation-notes",
-    "title": " Windows",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.\nIn all the sections below, if you are presented with the choice to download either a 64-bit (also called x64) or a 32-bit (also called x86) version of the application always choose the 64-bit version."
-  },
-  {
-    "objectID": "computing/windows.html#terminal",
-    "href": "computing/windows.html#terminal",
-    "title": " Windows",
-    "section": "Terminal",
-    "text": "Terminal\nBy “Terminal” below we mean the command line program called “Terminal”. Note that this is also available Inside RStudio. Either works."
-  },
-  {
-    "objectID": "computing/windows.html#github",
-    "href": "computing/windows.html#github",
-    "title": " Windows",
-    "section": "GitHub",
-    "text": "GitHub\nIn this course we will use the publicly available GitHub.com. If you do not already have an account, please sign up for one at GitHub.com\nSign up for a free account at GitHub.com if you don’t have one already."
-  },
-  {
-    "objectID": "computing/windows.html#git-bash-and-windows-terminal",
-    "href": "computing/windows.html#git-bash-and-windows-terminal",
-    "title": " Windows",
-    "section": "Git, Bash, and Windows Terminal",
-    "text": "Git, Bash, and Windows Terminal\nAlthough these three are separate programs, we are including them in the same section here since they are packaged together in the same installer on Windows. Briefly, we will be using the Bash shell to interact with our computers via a command line interface, Git to keep a version history of our files and upload to/download from to GitHub, and Windows Terminal to run the both Bash and Git.\nGo to https://git-scm.com/download/win and download the windows version of git. After the download has finished, run the installer and accept the default configuration for all pages except for the following:\n\nOn the Select Components page, add a Git Bash profile to Windows Terminal.\n\n\nTo install windows terminal visit this link and click Get to open it in Windows Store. Inside the Store, click Get again and then click Install. After installation, click Launch to start Windows Terminal. In the top of the window, you will see the tab bar with one open tab, a plus sign, and a down arrow. Click the down arrow and select Settings (or type the shortcut Ctrl + ,). In the Startup section, click the dropdown menu under Default profile and select Git Bash.\n\nYou can now launch the Windows terminal from the start menu or pin it to the taskbar like any other program (you can read the rest of the article linked above for additional tips if you wish). To make sure everything worked, close down Windows Terminal, and open it again. Git Bash should open by default, the text should be green and purple, and the tab should read MINGW64:/c/Users/$USERNAME (you should also see /c/Users/$USERNAME if you type pwd into the terminal). This screenshot shows what it should look like:\n\n\n\n\n\n\n\nNote\n\n\n\nWhenever we refer to “the terminal” in these installation instructions, we want you to use the Windows Terminal that you just installed with the Git Bash profile. Do not use Windows PowerShell, CMD, or anything else unless explicitly instructed to do so.\n\n\nTo open a new tab you can click the plus sign or use Ctrl + Shift + t (you can close a tab with Ctrl + Shift + w). To copy text from the terminal, you can highlight it with the mouse and then click Ctrl + Shift + c. To paste text you use Ctrl + Shift + v, try it by pasting the following into the terminal to check which version of Bash you just installed:\nbash --version\nThe output should look similar to this:\nGNU bash, version 4.4.23(1)-release (x86_64-pc-sys)\nCopyright (C) 2019 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;\nThis is free software; you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\n\n\n\n\n\nNote\n\n\n\nIf there is a newline (the enter character) in the clipboard when you are pasting into the terminal, you will be asked if you are sure you want to paste since this newline will act as if you pressed enter and run the command. As a guideline you can press Paste anyway unless you are sure you don’t want this to happen.\n\n\nLet’s also check which version of git was installed:\ngit --version\ngit version 2.32.0.windows.2\n\n\n\n\n\n\nNote\n\n\n\nSome of the Git commands we will use are only available since Git 2.23, so make sure your if your Git is at least this version.\n\n\n\nConfiguring Git user info\nNext, we need to configure Git by telling it your name and email. To do this, type the following into the terminal (replacing Jane Doe and janedoe@example.com, with your name and email that you used to sign up for GitHub, respectively):\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email janedoe@example.com\n\n\n\n\n\n\nNote\n\n\n\nTo ensure that you haven’t made a typo in any of the above, you can view your global Git configurations by either opening the configuration file in a text editor (e.g. via the command nano ~/.gitconfig) or by typing git config --list --global).\n\n\nIf you have never used Git before, we recommend also setting the default editor:\ngit config --global core.editor nano\nIf you prefer VScode (and know how to set it up) or something else, feel free."
-  },
-  {
-    "objectID": "computing/windows.html#github-pat",
-    "href": "computing/windows.html#github-pat",
-    "title": " Windows",
-    "section": "Github PAT",
-    "text": "Github PAT\nYou’re probably familiar with 2-factor authentication for your UBC account or other accounts which is a very secure way to protect sensitive information (in case your password gets exposed). Github uses a Personal Access Token (PAT) for the Command Line Interface (CLI) and RStudio. This is different from the password you use to log in with a web browser. You will have to create one. There are some nice R functions that will help you along, and I find that easiest.\nComplete instructions are in Chapter 9 of Happy Git With R. Here’s the quick version (you need the usethis and gitcreds libraries, which you can install with install.packages(c(\"usethis\", \"gitcreds\"))):\n\nIn the RStudio Console, call usethis::create_github_token() This should open a webbrowser. In the Note field, write what you like, perhaps “DSCI 200 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in repo is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.\nThis should now give you a long string to Copy. It often looks like ghp_0asfjhlasdfhlkasjdfhlksajdhf9234u. Copy that. (You would use this instead of the browser password in RStudio when it asks for a password).\nTo store the PAT permanently in R (so you’ll never have to do this again, hopefully) call gitcreds::gitcreds_set() and paste the thing you copied there."
-  },
-  {
-    "objectID": "computing/windows.html#post-installation-notes",
-    "href": "computing/windows.html#post-installation-notes",
-    "title": " Windows",
-    "section": "Post-installation notes",
-    "text": "Post-installation notes\nYou have completed the installation instructions, well done 🙌!"
-  },
-  {
-    "objectID": "computing/windows.html#attributions",
-    "href": "computing/windows.html#attributions",
-    "title": " Windows",
-    "section": "Attributions",
-    "text": "Attributions\nThe DSCI 310 Teaching Team, notably, Anmol Jawandha, Tomas Beuzen, Rodolfo Lourenzutti, Joel Ostblom, Arman Seyed-Ahmadi, Florencia D’Andrea, and Tiffany Timbers."
-  },
-  {
-    "objectID": "computing/mac_x86.html",
-    "href": "computing/mac_x86.html",
-    "title": " MacOS x86",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.\nIn all the sections below, if you are presented with the choice to download either a 64-bit (also called x64) or a 32-bit (also called x86) version of the application always choose the 64-bit version."
-  },
-  {
-    "objectID": "computing/mac_x86.html#installation-notes",
-    "href": "computing/mac_x86.html#installation-notes",
-    "title": " MacOS x86",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.\nIn all the sections below, if you are presented with the choice to download either a 64-bit (also called x64) or a 32-bit (also called x86) version of the application always choose the 64-bit version."
-  },
-  {
-    "objectID": "computing/mac_x86.html#terminal",
-    "href": "computing/mac_x86.html#terminal",
-    "title": " MacOS x86",
-    "section": "Terminal",
-    "text": "Terminal\nBy “Terminal” below we mean the command line program called “Terminal”. Note that this is also available Inside RStudio. Either works. To easily pull up the Terminal (outside RStudio), Type Cmd + Space then begin typing “Terminal” and press Return."
-  },
-  {
-    "objectID": "computing/mac_x86.html#github",
-    "href": "computing/mac_x86.html#github",
-    "title": " MacOS x86",
-    "section": "GitHub",
-    "text": "GitHub\nIn this course we will use the publicly available GitHub.com. If you do not already have an account, please sign up for one at GitHub.com\nSign up for a free account at GitHub.com if you don’t have one already."
-  },
-  {
-    "objectID": "computing/mac_x86.html#git",
-    "href": "computing/mac_x86.html#git",
-    "title": " MacOS x86",
-    "section": "Git",
-    "text": "Git\nWe will be using the command line version of Git as well as Git through RStudio. Some of the Git commands we will use are only available since Git 2.23, so if your Git is older than this version, we ask you to update it using the Xcode command line tools (not all of Xcode), which includes Git.\nOpen Terminal and type the following command to install Xcode command line tools:\nxcode-select --install\nAfter installation, in terminal type the following to ask for the version:\ngit --version\nyou should see something like this (does not have to be the exact same version) if you were successful:\ngit version 2.32.1 (Apple Git-133)\n\n\n\n\n\n\nNote\n\n\n\nIf you run into trouble, please see the Install Git Mac OS section from Happy Git and GitHub for the useR for additional help or strategies for Git installation.\n\n\n\nConfiguring Git user info\nNext, we need to configure Git by telling it your name and email. To do this, type the following into the terminal (replacing Jane Doe and janedoe@example.com, with your name and email that you used to sign up for GitHub, respectively):\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email janedoe@example.com\n\n\n\n\n\n\nNote\n\n\n\nTo ensure that you haven’t made a typo in any of the above, you can view your global Git configurations by either opening the configuration file in a text editor (e.g. via the command nano ~/.gitconfig) or by typing git config --list --global).\n\n\nIf you have never used Git before, we recommend also setting the default editor:\ngit config --global core.editor nano\nIf you prefer VScode (and know how to set it up) or something else, feel free."
-  },
-  {
-    "objectID": "computing/mac_x86.html#github-pat",
-    "href": "computing/mac_x86.html#github-pat",
-    "title": " MacOS x86",
-    "section": "Github PAT",
-    "text": "Github PAT\nYou’re probably familiar with 2-factor authentication for your UBC account or other accounts which is a very secure way to protect sensitive information (in case your password gets exposed). Github uses a Personal Access Token (PAT) for the Command Line Interface (CLI) and RStudio. This is different from the password you use to log in with a web browser. You will have to create one. There are some nice R functions that will help you along, and I find that easiest.\nComplete instructions are in Chapter 9 of Happy Git With R. Here’s the quick version (you need the usethis and gitcreds libraries, which you can install with install.packages(c(\"usethis\", \"gitcreds\"))):\n\nIn the RStudio Console, call usethis::create_github_token() This should open a web browser. In the Note field, write what you like, perhaps “DSCI 200 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in repo is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.\nThis should now give you a long string to Copy. It often looks like ghp_0asfjhlasdfhlkasjdfhlksajdhf9234u. Copy that. (You would use this instead of the browser password in RStudio when it asks for a password).\nTo store the PAT permanently in R (so you’ll never have to do this again, hopefully) call gitcreds::gitcreds_set() and paste the thing you copied there."
-  },
-  {
-    "objectID": "computing/mac_x86.html#post-installation-notes",
-    "href": "computing/mac_x86.html#post-installation-notes",
-    "title": " MacOS x86",
-    "section": "Post-installation notes",
-    "text": "Post-installation notes\nYou have completed the installation instructions, well done 🙌!"
-  },
-  {
-    "objectID": "computing/mac_x86.html#attributions",
-    "href": "computing/mac_x86.html#attributions",
-    "title": " MacOS x86",
-    "section": "Attributions",
-    "text": "Attributions\nThe DSCI 310 Teaching Team, notably, Anmol Jawandha, Tomas Beuzen, Rodolfo Lourenzutti, Joel Ostblom, Arman Seyed-Ahmadi, Florencia D’Andrea, and Tiffany Timbers."
-  },
-  {
-    "objectID": "computing/index.html",
-    "href": "computing/index.html",
-    "title": " Computing",
-    "section": "",
-    "text": "In this class, we will use R as our programming language. Similar to DSCI 100, we will utilize a server to complete and submit assignments.\nYou will also need to create a Github account for the case study projects.\nStudents are responsible for using a device and browser compatible with all functionality of Canvas. Chrome or Firefox browsers are recommended.\nBelow are some computing guidelines. These are edited and simplified from the DSCI 310 Setup Instructions as well as the DSCI 100 syllabus."
-  },
-  {
-    "objectID": "computing/index.html#laptop-requirements",
-    "href": "computing/index.html#laptop-requirements",
-    "title": " Computing",
-    "section": "Laptop requirements",
-    "text": "Laptop requirements\nStudents are required to bring a laptop, chromebook or tablet to both lectures and tutorials. Students who do not own a laptop, chromebook, or tablet may be able to loan a laptop from the UBC library.\n\nCan connect to networks via a wireless connection for on campus work.\nIs at most 6 years old (4 years old or newer is recommended).\nUses English as the default language. Using other languages is possible, but we have found that it often causes problems in the homework. We’ve done our best to fix them, but we may ask you to change it if you are having trouble.\nStudent user has full administrative access to the computer.\n\nAll other required software will be provided by the instructors. Students will learn to perform their analysis using the R programming language. Worksheets problem sets as well as the case study analysis, development and report will be done using Jupyter Notebooks accessed via Canvas.\n\nIf your computer does not meet the requirements please reach out to the teaching team and describe how it does not. We will work to accommodate you where we can."
-  },
-  {
-    "objectID": "computing/index.html#software-installation-instructions",
-    "href": "computing/index.html#software-installation-instructions",
-    "title": " Computing",
-    "section": "Software installation instructions",
-    "text": "Software installation instructions\nPlease click the appropriate link below to view the installation instructions for your operating system:\n\nmacOS x86 or macOS arm\nUbuntu\nWindows"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "DSCI 200",
-    "section": "",
-    "text": "Schedule Syllabus\n\n\nAt the end of the course, you will be able to:\n\nChoose a data acquisition strategy and write reproducible scripts to read data.\nDetermine when data simulation is useful for analysis and plan appropriate simulations.\nIdentify and manage outliers and anomalies, reflecting on their impact on conclusions.\nAddress missing data, apply handling strategies, and assess their effect on conclusions.\nPerform exploratory data analysis and understand its role in the data science pipeline.\nEvaluate the impact of measurement scales, units, and errors, and apply methods to minimize them.\nAssess data privacy needs, apply techniques where necessary and reflect on their impact.\nEvaluate who owns the data in a given case."
-  },
-  {
-    "objectID": "faq.html",
-    "href": "faq.html",
-    "title": " Frequently asked questions",
-    "section": "",
-    "text": "Answer 1\n\n\n\n\n\n\n\n\n\nTo be eligible\n\n\n\n\nCondition 1\nCondition 2"
-  },
-  {
-    "objectID": "faq.html#faq-1",
-    "href": "faq.html#faq-1",
-    "title": " Frequently asked questions",
-    "section": "",
-    "text": "Answer 1\n\n\n\n\n\n\n\n\n\nTo be eligible\n\n\n\n\nCondition 1\nCondition 2"
-  },
-  {
-    "objectID": "computing/mac_arm.html",
-    "href": "computing/mac_arm.html",
-    "title": " MacOS ARM",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.\nIn all the sections below, if you are presented with the choice to download either a 64-bit (also called x64) or a 32-bit (also called x86) version of the application always choose the 64-bit version."
-  },
-  {
-    "objectID": "computing/mac_arm.html#installation-notes",
-    "href": "computing/mac_arm.html#installation-notes",
-    "title": " MacOS ARM",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.\nIn all the sections below, if you are presented with the choice to download either a 64-bit (also called x64) or a 32-bit (also called x86) version of the application always choose the 64-bit version."
-  },
-  {
-    "objectID": "computing/mac_arm.html#terminal",
-    "href": "computing/mac_arm.html#terminal",
-    "title": " MacOS ARM",
-    "section": "Terminal",
-    "text": "Terminal\nBy “Terminal” below we mean the command line program called “Terminal”. Note that this is also available Inside RStudio. Either works. To easily pull up the Terminal (outside RStudio), Type Cmd + Space then begin typing “Terminal” and press Return."
-  },
-  {
-    "objectID": "computing/mac_arm.html#github",
-    "href": "computing/mac_arm.html#github",
-    "title": " MacOS ARM",
-    "section": "GitHub",
-    "text": "GitHub\nIn this course we will use the publicly available GitHub.com. If you do not already have an account, please sign up for one at GitHub.com\nSign up for a free account at GitHub.com if you don’t have one already."
-  },
-  {
-    "objectID": "computing/mac_arm.html#git",
-    "href": "computing/mac_arm.html#git",
-    "title": " MacOS ARM",
-    "section": "Git",
-    "text": "Git\nWe will be using the command line version of Git as well as Git through RStudio. Some of the Git commands we will use are only available since Git 2.23, so if your Git is older than this version, we ask you to update it using the Xcode command line tools (not all of Xcode), which includes Git.\nOpen Terminal and type the following command to install Xcode command line tools:\nxcode-select --install\nAfter installation, in terminal type the following to ask for the version:\ngit --version\nyou should see something like this (does not have to be the exact same version) if you were successful:\ngit version 2.32.1 (Apple Git-133)\n\n\n\n\n\n\nNote\n\n\n\nIf you run into trouble, please see the Install Git Mac OS section from Happy Git and GitHub for the useR for additional help or strategies for Git installation.\n\n\n\nConfiguring Git user info\nNext, we need to configure Git by telling it your name and email. To do this, type the following into the terminal (replacing Jane Doe and janedoe@example.com, with your name and email that you used to sign up for GitHub, respectively):\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email janedoe@example.com\n\n\n\n\n\n\nNote\n\n\n\nTo ensure that you haven’t made a typo in any of the above, you can view your global Git configurations by either opening the configuration file in a text editor (e.g. via the command nano ~/.gitconfig) or by typing git config --list --global).\n\n\nIf you have never used Git before, we recommend also setting the default editor:\ngit config --global core.editor nano\nIf you prefer VScode (and know how to set it up) or something else, feel free."
-  },
-  {
-    "objectID": "computing/mac_arm.html#github-pat",
-    "href": "computing/mac_arm.html#github-pat",
-    "title": " MacOS ARM",
-    "section": "Github PAT",
-    "text": "Github PAT\nYou’re probably familiar with 2-factor authentication for your UBC account or other accounts which is a very secure way to protect sensitive information (in case your password gets exposed). Github uses a Personal Access Token (PAT) for the Command Line Interface (CLI) and RStudio. This is different from the password you use to log in with a web browser. You will have to create one. There are some nice R functions that will help you along, and I find that easiest.\nComplete instructions are in Chapter 9 of Happy Git With R. Here’s the quick version (you need the usethis and gitcreds libraries, which you can install with install.packages(c(\"usethis\", \"gitcreds\"))):\n\nIn the RStudio Console, call usethis::create_github_token() This should open a webbrowser. In the Note field, write what you like, perhaps “DSCI 200 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in repo is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.\nThis should now give you a long string to Copy. It often looks like ghp_0asfjhlasdfhlkasjdfhlksajdhf9234u. Copy that. (You would use this instead of the browser password in RStudio when it asks for a password).\nTo store the PAT permanently in R (so you’ll never have to do this again, hopefully) call gitcreds::gitcreds_set() and paste the thing you copied there."
-  },
-  {
-    "objectID": "computing/mac_arm.html#post-installation-notes",
-    "href": "computing/mac_arm.html#post-installation-notes",
-    "title": " MacOS ARM",
-    "section": "Post-installation notes",
-    "text": "Post-installation notes\nYou have completed the installation instructions, well done 🙌!"
-  },
-  {
-    "objectID": "computing/mac_arm.html#attributions",
-    "href": "computing/mac_arm.html#attributions",
-    "title": " MacOS ARM",
-    "section": "Attributions",
-    "text": "Attributions\nThe DSCI 310 Teaching Team, notably, Anmol Jawandha, Tomas Beuzen, Rodolfo Lourenzutti, Joel Ostblom, Arman Seyed-Ahmadi, Florencia D’Andrea, and Tiffany Timbers."
-  },
-  {
-    "objectID": "computing/ubuntu.html",
-    "href": "computing/ubuntu.html",
-    "title": " Ubuntu",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below."
-  },
-  {
-    "objectID": "computing/ubuntu.html#installation-notes",
-    "href": "computing/ubuntu.html#installation-notes",
-    "title": " Ubuntu",
-    "section": "",
-    "text": "If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.\nIn order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below."
-  },
-  {
-    "objectID": "computing/ubuntu.html#ubuntu-software-settings",
-    "href": "computing/ubuntu.html#ubuntu-software-settings",
-    "title": " Ubuntu",
-    "section": "Ubuntu software settings",
-    "text": "Ubuntu software settings\nTo ensure that you are installing the right version of the software in this guide, open “Software & Updates” and make sure that the boxes in the screenshot are checked (this is the default configuration)."
-  },
-  {
-    "objectID": "computing/ubuntu.html#github",
-    "href": "computing/ubuntu.html#github",
-    "title": " Ubuntu",
-    "section": "GitHub",
-    "text": "GitHub\nIn this course we will use the publicly available GitHub.com. If you do not already have an account, please sign up for one at GitHub.com\nSign up for a free account at GitHub.com if you don’t have one already."
-  },
-  {
-    "objectID": "computing/ubuntu.html#git",
-    "href": "computing/ubuntu.html#git",
-    "title": " Ubuntu",
-    "section": "Git",
-    "text": "Git\nWe will be using the command line version of Git as well as Git through RStudio. Some of the Git commands we will use are only available since Git 2.23, so if your Git is older than this version, so if your Git is older than this version, we ask you to update it using the following commands:\nsudo apt update\nsudo apt install git\nYou can check your git version with the following command:\ngit --version\n\n\n\n\n\n\nNote\n\n\n\nIf you run into trouble, please see the Install Git Linux section from Happy Git and GitHub for the useR for additional help or strategies for Git installation.\n\n\n\nConfiguring Git user info\nNext, we need to configure Git by telling it your name and email. To do this, type the following into the terminal (replacing Jane Doe and janedoe@example.com, with your name and email that you used to sign up for GitHub, respectively):\ngit config --global user.name \"Jane Doe\"\ngit config --global user.email janedoe@example.com\n\n\n\n\n\n\nNote\n\n\n\nTo ensure that you haven’t made a typo in any of the above, you can view your global Git configurations by either opening the configuration file in a text editor (e.g. via the command nano ~/.gitconfig) or by typing git config --list --global).\n\n\nIf you have never used Git before, we recommend also setting the default editor:\ngit config --global core.editor nano\nIf you prefer VScode (and know how to set it up) or something else, feel free."
-  },
-  {
-    "objectID": "computing/ubuntu.html#github-pat",
-    "href": "computing/ubuntu.html#github-pat",
-    "title": " Ubuntu",
-    "section": "Github PAT",
-    "text": "Github PAT\nYou’re probably familiar with 2-factor authentication for your UBC account or other accounts which is a very secure way to protect sensitive information (in case your password gets exposed). Github uses a Personal Access Token (PAT) for the Command Line Interface (CLI) and RStudio. This is different from the password you use to log in with a web browser. You will have to create one. There are some nice R functions that will help you along, and I find that easiest.\nComplete instructions are in Chapter 9 of Happy Git With R. Here’s the quick version (you need the usethis and gitcreds libraries, which you can install with install.packages(c(\"usethis\", \"gitcreds\"))):\n\nIn the RStudio Console, call usethis::create_github_token() This should open a webbrowser. In the Note field, write what you like, perhaps “DSCI 200 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in repo is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.\nThis should now give you a long string to Copy. It often looks like ghp_0asfjhlasdfhlkasjdfhlksajdhf9234u. Copy that. (You would use this instead of the browser password in RStudio when it asks for a password).\nTo store the PAT permanently in R (so you’ll never have to do this again, hopefully) call gitcreds::gitcreds_set() and paste the thing you copied there."
-  },
-  {
-    "objectID": "computing/ubuntu.html#post-installation-notes",
-    "href": "computing/ubuntu.html#post-installation-notes",
-    "title": " Ubuntu",
-    "section": "Post-installation notes",
-    "text": "Post-installation notes\nYou have completed the installation instructions, well done 🙌!"
-  },
-  {
-    "objectID": "computing/ubuntu.html#attributions",
-    "href": "computing/ubuntu.html#attributions",
-    "title": " Ubuntu",
-    "section": "Attributions",
-    "text": "Attributions\nThe DSCI 310 Teaching Team, notably, Anmol Jawandha, Tomas Beuzen, Rodolfo Lourenzutti, Joel Ostblom, Arman Seyed-Ahmadi, Florencia D’Andrea, and Tiffany Timbers."
-  },
-  {
-    "objectID": "schedule/index.html",
-    "href": "schedule/index.html",
-    "title": " Schedule",
-    "section": "",
-    "text": "Slides are listed below for each lesson."
-  },
-  {
-    "objectID": "schedule/index.html#final-exam",
-    "href": "schedule/index.html#final-exam",
-    "title": " Schedule",
-    "section": "Final exam",
-    "text": "Final exam\n\n\n\n\n\n\nImportant\n\n\n\nDo not make any plans to leave Vancouver before the final exam date is announced.\n\n\n\nIn person attendance is required (per Faculty of Science guidelines)"
-  },
-  {
     "objectID": "syllabus.html#learning-outcomes",
     "href": "syllabus.html#learning-outcomes",
     "title": " Syllabus",
@@ -343,10 +63,108 @@
     "text": "Policies\n\nCode of Conduct\nAll participants in our course and communications are expected to show respect and courtesy to others. To creating a friendly and respectful place for learning, teaching and contributing, you are expected to read and follow the DSCI 100 Code of Conduct.\n\n\nLate Registration\nStudents who register for the class late have 1 week from their registration date on Canvas to complete all prior assignments.\n\n\nLate Assignments / Absences\nFor examinations, students must be present at the invigilation venue (in class, examination centre, etc) to take exams; otherwise they will be considered to have missed the exam and will be assigned a grade of zero.\nStudents who will miss an exam must provide a self-declaration of academic concession prior to the exam (see Canvas homepage for the academic concession form) and make arrangements with the Instructor. Failing to present a declaration within a reasonable timeframe before the exam will result in a grade of zero.\nThere will be no extensions for the worksheets; late assignments will receive a grade of zero. Instead, we will drop the lowest worksheet grade from the semester. This policy is meant to cover illness/unexpectancies. The worksheet that you were not able to complete before the deadline will be covered by this policy. However, if you have extenuating circumstances and require further accommodations for subsequent requests, please contact the course instructor with supporting documents, and we will deal with them case by case.\nStudents who miss a lecture for their registered section will receive an iClicker grade of 0 for that lecture. There will be no make ups or accomodations for missing i-clickers. Instead, we will drop the 2 lowest grades on iClicker lectures to accomodate late registration and/or unforseeable events.\nFor all other assignments including the case studies, a late submission will receive a 50% penalty.\n\n\nAutograder Policy\nMany of the questions in assignments are graded automatically by software. The grading computer has exactly the same hardware setup as the server that students work on. No assignment, when completed, should take longer than 5 minutes to run on the server. The autograder will automatically stop (time out) for each student assignment after a maximum of 5 minutes; any ungraded questions at that point will receive a score of 0.\nStudents are responsible for making sure their assignments are reproducible, and run from beginning to end on the autograding computer. In particular, please ensure that any data that needs to be downloaded is done so by the assignment notebook with the correct filename to the correct folder. A common mistake is to manually download data when working on the assignment, making the autograder unable to find the data and often resulting in an assignment grade of 0.\nIn short: whatever grade the autograder returns after 5 minutes (assuming the teaching team did not make an error) is the grade that will be assigned.\n\n\nRe-grading\nTo account for minor grading errors throughout the course, every student will get a bonus of one percentage point at the end of the semester.\n\n\nDevice/Browser\nStudents are responsible for using a device and browser compatible with all functionality of Canvas. Chrome or Firefox browsers are recommended.\n\n\nMissed Final Exam\nStudents who miss the final exam must report to their faculty advising office within 72 hours of the missed exam, and must supply supporting documentation. Only your faculty advising office can grant deferred standing in a course. You must also notify your instructor prior to (if possible) or immediately after the exam. Your instructor will let you know when you are expected to write your deferred exam. Deferred exams will ONLY be provided to students who have applied for and received deferred standing from their faculty.\n\n\nAcademic Concession Policy\nPlease see UBC’s concession policy for detailed information on dealing with missed coursework and exams under circumstances of an acute and unanticipated nature.\nSee our Canvas homepage for the academic concession form.\n\n\nAcademic Integrity\nThe academic enterprise is founded on honesty, civility, and integrity. As members of this enterprise, all students are expected to know, understand, and follow the codes of conduct regarding academic integrity. At the most basic level, this means submitting only original work done by you and acknowledging all sources of information or ideas and attributing them to others as required. This also means you should not cheat, copy, or mislead others about what is your work. Violations of academic integrity (i.e., misconduct) lead to the breakdown of the academic enterprise, and therefore serious consequences arise and harsh sanctions are imposed. For example, incidences of plagiarism or cheating may result in a mark of zero on the assignment or exam and more serious consequences may apply if the matter is referred to the President’s Advisory Committee on Student Discipline. Careful records are kept in order to monitor and prevent recurrences.\nA more detailed description of academic integrity, including the University’s policies and procedures, may be found in the Academic Calendar at http://calendar.ubc.ca/vancouver/index.cfm?tree=3,54,111,0.\n\n\nPlagiarism\nStudents must correctly cite any code or text that has been authored by someone else or by the student themselves for other assignments. Cases of plagiarism may include, but are not limited to:\nthe reproduction (copying and pasting) of code or text with none or minimal reformatting (e.g., changing the name of the variables) the translation of an algorithm or a script from a language to another the generation of code and/or text by automatic code-generation software or large language model An “adequate acknowledgement” requires a detailed identification of the (parts of the) code or text reused and a full citation of the original source code that has been reused.\nThe above attribution policy applies only to assignments. No code or text may be copied (with or without attribution) from any source during an exam. Answers must always be in your own words. At a minimum, copying will result in a grade of 0 for the related assignment.\nRepeated plagiarism of any form could result in larger penalties, including failure of the course.\n\n\nResources\nFor additional information, please check out these useful student resources, the survival tips from your TAs, and the Frequently Asked Questions. If you want to use any of this material elsewhere, please read the license.\n\n\nAttribution\nParts of this syllabus have been copied and derived from the DSCI 100 syllabus and the UBC MDS Policies."
   },
   {
-    "objectID": "computing/index.html#submission",
-    "href": "computing/index.html#submission",
+    "objectID": "case-studies/case-study-1.html",
+    "href": "case-studies/case-study-1.html",
+    "title": "Case Study I: From Exploration to Design",
+    "section": "",
+    "text": "Welcome to the first case study in DSCI 200! This case study is the first in a series of hands-on projects designed to give you practical experience working with real-world data. Each case study reinforces key concepts from the course and helps you develop your analytical thinking and data science workflow.\nIn this case study, you’ll explore topics including exploratory data analysis (EDA), sampling and study design. The project is divided into milestones and tasks that align with the course material, allowing you to work on them progressively as you advance through the lectures.\n\n\nBefore diving into the case study, let’s make sure all the required packages are available. If any are missing, you can install them by uncommenting the relevant lines below (i.e., remove the # symbol before the install command).\n\n#install.packages('tidyverse')\n\nIn addition to tidyverse, this case study uses the hecedsm package. This package includes datasets used in the HEC Montréal course MATH 80667A: Experimental Design and Statistical Methods.You can read more about it here. To install it directly from GitHub:\n\n#devtools::install_github(\"lbelzile/hecedsm\")\n\nOnce all the necessary packages are installed, load them with:\n\nlibrary(tidyverse)\nlibrary(hecedsm)\n\n\n\n\nDue dates are available on Canvas.\nEach submission will require the use of Jupyter to communicate the question asked, the analysis performed and the conclusions reached. Your submission must include: the source Jupyter notebook (.ipynb file), the rendered final document (.html or .pdf file) and a link to your GitHub repository.\n\n\n\nEach question will have a specific point value assigned to it. Points will be distributed across different components of the question depending on the question type. After each question, you will see the rubric items associated with that question along with their corresponding point values (for example, Mechanics: 5 points). We will be using publicly available rubrics from the UBC MDS program, so for more details about each rubric type please visit https://github.com/UBC-MDS/public/tree/master/rubric."
+  },
+  {
+    "objectID": "case-studies/case-study-1.html#intro",
+    "href": "case-studies/case-study-1.html#intro",
+    "title": "Case Study I: From Exploration to Design",
+    "section": "",
+    "text": "Welcome to the first case study in DSCI 200! This case study is the first in a series of hands-on projects designed to give you practical experience working with real-world data. Each case study reinforces key concepts from the course and helps you develop your analytical thinking and data science workflow.\nIn this case study, you’ll explore topics including exploratory data analysis (EDA), sampling and study design. The project is divided into milestones and tasks that align with the course material, allowing you to work on them progressively as you advance through the lectures.\n\n\nBefore diving into the case study, let’s make sure all the required packages are available. If any are missing, you can install them by uncommenting the relevant lines below (i.e., remove the # symbol before the install command).\n\n#install.packages('tidyverse')\n\nIn addition to tidyverse, this case study uses the hecedsm package. This package includes datasets used in the HEC Montréal course MATH 80667A: Experimental Design and Statistical Methods.You can read more about it here. To install it directly from GitHub:\n\n#devtools::install_github(\"lbelzile/hecedsm\")\n\nOnce all the necessary packages are installed, load them with:\n\nlibrary(tidyverse)\nlibrary(hecedsm)\n\n\n\n\nDue dates are available on Canvas.\nEach submission will require the use of Jupyter to communicate the question asked, the analysis performed and the conclusions reached. Your submission must include: the source Jupyter notebook (.ipynb file), the rendered final document (.html or .pdf file) and a link to your GitHub repository.\n\n\n\nEach question will have a specific point value assigned to it. Points will be distributed across different components of the question depending on the question type. After each question, you will see the rubric items associated with that question along with their corresponding point values (for example, Mechanics: 5 points). We will be using publicly available rubrics from the UBC MDS program, so for more details about each rubric type please visit https://github.com/UBC-MDS/public/tree/master/rubric."
+  },
+  {
+    "objectID": "case-studies/case-study-1.html#the-data",
+    "href": "case-studies/case-study-1.html#the-data",
+    "title": "Case Study I: From Exploration to Design",
+    "section": "The Data",
+    "text": "The Data\nIn this case study, we will use published research and corresponding datasets from the hecedsm package to gain hands-on experience with real-world data.\nBelow are three dataset options you can choose from for this case study. Each one includes a research paper and a dataset, both accessible through the provided links.\n\nVirtual communication curbs creative idea generation\n\n\nThe published paper of this study is available here.\nThe data is availbale in BL22_E from hecedsm dataset. You can read more about it here.\n\n\nSmartwatches are more distracting than mobile phones while driving: Results from an experimental study\n\n\nThe published paper of this study is available here.\nThe data is availbale in BRLS21_EDA from hecedsm dataset. You can read more about it here.\n\n\nTrivially informative semantic context inflates people’s confidence they can perform a highly complex skill\n\n\nThe published paper of this study is available here.\nThe data is availbale in JZBJG22_E2 from hecedsm dataset. You can read more about it here."
+  },
+  {
+    "objectID": "case-studies/case-study-1.html#milestone-1-exploratory-data-analysis-eda-60-points",
+    "href": "case-studies/case-study-1.html#milestone-1-exploratory-data-analysis-eda-60-points",
+    "title": "Case Study I: From Exploration to Design",
+    "section": "🏁 Milestone 1: Exploratory Data Analysis (EDA) (60 points)",
+    "text": "🏁 Milestone 1: Exploratory Data Analysis (EDA) (60 points)\nWe will begin by applying some of the EDA concepts we learned in class in the upcoming tasks below.\n\nTask 1: Choose your favourite dataset (15 points)\nBefore moving forward, it is important to understand the context behind your data. In this task, you will start by choosing one of the studies listed above, then read the associated research paper and load the dataset into R. This will give you a clearer picture of the study’s goals and how the data look like. Answer all questions in this task.\n\nChoose one of the studies of your choice from the options above. Download the paper from the provided link and load data in R. (Mechanics: 5 points)\nRead the paper and summarize the main goals of study. Write your summary in no more than 200 words. (Writing: 4 points)\n\n\n\nTask 2: Explore data (10 points)\nExploring data is a crucial step before producing any plots. This often helps us to detect any missing values and have a better understanding of the type of variables that we are working with. Answer all questions in this task.\n\nUse the glimpse() or head() function to examine your dataset. How many observations and variables are there in the dataset? What types of variables are present (e.g., numeric, categorical)? (Reasoning: 1 point + Code Quality:1 point)\nWhat type of variables are in the dataset? (i.e Numerical vs Categorical). Explain briefly. (Reasoning: 1 point + Code Quality:1 point)\nWould you need to convert any variable in the dataset before starting your analysis? Explain briefly why or why not. (Reasoning: 1 point + Code Quality:1 point)\nHow many missing values are there for each variable in the dataset? Are there any variables with a large proportion of missing data (e.g., more than 20%)? (Reasoning: 1 point + Code Quality:1 point)\nIs there evidence of class imbalance in any categorical variable in the dataset (e.g., one category makes up a large majority of the observations)? (Reasoning: 1 point + Code Quality:1 point)\n\n\n\nTask 3: Data visualization (15 points)\nAlright! Now we are ready to start making some plots to gain more insights into our dataset. While coding this in R please avoid using basic R functionality for plotting (functions such as plot, lines, ect) for this case study. You are welcome to use them later in your tasks but we want you to learn using functions from ggplot and dplyr that we learnd in class. For this task answer three out of four questions of your choice.\n\nSelect two numerical variables from the dataset and name them here. What type of plot would be appropriate to explore the relationship between these two variables? Write the R code to produce this plot. Describe any pattern you observe. (Reasoning: 2.5 points + Code Quality: 2.5 points)\nCreate an appropriate plot to show the distribution of one numerical variable in the dataset. What does the distribution tell you about the variable? What is a typical observation from this distribution? (Reasoning: 2.5 points + Code Quality: 2.5 points)\nPick one numerical and one categorical variable from your dataset. Using an appropriate plot what insights can you draw about the relationship between these two variables? (Reasoning: 2.5 points + Coding: 2.5 points)\nCreate an appropriate plot to show the distribution of one categorical variable in the dataset. What does the distribution tell you about the variable? (Reasoning: 2.5 points + Code Quality: 2.5 points)\n\n\n\nTask 4: Find summary statistics (10 points)\nIn this task, you will work with summary statistics. These numbers like means, medians, and standard deviations, can help us better understand patterns in the data, especially when used alongside plots. While we should not rely on summary statistics alone to draw conclusions, combining them with visualizations often gives a clearer picture. Choose and answer any two out of the three questions in this task.\n\nChoose one numerical variable from your dataset. Report an appropriate measure of central tendency and explain why this measure is appropriate for the variable you selected. (Reasoning: 3 points + Code Quality: 2 points)\nChoose one categorical variable from your dataset. Report a relevant summary statistic and explain why it is informative. (Reasoning: 3 points + Code Quality: 2 points)\nChoose two variables from your dataset and compute an appropriate correlation to measure their relationship. Interpret the value in a simple language. (Reasoning: 3 points + Code Quality: 2 points)\n\n\n\nTask 5: Develop a question (12 points)\nBy now, you have spent some time exploring your dataset and have a better understanding of its structure and context. In addition to answering research questions, data scientists often play a key role in developing them. This task gives you a chance to practice that skill. Before attempting the questions, make sure to read the study’s paper carefully. Then, choose two out of the three questions in this task to answer.\n\nThink of a research question you would like to explore using this dataset if you were the author of this paper. Write your question in one or two sentences in simple and plain language. (Writing: 6 points)\nBased on the question you wrote do you think you need to do the splitting of your data into train and test? Answer in two or three sentences. (Reasoning: 6 points)\nConsidering your dataset and research question, create a new feature derived from the existing variables in your dataset that could help you answer your question. Describe how you constructed this variable and explain why you think it will be useful. (Reasoning: 3 points + Code Quality: 3 points)"
+  },
+  {
+    "objectID": "case-studies/case-study-1.html#milestone-2-sampling-and-study-design-40-points",
+    "href": "case-studies/case-study-1.html#milestone-2-sampling-and-study-design-40-points",
+    "title": "Case Study I: From Exploration to Design",
+    "section": "🏁 Milestone 2: Sampling and Study Design (40 points)",
+    "text": "🏁 Milestone 2: Sampling and Study Design (40 points)\nIn this part of case study, we will practice with some of different sampling and study designs techniques that we learned in class. Our goal is to recognize the sampling method that authors used in their study along with study design.\n\nTask 1: Describe design (15 points)\nUnderstanding the design of a study is important. You can often find some information about the design of a study in methodology section of a paper or its introduction part. Spend some time skimming through the text and answer all questions in this task.\n\nWhat type of data analysis questions are the authors of the paper hoping to answer? Recall the different types of data analysis questions you learned in DSCI 100 (e.g., descriptive, inferential, predictive, causal, exploratory). Which category or categories best describe the authors’ goals? (Reasoning: 2.5 points + Code Quality: 2.5 points)\nDescribe the population and sample used in this study. Clearly define both the population of interest and the sample that was actually observed in the study. (Reasoning: 2.5 points + Code Quality: 2.5 points)\nWas this an observational study or controlled experiment study? Explain your reasoning. (Reasoning: 2.5 points + Code Quality: 2.5 points)\n\n\n\nTask 2: Dive into the design! (15 points)\nAs we discussed in the lecture notes, it is important to think about the presence of confounding variable in a study design. Also there are sources of sampling bias that can occur due to the way we choose to sample from population. Answer two out of three questions in this task.\n\nDid researchers control for any confounding variable in this study? If yes explain how. If no, can you think of any potential confounding variable that you can adjust for? Explain your reasoning. (Reasoning: 4 points + Code Quality: 3.5 points)\nWhat type of sampling method did the authors use? Cite the section of the paper where the sampling method is described or being inferred. Why do you think the authors chose this method over others? (Reasoning: 4 points + Code Quality: 3.5 points)\nWere there any potential sources of sampling bias that may have affected the study’s conclusions? (Reasoning: 4 points + Code Quality: 3.5 points)\n\n\n\nTask 3: Now it is your turn! (10 points)\nHaving done the previous questions in different tasks, now you have a better understanding of the study that you chose. Take a moment to think about all you have explored here and use that to answer the following question:\n\nIf you were to design this study yourself, would you use a different sampling and design method? Why or why not? Reflect on what you might do differently and how your choice of sampling method might affect the results. (Reasoning: 5 points + Code Quality: 5 points)"
+  },
+  {
+    "objectID": "case-studies/case-study-1.html#reproducibility-and-organization-checklist",
+    "href": "case-studies/case-study-1.html#reproducibility-and-organization-checklist",
+    "title": "Case Study I: From Exploration to Design",
+    "section": "Reproducibility and Organization Checklist",
+    "text": "Reproducibility and Organization Checklist\nHere are the criteria we’re looking for:\n\nCoherence (0.5 points)\n\nThe document should read sensibly from top to bottom, with no major continuity errors and the README file should be up-to-date.\n\nFile and folder structure (1 point)\n\nYou should have at least three folders in the top level of your repository: one for each milestone, and one output folder. If there are any other folders, these are explained in the main README. Each milestone document is contained in its respective folder, and nowhere else. Every level-1 folder (that is, the ones stored in the top level, like “Milestone1”) has a README file, explaining in a sentence or two what is in the folder, in plain language (it’s enough to say something like “This folder contains the source for Milestone 1”).\n\nOutput (1 point)\n\nAll output is recent and relevant. All files are viewable without errors. Examples of errors: Missing plots, “Sorry about that, but we can’t show files that are this big right now” messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.\n\nTagged release (0.5 point)\n\nYou’ve tagged a release for the corresponding milestone. Please visit this link to learn about mangaging releases in a repository.\n\nAttribution\n\nThis case study incorporates elements from the projects in UBC’s STAT 545: Exploratory Data Analysis."
+  },
+  {
+    "objectID": "faq.html",
+    "href": "faq.html",
+    "title": " Frequently asked questions",
+    "section": "",
+    "text": "Answer 1\n\n\n\n\n\n\n\n\n\nTo be eligible\n\n\n\n\nCondition 1\nCondition 2"
+  },
+  {
+    "objectID": "faq.html#faq-1",
+    "href": "faq.html#faq-1",
+    "title": " Frequently asked questions",
+    "section": "",
+    "text": "Answer 1\n\n\n\n\n\n\n\n\n\nTo be eligible\n\n\n\n\nCondition 1\nCondition 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DSCI 200",
+    "section": "",
+    "text": "Schedule Syllabus\n\n\nAt the end of the course, you will be able to:\n\nChoose a data acquisition strategy and write reproducible scripts to read data.\nDetermine when data simulation is useful for analysis and plan appropriate simulations.\nIdentify and manage outliers and anomalies, reflecting on their impact on conclusions.\nAddress missing data, apply handling strategies, and assess their effect on conclusions.\nPerform exploratory data analysis and understand its role in the data science pipeline.\nEvaluate the impact of measurement scales, units, and errors, and apply methods to minimize them.\nAssess data privacy needs, apply techniques where necessary and reflect on their impact.\nEvaluate who owns the data in a given case."
+  },
+  {
+    "objectID": "computing/index.html",
+    "href": "computing/index.html",
     "title": " Computing",
-    "section": "Submission",
-    "text": "Submission\n\nWorksheets\n\nTo open an assignment, click the link (e.g. worksheet_EDA) from Canvas.\nTo submit your assignment, just make sure your work is saved on our server (File -&gt; Save Notebook to be sure).\nAt the deadline, our server will automatically snapshot your work.\nYou must access the lecture and tutorial worksheets through our Canvas course page (as opposed to the worksheets publicly available via Github). Otherwise your worksheets may not be marked!"
+    "section": "",
+    "text": "In this class, we will use R as our programming language. Similar to DSCI 100, we will utilize a server to complete and submit assignments.\nYou will also need to create a Github account for the case study projects.\nStudents are responsible for using a device and browser compatible with all functionality of Canvas. Chrome or Firefox browsers are recommended.\nBelow are some computing guidelines. These are edited and simplified from the DSCI 310 Setup Instructions as well as the DSCI 100 syllabus."
+  },
+  {
+    "objectID": "computing/index.html#laptop-requirements",
+    "href": "computing/index.html#laptop-requirements",
+    "title": " Computing",
+    "section": "Laptop requirements",
+    "text": "Laptop requirements\nStudents are required to bring a laptop, chromebook or tablet to both lectures and tutorials. Students who do not own a laptop, chromebook, or tablet may be able to loan a laptop from the UBC library.\n\nCan connect to networks via a wireless connection for on campus work.\nIs at most 6 years old (4 years old or newer is recommended).\nUses English as the default language. Using other languages is possible, but we have found that it often causes problems in the homework. We’ve done our best to fix them, but we may ask you to change it if you are having trouble.\nStudent user has full administrative access to the computer.\n\nAll other required software will be provided by the instructors. Students will learn to perform their analysis using the R programming language. Worksheets problem sets as well as the case study analysis, development and report will be done using Jupyter Notebooks accessed via Canvas.\n\nIf your computer does not meet the requirements please reach out to the teaching team and describe how it does not. We will work to accommodate you where we can."
+  },
+  {
+    "objectID": "case-studies/index.html",
+    "href": "case-studies/index.html",
+    "title": "Case Studies",
+    "section": "",
+    "text": "This page contains three case studies developed for DSCI 200. Each case study focuses on a distinct set of topics from the course, providing students with an opportunity to apply key concepts in a real-world context. The case studies are designed to be completed in sequence, aligning with the progression of topics in DSCI 200."
+  },
+  {
+    "objectID": "case-studies/index.html#project-template-setup",
+    "href": "case-studies/index.html#project-template-setup",
+    "title": "Case Studies",
+    "section": "Project Template Setup",
+    "text": "Project Template Setup\nStudents should use the following template when starting a case study project:\nTemplate repository:\nhttps://github.com/UBC-DSCI/dsci-200-case-study-template/\nTo set up your project:\n\nGo to the base project template linked above.\nClick “Use this template” to create your own GitHub repository using the template.\nClone your new repository into your JupyterHub home folder:\nhttps://datasciencebook.ca/version-control.html#cloning-a-repository-using-jupyter\n\n\nNote: Do not clone into your dsci-200-student folder. If you do, move it out!\n\n\nRepository names must be unique within your GitHub account, but multiple users can use the same name."
+  },
+  {
+    "objectID": "schedule/index.html",
+    "href": "schedule/index.html",
+    "title": " Schedule",
+    "section": "",
+    "text": "Slides are listed below for each lesson."
+  },
+  {
+    "objectID": "schedule/index.html#final-exam",
+    "href": "schedule/index.html#final-exam",
+    "title": " Schedule",
+    "section": "Final exam",
+    "text": "Final exam\n\n\n\n\n\n\nImportant\n\n\n\nDo not make any plans to leave Vancouver before the final exam date is announced.\n\n\n\nIn person attendance is required (per Faculty of Science guidelines)"
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title> Ubuntu – UBC DSCI 200</title>
+<title>Case Study I: From Exploration to Design – UBC DSCI 200</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Computing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../case-studies/index.html"> 
 <span class="menu-text">Case Studies</span></a>
   </li>  
   <li class="nav-item">
@@ -166,20 +166,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#installation-notes" id="toc-installation-notes" class="nav-link active" data-scroll-target="#installation-notes">Installation notes</a></li>
-  <li><a href="#ubuntu-software-settings" id="toc-ubuntu-software-settings" class="nav-link" data-scroll-target="#ubuntu-software-settings">Ubuntu software settings</a></li>
-  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github">GitHub</a></li>
-  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">Git</a>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a>
   <ul class="collapse">
-  <li><a href="#configuring-git-user-info" id="toc-configuring-git-user-info" class="nav-link" data-scroll-target="#configuring-git-user-info">Configuring Git user info</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#submission-instructions" id="toc-submission-instructions" class="nav-link" data-scroll-target="#submission-instructions">Submission Instructions</a></li>
+  <li><a href="#rubrics" id="toc-rubrics" class="nav-link" data-scroll-target="#rubrics">Rubrics</a></li>
   </ul></li>
-  <li><a href="#r-xquartz-and-rstudio" id="toc-r-xquartz-and-rstudio" class="nav-link" data-scroll-target="#r-xquartz-and-rstudio">R, XQuartz, and RStudio</a>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The Data</a></li>
+  <li><a href="#milestone-1-exploratory-data-analysis-eda-60-points" id="toc-milestone-1-exploratory-data-analysis-eda-60-points" class="nav-link" data-scroll-target="#milestone-1-exploratory-data-analysis-eda-60-points">🏁 Milestone 1: Exploratory Data Analysis (EDA) (60 points)</a>
   <ul class="collapse">
-  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
-  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
-  <li><a href="#github-pat" id="toc-github-pat" class="nav-link" data-scroll-target="#github-pat">Github PAT</a></li>
-  <li><a href="#post-installation-notes" id="toc-post-installation-notes" class="nav-link" data-scroll-target="#post-installation-notes">Post-installation notes</a></li>
-  <li><a href="#attributions" id="toc-attributions" class="nav-link" data-scroll-target="#attributions">Attributions</a></li>
+  <li><a href="#task-1-choose-your-favourite-dataset-15-points" id="toc-task-1-choose-your-favourite-dataset-15-points" class="nav-link" data-scroll-target="#task-1-choose-your-favourite-dataset-15-points">Task 1: Choose your favourite dataset (15 points)</a></li>
+  <li><a href="#task-2-explore-data-10-points" id="toc-task-2-explore-data-10-points" class="nav-link" data-scroll-target="#task-2-explore-data-10-points">Task 2: Explore data (10 points)</a></li>
+  <li><a href="#task-3-data-visualization-15-points" id="toc-task-3-data-visualization-15-points" class="nav-link" data-scroll-target="#task-3-data-visualization-15-points">Task 3: Data visualization (15 points)</a></li>
+  <li><a href="#task-4-find-summary-statistics-10-points" id="toc-task-4-find-summary-statistics-10-points" class="nav-link" data-scroll-target="#task-4-find-summary-statistics-10-points">Task 4: Find summary statistics (10 points)</a></li>
+  <li><a href="#task-5-develop-a-question-12-points" id="toc-task-5-develop-a-question-12-points" class="nav-link" data-scroll-target="#task-5-develop-a-question-12-points">Task 5: Develop a question (12 points)</a></li>
+  </ul></li>
+  <li><a href="#milestone-2-sampling-and-study-design-40-points" id="toc-milestone-2-sampling-and-study-design-40-points" class="nav-link" data-scroll-target="#milestone-2-sampling-and-study-design-40-points">🏁 Milestone 2: Sampling and Study Design (40 points)</a>
+  <ul class="collapse">
+  <li><a href="#task-1-describe-design-15-points" id="toc-task-1-describe-design-15-points" class="nav-link" data-scroll-target="#task-1-describe-design-15-points">Task 1: Describe design (15 points)</a></li>
+  <li><a href="#task-2-dive-into-the-design-15-points" id="toc-task-2-dive-into-the-design-15-points" class="nav-link" data-scroll-target="#task-2-dive-into-the-design-15-points">Task 2: Dive into the design! (15 points)</a></li>
+  <li><a href="#task-3-now-it-is-your-turn-10-points" id="toc-task-3-now-it-is-your-turn-10-points" class="nav-link" data-scroll-target="#task-3-now-it-is-your-turn-10-points">Task 3: Now it is your turn! (10 points)</a></li>
+  </ul></li>
+  <li><a href="#reproducibility-and-organization-checklist" id="toc-reproducibility-and-organization-checklist" class="nav-link" data-scroll-target="#reproducibility-and-organization-checklist">Reproducibility and Organization Checklist</a>
+  <ul class="collapse">
+  <li><a href="#attribution" id="toc-attribution" class="nav-link" data-scroll-target="#attribution">Attribution</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -189,7 +199,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><i class="fa-brands fa-linux" aria-label="linux"></i> Ubuntu</h1>
+<h1 class="title">Case Study I: From Exploration to Design</h1>
+<p class="subtitle lead">DSCI 200</p>
 </div>
 
 
@@ -206,145 +217,166 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="installation-notes" class="level2">
-<h2 class="anchored" data-anchor-id="installation-notes">Installation notes</h2>
-<p>If you have already installed Git, LaTeX, or any of the R packages, you should be OK. However, if you have difficulty with Homework or Labs, we may ask you to uninstall and try again.</p>
-<p>In order to be able to support you effectively and minimize setup issues and software conflicts, we suggest you install the required software as specified below.</p>
-</section>
-<section id="ubuntu-software-settings" class="level2">
-<h2 class="anchored" data-anchor-id="ubuntu-software-settings">Ubuntu software settings</h2>
-<p>To ensure that you are installing the right version of the software in this guide, open “Software &amp; Updates” and make sure that the boxes in the screenshot are checked (this is the default configuration).</p>
-<p><img src="../assets/img/ubuntu_settings.png" class="img-fluid"></p>
-</section>
-<section id="github" class="level2">
-<h2 class="anchored" data-anchor-id="github">GitHub</h2>
-<p>In this course we will use the publicly available <a href="https://github.com/">GitHub.com</a>. If you do not already have an account, please sign up for one at <a href="https://github.com/">GitHub.com</a></p>
-<p>Sign up for a free account at <a href="https://github.com/">GitHub.com</a> if you don’t have one already.</p>
-</section>
-<section id="git" class="level2">
-<h2 class="anchored" data-anchor-id="git">Git</h2>
-<p>We will be using the command line version of Git as well as Git through RStudio. Some of the Git commands we will use are only available since Git 2.23, so if your Git is older than this version, so if your Git is older than this version, we ask you to update it using the following commands:</p>
-<pre><code>sudo apt update
-sudo apt install git</code></pre>
-<p>You can check your git version with the following command:</p>
-<pre><code>git --version</code></pre>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>Welcome to the first case study in DSCI 200! This case study is the first in a series of hands-on projects designed to give you practical experience working with real-world data. Each case study reinforces key concepts from the course and helps you develop your analytical thinking and data science workflow.</p>
+<p>In this case study, you’ll explore topics including exploratory data analysis (EDA), sampling and study design. The project is divided into milestones and tasks that align with the course material, allowing you to work on them progressively as you advance through the lectures.</p>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<p>Before diving into the case study, let’s make sure all the required packages are available. If any are missing, you can install them by uncommenting the relevant lines below (i.e., remove the <code>#</code> symbol before the install command).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages('tidyverse')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Note
+<p>In addition to tidyverse, this case study uses the hecedsm package. This package includes datasets used in the HEC Montréal course MATH 80667A: Experimental Design and Statistical Methods.You can read more about it <a href="https://lbelzile.github.io/hecedsm/index.html">here</a>. To install it directly from GitHub:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github("lbelzile/hecedsm")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If you run into trouble, please see the Install Git Linux section from <a href="http://happygitwithr.com/install-git.html#mac-os">Happy Git and GitHub for the useR</a> for additional help or strategies for Git installation.</p>
-</div>
-</div>
-<section id="configuring-git-user-info" class="level3">
-<h3 class="anchored" data-anchor-id="configuring-git-user-info">Configuring Git user info</h3>
-<p>Next, we need to configure Git by telling it your name and email. To do this, type the following into the terminal (replacing Jane Doe and janedoe@example.com, with your name and email that you used to sign up for GitHub, respectively):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Jane Doe"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email janedoe@example.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To ensure that you haven’t made a typo in any of the above, you can view your global Git configurations by either opening the configuration file in a text editor (e.g.&nbsp;via the command <code>nano ~/.gitconfig</code>) or by typing <code>git config --list --global</code>).</p>
-</div>
-</div>
-<p>If you have never used Git before, we recommend also setting the default editor:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> core.editor nano</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you prefer VScode (and know how to set it up) or something else, feel free.</p>
-</section>
-</section>
-<section id="r-xquartz-and-rstudio" class="level1">
-<h1>R, XQuartz, and RStudio</h1>
-<p>R is the only language that we will be using in this course. We will generally (always?) use R in RStudio.</p>
-<section id="r" class="level3">
-<h3 class="anchored" data-anchor-id="r">R</h3>
-<p>The version of R available in the default Ubuntu repositories is older than the one we will be using in this course. To obtain the latest R packages, we need to add a new repository which is maintained directly by the r-project. To do this, first add the key for this repository by typing the following:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then add the URL to the repository:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> add-apt-repository <span class="st">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Next, install <code>r-base</code> and <code>r-base-dev</code> (useful for compiling R packages from source):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install r-base r-base-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>After installation, type the following in a new terminal window:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You should see something like this if you were successful:</p>
-<pre><code>R version 4.4.1 (2024-06-14) -- "Race for Your Life"
-Copyright (C) 2024 The R Foundation for Statistical Computing
-Platform: aarch64-apple-darwin23.4.0
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.</code></pre>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="https://cloud.r-project.org/bin/linux/ubuntu/">See this page for additional instructions if you run into trouble while installing R</a>.</p>
-<p>Although it is possible to install R through conda, we highly recommend not doing so. In case you have already installed R using conda you can remove it by executing <code>conda uninstall r-base</code>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course requires <code>R</code> version 4.2 or higher. You may need to update.</p>
-<p>The course package will error on install if this is not the case.</p>
-</div>
+<p>Once all the necessary packages are installed, load them with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hecedsm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
-<p>Download the Ubuntu 18/Debian 10 Desktop version (not Pro) of RStudio Preview from <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>. Open the file and follow the installer instructions.</p>
+<section id="submission-instructions" class="level3">
+<h3 class="anchored" data-anchor-id="submission-instructions">Submission Instructions</h3>
+<p>Due dates are available on Canvas.</p>
+<p>Each submission will require the use of Jupyter to communicate the question asked, the analysis performed and the conclusions reached. Your submission must include: the source Jupyter notebook (<code>.ipynb</code> file), the rendered final document (<code>.html</code> or <code>.pdf</code> file) and a link to your GitHub repository.</p>
 </section>
-<section id="github-pat" class="level2">
-<h2 class="anchored" data-anchor-id="github-pat">Github PAT</h2>
-<p>You’re probably familiar with 2-factor authentication for your UBC account or other accounts which is a very secure way to protect sensitive information (in case your password gets exposed). Github uses a Personal Access Token (PAT) for the Command Line Interface (CLI) and RStudio. This is different from the password you use to log in with a web browser. You will have to create one. There are some nice <code>R</code> functions that will help you along, and I find that easiest.</p>
-<p>Complete instructions are in <a href="https://happygitwithr.com/https-pat.html">Chapter 9 of Happy Git With R</a>. Here’s the quick version (you need the <code>usethis</code> and <code>gitcreds</code> libraries, which you can install with <code>install.packages(c("usethis", "gitcreds"))</code>):</p>
+<section id="rubrics" class="level3">
+<h3 class="anchored" data-anchor-id="rubrics">Rubrics</h3>
+<p>Each question will have a specific point value assigned to it. Points will be distributed across different components of the question depending on the question type. After each question, you will see the rubric items associated with that question along with their corresponding point values (for example, Mechanics: 5 points). We will be using publicly available rubrics from the UBC MDS program, so for more details about each rubric type please visit <a href="https://github.com/UBC-MDS/public/tree/master/rubric" class="uri">https://github.com/UBC-MDS/public/tree/master/rubric</a>.</p>
+</section>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The Data</h2>
+<p>In this case study, we will use published research and corresponding datasets from the <code>hecedsm</code> package to gain hands-on experience with real-world data.</p>
+<p>Below are three dataset options you can choose from for this case study. Each one includes a research paper and a dataset, both accessible through the provided links.</p>
 <ol type="1">
-<li>In the RStudio Console, call <code>usethis::create_github_token()</code> This should open a webbrowser. In the Note field, write what you like, perhaps “DSCI 200 token”. Then update the Expiration to any date after December 15. (“No expiration” is fine, though not very secure). Make sure that everything in <code>repo</code> is checked. Leave all other checks as is. Scroll to the bottom and click the green “Generate Token” button.</li>
-<li>This should now give you a long string to Copy. It often looks like <code>ghp_0asfjhlasdfhlkasjdfhlksajdhf9234u</code>. Copy that. (You would use this instead of the browser password in RStudio when it asks for a password).</li>
-<li>To store the PAT permanently in <code>R</code> (so you’ll never have to do this again, hopefully) call <code>gitcreds::gitcreds_set()</code> and paste the thing you copied there.</li>
+<li><strong>Virtual communication curbs creative idea generation</strong></li>
+</ol>
+<ul>
+<li>The published paper of this study is available <a href="https://www.nature.com/articles/s41586-022-04643-y">here</a>.</li>
+<li>The data is availbale in <code>BL22_E</code> from <code>hecedsm</code> dataset. You can read more about it <a href="https://lbelzile.github.io/hecedsm/reference/BL22_E.html">here</a>.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Smartwatches are more distracting than mobile phones while driving: Results from an experimental study</strong></li>
+</ol>
+<ul>
+<li>The published paper of this study is available <a href="https://www.sciencedirect.com/science/article/abs/pii/S0001457520316663?via%3Dihub">here</a>.</li>
+<li>The data is availbale in <code>BRLS21_EDA</code> from <code>hecedsm</code> dataset. You can read more about it <a href="https://lbelzile.github.io/hecedsm/reference/BRLS21_EDA.html">here</a>.</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Trivially informative semantic context inflates people’s confidence they can perform a highly complex skill</strong></li>
+</ol>
+<ul>
+<li>The published paper of this study is available <a href="https://royalsocietypublishing.org/doi/10.1098/rsos.211977">here</a>.</li>
+<li>The data is availbale in <code>JZBJG22_E2</code> from <code>hecedsm</code> dataset. You can read more about it <a href="https://lbelzile.github.io/hecedsm/reference/JZBJG22_E2.html">here</a>.</li>
+</ul>
+</section>
+<section id="milestone-1-exploratory-data-analysis-eda-60-points" class="level2">
+<h2 class="anchored" data-anchor-id="milestone-1-exploratory-data-analysis-eda-60-points">🏁 Milestone 1: Exploratory Data Analysis (EDA) (60 points)</h2>
+<p>We will begin by applying some of the EDA concepts we learned in class in the upcoming tasks below.</p>
+<section id="task-1-choose-your-favourite-dataset-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-choose-your-favourite-dataset-15-points">Task 1: Choose your favourite dataset (15 points)</h3>
+<p>Before moving forward, it is important to understand the context behind your data. In this task, you will start by choosing one of the studies listed above, then read the associated research paper and load the dataset into R. This will give you a clearer picture of the study’s goals and how the data look like. Answer all questions in this task.</p>
+<ol type="1">
+<li><p>Choose one of the studies of your choice from the options above. Download the paper from the provided link and load data in R. (<em>Mechanics: 5 points</em>)</p></li>
+<li><p>Read the paper and summarize the main goals of study. Write your summary in no more than 200 words. (<em>Writing: 4 points</em>)</p></li>
 </ol>
 </section>
-<section id="post-installation-notes" class="level2">
-<h2 class="anchored" data-anchor-id="post-installation-notes">Post-installation notes</h2>
-<p>You have completed the installation instructions, well done 🙌!</p>
+<section id="task-2-explore-data-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-explore-data-10-points">Task 2: Explore data (10 points)</h3>
+<p>Exploring data is a crucial step before producing any plots. This often helps us to detect any missing values and have a better understanding of the type of variables that we are working with. Answer all questions in this task.</p>
+<ol start="3" type="1">
+<li><p>Use the <code>glimpse()</code> or <code>head()</code> function to examine your dataset. How many observations and variables are there in the dataset? What types of variables are present (e.g., numeric, categorical)? (<em>Reasoning: 1 point + Code Quality:1 point</em>)</p></li>
+<li><p>What type of variables are in the dataset? (i.e Numerical vs Categorical). Explain briefly. (<em>Reasoning: 1 point + Code Quality:1 point</em>)</p></li>
+<li><p>Would you need to convert any variable in the dataset before starting your analysis? Explain briefly why or why not. (<em>Reasoning: 1 point + Code Quality:1 point</em>)</p></li>
+<li><p>How many missing values are there for each variable in the dataset? Are there any variables with a large proportion of missing data (e.g., more than 20%)? (<em>Reasoning: 1 point + Code Quality:1 point</em>)</p></li>
+<li><p>Is there evidence of class imbalance in any categorical variable in the dataset (e.g., one category makes up a large majority of the observations)? (<em>Reasoning: 1 point + Code Quality:1 point</em>)</p></li>
+</ol>
 </section>
-<section id="attributions" class="level2">
-<h2 class="anchored" data-anchor-id="attributions">Attributions</h2>
-<p>The <a href="https://ubc-dsci.github.io/dsci-310-student/computer-setup.html">DSCI 310 Teaching Team</a>, notably, Anmol Jawandha, Tomas Beuzen, Rodolfo Lourenzutti, Joel Ostblom, Arman Seyed-Ahmadi, Florencia D’Andrea, and Tiffany Timbers.</p>
+<section id="task-3-data-visualization-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-data-visualization-15-points">Task 3: Data visualization (15 points)</h3>
+<p>Alright! Now we are ready to start making some plots to gain more insights into our dataset. While coding this in R please avoid using basic R functionality for plotting (functions such as <code>plot</code>, <code>lines</code>, ect) for this case study. You are welcome to use them later in your tasks but we want you to learn using functions from <code>ggplot</code> and <code>dplyr</code> that we learnd in class. For this task answer three out of four questions of your choice.</p>
+<ol start="8" type="1">
+<li><p>Select two numerical variables from the dataset and name them here. What type of plot would be appropriate to explore the relationship between these two variables? Write the R code to produce this plot. Describe any pattern you observe. (<em>Reasoning: 2.5 points + Code Quality: 2.5 points</em>)</p></li>
+<li><p>Create an appropriate plot to show the distribution of one numerical variable in the dataset. What does the distribution tell you about the variable? What is a typical observation from this distribution? (<em>Reasoning: 2.5 points + Code Quality: 2.5 points</em>)</p></li>
+<li><p>Pick one numerical and one categorical variable from your dataset. Using an appropriate plot what insights can you draw about the relationship between these two variables? (<em>Reasoning: 2.5 points + Coding: 2.5 points</em>)</p></li>
+<li><p>Create an appropriate plot to show the distribution of one categorical variable in the dataset. What does the distribution tell you about the variable? (<em>Reasoning: 2.5 points + Code Quality: 2.5 points</em>)</p></li>
+</ol>
+</section>
+<section id="task-4-find-summary-statistics-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-4-find-summary-statistics-10-points">Task 4: Find summary statistics (10 points)</h3>
+<p>In this task, you will work with summary statistics. These numbers like means, medians, and standard deviations, can help us better understand patterns in the data, especially when used alongside plots. While we should not rely on summary statistics alone to draw conclusions, combining them with visualizations often gives a clearer picture. Choose and answer any two out of the three questions in this task.</p>
+<ol start="12" type="1">
+<li><p>Choose one numerical variable from your dataset. Report an appropriate measure of central tendency and explain why this measure is appropriate for the variable you selected. (<em>Reasoning: 3 points + Code Quality: 2 points</em>)</p></li>
+<li><p>Choose one categorical variable from your dataset. Report a relevant summary statistic and explain why it is informative. (<em>Reasoning: 3 points + Code Quality: 2 points</em>)</p></li>
+<li><p>Choose two variables from your dataset and compute an appropriate correlation to measure their relationship. Interpret the value in a simple language. (<em>Reasoning: 3 points + Code Quality: 2 points</em>)</p></li>
+</ol>
+</section>
+<section id="task-5-develop-a-question-12-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-5-develop-a-question-12-points">Task 5: Develop a question (12 points)</h3>
+<p>By now, you have spent some time exploring your dataset and have a better understanding of its structure and context. In addition to answering research questions, data scientists often play a key role in developing them. This task gives you a chance to practice that skill. Before attempting the questions, make sure to read the study’s paper carefully. Then, choose two out of the three questions in this task to answer.</p>
+<ol start="15" type="1">
+<li><p>Think of a research question you would like to explore using this dataset if you were the author of this paper. Write your question in one or two sentences in simple and plain language. (<em>Writing: 6 points</em>)</p></li>
+<li><p>Based on the question you wrote do you think you need to do the splitting of your data into train and test? Answer in two or three sentences. (<em>Reasoning: 6 points</em>)</p></li>
+<li><p>Considering your dataset and research question, create a new feature derived from the existing variables in your dataset that could help you answer your question. Describe how you constructed this variable and explain why you think it will be useful. (<em>Reasoning: 3 points + Code Quality: 3 points</em>)</p></li>
+</ol>
+</section>
+</section>
+<section id="milestone-2-sampling-and-study-design-40-points" class="level2">
+<h2 class="anchored" data-anchor-id="milestone-2-sampling-and-study-design-40-points">🏁 Milestone 2: Sampling and Study Design (40 points)</h2>
+<p>In this part of case study, we will practice with some of different sampling and study designs techniques that we learned in class. Our goal is to recognize the sampling method that authors used in their study along with study design.</p>
+<section id="task-1-describe-design-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-describe-design-15-points">Task 1: Describe design (15 points)</h3>
+<p>Understanding the design of a study is important. You can often find some information about the design of a study in methodology section of a paper or its introduction part. Spend some time skimming through the text and answer all questions in this task.</p>
+<ol start="18" type="1">
+<li><p>What type of data analysis questions are the authors of the paper hoping to answer? Recall the different types of data analysis questions you learned in DSCI 100 (e.g., descriptive, inferential, predictive, causal, exploratory). Which category or categories best describe the authors’ goals? (<em>Reasoning: 2.5 points + Code Quality: 2.5 points</em>)</p></li>
+<li><p>Describe the population and sample used in this study. Clearly define both the population of interest and the sample that was actually observed in the study. (<em>Reasoning: 2.5 points + Code Quality: 2.5 points</em>)</p></li>
+<li><p>Was this an observational study or controlled experiment study? Explain your reasoning. (<em>Reasoning: 2.5 points + Code Quality: 2.5 points</em>)</p></li>
+</ol>
+</section>
+<section id="task-2-dive-into-the-design-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-dive-into-the-design-15-points">Task 2: Dive into the design! (15 points)</h3>
+<p>As we discussed in the lecture notes, it is important to think about the presence of confounding variable in a study design. Also there are sources of sampling bias that can occur due to the way we choose to sample from population. Answer two out of three questions in this task.</p>
+<ol start="21" type="1">
+<li><p>Did researchers control for any confounding variable in this study? If yes explain how. If no, can you think of any potential confounding variable that you can adjust for? Explain your reasoning. (<em>Reasoning: 4 points + Code Quality: 3.5 points</em>)</p></li>
+<li><p>What type of sampling method did the authors use? Cite the section of the paper where the sampling method is described or being inferred. Why do you think the authors chose this method over others? (<em>Reasoning: 4 points + Code Quality: 3.5 points</em>)</p></li>
+<li><p>Were there any potential sources of sampling bias that may have affected the study’s conclusions? (<em>Reasoning: 4 points + Code Quality: 3.5 points</em>)</p></li>
+</ol>
+</section>
+<section id="task-3-now-it-is-your-turn-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-now-it-is-your-turn-10-points">Task 3: Now it is your turn! (10 points)</h3>
+<p>Having done the previous questions in different tasks, now you have a better understanding of the study that you chose. Take a moment to think about all you have explored here and use that to answer the following question:</p>
+<ol start="24" type="1">
+<li>If you were to design this study yourself, would you use a different sampling and design method? Why or why not? Reflect on what you might do differently and how your choice of sampling method might affect the results. (<em>Reasoning: 5 points + Code Quality: 5 points</em>)</li>
+</ol>
+</section>
+</section>
+<section id="reproducibility-and-organization-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-and-organization-checklist">Reproducibility and Organization Checklist</h2>
+<p>Here are the criteria we’re looking for:</p>
+<ul>
+<li><strong>Coherence</strong> (0.5 points)</li>
+</ul>
+<p>The document should read sensibly from top to bottom, with no major continuity errors and the <code>README</code> file should be up-to-date.</p>
+<ul>
+<li><strong>File and folder structure</strong> (1 point)</li>
+</ul>
+<p>You should have at least three folders in the top level of your repository: one for each milestone, and one output folder. If there are any other folders, these are explained in the main <code>README</code>. Each milestone document is contained in its respective folder, and nowhere else. Every level-1 folder (that is, the ones stored in the top level, like “Milestone1”) has a <code>README</code> file, explaining in a sentence or two what is in the folder, in plain language (it’s enough to say something like “This folder contains the source for Milestone 1”).</p>
+<ul>
+<li><strong>Output</strong> (1 point)</li>
+</ul>
+<p>All output is recent and relevant. All files are viewable without errors. Examples of errors: Missing plots, “Sorry about that, but we can’t show files that are this big right now” messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.</p>
+<ul>
+<li><strong>Tagged release</strong> (0.5 point)</li>
+</ul>
+<p>You’ve tagged a release for the corresponding milestone. Please visit <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">this link</a> to learn about mangaging releases in a repository.</p>
+<section id="attribution" class="level3">
+<h3 class="anchored" data-anchor-id="attribution">Attribution</h3>
+<blockquote class="blockquote">
+<p><em>This case study incorporates elements from the projects in UBC’s <a href="https://stat545.stat.ubc.ca/course/">STAT 545: Exploratory Data Analysis</a>.</em></p>
+</blockquote>
 
 
 </section>

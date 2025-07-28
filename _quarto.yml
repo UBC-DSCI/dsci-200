@@ -40,7 +40,7 @@ website:
       - text: Computing
         url: computing/index.qmd
       - text: Case Studies
-        url: index.qmd
+        url: case-studies/index.qmd
       - text: FAQ
         url: faq.qmd
       - text: "{{< fa brands github >}} Github"
