@@ -154,7 +154,7 @@ Having done the previous questions in different tasks, now you have a better und
 
 24. If you were to design this study yourself, would you use a different sampling and design method? Why or why not? Reflect on what you might do differently and how your choice of sampling method might affect the results. (*Reasoning: 5 points + Code Quality: 5 points*)
 
-## Reproducibility and Organization Checklist
+## Reproducibility and Organization (3 points)
 
 Here are the criteria we’re looking for:
 
