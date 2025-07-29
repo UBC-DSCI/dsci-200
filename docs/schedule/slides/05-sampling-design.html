@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en-CA"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
+  <title>UBC DSCI 200 – sampling-design</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-3faac352b6474bbecd2b121c3fec1fe3.css">
+  <link rel="stylesheet" href="tachyons-minimal.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
+<h2>05 - Sampling Design</h2>
+<p><span class="secondary">DSCI 200</span></p>
+<p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
+<p>Last modified – 29 July 2025</p>
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\maximize}{maximize}
+\DeclareMathOperator*{\find}{find}
+\DeclareMathOperator{\st}{subject\,\,to}
+\newcommand{\E}{E}
+\newcommand{\Expect}[1]{\E\left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left[ #1 \right]}
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[#1,\ #2\right]}
+\newcommand{\given}{\ \vert\ }
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\snorm}[1]{\lVert #1 \rVert}
+\newcommand{\tr}[1]{\mbox{tr}(#1)}
+\newcommand{\brt}{\widehat{\beta}^R_{s}}
+\newcommand{\brl}{\widehat{\beta}^R_{\lambda}}
+\newcommand{\bls}{\widehat{\beta}_{ols}}
+\newcommand{\blt}{\widehat{\beta}^L_{s}}
+\newcommand{\bll}{\widehat{\beta}^L_{\lambda}}
+\newcommand{\U}{\mathbf{U}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\V}{\mathbf{V}}
+\]</span></p>
+</section>
+<section id="attribution" class="slide level2">
+<h2>Attribution</h2>
+<p><br><br></p>
+<p><em>This material is adapted from</em> <a href="https://homerhanumat.github.io/elemStats/"><em>Chapters 5 of Elementary Statistics with R</em></a>.</p>
+<p><br><br></p>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning Objectives</h2>
+<p><br><br></p>
+<ul>
+<li><p>Recognize some common types of sampling designs, such as simple random sampling, stratified sampling, cluster sampling, and systematic sampling.</p></li>
+<li><p>Analyze a given scenario to determine an appropriate sampling scheme.</p></li>
+<li><p>Identify possible sources of sampling bias.</p></li>
+</ul>
+</section>
+<section id="asking-a-question" class="slide level2">
+<h2>Asking a Question</h2>
+<p><br><br> Let’s recall the 6 types of data analysis questions we learned about in DSCI 100: <br><br></p>
+<div>
+<ul>
+<li class="fragment">Descriptive</li>
+<li class="fragment">Exploratory</li>
+<li class="fragment">Predictive</li>
+<li class="fragment">Inferential</li>
+<li class="fragment">Causal</li>
+<li class="fragment">Mechanistic</li>
+</ul>
+</div>
+</section>
+<section id="a-sample" class="slide level2">
+<h2>A Sample</h2>
+<p><br><br></p>
+<ul>
+<li><p>To answer these questions, we first need some data!</p></li>
+<li><p>While we <em>could</em> simulate data (more to come later in this course), it is ideal if we have access to a sample that is representative of our target population.</p></li>
+<li><p>A <span class="secondary">population</span> is a collection of all subjects or observations we are interested in (e.g., all UBC students).</p></li>
+<li><p>A <span class="secondary">sample</span> is a subset of of our population that we will use to draw conclusions about the larger population (e.g., DSCI 200 students).</p></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div style="text-align: center;">
+<p><img src="https://www.scribbr.com/wp-content/uploads/2019/09/population-vs-sample-1.png" style="width: 50%;"></p>
+</div>
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+<p>Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" target="_blank">Scribbr: Population vs.&nbsp;Sample</a></p>
+</div>
+</section>
+<section id="sampling-scenario" class="slide level2">
+<h2>Sampling Scenario</h2>
+<p><br><br></p>
+<ul>
+<li>Imagine you want to investigate the study habits of UBC undergraduate students. Since surveying every student isn’t practical, you need to collect a sample. Discuss the following prompts with the people around you:
+<ul>
+<li>How would you select your sample?</li>
+<li>How can you ensure your sample represents the entire student body?</li>
+<li>What biases might affect your results?</li>
+</ul></li>
+</ul>
+</section>
+<section id="types-of-sampling" class="slide level2">
+<h2>Types of Sampling</h2>
+<p><br><br> In data science, selecting a <strong>representative sample</strong> is crucial for making accurate inferences about a population. <br><br></p>
+<ul>
+<li>Random Sampling</li>
+<li>Non-Random Sampling</li>
+</ul>
+<p>We will focus on random sampling schemes in this course.</p>
+</section>
+<section id="random-sampling-methods" class="slide level2">
+<h2>Random Sampling Methods</h2>
+<p><br><br> We will explore four key random sampling methods: <br><br></p>
+<div>
+<ul>
+<li class="fragment">Simple Random Sampling (SRS)</li>
+<li class="fragment">Systematic Sampling</li>
+<li class="fragment">Stratified Sampling</li>
+<li class="fragment">Cluster Sampling</li>
+</ul>
+</div>
+</section>
+<section id="simple-random-sampling-srs" class="slide level2">
+<h2>Simple Random Sampling (SRS)</h2>
+<p><br><br></p>
+<ul>
+<li><p>In a simple random sample (SRS), for a given sample size <span class="math inline">\(n\)</span> every set of <span class="math inline">\(n\)</span> observations has the same chance to be the sample that is actually selected.</p></li>
+<li><p>Note that this does not mean that each individual in the population has an equal chance of being selected, but that each sample of a certain size as the same chance of being selected.</p></li>
+</ul>
+</section>
+<section id="srs-example" class="slide level2">
+<h2>SRS Example</h2>
+<p><br><br></p>
+<ul>
+<li>Suppose you want to look into student performance at UBC.</li>
+<li>There are ~45,000 undergrad students at UBC Vancouver, but surveying all of them isn’t feasible.</li>
+<li>You write each student’s ID on an identical slip of paper and place all the slips into a basket.</li>
+<li>You mix the papers thoroughly, then blindly draw 500 slips, one at a time, without looking. You record the GPA of each student whose ID is drawn.</li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p>Let’s revisit this example in R</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="co"># Simulate student population data</span></span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a>student_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-9"><a></a>  <span class="at">Student =</span> <span class="fu">paste</span>(<span class="st">"Student"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">45000</span>),</span>
+<span id="cb1-10"><a></a>  <span class="at">GPA =</span> <span class="fu">runif</span>(<span class="dv">45000</span>, <span class="at">min =</span> <span class="fl">2.5</span>, <span class="at">max =</span> <span class="fl">4.0</span>)  <span class="co"># Generate random GPAs between 2.5 and 4.0</span></span>
+<span id="cb1-11"><a></a>)</span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a><span class="fu">dim</span>(student_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45000     2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">head</span>(student_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  Student     GPA
+  &lt;chr&gt;     &lt;dbl&gt;
+1 Student 1  3.30
+2 Student 2  3.38
+3 Student 3  3.38
+4 Student 4  3.54
+5 Student 5  3.50
+6 Student 6  3.76</code></pre>
+</div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p>Use the <a href="https://dplyr.tidyverse.org/reference/slice_sample.html"><code>slice_sample</code></a> function from <code>dplyr</code> to draw a sample of size 100:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>srs_student <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb5-2"><a></a><span class="fu">dim</span>(srs_student)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100   2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">head</span>(srs_student)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  Student         GPA
+  &lt;chr&gt;         &lt;dbl&gt;
+1 Student 41525  3.57
+2 Student 7729   2.71
+3 Student 11342  2.72
+4 Student 3268   3.28
+5 Student 17378  3.87
+6 Student 10243  3.57</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>srs_student <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a></a>    <span class="fu">summarise</span>(<span class="at">Mean_GPA =</span> <span class="fu">mean</span>(GPA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  Mean_GPA
+     &lt;dbl&gt;
+1     3.25</code></pre>
+</div>
+</div>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<p>Alternative solution using dplyr’s <code>sample_frac()</code> functions</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>student_data <span class="sc">|&gt;</span> <span class="fu">sample_frac</span>(<span class="at">size =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,500 × 2
+   Student         GPA
+   &lt;chr&gt;         &lt;dbl&gt;
+ 1 Student 23289  3.74
+ 2 Student 9688   3.42
+ 3 Student 28888  3.00
+ 4 Student 10307  2.56
+ 5 Student 28497  3.89
+ 6 Student 10028  3.41
+ 7 Student 37556  3.45
+ 8 Student 6474   3.82
+ 9 Student 3143   3.53
+10 Student 22272  3.70
+# ℹ 4,490 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="srs-pros-and-cons" class="slide level2">
+<h2>SRS: Pros and Cons</h2>
+<p>Pros:</p>
+<div>
+<ul>
+<li class="fragment">The selection of one element does not affect the selection of others.</li>
+<li class="fragment">Each possible sample, of a given size, has an equal chance of being selected.</li>
+<li class="fragment">Simple random samples tend to be fairly reasonable representations of the population.</li>
+<li class="fragment">Requires little knowledge of the population.</li>
+</ul>
+</div>
+<p>Cons:</p>
+<div>
+<ul>
+<li class="fragment">If there are small subgroups within the population, a SRS may not give an accurate representation of that subgroup (especially true if the sample size is small).</li>
+<li class="fragment">If the population is large, it can be expensive (both in time and money) to collect the data.</li>
+</ul>
+</div>
+</section>
+<section id="systematic-sampling" class="slide level2">
+<h2>Systematic Sampling</h2>
+<p><br><br></p>
+<ul>
+<li>In a systematic sample, the members of the population are put in a “row”.</li>
+<li>Then 1 out of every <span class="math inline">\(k\)</span> members are selected</li>
+<li>Sometimes we refer to this as 1-in-<span class="math inline">\(k\)</span> sampling.</li>
+<li>The starting point is randomly chosen from the first <span class="math inline">\(k\)</span> elements and then elements are sampled at the same location in each of the subsequent segments of size <span class="math inline">\(k\)</span>. .</li>
+</ul>
+</section>
+<section id="systematic-sampling-example" class="slide level2">
+<h2>Systematic Sampling Example</h2>
+<ul>
+<li>Again, suppose you want to survey UBC students.</li>
+<li>You stand outside of the bookstore and randomly select every 10th person.</li>
+<li>Let’s look at our <code>student_data</code> again and perform a 1-in-10 systematic sample:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a>start <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span>) <span class="co"># randomly define a student to start with</span></span>
+<span id="cb13-4"><a></a></span>
+<span id="cb13-5"><a></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb13-6"><a></a>    <span class="fu">slice</span>(<span class="fu">seq</span>(start, <span class="fu">n</span>(), <span class="at">by =</span> <span class="dv">10</span>)) <span class="co"># sample every 10th student</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,500 × 2
+   Student      GPA
+   &lt;chr&gt;      &lt;dbl&gt;
+ 1 Student 6   3.76
+ 2 Student 16  2.96
+ 3 Student 26  2.90
+ 4 Student 36  3.34
+ 5 Student 46  3.53
+ 6 Student 56  2.70
+ 7 Student 66  3.52
+ 8 Student 76  2.97
+ 9 Student 86  3.68
+10 Student 96  3.06
+# ℹ 4,490 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="systematic-sampling-pros-and-cons" class="slide level2">
+<h2>Systematic Sampling: Pros and Cons</h2>
+<p>Pros:</p>
+<div>
+<ul>
+<li class="fragment">Assures an even, random sampling of the population.</li>
+<li class="fragment">When the population is an ordered list, a systematic sample gives a better representation of the population than a SRS.</li>
+<li class="fragment">Can be used in situations where a SRS is difficult or impossible.</li>
+<li class="fragment">It is especially useful when the population that you are studying is arranged in time.</li>
+</ul>
+</div>
+<p>Cons:</p>
+<div>
+<ul>
+<li class="fragment"><p>Not every combination has an equal chance of being selected. Many combinations will never be selected using a systematic sample!</p></li>
+<li class="fragment"><p>If there is periodicity in the population (i.e., after ordering, the selections match some pattern in the list), the sample may not be representative of the population.</p></li>
+</ul>
+</div>
+</section>
+<section id="iclicker-question" class="slide level2">
+<h2>iClicker Question</h2>
+<p>You are using systematic sampling to select every 4th student (starting with Student 1). The table below includes the first 8 rows of the data and lists students by their ClassYear and GPA. Based on the sampling strategy, which of the following is most likely to occur?</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>ClassYear</th>
+<th>GPA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Freshman</td>
+<td>3.2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Sophomore</td>
+<td>3.5</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Junior</td>
+<td>3.6</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Senior</td>
+<td>3.8</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Freshman</td>
+<td>3.1</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Sophomore</td>
+<td>3.3</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Junior</td>
+<td>3.7</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Senior</td>
+<td>3.9</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:60%;">
+<ul>
+<li><strong>A)</strong> The sample will have a balanced representation of Freshmen, Sophomores, Juniors, and Seniors.<br>
+</li>
+<li><strong>B)</strong> The sample will likely overrepresent Seniors and underrepresent Freshmen, Sophomores, and Juniors.<br>
+</li>
+<li><strong>C)</strong> The sample will be biased toward Freshmen, as they are more likely to appear at the beginning of the list.<br>
+</li>
+<li><strong>D)</strong> The sample will likely underrepresent Seniors and overrepresent Freshmen, Sophomores, and Juniors.</li>
+</ul>
+</div></div>
+</section>
+<section id="stratified-sampling" class="slide level2">
+<h2>Stratified Sampling</h2>
+<p><br><br></p>
+<ul>
+<li>In a stratified sample, the population must first be separated into homogeneous groups, or strata.</li>
+<li>Each element only belongs to one stratum and the stratum consist of elements that are alike in some way.</li>
+<li>A simple random sample is then drawn from each stratum, which is combined to make the stratified sample.</li>
+</ul>
+</section>
+<section id="stratified-sampling-example" class="slide level2">
+<h2>Stratified Sampling Example</h2>
+<ul>
+<li>Suppose we consider student major as a strata:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a>majors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CS"</span>, <span class="st">"Math"</span>, <span class="st">"Stat"</span>, <span class="st">"Bio"</span>, <span class="st">"Data Science"</span>, <span class="st">"Phys"</span>, <span class="st">"Chem"</span>)</span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a>student_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a></a>  <span class="fu">mutate</span>(<span class="at">Major =</span> <span class="fu">sample</span>(majors, <span class="at">size =</span> <span class="fu">n</span>(), <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-7"><a></a></span>
+<span id="cb15-8"><a></a>strat_sampled_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span></span>
+<span id="cb15-9"><a></a>  <span class="fu">group_by</span>(Major) <span class="sc">|&gt;</span></span>
+<span id="cb15-10"><a></a>  <span class="fu">slice_sample</span>(<span class="at">n=</span><span class="dv">100</span>) <span class="co"># sample 100 students from each major </span></span>
+<span id="cb15-11"><a></a></span>
+<span id="cb15-12"><a></a><span class="fu">head</span>(strat_sampled_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+# Groups:   Major [1]
+  Student         GPA Major
+  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;
+1 Student 35080  3.41 Bio  
+2 Student 7922   3.19 Bio  
+3 Student 23923  2.57 Bio  
+4 Student 11018  3.28 Bio  
+5 Student 29294  2.58 Bio  
+6 Student 11656  2.79 Bio  </code></pre>
+</div>
+</div>
+</section>
+<section id="stratified-sampling-pros-and-cons" class="slide level2">
+<h2>Stratified Sampling: Pros and Cons</h2>
+<p>Pros:</p>
+<div>
+<ul>
+<li class="fragment"><p>Representative of the population, because elements from all strata are included in the sample.</p></li>
+<li class="fragment"><p>Ensures that specific groups are represented, sometimes even proportionally, in the sample.</p></li>
+<li class="fragment"><p>Allows comparisons to be made between strata, if necessary. For example, a stratified sample allows you to easily compare the mean GPA of Biology students to the mean GPA of Chemistry students.</p></li>
+</ul>
+</div>
+<p>Cons:</p>
+<div>
+<ul>
+<li class="fragment">Requires prior knowledge of the population. You have to know something about the population to be able to split into strata!</li>
+</ul>
+</div>
+</section>
+<section id="conceptual-question" class="slide level2">
+<h2>Conceptual Question</h2>
+<p>You are conducting a stratified random sampling study to survey students at a university. The population consists of the following groups:</p>
+<ul>
+<li>Freshmen: 2000 students</li>
+<li>Sophomores: 1500 students</li>
+<li>Juniors: 1000 students</li>
+<li>Seniors: 500 students</li>
+<li>Graduate Students: 30 students</li>
+</ul>
+<p>What might you do to ensure that the sample is representative of the population, given the imbalanced nature of each subgroup?</p>
+</section>
+<section id="cluster-sampling" class="slide level2">
+<h2>Cluster Sampling</h2>
+<p><br><br></p>
+<ul>
+<li>Cluster sampling is a sampling method used when natural groups are evident in the population.</li>
+<li>The clusters should all be similar each other and roughly homogenous within each cluster.</li>
+<li>To take a cluster sample, we randomly select a certain number of clusters, and then use all observations within the sampled clusters.</li>
+</ul>
+<blockquote>
+<p>Example: Say we want to look into the average heights of NHL players. We could randomly sample 3 teams (clusters), and record the heights of all of the players on these selected teams.</p>
+</blockquote>
+</section>
+<section id="cluster-sampling-example" class="slide level2">
+<h2>Cluster Sampling Example</h2>
+<p>Suppose each the student data had 30 class secions and we consider each <code>ClassSection</code> to be a cluster:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb17-2"><a></a></span>
+<span id="cb17-3"><a></a><span class="co"># Add simulated class sections (clusters)</span></span>
+<span id="cb17-4"><a></a>student_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span></span>
+<span id="cb17-5"><a></a>  <span class="fu">mutate</span>(<span class="at">ClassSection =</span> <span class="fu">sample</span>(<span class="fu">paste0</span>(<span class="st">"Section_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>), <span class="at">size =</span> <span class="fu">n</span>(), <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb17-6"><a></a></span>
+<span id="cb17-7"><a></a><span class="co"># Randomly select 5 clusters </span></span>
+<span id="cb17-8"><a></a>selected_clusters <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span></span>
+<span id="cb17-9"><a></a>  <span class="fu">distinct</span>(ClassSection) <span class="sc">|&gt;</span></span>
+<span id="cb17-10"><a></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb17-11"><a></a></span>
+<span id="cb17-12"><a></a><span class="co"># Filter the data to include all students from the selected clusters</span></span>
+<span id="cb17-13"><a></a>cluster_sampled_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span></span>
+<span id="cb17-14"><a></a>  <span class="fu">filter</span>(ClassSection <span class="sc">%in%</span> selected_clusters)</span>
+<span id="cb17-15"><a></a></span>
+<span id="cb17-16"><a></a><span class="fu">head</span>(cluster_sampled_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 4
+# ℹ 4 variables: Student &lt;chr&gt;, GPA &lt;dbl&gt;, Major &lt;chr&gt;, ClassSection &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="think-pair-share" class="slide level2">
+<h2>Think, Pair, Share</h2>
+<p><br><br></p>
+<p>Discuss the similarities and differences between stratified random sampling and cluster sampling. Be prepared to share with the class!</p>
+<div>
+<ul>
+<li class="fragment">In a stratified sample, the differences between stratum are high while the differences within strata are low.</li>
+<li class="fragment">In a cluster sample, the differences between clusters are low while the differences within clusters are high.</li>
+</ul>
+</div>
+</section>
+<section id="sampling-scenario-1" class="slide level2">
+<h2>Sampling Scenario</h2>
+<p><br><br></p>
+<ul>
+<li>Imagine you’re conducting a survey to assess the quality of food on UBC’s campus.</li>
+<li>Your goal is to gather feedback to help the campus dining services improve their offerings.</li>
+<li>You set up a booth in the Nest during lunchtime and invite students to fill out the survey while they eat.</li>
+</ul>
+<blockquote>
+<p><em>Question: What potential problems might arise from this sampling approach?</em></p>
+</blockquote>
+</section>
+<section id="sampling-bias" class="slide level2">
+<h2>Sampling Bias</h2>
+<div>
+<ul>
+<li class="fragment">A sampling method is considered <em>biased</em> if it systemically produces samples that do not accurately reflect the population, where certain individuals are more or less likely to be selected</li>
+<li class="fragment">Sampling bias can lead to an unrepresentative sample (i.e., a sample that does not reflect the population of interest).</li>
+<li class="fragment">We will now introduce three different types of sampling bias:
+<ul>
+<li class="fragment">Selection bias</li>
+<li class="fragment">Nonresponse bias</li>
+<li class="fragment">Response bias</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="selection-bias" class="slide level2">
+<h2>Selection Bias</h2>
+<p><br><br></p>
+<ul>
+<li>A sampling method exhibits <strong>selection bias</strong> if its process for choosing the sample systematically tends to over-represent or under-represent certain subsets of the population.</li>
+<li>While we don’t always have control over certain types of selection bias, it’s important to recognize that some sampling techniques are more prone to it than others.</li>
+</ul>
+</section>
+<section id="convenience-sampling" class="slide level2">
+<h2>Convenience Sampling</h2>
+<p><br><br></p>
+<div>
+<ul>
+<li class="fragment"><p>Convenience sampling is the practice of sampling observations that are easy to access or are readily available, making it convenient for the person collecting the data.</p></li>
+<li class="fragment"><p>A convenience sample can suffer from selection bias, as it can lead to the underrepresentation or omission of certain subgroups in the population.</p></li>
+<li class="fragment"><p>Example: I wanted to have an idea of people’s thoughts on the food quality on campus, so I ask my DSCI 200 class.</p></li>
+</ul>
+</div>
+</section>
+<section id="volunteer-sampling" class="slide level2">
+<h2>Volunteer Sampling</h2>
+<div>
+<ul>
+<li class="fragment">As the name suggests, volunter sampling is when a sample is collected from subjects that have volunteered to participate (i.e., individuals self-select whether or not to participate).</li>
+<li class="fragment">Oftentimes, people with strong opinions who feel compelled to participate are overrepresented and individuals with neutral opinions may opt to not participate, resulting in a biased sample.</li>
+<li class="fragment">In a volunteer sample you are also leaving it up to each member of the population to find out about your survey to have the opportunity to participate.</li>
+<li class="fragment">Example: In a survey about campus food quality, students who have strong opinions (either positive or negative) may be more likely to volunteer to participate, leading to a sample that over-represents those with extreme views and under-represents students with neutral opinions.</li>
+</ul>
+</div>
+</section>
+<section id="nonresponse-bias" class="slide level2">
+<h2>Nonresponse Bias</h2>
+<div>
+<ul>
+<li class="fragment">If we avoid selection bias (perhaps by choosing a sampling scheme like SRS), we still need participants to consent to participate to being sampled.</li>
+<li class="fragment">Indiviudals may refuse to participate or we may not be able to contact them at all.</li>
+<li class="fragment">A sampling method exhibits <strong>nonresponse bias</strong> if people who choose to participate in the survey systematically differ from the population in some important way.</li>
+<li class="fragment">Examples:
+<ul>
+<li class="fragment">In a survey about drug use, individuals who engage in illegal or behaviours perceived as “taboo” may be less likely to respond, leading to nonresponse bias where the sample underrepresents people who use drugs.</li>
+<li class="fragment">In an email survey about healthcare, older adults who may not have access to email or are less familiar with technology might not participate, resulting in nonresponse bias where the sample overrepresents younger, tech-savvy individuals and underrepresents older populations.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="response-bias" class="slide level2">
+<h2>Response Bias</h2>
+<div>
+<ul>
+<li class="fragment">The way a survey question is phrased can influence how subjects respond.</li>
+<li class="fragment">For example, consider the wording in the following questions and how the phrasing might impact responses:
+<ul>
+<li class="fragment"><em>“How much do you agree that climate change is a serious issue that requires immediate action?”</em></li>
+<li class="fragment"><em>“What are your thoughts on the issue of climate change and the need for action?”</em></li>
+</ul></li>
+<li class="fragment">A sampling method exhibits <strong>response bias</strong> if the way the questions are asked or framed tends to influence the individuals’ responses.</li>
+</ul>
+</div>
+</section>
+<section id="factors-influencing-response-bias" class="slide level2">
+<h2>Factors Influencing Response Bias</h2>
+<div>
+<ul>
+<li class="fragment">Deliberate (or unintentional) wording bias</li>
+<li class="fragment">Desire of the respondents to please</li>
+<li class="fragment">Asking the uninformed</li>
+<li class="fragment">Unnecessary complexity</li>
+<li class="fragment">Ordering of questions</li>
+<li class="fragment">Confidentiality concerns</li>
+<li class="fragment">Certain groups (e.g., minorities, marginalized populations) may be left out or underrepresented if the sampling frame does not fully capture the diversity of the population or contains inherent biases.</li>
+</ul>
+</div>
+</section>
+<section id="a-case-study-of-sampling-bias-and-black-voters-in-online-opt-in-polls" class="slide level2">
+<h2>A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls</h2>
+<ul>
+<li>Study focused on Philadelphia’s 2023 mayoral primary</li>
+<li>Online surveys promoted via social media had a very low participation rate (~0.4%)</li>
+<li>White residents and college graduates were more likely to respond, leading to sample bias</li>
+<li>Online polls underestimated support for the Black Democrat winner of the mayoral primary</li>
+<li>Weighting and geographic stratification did not fully correct this bias</li>
+</ul>
+<blockquote>
+<p>Source: <a href="https://www.cambridge.org/core/journals/journal-of-race-ethnicity-and-politics/article/getting-the-race-wrong-a-case-study-of-sampling-bias-and-black-voters-in-online-optin-polls/55C516D26B21DA6436FDDFB2B2FF1FCA">Getting the Race Wrong: A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls</a></p>
+</blockquote>
+</section>
+<section id="ethical-implications-of-sampling" class="slide level2">
+<h2>Ethical Implications of Sampling</h2>
+<p><br><br></p>
+<ul>
+<li><p>Later in this course, we will explore the ethical implications related to data ownership, privacy, and acquisition.</p></li>
+<li><p>For now, it’s important to note that consent, privacy, and the consideration of equity, diversity, and inclusion should be prioritized throughout any data collection process.</p></li>
+<li><p>For further details on these considerations, check out <a href="https://www.nserc-crsng.gc.ca/NSERC-CRSNG/Policies-Politiques/EDI_guidance-Conseils_EDI_eng.asp">NSERC’s guide on integrating equity, diversity and inclusion considerations in research</a>.</p></li>
+</ul>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>UBC DSCI 200</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

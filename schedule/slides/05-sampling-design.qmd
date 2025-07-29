@@ -1,0 +1,441 @@
+---
+lecture: "05 - Sampling Design"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+*This material is adapted from* [*Chapters 5 of Elementary Statistics with R*](https://homerhanumat.github.io/elemStats/).
+
+<br><br>
+
+## Learning Objectives 
+<br><br>
+
+- Recognize some common types of sampling designs, such as simple random sampling, stratified sampling, cluster sampling, and systematic sampling.
+
+- Analyze a given scenario to determine an appropriate sampling scheme.
+
+- Identify possible sources of sampling bias.
+
+## Asking a Question
+<br><br>
+Let's recall the 6 types of data analysis questions we learned about in DSCI 100: 
+<br><br>
+
+:::incremental
+- Descriptive
+- Exploratory
+- Predictive
+- Inferential
+- Causal
+- Mechanistic
+:::
+
+
+## A Sample 
+<br><br>
+
+- To answer these questions, we first need some data! 
+
+- While we *could* simulate data (more to come later in this course), it is ideal if we have access to a sample that is representative of our target population. 
+
+- A <span class="secondary">population</span> is a collection of all subjects or observations we are interested in (e.g., all UBC students).
+
+- A <span class="secondary">sample</span> is a subset of of our population that we will use to draw conclusions about the larger population (e.g., DSCI 200 students). 
+
+## 
+
+<div style="text-align: center;">
+  <img src="https://www.scribbr.com/wp-content/uploads/2019/09/population-vs-sample-1.png" style="width: 50%;">
+</div>
+
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" target="_blank">Scribbr: Population vs. Sample</a>
+</div>
+
+
+## Sampling Scenario
+<br><br>
+
+- Imagine you want to investigate the study habits of UBC undergraduate students. Since surveying every student isn't practical, you need to collect a sample. Discuss the following prompts with the people around you:
+	- How would you select your sample?
+	- How can you ensure your sample represents the entire student body?
+	- What biases might affect your results?
+
+## Types of Sampling
+<br><br>
+In data science, selecting a **representative sample** is crucial for making accurate inferences about a population.
+<br><br>
+
+- Random Sampling
+- Non-Random Sampling
+
+We will focus on random sampling schemes in this course.
+
+## Random Sampling Methods
+<br><br>
+We will explore four key random sampling methods:
+<br><br>
+
+:::incremental
+- Simple Random Sampling (SRS)
+- Systematic Sampling
+- Stratified Sampling
+- Cluster Sampling
+:::
+
+## Simple Random Sampling (SRS)
+<br><br>
+
+- In a simple random sample (SRS), for a given sample size $n$ every set of $n$ observations 
+has the same chance to be the sample that is actually selected. 
+
+- Note that this does not mean that each individual in the population has an equal chance of being selected, but that each sample of a certain size as the same chance of being selected. 
+
+## SRS Example
+<br><br>
+
+- Suppose you want to look into student performance at UBC.
+- There are ~45,000 undergrad students at UBC Vancouver, but surveying all of them isn't feasible.
+- You write each student's ID on an identical slip of paper and place all the slips into a basket. 
+- You mix the papers thoroughly, then blindly draw 500 slips, one at a time, without looking. You record the GPA of each student whose ID is drawn.
+
+
+## 
+
+Let's revisit this example in R
+
+```{r}
+library(tidyverse)
+library(dplyr)
+
+# Simulate student population data
+
+set.seed(200)
+
+student_data <- tibble(
+  Student = paste("Student", 1:45000),
+  GPA = runif(45000, min = 2.5, max = 4.0)  # Generate random GPAs between 2.5 and 4.0
+)
+
+dim(student_data)
+head(student_data)
+```
+##
+
+Use the [`slice_sample`](https://dplyr.tidyverse.org/reference/slice_sample.html) function from `dplyr` to draw a sample of size 100:
+
+```{r}
+srs_student <- student_data |> slice_sample(n = 100)
+dim(srs_student)
+head(srs_student)
+
+srs_student |>
+	summarise(Mean_GPA = mean(GPA))
+```
+
+##
+
+Alternative solution using dplyr's `sample_frac()` functions
+
+```{r}
+student_data |> sample_frac(size = 0.1)
+```
+
+## SRS: Pros and Cons
+
+Pros:
+
+:::incremental
+- The selection of one element does not affect the selection of others.
+- Each possible sample, of a given size, has an equal chance of being selected.
+- Simple random samples tend to be fairly reasonable representations of the population.
+- Requires little knowledge of the population.
+:::
+
+Cons:
+
+:::incremental
+- If there are small subgroups within the population, a SRS may not give an accurate representation of that subgroup (especially true if the sample size is small).
+- If the population is large, it can be expensive (both in time and money) to collect the data.
+:::
+
+
+## Systematic Sampling
+<br><br>
+
+- In a systematic sample, the members of the population are put in a "row". 
+- Then 1 out of every $k$ members are selected 
+- Sometimes we refer to this as 1-in-$k$ sampling.
+- The starting point is randomly chosen from the first $k$  elements and then elements are sampled at the same location in each of the subsequent segments of size $k$. 
+ .
+
+## Systematic Sampling Example 
+- Again, suppose you want to survey UBC students. 
+- You stand outside of the bookstore and randomly select every 10th person.
+- Let's look at our `student_data` again and perform a 1-in-10 systematic sample: 
+```{r}
+set.seed(200)
+
+start <- sample(1:10,1) # randomly define a student to start with
+
+student_data |> 
+	slice(seq(start, n(), by = 10)) # sample every 10th student
+```
+
+
+## Systematic Sampling: Pros and Cons
+
+Pros:
+
+:::incremental
+- Assures an even, random sampling of the population.
+- When the population is an ordered list, a systematic sample gives a better representation of the population than a SRS.
+- Can be used in situations where a SRS is difficult or impossible. 
+- It is especially useful when the population that you are studying is arranged in time.
+:::
+
+Cons:
+
+:::incremental
+- Not every combination has an equal chance of being selected. Many combinations will never be selected using a systematic sample!
+
+- If there is periodicity in the population (i.e., after ordering, the selections match some pattern in the list), the sample may not be representative of the population.
+:::
+
+## iClicker Question
+
+You are using systematic sampling to select every 4th student (starting with Student 1). The table below includes the first 8 rows of the data and lists students by their ClassYear and GPA. Based on the sampling strategy, which of the following is most likely to occur?
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+| ID  | ClassYear | GPA  |
+| --- | --------- | ---- |
+| 1   | Freshman  | 3.2  |
+| 2   | Sophomore | 3.5  |
+| 3   | Junior    | 3.6  |
+| 4   | Senior    | 3.8  |
+| 5   | Freshman  | 3.1  |
+| 6   | Sophomore | 3.3  |
+| 7   | Junior    | 3.7  |
+| 8   | Senior    | 3.9  |
+:::
+
+::: {.column width="10%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="60%"}
+- **A)** The sample will have a balanced representation of Freshmen, Sophomores, Juniors, and Seniors.  
+- **B)** The sample will likely overrepresent Seniors and underrepresent Freshmen, Sophomores, and Juniors.  
+- **C)** The sample will be biased toward Freshmen, as they are more likely to appear at the beginning of the list.  
+- **D)** The sample will likely underrepresent Seniors and overrepresent Freshmen, Sophomores, and Juniors. 
+:::
+
+::::
+
+## Stratified Sampling
+<br></br>
+
+- In a stratified sample, the population must first be separated into homogeneous groups, or strata. 
+- Each element only belongs to one stratum and the stratum consist of elements that are alike in some way.
+- A simple random sample is then drawn from each stratum, which is combined to make the stratified sample.
+
+## Stratified Sampling Example
+- Suppose we consider student major as a strata:
+```{r}
+set.seed(200)
+
+majors <- c("CS", "Math", "Stat", "Bio", "Data Science", "Phys", "Chem")
+
+student_data <- student_data |>
+  mutate(Major = sample(majors, size = n(), replace = TRUE))
+
+strat_sampled_data <- student_data |>
+  group_by(Major) |>
+  slice_sample(n=100) # sample 100 students from each major 
+
+head(strat_sampled_data)
+```
+
+## Stratified Sampling: Pros and Cons
+
+Pros:
+
+:::incremental
+- Representative of the population, because elements from all strata are included in the sample.
+
+- Ensures that specific groups are represented, sometimes even proportionally, in the sample.
+
+- Allows comparisons to be made between strata, if necessary. For example, a stratified sample allows you to easily compare the mean GPA of Biology students to the mean GPA of Chemistry students.
+:::
+
+Cons:
+
+:::incremental
+- Requires prior knowledge of the population. You have to know something about the population to be able to split into strata!
+:::
+
+## Conceptual Question
+
+You are conducting a stratified random sampling study to survey students at a university. The population consists of the following groups:
+
+- Freshmen: 2000 students
+- Sophomores: 1500 students
+- Juniors: 1000 students
+- Seniors: 500 students
+- Graduate Students: 30 students
+
+What might you do to ensure that the sample is representative of the population, given the imbalanced nature of each subgroup? 
+
+## Cluster Sampling
+<br></br>
+
+- Cluster sampling is a sampling method used when natural groups are evident in the population. 
+- The clusters should all be similar each other and roughly homogenous within each cluster. 
+- To take a cluster sample, we randomly select a certain number of clusters, and then use all observations within the sampled clusters.
+
+> Example: Say we want to look into the average heights of NHL players. We could randomly sample 3 teams (clusters), and record the heights of all of the players on these selected teams.
+
+## Cluster Sampling Example
+Suppose each the student data had 30 class secions and we consider each `ClassSection` to be a cluster:
+
+```{r}
+set.seed(200)
+
+# Add simulated class sections (clusters)
+student_data <- student_data |>
+  mutate(ClassSection = sample(paste0("Section_", 1:30), size = n(), replace = TRUE))
+
+# Randomly select 5 clusters 
+selected_clusters <- student_data |>
+  distinct(ClassSection) |>
+  slice_sample(n = 5)
+
+# Filter the data to include all students from the selected clusters
+cluster_sampled_data <- student_data |>
+  filter(ClassSection %in% selected_clusters)
+
+head(cluster_sampled_data)
+
+```
+
+
+## Think, Pair, Share
+<br></br>
+
+Discuss the similarities and differences between stratified random sampling and cluster sampling. Be prepared to share with the class!
+
+:::incremental
+- In a stratified sample, the differences between stratum are high while the differences within strata are low. 
+- In a cluster sample, the differences between clusters are low while the differences within clusters are high.
+:::
+
+## Sampling Scenario
+<br></br>
+
+- Imagine you're conducting a survey to assess the quality of food on UBC's campus. 
+- Your goal is to gather feedback to help the campus dining services improve their offerings.
+- You set up a booth in the Nest during lunchtime and invite students to fill out the survey while they eat. 
+
+> *Question: What potential problems might arise from this sampling approach?*
+
+## Sampling Bias 
+
+:::incremental
+- A sampling method is considered *biased* if it systemically produces samples that do not accurately reflect the population, where certain individuals are more or less likely to be selected
+- Sampling bias can lead to an unrepresentative sample (i.e.,  a sample that does not reflect the population of interest).
+- We will now introduce three different types of sampling bias: 
+	- Selection bias
+	- Nonresponse bias
+	- Response bias
+::: 
+
+
+## Selection Bias
+<br></br>
+
+- A sampling method exhibits **selection bias** if its process for choosing the sample systematically tends to over-represent or under-represent certain subsets of the population.
+- While we don’t always have control over certain types of selection bias, it’s important to recognize that some sampling techniques are more prone to it than others.
+
+
+## Convenience Sampling
+<br></br>
+
+:::incremental 
+- Convenience sampling is the practice of sampling observations that are easy to access or are readily available, making it convenient for the person collecting the data.
+- A convenience sample can suffer from selection bias, as it can lead to the underrepresentation or omission of certain subgroups in the population. 
+
+- Example: I wanted to have an idea of people's thoughts on the food quality on campus, so I ask my DSCI 200 class. 
+:::
+
+## Volunteer Sampling
+
+:::incremental 
+- As the name suggests, volunter sampling is when a sample is collected from subjects that have volunteered to participate (i.e., individuals self-select whether or not to participate).
+- Oftentimes, people with strong opinions who feel compelled to participate are overrepresented and individuals with neutral opinions may opt to not participate, resulting in a biased sample. 
+- In a volunteer sample you are also leaving it up to each member of the population to find out about your survey to have the opportunity to participate.
+- Example: In a survey about campus food quality, students who have strong opinions (either positive or negative) may be more likely to volunteer to participate, leading to a sample that over-represents those with extreme views and under-represents students with neutral opinions.
+:::
+
+## Nonresponse Bias 
+
+:::incremental 
+- If we avoid selection bias (perhaps by choosing a sampling scheme like SRS), we still need participants to consent to participate to being sampled.
+- Indiviudals may refuse to participate or we may not be able to contact them at all.
+- A sampling method exhibits **nonresponse bias** if people who choose to participate in the survey systematically differ from the population in some important way.
+- Examples: 
+	- In a survey about drug use, individuals who engage in illegal or behaviours 					perceived as "taboo" may be less likely to respond, leading to nonresponse bias 			where the sample underrepresents people who use drugs.
+	- In an email survey about healthcare, older adults who may not have access to email 		or are less familiar with technology might not participate, resulting in 								nonresponse bias where the sample overrepresents younger, tech-savvy individuals 		and underrepresents older populations.
+:::
+
+
+## Response Bias
+
+:::incremental
+- The way a survey question is phrased can influence how subjects respond. 
+- For example, consider the wording in the following questions and how the phrasing might impact responses:  
+	- *"How much do you agree that climate change is a serious issue that requires immediate action?"*
+	- *"What are your thoughts on the issue of climate change and the need for action?"*
+- A sampling method exhibits **response bias** if the way the questions are asked or framed tends to influence the individuals’ responses.
+:::
+
+## Factors Influencing Response Bias
+
+:::incremental
+- Deliberate (or unintentional) wording bias
+- Desire of the respondents to please
+- Asking the uninformed
+- Unnecessary complexity
+- Ordering of questions
+- Confidentiality concerns
+- Certain groups (e.g., minorities, marginalized populations) may be left out or underrepresented if the sampling frame does not fully capture the diversity of the population or contains inherent biases.
+:::
+
+## A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls
+
+- Study focused on Philadelphia’s 2023 mayoral primary 
+- Online surveys promoted via social media had a very low participation rate (~0.4%)
+- White residents and college graduates were more likely to respond, leading to sample bias
+- Online polls underestimated support for the Black Democrat winner of the mayoral primary
+- Weighting and geographic stratification did not fully correct this bias
+
+> Source: [Getting the Race Wrong: A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls](https://www.cambridge.org/core/journals/journal-of-race-ethnicity-and-politics/article/getting-the-race-wrong-a-case-study-of-sampling-bias-and-black-voters-in-online-optin-polls/55C516D26B21DA6436FDDFB2B2FF1FCA
+)  
+
+## Ethical Implications of Sampling
+<br></br>
+
+- Later in this course, we will explore the ethical implications related to data ownership, privacy, and acquisition.
+
+- For now, it's important to note that consent, privacy, and the consideration of equity, diversity, and inclusion should be prioritized throughout any data collection process.
+
+- For further details on these considerations, check out [NSERC's guide on integrating equity, diversity and inclusion considerations in research](https://www.nserc-crsng.gc.ca/NSERC-CRSNG/Policies-Politiques/EDI_guidance-Conseils_EDI_eng.asp).

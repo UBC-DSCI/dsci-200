@@ -4,8 +4,8 @@
 |07 Jan 26 | Exploratory Data Analysis |[Slides]()   |          |
 |12 Jan 26 | Fundamentals of Sampling and Variability |[Slides]()   |          |
 |14 Jan 26 | Fundamentals of Sampling and Variability     |[Slides]()   |          |
-|19 Jan 26 | Sampling Design  |[Slides]()   |          |
-|21 Jan 26 | Experimental Design  |[Slides]()   |          |
+|19 Jan 26 | Sampling Design  |[Slides](slides/05-sampling-design.qmd)   |          |
+|21 Jan 26 | Study Design  |[Slides](slides/06-study-design.qmd)   |          |
 |26 Jan 26 | Case Study 1 Work Period  |[Slides]()   |          |
 |28 Jan 26 | Simulation  |[Slides]()   |          |
 |02 Feb 26 | Simulation |[Slides]()   |          |

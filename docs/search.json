@@ -1,5 +1,187 @@
 [
   {
+    "objectID": "schedule/slides/06-study-design.html#section",
+    "href": "schedule/slides/06-study-design.html#section",
+    "title": "UBC DSCI 200",
+    "section": "06 - Study Design",
+    "text": "06 - Study Design\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 29 July 2025\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#attribution",
+    "href": "schedule/slides/06-study-design.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\nThis material is adapted from Chapter 6 of Elementary Statistics with R and Chapter 1 of Significant Statistics: An Introduction to Statistics."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#observational-studies",
+    "href": "schedule/slides/06-study-design.html#observational-studies",
+    "title": "UBC DSCI 200",
+    "section": "Observational Studies",
+    "text": "Observational Studies\n\n\n\nObservational studies are a research method in which the researcher does not apply any treatments or alter any variables.\nBehaviours or outcomes are simply observed and recorded as they naturally occur.\nObservational data appears in scenarios such as:\n\nMedical records\nHistorical data\nSocial media engagement metrics\nMarket trends"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#why-observational-studies",
+    "href": "schedule/slides/06-study-design.html#why-observational-studies",
+    "title": "UBC DSCI 200",
+    "section": "Why Observational Studies?",
+    "text": "Why Observational Studies?\nTake 1-2 minutes to brainstorm reasons why you might use an observational study.\n\n\nEthical considerations\n\nFor example, it would be unethical to randomly assign individuals to smoke or not smoke to study the effects of smoking on health.\n\nCost-effective and efficient\n\nObservational studies often use existing data, making them less expensive and quicker to conduct.\n\nStudying rare conditions\n\nObservational studies are often the only way to study rare diseases or outcomes because collecting enough data through experiments could be impractical (or impossible)."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#types-of-observational-studies",
+    "href": "schedule/slides/06-study-design.html#types-of-observational-studies",
+    "title": "UBC DSCI 200",
+    "section": "Types of Observational Studies",
+    "text": "Types of Observational Studies\n\n\nRetrospective studies\n\nEvents have already taken place and data is collected afterwards or historical data is used\nExample: Economists analyze historical data from the past 50 years to see how major global events influenced the economic growth of different countries.\n\nProspective studies\n\nIndividuals/observations are first identified and data is collected as time progresses\nExample: A group of 1000 healthy adults is followed over 10 years to study how physical activity affects the development of heart disease.\n\nNote that you may encounter more specific types of observational studies such as cohort, case-control and cross-sectional studies which are beyond the scope of this course. You can read more about them here if you are interested!"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#iclicker-question-1",
+    "href": "schedule/slides/06-study-design.html#iclicker-question-1",
+    "title": "UBC DSCI 200",
+    "section": "iClicker Question 1",
+    "text": "iClicker Question 1\n\nA retrospective observational study would MOST likely be used in which of the following scenarios? \n\n\nAnalyzing the impact of a new drug on cancer survival rates.\n\n\nStudying how physical activity influences heart disease over the next decade.\n\n\nInvestigating the relationship between smoking and lung disease using historical data.\n\n\nTesting the effects of a new exercise regimen on stress levels."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#causality-and-observational-studies",
+    "href": "schedule/slides/06-study-design.html#causality-and-observational-studies",
+    "title": "UBC DSCI 200",
+    "section": "Causality and Observational Studies",
+    "text": "Causality and Observational Studies\n\n\nWhile we have listed some motivating reasons for the usage of observational studies, there are also some downsides.\nA major disadvantage is the lack of the ability to establish causality.\nCausality refers to the notion that one variable or event directly causes or influences another (implies a direct cause-and-effect relationship).\nWe cannot make a statment like “variable \\(X\\) causes a change in variable \\(Y\\)” using observational data."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#correlation-vs.-causation",
+    "href": "schedule/slides/06-study-design.html#correlation-vs.-causation",
+    "title": "UBC DSCI 200",
+    "section": "Correlation vs. Causation",
+    "text": "Correlation vs. Causation\n\nIn observational studies, we can investigate associations or relationships between variables (e.g., correlation analysis).\nHowever, correlation does NOT imply causation! Just because two variables are correlated, does not imply that one variable causes a change in another.\n\n\n\nSource:  https://spot.pcc.edu/~evega/section-4.htmle"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#scenario",
+    "href": "schedule/slides/06-study-design.html#scenario",
+    "title": "UBC DSCI 200",
+    "section": "Scenario",
+    "text": "Scenario\nAn observational study found that individuals who used more sunscreen were more likely to develop skin cancer.\n\nDoes this imply that sunscreen causes skin cancer?\nWhat might be happening here? \n\n\n\nSource:  https://spot.pcc.edu/~evega/section-4.html"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#confounding-variables",
+    "href": "schedule/slides/06-study-design.html#confounding-variables",
+    "title": "UBC DSCI 200",
+    "section": "Confounding Variables",
+    "text": "Confounding Variables\n\n\nIn the previous scenario, sun exposure is an example of a so-called confounding variable.\nA confounding (or “lurking”) variable is one that has an effect on a study, but it is neither an explanatory or response variable.\nUnfortunately, in observational studies we can’t control for confounders the way we might want to."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#experiments",
+    "href": "schedule/slides/06-study-design.html#experiments",
+    "title": "UBC DSCI 200",
+    "section": "Experiments",
+    "text": "Experiments\n\n\n\nIdeally, we are able to perform an experiment.\nIn an experiment, researchers manipulate something (e.g., impose a treatment) and observe the effects on a response variable.\nAlthough they can be difficult and more expensive to perform, there are several advantages to experiments over observational studies:\n\nReproducibility\nCausality\nRandomization\nControl over variables"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#experiment-terminology",
+    "href": "schedule/slides/06-study-design.html#experiment-terminology",
+    "title": "UBC DSCI 200",
+    "section": "Experiment Terminology",
+    "text": "Experiment Terminology\n\n\nExperimental units: the subjects or individuals in an experiment.\nTreatment groups: the group(s) in an experiment that receives the intervention or treatment being tested.\nControl group: The group in an experiment that does not receive the intervention or treatment for comparative purposes.\n\n\n\n\nSource:  https://causalwizard.app/inference/article/control-and-treated"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#section-1",
+    "href": "schedule/slides/06-study-design.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Single-blind experiment: an experiment in which the subjects do not know which treatment group they are in.\nDouble-blind experiment: an experiment in which neither the subjects nor the researchers know the group assignments of the subjects.\nPlacebo: an inert substance given to subjects in the control group (allows the experiment to be single-blind).\nBlinding is an important way to reduce bias in an experiment!"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#activity",
+    "href": "schedule/slides/06-study-design.html#activity",
+    "title": "UBC DSCI 200",
+    "section": "Activity",
+    "text": "Activity\nResearchers are testing a new online tutoring service to improve math grades. They randomly assign 100 students to two groups. One group uses the tutoring service for 6 weeks, and the other group continues with their regular study routine. The researchers know which students are in which group, but the students do not. At the end of the study, their grades are compared. \nIdentify the following parts of the experiment:\n\nExperimental units\nTreatment group\nControl group\nType of experiment (single-blind, double-blind, or neither)\nPlacebo (if any)"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#completely-randomized-designs",
+    "href": "schedule/slides/06-study-design.html#completely-randomized-designs",
+    "title": "UBC DSCI 200",
+    "section": "Completely Randomized Designs",
+    "text": "Completely Randomized Designs\n\n\n\nA completely randomized design assigns subjects to treatment groups purely by randomization.\nRandomization helps to create similar groups by balancing out variables that might affect the outcome, ensuring that each subject has an equal chance of being assigned to any group.\nThis design is ideal when there are a large number of subjects.\nRandomization helps mitigate the impact of confounding variables (like sex or income) by equally distributing them across groups."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#replication",
+    "href": "schedule/slides/06-study-design.html#replication",
+    "title": "UBC DSCI 200",
+    "section": "Replication",
+    "text": "Replication\n\n\n\nReplication refers to including multiple subjects in each treatment group.\nLarger sample sizes help ensure that treatment groups are more comparable.\nMore subjects in the groups means stronger and more reliable conclusions.\nWhile randomization works well with large samples, smaller sample sizes can lead to imbalances in treatment groups."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#practical-example",
+    "href": "schedule/slides/06-study-design.html#practical-example",
+    "title": "UBC DSCI 200",
+    "section": "Practical Example",
+    "text": "Practical Example\n\n\nA pharmaceutical company is testing a new drug for lowering blood pressure.\nThey randomly assign 1,000 patients to two groups:\n\none group takes the drug\nthe other receives a placebo\n\nThe patients are randomly assigned, ensuring that any differences in blood pressure outcomes are due to the drug and not other factors."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#randomized-block-designs",
+    "href": "schedule/slides/06-study-design.html#randomized-block-designs",
+    "title": "UBC DSCI 200",
+    "section": "Randomized Block Designs",
+    "text": "Randomized Block Designs\n\n\n\nA randomized block design is used when there are only a small number of subjects, and randomization alone may lead to imbalanced groups.\nSubjects are grouped into blocks based on potential confounders.\nWithin each block, subjects are randomly assigned to treatment groups.\nThis helps to ensure that each treatment group is similar with respect to the confounders.\nThe goal is to reduce variability within each block and improve the accuracy of the experiment’s results."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#practical-example-1",
+    "href": "schedule/slides/06-study-design.html#practical-example-1",
+    "title": "UBC DSCI 200",
+    "section": "Practical Example",
+    "text": "Practical Example\n\n\nA study is comparing two data science bootcamps (Bootcamp A and Bootcamp B) to determine which one better prepares participants for data science roles.\nThe researcher blocks participants based on their highest degree attained (High School, Bachelor’s, or Graduate degree).\nWithin each block, participants are randomly assigned to either Bootcamp A or Bootcamp B.\nThis ensures that both bootcamps are tested across a balanced mix of educational backgrounds, controlling for the influence of prior education on the effectiveness of the bootcamps."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#matched-pair-designs",
+    "href": "schedule/slides/06-study-design.html#matched-pair-designs",
+    "title": "UBC DSCI 200",
+    "section": "Matched Pair Designs",
+    "text": "Matched Pair Designs\n\n\n\nA matched pair design is an extreme form of blocking where subjects are paired based on similarities.\nEach pair of subjects is randomly assigned to different treatment groups.\nAn example of matched pairs could be comparing left vs. right feet in a shoe wear test (pairs of feet on the same person).\nThis design minimizes the effect of confounding variables by ensuring pairs are as similar as possible before randomization."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#repeated-measure-designs",
+    "href": "schedule/slides/06-study-design.html#repeated-measure-designs",
+    "title": "UBC DSCI 200",
+    "section": "Repeated-Measure Designs",
+    "text": "Repeated-Measure Designs\n\n\n\nIn a repeated-measures design, subjects are measured multiple times under different conditions.\nThis design is ideal for studying changes over time or responses to different treatments.\nThe challenge in repeated-measures designs is to manage potential carryover effects between measurements (i.e., dependence).\nRandomizing the order of measurements is important to avoid bias in the results."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#practical-example-2",
+    "href": "schedule/slides/06-study-design.html#practical-example-2",
+    "title": "UBC DSCI 200",
+    "section": "Practical Example",
+    "text": "Practical Example\n\n\nA psychologist conducts an experiment on memory retention where each participant is shown a list of words.\nThe same participants are tested on memory recall in two different conditions: one after a short delay and one after a long delay.\nThe same group of people undergoes both conditions, and the order of conditions is randomized to prevent the sequence from influencing the results."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#reproducibility",
+    "href": "schedule/slides/06-study-design.html#reproducibility",
+    "title": "UBC DSCI 200",
+    "section": "Reproducibility",
+    "text": "Reproducibility\n\n\n\nReproducibility is a core principle of scientific work and in the field of data science.\nIt ensures that others can independently verify your results and understand how they were obtained.\nTo achieve reproducibility in experiments, randomization should be performed in a way that others can replicate!\nIn R, this is done by setting a seed for random number generation using the set.seed() function.\nThis ensures that the randomization produces the same result every time it is run, making the experiment reproducible."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#consent-in-experiments",
+    "href": "schedule/slides/06-study-design.html#consent-in-experiments",
+    "title": "UBC DSCI 200",
+    "section": "Consent in Experiments",
+    "text": "Consent in Experiments\n\n\n\nConsent is crucial when conducting experiments involving human subjects.\nParticipants must voluntarily agree to participate and be be fully informed about potential risks and benefits of the experiment.\nThe group of volunteers may differ from the general population, potentially leading to biased results.\nResearchers must be cautious when generalizing the results of such experiments to the larger population."
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#iclicker-question-2",
+    "href": "schedule/slides/06-study-design.html#iclicker-question-2",
+    "title": "UBC DSCI 200",
+    "section": "iClicker Question 2",
+    "text": "iClicker Question 2\n\nWhich of the following is the main purpose of blocking in an experiment? \n\n\nMinimizing random error\n\n\nControlling for confounding variables that may affect the outcome\n\n\nAddressing ethical concerns related to human subjects\n\n\nEliminating the need for a control group"
+  },
+  {
+    "objectID": "schedule/slides/06-study-design.html#iclicker-question-3",
+    "href": "schedule/slides/06-study-design.html#iclicker-question-3",
+    "title": "UBC DSCI 200",
+    "section": "iClicker Question 3",
+    "text": "iClicker Question 3\n\nWhy is randomization particularly important in experimental design? \n\n\nIt allows the researcher to select subjects who are most likely to benefit from the treatment.\n\n\nIt helps to ensure that both the treatment and control groups are similar at the start of the experiment.\n\n\nIt reduces the need for a control group.\n\n\nIt ensures that the experiment can be reproduced exactly by other researchers."
+  },
+  {
     "objectID": "schedule/slides/00-intro-to-class.html#section",
     "href": "schedule/slides/00-intro-to-class.html#section",
     "title": "UBC DSCI 200",
@@ -98,11 +280,11 @@
     "text": "🏁 Milestone 2: Sampling and Study Design (40 points)\nIn this part of case study, we will practice with some of different sampling and study designs techniques that we learned in class. Our goal is to recognize the sampling method that authors used in their study along with study design.\n\nTask 1: Describe design (15 points)\nUnderstanding the design of a study is important. You can often find some information about the design of a study in methodology section of a paper or its introduction part. Spend some time skimming through the text and answer all questions in this task.\n\nWhat type of data analysis questions are the authors of the paper hoping to answer? Recall the different types of data analysis questions you learned in DSCI 100 (e.g., descriptive, inferential, predictive, causal, exploratory). Which category or categories best describe the authors’ goals? (Reasoning: 2.5 points + Code Quality: 2.5 points)\nDescribe the population and sample used in this study. Clearly define both the population of interest and the sample that was actually observed in the study. (Reasoning: 2.5 points + Code Quality: 2.5 points)\nWas this an observational study or controlled experiment study? Explain your reasoning. (Reasoning: 2.5 points + Code Quality: 2.5 points)\n\n\n\nTask 2: Dive into the design! (15 points)\nAs we discussed in the lecture notes, it is important to think about the presence of confounding variable in a study design. Also there are sources of sampling bias that can occur due to the way we choose to sample from population. Answer two out of three questions in this task.\n\nDid researchers control for any confounding variable in this study? If yes explain how. If no, can you think of any potential confounding variable that you can adjust for? Explain your reasoning. (Reasoning: 4 points + Code Quality: 3.5 points)\nWhat type of sampling method did the authors use? Cite the section of the paper where the sampling method is described or being inferred. Why do you think the authors chose this method over others? (Reasoning: 4 points + Code Quality: 3.5 points)\nWere there any potential sources of sampling bias that may have affected the study’s conclusions? (Reasoning: 4 points + Code Quality: 3.5 points)\n\n\n\nTask 3: Now it is your turn! (10 points)\nHaving done the previous questions in different tasks, now you have a better understanding of the study that you chose. Take a moment to think about all you have explored here and use that to answer the following question:\n\nIf you were to design this study yourself, would you use a different sampling and design method? Why or why not? Reflect on what you might do differently and how your choice of sampling method might affect the results. (Reasoning: 5 points + Code Quality: 5 points)"
   },
   {
-    "objectID": "case-studies/case-study-1.html#reproducibility-and-organization-checklist",
-    "href": "case-studies/case-study-1.html#reproducibility-and-organization-checklist",
+    "objectID": "case-studies/case-study-1.html#reproducibility-and-organization-3-points",
+    "href": "case-studies/case-study-1.html#reproducibility-and-organization-3-points",
     "title": "Case Study I: From Exploration to Design",
-    "section": "Reproducibility and Organization Checklist",
-    "text": "Reproducibility and Organization Checklist\nHere are the criteria we’re looking for:\n\nCoherence (0.5 points)\n\nThe document should read sensibly from top to bottom, with no major continuity errors and the README file should be up-to-date.\n\nFile and folder structure (1 point)\n\nYou should have at least three folders in the top level of your repository: one for each milestone, and one output folder. If there are any other folders, these are explained in the main README. Each milestone document is contained in its respective folder, and nowhere else. Every level-1 folder (that is, the ones stored in the top level, like “Milestone1”) has a README file, explaining in a sentence or two what is in the folder, in plain language (it’s enough to say something like “This folder contains the source for Milestone 1”).\n\nOutput (1 point)\n\nAll output is recent and relevant. All files are viewable without errors. Examples of errors: Missing plots, “Sorry about that, but we can’t show files that are this big right now” messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.\n\nTagged release (0.5 point)\n\nYou’ve tagged a release for the corresponding milestone. Please visit this link to learn about mangaging releases in a repository.\n\nAttribution\n\nThis case study incorporates elements from the projects in UBC’s STAT 545: Exploratory Data Analysis."
+    "section": "Reproducibility and Organization (3 points)",
+    "text": "Reproducibility and Organization (3 points)\nHere are the criteria we’re looking for:\n\nCoherence (0.5 points)\n\nThe document should read sensibly from top to bottom, with no major continuity errors and the README file should be up-to-date.\n\nFile and folder structure (1 point)\n\nYou should have at least three folders in the top level of your repository: one for each milestone, and one output folder. If there are any other folders, these are explained in the main README. Each milestone document is contained in its respective folder, and nowhere else. Every level-1 folder (that is, the ones stored in the top level, like “Milestone1”) has a README file, explaining in a sentence or two what is in the folder, in plain language (it’s enough to say something like “This folder contains the source for Milestone 1”).\n\nOutput (1 point)\n\nAll output is recent and relevant. All files are viewable without errors. Examples of errors: Missing plots, “Sorry about that, but we can’t show files that are this big right now” messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.\n\nTagged release (0.5 point)\n\nYou’ve tagged a release for the corresponding milestone. Please visit this link to learn about mangaging releases in a repository.\n\nAttribution\n\nThis case study incorporates elements from the projects in UBC’s STAT 545: Exploratory Data Analysis."
   },
   {
     "objectID": "faq.html",
@@ -110,13 +292,6 @@
     "title": " Frequently asked questions",
     "section": "",
     "text": "What if I get sick during the semester?\nPlease follow the UBC CAMPUS RULES & GUIDANCE DOCUMENTS.\nDO NOT COME TO CLASS.\nYou can complete all of your assignments electronically (and remotely).\nWe will drop the lowest worksheet grade from the semester.\n\n\nWhat if I get sick right before an exam?\nDO NOT COME TO THE EXAM. Your instructor will make alternate arrangements if you get sick right before/during a exam. Please contact your instructor as far in advance as possible, and fill out an academic concession form (available on the Canvas page).\n\n\nWhat is the structure of the class?\nEach week will have the following pattern:\nYour instructor will release pre-lecture reading material on Monday In class, your instructor will begin with a brief lecture to introduce a new concept. Then you’ll do a worksheet to practice the concept. In tutorial, the TAs will run a tutorial to reinforce the concept we learned in lecture. You’ll do another worksheet to practice the concept. The tutorial worksheets are generally harder than the lecture worksheets. There will be one midterm, one final exam, and one group project.\n\n\nHow do I submit a worksheet?\n\nWorksheets: You must complete all of your worksheets on our JupyterHub server. Once you are done working, go to File -&gt; Save and Checkpoint, and make sure the checkpoint is “a few seconds ago” at the top of your screen. We will show you how to do this in class. You don’t need to click “submit” anywhere – our server will automatically take a snapshot of your assignment at the due date. Make sure you do not move / rename your assignment from where it originally was on the server.\nCase studies / other assignments: You will submit these on Canvas.\n\n\n\nHow do I get my assignment regraded?\nPlease see the course syllabus.\n\n\nWhere do I find due dates?\nAll due dates are listed on Canvas.\n\n\nWhat if I registered late? When are things due?\n\nIf you registered after an assignment was due, then that assignment will be due exactly 1 week after your registration date & time.\nIf you registered before an assignment was due, the assignment from that class is due at the normal time.\n\n\n\nI’m going to be late / absent for a class! Who do I notify?\nYour instructor does not need to be informed when you’ll be absent from a regular class. We understand that, from time to time, you will not be able to attend the lecture sessions. However, since iClicker participation is a part of your grade, regular attendance is encouraged to ensure you can fully engage with the material and earn participation marks.\nIf you are going to be absent from an exam, you need to fill out a self-declared concession form in a timely manner prior to the exam. See the course policies on the syllabus for details.\n\n\nDo I satisfy the math requirement for this class?\nThe prerequisite for this course is DSCI 100.\n\n\nHow do I get help in the course?\n\nOffice Hours: The TAs and I will hold office hours at various times throughout the week via Zoom/in-person. See Canvas for times/locations. I encourage you to ask questions about the worksheets, case studies or any other questions about the course material.\nPiazza Discussion Board: You can post on the Piazza Discussion board to ask your questions about the course material. You can also help your classmates by answering their questions.\nEmail: For questions about the course material, please post your questions on Piazza. If you have personal questions that do not pertain to the course material itself you can email the course instructor (please see syllabus for emails). Please note: Most instructors only respond to emails Monday to Friday, and try their best to answer you as promptly as possible. However, given the large class size it may take a few days to respond.\n\n\n\nHow do I do well in this course?\nMost importantly: complete and understand the worksheets. These are intended to help you learn the concepts so you’ll do well on the case studies and exams. The worksheets tend to be a bit easier and provide more guidance.\nFor lecture worksheets, you can collaborate with your peers (this is encouraged!) as discussing the material while you work on it will help you learn. But you are not allowed to simply copy another student’s work. That is plagiarism, which is expressly forbidden in the course policy.\nTime management is very important in this course. There are regular assessments every week to keep you on track, but we move quickly and cover a lot of ground.\nTake an active role in the learning community that we will build together. Ask questions on Piazza when you have them, and try to answer each others’ questions when you can.\n\nAttribution: These FAQ have been adapted from DSCI 100’s FAQ."
-  },
-  {
-    "objectID": "faq.html#faq-1",
-    "href": "faq.html#faq-1",
-    "title": " Frequently asked questions",
-    "section": "",
-    "text": "Answer 1\n\n\n\n\n\n\n\n\n\nTo be eligible\n\n\n\n\nCondition 1\nCondition 2"
   },
   {
     "objectID": "index.html",
@@ -168,59 +343,255 @@
     "text": "Final exam\n\n\n\n\n\n\nImportant\n\n\n\nDo not make any plans to leave Vancouver before the final exam date is announced.\n\n\n\nIn person attendance is required (per Faculty of Science guidelines)"
   },
   {
-    "objectID": "case-studies/case-study-1.html#reproducibility-and-organization-3-points",
-    "href": "case-studies/case-study-1.html#reproducibility-and-organization-3-points",
-    "title": "Case Study I: From Exploration to Design",
-    "section": "Reproducibility and Organization (3 points)",
-    "text": "Reproducibility and Organization (3 points)\nHere are the criteria we’re looking for:\n\nCoherence (0.5 points)\n\nThe document should read sensibly from top to bottom, with no major continuity errors and the README file should be up-to-date.\n\nFile and folder structure (1 point)\n\nYou should have at least three folders in the top level of your repository: one for each milestone, and one output folder. If there are any other folders, these are explained in the main README. Each milestone document is contained in its respective folder, and nowhere else. Every level-1 folder (that is, the ones stored in the top level, like “Milestone1”) has a README file, explaining in a sentence or two what is in the folder, in plain language (it’s enough to say something like “This folder contains the source for Milestone 1”).\n\nOutput (1 point)\n\nAll output is recent and relevant. All files are viewable without errors. Examples of errors: Missing plots, “Sorry about that, but we can’t show files that are this big right now” messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.\n\nTagged release (0.5 point)\n\nYou’ve tagged a release for the corresponding milestone. Please visit this link to learn about mangaging releases in a repository.\n\nAttribution\n\nThis case study incorporates elements from the projects in UBC’s STAT 545: Exploratory Data Analysis."
+    "objectID": "schedule/slides/05-sampling-design.html#section",
+    "href": "schedule/slides/05-sampling-design.html#section",
+    "title": "UBC DSCI 200",
+    "section": "05 - Sampling Design",
+    "text": "05 - Sampling Design\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 29 July 2025\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
-    "objectID": "faq.html#how-do-i-get-my-assignment-regraded",
-    "href": "faq.html#how-do-i-get-my-assignment-regraded",
-    "title": " Frequently asked questions",
-    "section": "How do I get my assignment regraded?",
-    "text": "How do I get my assignment regraded?\nPlease see the course syllabus."
+    "objectID": "schedule/slides/05-sampling-design.html#attribution",
+    "href": "schedule/slides/05-sampling-design.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\nThis material is adapted from Chapters 5 of Elementary Statistics with R."
   },
   {
-    "objectID": "faq.html#where-do-i-find-due-dates",
-    "href": "faq.html#where-do-i-find-due-dates",
-    "title": " Frequently asked questions",
-    "section": "Where do I find due dates?",
-    "text": "Where do I find due dates?\nAll due dates are listed on Canvas."
+    "objectID": "schedule/slides/05-sampling-design.html#learning-objectives",
+    "href": "schedule/slides/05-sampling-design.html#learning-objectives",
+    "title": "UBC DSCI 200",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\n\nRecognize some common types of sampling designs, such as simple random sampling, stratified sampling, cluster sampling, and systematic sampling.\nAnalyze a given scenario to determine an appropriate sampling scheme.\nIdentify possible sources of sampling bias."
   },
   {
-    "objectID": "faq.html#what-if-i-registered-late-when-are-things-due",
-    "href": "faq.html#what-if-i-registered-late-when-are-things-due",
-    "title": " Frequently asked questions",
-    "section": "What if I registered late? When are things due?",
-    "text": "What if I registered late? When are things due?\n\nIf you registered after an assignment was due, then the assignment from that class session will be due exactly 1 week after your registration date & time.\nIf you registered before an assignment was due, the assignment from that class is due at the normal time."
+    "objectID": "schedule/slides/05-sampling-design.html#asking-a-question",
+    "href": "schedule/slides/05-sampling-design.html#asking-a-question",
+    "title": "UBC DSCI 200",
+    "section": "Asking a Question",
+    "text": "Asking a Question\n Let’s recall the 6 types of data analysis questions we learned about in DSCI 100: \n\n\nDescriptive\nExploratory\nPredictive\nInferential\nCausal\nMechanistic"
   },
   {
-    "objectID": "faq.html#im-going-to-be-late-absent-for-a-class-who-do-i-notify",
-    "href": "faq.html#im-going-to-be-late-absent-for-a-class-who-do-i-notify",
-    "title": " Frequently asked questions",
-    "section": "I’m going to be late / absent for a class! Who do I notify?",
-    "text": "I’m going to be late / absent for a class! Who do I notify?\nYour instructor does not need to be informed when you’ll be absent from a regular class. We understand that, from time to time, you will not be able to attend the lecture sessions. However, since iClicker participation is a part of your grade, regular attendance is encouraged to ensure you can fully engage with the material and earn participation marks.\nIf you are going to be absent from an exam, you need to fill out a self-declared concession form in a timely manner prior to the exam. See the course policies on the syllabus for details."
+    "objectID": "schedule/slides/05-sampling-design.html#a-sample",
+    "href": "schedule/slides/05-sampling-design.html#a-sample",
+    "title": "UBC DSCI 200",
+    "section": "A Sample",
+    "text": "A Sample\n\n\nTo answer these questions, we first need some data!\nWhile we could simulate data (more to come later in this course), it is ideal if we have access to a sample that is representative of our target population.\nA population is a collection of all subjects or observations we are interested in (e.g., all UBC students).\nA sample is a subset of of our population that we will use to draw conclusions about the larger population (e.g., DSCI 200 students)."
   },
   {
-    "objectID": "faq.html#do-i-satisfy-the-math-requirement-for-this-class",
-    "href": "faq.html#do-i-satisfy-the-math-requirement-for-this-class",
-    "title": " Frequently asked questions",
-    "section": "Do I satisfy the math requirement for this class?",
-    "text": "Do I satisfy the math requirement for this class?\nThe prerequisite for this course is DSCI 100."
+    "objectID": "schedule/slides/05-sampling-design.html#section-1",
+    "href": "schedule/slides/05-sampling-design.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Source: Scribbr: Population vs. Sample"
   },
   {
-    "objectID": "faq.html#how-do-i-get-help-in-the-course",
-    "href": "faq.html#how-do-i-get-help-in-the-course",
-    "title": " Frequently asked questions",
-    "section": "How do I get help in the course?",
-    "text": "How do I get help in the course?\n\nOffice Hours: The TAs and I will hold office hours at various times throughout the week via Zoom/in-person. See Canvas for times/locations. I encourage you to ask questions about the worksheets, case studies or any other questions about the course material.\nPiazza Discussion Board: You can post on the Piazza Discussion board to ask your questions about the course material. You can also help your classmates by answering their questions.\nEmail: For questions about the course material, please post your questions on Piazza. If you have personal questions that do not pertain to the course material itself you can email the course coordinator (please see syllabus for emails). Please note: Most instructors only respond to emails Monday to Friday, and try their best to answer you as promptly as possible. However, given the large class size it may take a few days to respond."
+    "objectID": "schedule/slides/05-sampling-design.html#sampling-scenario",
+    "href": "schedule/slides/05-sampling-design.html#sampling-scenario",
+    "title": "UBC DSCI 200",
+    "section": "Sampling Scenario",
+    "text": "Sampling Scenario\n\n\nImagine you want to investigate the study habits of UBC undergraduate students. Since surveying every student isn’t practical, you need to collect a sample. Discuss the following prompts with the people around you:\n\nHow would you select your sample?\nHow can you ensure your sample represents the entire student body?\nWhat biases might affect your results?"
   },
   {
-    "objectID": "faq.html#how-do-i-do-well-in-this-course",
-    "href": "faq.html#how-do-i-do-well-in-this-course",
-    "title": " Frequently asked questions",
-    "section": "How do I do well in this course?",
-    "text": "How do I do well in this course?\nMost importantly: complete and understand the worksheets. These are intended to help you learn the concepts so you’ll do well on the case studies and exams. The worksheets tend to be a bit easier and provide more guidance.\nFor lecture worksheets, you can collaborate with your peers (this is encouraged!) as discussing the material while you work on it will help you learn. But you are not allowed to simply copy another student’s work. That is plagiarism, which is expressly forbidden in the course policy.\nTime management is very important in this course. There are regular assessments every week to keep you on track, but we move quickly and cover a lot of ground.\nTake an active role in the learning community that we will build together. Ask questions on Piazza when you have them, and try to answer each others’ questions when you can."
+    "objectID": "schedule/slides/05-sampling-design.html#types-of-sampling",
+    "href": "schedule/slides/05-sampling-design.html#types-of-sampling",
+    "title": "UBC DSCI 200",
+    "section": "Types of Sampling",
+    "text": "Types of Sampling\n In data science, selecting a representative sample is crucial for making accurate inferences about a population. \n\nRandom Sampling\nNon-Random Sampling\n\nWe will focus on random sampling schemes in this course."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#random-sampling-methods",
+    "href": "schedule/slides/05-sampling-design.html#random-sampling-methods",
+    "title": "UBC DSCI 200",
+    "section": "Random Sampling Methods",
+    "text": "Random Sampling Methods\n We will explore four key random sampling methods: \n\n\nSimple Random Sampling (SRS)\nSystematic Sampling\nStratified Sampling\nCluster Sampling"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#simple-random-sampling-srs",
+    "href": "schedule/slides/05-sampling-design.html#simple-random-sampling-srs",
+    "title": "UBC DSCI 200",
+    "section": "Simple Random Sampling (SRS)",
+    "text": "Simple Random Sampling (SRS)\n\n\nIn a simple random sample (SRS), for a given sample size \\(n\\) every set of \\(n\\) observations has the same chance to be the sample that is actually selected.\nNote that this does not mean that each individual in the population has an equal chance of being selected, but that each sample of a certain size as the same chance of being selected."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#srs-example",
+    "href": "schedule/slides/05-sampling-design.html#srs-example",
+    "title": "UBC DSCI 200",
+    "section": "SRS Example",
+    "text": "SRS Example\n\n\nSuppose you want to look into student performance at UBC.\nThere are ~45,000 undergrad students at UBC Vancouver, but surveying all of them isn’t feasible.\nYou write each student’s ID on an identical slip of paper and place all the slips into a basket.\nYou mix the papers thoroughly, then blindly draw 500 slips, one at a time, without looking. You record the GPA of each student whose ID is drawn."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#section-2",
+    "href": "schedule/slides/05-sampling-design.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Let’s revisit this example in R\n\nlibrary(tidyverse)\nlibrary(dplyr)\n\n# Simulate student population data\n\nset.seed(200)\n\nstudent_data &lt;- tibble(\n  Student = paste(\"Student\", 1:45000),\n  GPA = runif(45000, min = 2.5, max = 4.0)  # Generate random GPAs between 2.5 and 4.0\n)\n\ndim(student_data)\n\n[1] 45000     2\n\nhead(student_data)\n\n# A tibble: 6 × 2\n  Student     GPA\n  &lt;chr&gt;     &lt;dbl&gt;\n1 Student 1  3.30\n2 Student 2  3.38\n3 Student 3  3.38\n4 Student 4  3.54\n5 Student 5  3.50\n6 Student 6  3.76"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#section-3",
+    "href": "schedule/slides/05-sampling-design.html#section-3",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Use the slice_sample function from dplyr to draw a sample of size 100:\n\nsrs_student &lt;- student_data |&gt; slice_sample(n = 100)\ndim(srs_student)\n\n[1] 100   2\n\nhead(srs_student)\n\n# A tibble: 6 × 2\n  Student         GPA\n  &lt;chr&gt;         &lt;dbl&gt;\n1 Student 41525  3.57\n2 Student 7729   2.71\n3 Student 11342  2.72\n4 Student 3268   3.28\n5 Student 17378  3.87\n6 Student 10243  3.57\n\nsrs_student |&gt;\n    summarise(Mean_GPA = mean(GPA))\n\n# A tibble: 1 × 1\n  Mean_GPA\n     &lt;dbl&gt;\n1     3.25"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#section-4",
+    "href": "schedule/slides/05-sampling-design.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Alternative solution using dplyr’s sample_frac() functions\n\nstudent_data |&gt; sample_frac(size = 0.1)\n\n# A tibble: 4,500 × 2\n   Student         GPA\n   &lt;chr&gt;         &lt;dbl&gt;\n 1 Student 23289  3.74\n 2 Student 9688   3.42\n 3 Student 28888  3.00\n 4 Student 10307  2.56\n 5 Student 28497  3.89\n 6 Student 10028  3.41\n 7 Student 37556  3.45\n 8 Student 6474   3.82\n 9 Student 3143   3.53\n10 Student 22272  3.70\n# ℹ 4,490 more rows"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#srs-pros-and-cons",
+    "href": "schedule/slides/05-sampling-design.html#srs-pros-and-cons",
+    "title": "UBC DSCI 200",
+    "section": "SRS: Pros and Cons",
+    "text": "SRS: Pros and Cons\nPros:\n\n\nThe selection of one element does not affect the selection of others.\nEach possible sample, of a given size, has an equal chance of being selected.\nSimple random samples tend to be fairly reasonable representations of the population.\nRequires little knowledge of the population.\n\n\nCons:\n\n\nIf there are small subgroups within the population, a SRS may not give an accurate representation of that subgroup (especially true if the sample size is small).\nIf the population is large, it can be expensive (both in time and money) to collect the data."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#systematic-sampling",
+    "href": "schedule/slides/05-sampling-design.html#systematic-sampling",
+    "title": "UBC DSCI 200",
+    "section": "Systematic Sampling",
+    "text": "Systematic Sampling\n\n\nIn a systematic sample, the members of the population are put in a “row”.\nThen 1 out of every \\(k\\) members are selected\nSometimes we refer to this as 1-in-\\(k\\) sampling.\nThe starting point is randomly chosen from the first \\(k\\) elements and then elements are sampled at the same location in each of the subsequent segments of size \\(k\\). ."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#systematic-sampling-example",
+    "href": "schedule/slides/05-sampling-design.html#systematic-sampling-example",
+    "title": "UBC DSCI 200",
+    "section": "Systematic Sampling Example",
+    "text": "Systematic Sampling Example\n\nAgain, suppose you want to survey UBC students.\nYou stand outside of the bookstore and randomly select every 10th person.\nLet’s look at our student_data again and perform a 1-in-10 systematic sample:\n\n\nset.seed(200)\n\nstart &lt;- sample(1:10,1) # randomly define a student to start with\n\nstudent_data |&gt; \n    slice(seq(start, n(), by = 10)) # sample every 10th student\n\n# A tibble: 4,500 × 2\n   Student      GPA\n   &lt;chr&gt;      &lt;dbl&gt;\n 1 Student 6   3.76\n 2 Student 16  2.96\n 3 Student 26  2.90\n 4 Student 36  3.34\n 5 Student 46  3.53\n 6 Student 56  2.70\n 7 Student 66  3.52\n 8 Student 76  2.97\n 9 Student 86  3.68\n10 Student 96  3.06\n# ℹ 4,490 more rows"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#systematic-sampling-pros-and-cons",
+    "href": "schedule/slides/05-sampling-design.html#systematic-sampling-pros-and-cons",
+    "title": "UBC DSCI 200",
+    "section": "Systematic Sampling: Pros and Cons",
+    "text": "Systematic Sampling: Pros and Cons\nPros:\n\n\nAssures an even, random sampling of the population.\nWhen the population is an ordered list, a systematic sample gives a better representation of the population than a SRS.\nCan be used in situations where a SRS is difficult or impossible.\nIt is especially useful when the population that you are studying is arranged in time.\n\n\nCons:\n\n\nNot every combination has an equal chance of being selected. Many combinations will never be selected using a systematic sample!\nIf there is periodicity in the population (i.e., after ordering, the selections match some pattern in the list), the sample may not be representative of the population."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#iclicker-question",
+    "href": "schedule/slides/05-sampling-design.html#iclicker-question",
+    "title": "UBC DSCI 200",
+    "section": "iClicker Question",
+    "text": "iClicker Question\nYou are using systematic sampling to select every 4th student (starting with Student 1). The table below includes the first 8 rows of the data and lists students by their ClassYear and GPA. Based on the sampling strategy, which of the following is most likely to occur?\n\n\n\n\n\nID\nClassYear\nGPA\n\n\n\n\n1\nFreshman\n3.2\n\n\n2\nSophomore\n3.5\n\n\n3\nJunior\n3.6\n\n\n4\nSenior\n3.8\n\n\n5\nFreshman\n3.1\n\n\n6\nSophomore\n3.3\n\n\n7\nJunior\n3.7\n\n\n8\nSenior\n3.9\n\n\n\n\n\n\n\nA) The sample will have a balanced representation of Freshmen, Sophomores, Juniors, and Seniors.\n\nB) The sample will likely overrepresent Seniors and underrepresent Freshmen, Sophomores, and Juniors.\n\nC) The sample will be biased toward Freshmen, as they are more likely to appear at the beginning of the list.\n\nD) The sample will likely underrepresent Seniors and overrepresent Freshmen, Sophomores, and Juniors."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#stratified-sampling",
+    "href": "schedule/slides/05-sampling-design.html#stratified-sampling",
+    "title": "UBC DSCI 200",
+    "section": "Stratified Sampling",
+    "text": "Stratified Sampling\n\n\nIn a stratified sample, the population must first be separated into homogeneous groups, or strata.\nEach element only belongs to one stratum and the stratum consist of elements that are alike in some way.\nA simple random sample is then drawn from each stratum, which is combined to make the stratified sample."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#stratified-sampling-example",
+    "href": "schedule/slides/05-sampling-design.html#stratified-sampling-example",
+    "title": "UBC DSCI 200",
+    "section": "Stratified Sampling Example",
+    "text": "Stratified Sampling Example\n\nSuppose we consider student major as a strata:\n\n\nset.seed(200)\n\nmajors &lt;- c(\"CS\", \"Math\", \"Stat\", \"Bio\", \"Data Science\", \"Phys\", \"Chem\")\n\nstudent_data &lt;- student_data |&gt;\n  mutate(Major = sample(majors, size = n(), replace = TRUE))\n\nstrat_sampled_data &lt;- student_data |&gt;\n  group_by(Major) |&gt;\n  slice_sample(n=100) # sample 100 students from each major \n\nhead(strat_sampled_data)\n\n# A tibble: 6 × 3\n# Groups:   Major [1]\n  Student         GPA Major\n  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;\n1 Student 35080  3.41 Bio  \n2 Student 7922   3.19 Bio  \n3 Student 23923  2.57 Bio  \n4 Student 11018  3.28 Bio  \n5 Student 29294  2.58 Bio  \n6 Student 11656  2.79 Bio"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#stratified-sampling-pros-and-cons",
+    "href": "schedule/slides/05-sampling-design.html#stratified-sampling-pros-and-cons",
+    "title": "UBC DSCI 200",
+    "section": "Stratified Sampling: Pros and Cons",
+    "text": "Stratified Sampling: Pros and Cons\nPros:\n\n\nRepresentative of the population, because elements from all strata are included in the sample.\nEnsures that specific groups are represented, sometimes even proportionally, in the sample.\nAllows comparisons to be made between strata, if necessary. For example, a stratified sample allows you to easily compare the mean GPA of Biology students to the mean GPA of Chemistry students.\n\n\nCons:\n\n\nRequires prior knowledge of the population. You have to know something about the population to be able to split into strata!"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#conceptual-question",
+    "href": "schedule/slides/05-sampling-design.html#conceptual-question",
+    "title": "UBC DSCI 200",
+    "section": "Conceptual Question",
+    "text": "Conceptual Question\nYou are conducting a stratified random sampling study to survey students at a university. The population consists of the following groups:\n\nFreshmen: 2000 students\nSophomores: 1500 students\nJuniors: 1000 students\nSeniors: 500 students\nGraduate Students: 30 students\n\nWhat might you do to ensure that the sample is representative of the population, given the imbalanced nature of each subgroup?"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#cluster-sampling",
+    "href": "schedule/slides/05-sampling-design.html#cluster-sampling",
+    "title": "UBC DSCI 200",
+    "section": "Cluster Sampling",
+    "text": "Cluster Sampling\n\n\nCluster sampling is a sampling method used when natural groups are evident in the population.\nThe clusters should all be similar each other and roughly homogenous within each cluster.\nTo take a cluster sample, we randomly select a certain number of clusters, and then use all observations within the sampled clusters.\n\n\nExample: Say we want to look into the average heights of NHL players. We could randomly sample 3 teams (clusters), and record the heights of all of the players on these selected teams."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#cluster-sampling-example",
+    "href": "schedule/slides/05-sampling-design.html#cluster-sampling-example",
+    "title": "UBC DSCI 200",
+    "section": "Cluster Sampling Example",
+    "text": "Cluster Sampling Example\nSuppose each the student data had 30 class secions and we consider each ClassSection to be a cluster:\n\nset.seed(200)\n\n# Add simulated class sections (clusters)\nstudent_data &lt;- student_data |&gt;\n  mutate(ClassSection = sample(paste0(\"Section_\", 1:30), size = n(), replace = TRUE))\n\n# Randomly select 5 clusters \nselected_clusters &lt;- student_data |&gt;\n  distinct(ClassSection) |&gt;\n  slice_sample(n = 5)\n\n# Filter the data to include all students from the selected clusters\ncluster_sampled_data &lt;- student_data |&gt;\n  filter(ClassSection %in% selected_clusters)\n\nhead(cluster_sampled_data)\n\n# A tibble: 0 × 4\n# ℹ 4 variables: Student &lt;chr&gt;, GPA &lt;dbl&gt;, Major &lt;chr&gt;, ClassSection &lt;chr&gt;"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#think-pair-share",
+    "href": "schedule/slides/05-sampling-design.html#think-pair-share",
+    "title": "UBC DSCI 200",
+    "section": "Think, Pair, Share",
+    "text": "Think, Pair, Share\n\nDiscuss the similarities and differences between stratified random sampling and cluster sampling. Be prepared to share with the class!\n\n\nIn a stratified sample, the differences between stratum are high while the differences within strata are low.\nIn a cluster sample, the differences between clusters are low while the differences within clusters are high."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#sampling-scenario-1",
+    "href": "schedule/slides/05-sampling-design.html#sampling-scenario-1",
+    "title": "UBC DSCI 200",
+    "section": "Sampling Scenario",
+    "text": "Sampling Scenario\n\n\nImagine you’re conducting a survey to assess the quality of food on UBC’s campus.\nYour goal is to gather feedback to help the campus dining services improve their offerings.\nYou set up a booth in the Nest during lunchtime and invite students to fill out the survey while they eat.\n\n\nQuestion: What potential problems might arise from this sampling approach?"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#sampling-bias",
+    "href": "schedule/slides/05-sampling-design.html#sampling-bias",
+    "title": "UBC DSCI 200",
+    "section": "Sampling Bias",
+    "text": "Sampling Bias\n\n\nA sampling method is considered biased if it systemically produces samples that do not accurately reflect the population, where certain individuals are more or less likely to be selected\nSampling bias can lead to an unrepresentative sample (i.e., a sample that does not reflect the population of interest).\nWe will now introduce three different types of sampling bias:\n\nSelection bias\nNonresponse bias\nResponse bias"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#selection-bias",
+    "href": "schedule/slides/05-sampling-design.html#selection-bias",
+    "title": "UBC DSCI 200",
+    "section": "Selection Bias",
+    "text": "Selection Bias\n\n\nA sampling method exhibits selection bias if its process for choosing the sample systematically tends to over-represent or under-represent certain subsets of the population.\nWhile we don’t always have control over certain types of selection bias, it’s important to recognize that some sampling techniques are more prone to it than others."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#convenience-sampling",
+    "href": "schedule/slides/05-sampling-design.html#convenience-sampling",
+    "title": "UBC DSCI 200",
+    "section": "Convenience Sampling",
+    "text": "Convenience Sampling\n\n\n\nConvenience sampling is the practice of sampling observations that are easy to access or are readily available, making it convenient for the person collecting the data.\nA convenience sample can suffer from selection bias, as it can lead to the underrepresentation or omission of certain subgroups in the population.\nExample: I wanted to have an idea of people’s thoughts on the food quality on campus, so I ask my DSCI 200 class."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#volunteer-sampling",
+    "href": "schedule/slides/05-sampling-design.html#volunteer-sampling",
+    "title": "UBC DSCI 200",
+    "section": "Volunteer Sampling",
+    "text": "Volunteer Sampling\n\n\nAs the name suggests, volunter sampling is when a sample is collected from subjects that have volunteered to participate (i.e., individuals self-select whether or not to participate).\nOftentimes, people with strong opinions who feel compelled to participate are overrepresented and individuals with neutral opinions may opt to not participate, resulting in a biased sample.\nIn a volunteer sample you are also leaving it up to each member of the population to find out about your survey to have the opportunity to participate.\nExample: In a survey about campus food quality, students who have strong opinions (either positive or negative) may be more likely to volunteer to participate, leading to a sample that over-represents those with extreme views and under-represents students with neutral opinions."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#nonresponse-bias",
+    "href": "schedule/slides/05-sampling-design.html#nonresponse-bias",
+    "title": "UBC DSCI 200",
+    "section": "Nonresponse Bias",
+    "text": "Nonresponse Bias\n\n\nIf we avoid selection bias (perhaps by choosing a sampling scheme like SRS), we still need participants to consent to participate to being sampled.\nIndiviudals may refuse to participate or we may not be able to contact them at all.\nA sampling method exhibits nonresponse bias if people who choose to participate in the survey systematically differ from the population in some important way.\nExamples:\n\nIn a survey about drug use, individuals who engage in illegal or behaviours perceived as “taboo” may be less likely to respond, leading to nonresponse bias where the sample underrepresents people who use drugs.\nIn an email survey about healthcare, older adults who may not have access to email or are less familiar with technology might not participate, resulting in nonresponse bias where the sample overrepresents younger, tech-savvy individuals and underrepresents older populations."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#response-bias",
+    "href": "schedule/slides/05-sampling-design.html#response-bias",
+    "title": "UBC DSCI 200",
+    "section": "Response Bias",
+    "text": "Response Bias\n\n\nThe way a survey question is phrased can influence how subjects respond.\nFor example, consider the wording in the following questions and how the phrasing might impact responses:\n\n“How much do you agree that climate change is a serious issue that requires immediate action?”\n“What are your thoughts on the issue of climate change and the need for action?”\n\nA sampling method exhibits response bias if the way the questions are asked or framed tends to influence the individuals’ responses."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#factors-influencing-response-bias",
+    "href": "schedule/slides/05-sampling-design.html#factors-influencing-response-bias",
+    "title": "UBC DSCI 200",
+    "section": "Factors Influencing Response Bias",
+    "text": "Factors Influencing Response Bias\n\n\nDeliberate (or unintentional) wording bias\nDesire of the respondents to please\nAsking the uninformed\nUnnecessary complexity\nOrdering of questions\nConfidentiality concerns\nCertain groups (e.g., minorities, marginalized populations) may be left out or underrepresented if the sampling frame does not fully capture the diversity of the population or contains inherent biases."
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#a-case-study-of-sampling-bias-and-black-voters-in-online-opt-in-polls",
+    "href": "schedule/slides/05-sampling-design.html#a-case-study-of-sampling-bias-and-black-voters-in-online-opt-in-polls",
+    "title": "UBC DSCI 200",
+    "section": "A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls",
+    "text": "A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls\n\nStudy focused on Philadelphia’s 2023 mayoral primary\nOnline surveys promoted via social media had a very low participation rate (~0.4%)\nWhite residents and college graduates were more likely to respond, leading to sample bias\nOnline polls underestimated support for the Black Democrat winner of the mayoral primary\nWeighting and geographic stratification did not fully correct this bias\n\n\nSource: Getting the Race Wrong: A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls"
+  },
+  {
+    "objectID": "schedule/slides/05-sampling-design.html#ethical-implications-of-sampling",
+    "href": "schedule/slides/05-sampling-design.html#ethical-implications-of-sampling",
+    "title": "UBC DSCI 200",
+    "section": "Ethical Implications of Sampling",
+    "text": "Ethical Implications of Sampling\n\n\nLater in this course, we will explore the ethical implications related to data ownership, privacy, and acquisition.\nFor now, it’s important to note that consent, privacy, and the consideration of equity, diversity, and inclusion should be prioritized throughout any data collection process.\nFor further details on these considerations, check out NSERC’s guide on integrating equity, diversity and inclusion considerations in research."
   }
 ]
