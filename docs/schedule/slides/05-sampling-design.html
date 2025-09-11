@@ -199,7 +199,7 @@
 <h2>05 - Sampling Design</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
-<p>Last modified – 29 July 2025</p>
+<p>Last modified – 08 August 2025</p>
 <p><span class="math display">\[
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -315,8 +315,7 @@
 <h2>Simple Random Sampling (SRS)</h2>
 <p><br><br></p>
 <ul>
-<li><p>In a simple random sample (SRS), for a given sample size <span class="math inline">\(n\)</span> every set of <span class="math inline">\(n\)</span> observations has the same chance to be the sample that is actually selected.</p></li>
-<li><p>Note that this does not mean that each individual in the population has an equal chance of being selected, but that each sample of a certain size as the same chance of being selected.</p></li>
+<li>In a simple random sample (SRS), for a given sample size <span class="math inline">\(n\)</span> every set of <span class="math inline">\(n\)</span> observations has the same chance to be the sample that is actually selected.</li>
 </ul>
 </section>
 <section id="srs-example" class="slide level2">
@@ -396,7 +395,7 @@
 </section>
 <section id="section-4" class="slide level2">
 <h2></h2>
-<p>Alternative solution using dplyr’s <code>sample_frac()</code> functions</p>
+<p>Alternative solution using dplyr’s <code>sample_frac()</code> function:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>student_data <span class="sc">|&gt;</span> <span class="fu">sample_frac</span>(<span class="at">size =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -569,12 +568,17 @@
 </section>
 <section id="stratified-sampling" class="slide level2">
 <h2>Stratified Sampling</h2>
-<p><br><br></p>
 <ul>
 <li>In a stratified sample, the population must first be separated into homogeneous groups, or strata.</li>
 <li>Each element only belongs to one stratum and the stratum consist of elements that are alike in some way.</li>
 <li>A simple random sample is then drawn from each stratum, which is combined to make the stratified sample.</li>
 </ul>
+<div style="text-align: center;">
+<p><img src="https://www.scribbr.com/wp-content/uploads/2020/09/stratified-sample-7.png" style="width: 50%;"></p>
+</div>
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+<p>Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" target="_blank">Scribbr: Stratified Sampling</a></p>
+</div>
 </section>
 <section id="stratified-sampling-example" class="slide level2">
 <h2>Stratified Sampling Example</h2>
@@ -639,15 +643,17 @@
 </section>
 <section id="cluster-sampling" class="slide level2">
 <h2>Cluster Sampling</h2>
-<p><br><br></p>
 <ul>
 <li>Cluster sampling is a sampling method used when natural groups are evident in the population.</li>
 <li>The clusters should all be similar each other and roughly homogenous within each cluster.</li>
 <li>To take a cluster sample, we randomly select a certain number of clusters, and then use all observations within the sampled clusters.</li>
 </ul>
-<blockquote>
-<p>Example: Say we want to look into the average heights of NHL players. We could randomly sample 3 teams (clusters), and record the heights of all of the players on these selected teams.</p>
-</blockquote>
+<div style="text-align: center;">
+<p><img src="https://www.scribbr.com/wp-content/uploads/2023/02/cluster-sampling-preview.webp" style="width: 50%;"></p>
+</div>
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+<p>Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" target="_blank">Scribbr: Cluster Sampling</a></p>
+</div>
 </section>
 <section id="cluster-sampling-example" class="slide level2">
 <h2>Cluster Sampling Example</h2>
@@ -806,6 +812,15 @@
 <li><p>Later in this course, we will explore the ethical implications related to data ownership, privacy, and acquisition.</p></li>
 <li><p>For now, it’s important to note that consent, privacy, and the consideration of equity, diversity, and inclusion should be prioritized throughout any data collection process.</p></li>
 <li><p>For further details on these considerations, check out <a href="https://www.nserc-crsng.gc.ca/NSERC-CRSNG/Policies-Politiques/EDI_guidance-Conseils_EDI_eng.asp">NSERC’s guide on integrating equity, diversity and inclusion considerations in research</a>.</p></li>
+</ul>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<p><br><br></p>
+<ul>
+<li>Different random sampling methods each balance practicality and representativeness in different ways.</li>
+<li>We covered four random sampling methods (simple random, systematic, stratified, and cluster), each with its own strengths and limitations.</li>
+<li>Selecting an appropriate sampling method can minimize bias, but no method completely eliminates it. Being aware of various types of bias is crucial.</li>
 </ul>
 
 

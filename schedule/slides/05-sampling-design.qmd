@@ -96,7 +96,6 @@ We will explore four key random sampling methods:
 - In a simple random sample (SRS), for a given sample size $n$ every set of $n$ observations 
 has the same chance to be the sample that is actually selected. 
 
-- Note that this does not mean that each individual in the population has an equal chance of being selected, but that each sample of a certain size as the same chance of being selected. 
 
 ## SRS Example
 <br><br>
@@ -142,7 +141,7 @@ srs_student |>
 
 ##
 
-Alternative solution using dplyr's `sample_frac()` functions
+Alternative solution using dplyr's `sample_frac()` function:
 
 ```{r}
 student_data |> sample_frac(size = 0.1)
@@ -243,11 +242,20 @@ You are using systematic sampling to select every 4th student (starting with Stu
 ::::
 
 ## Stratified Sampling
-<br></br>
 
 - In a stratified sample, the population must first be separated into homogeneous groups, or strata. 
 - Each element only belongs to one stratum and the stratum consist of elements that are alike in some way.
 - A simple random sample is then drawn from each stratum, which is combined to make the stratified sample.
+
+
+<div style="text-align: center;">
+  <img src="https://www.scribbr.com/wp-content/uploads/2020/09/stratified-sample-7.png" style="width: 50%;">
+</div>
+
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" target="_blank">Scribbr: Stratified Sampling</a>
+</div>
+
 
 ## Stratified Sampling Example
 - Suppose we consider student major as a strata:
@@ -297,13 +305,19 @@ You are conducting a stratified random sampling study to survey students at a un
 What might you do to ensure that the sample is representative of the population, given the imbalanced nature of each subgroup? 
 
 ## Cluster Sampling
-<br></br>
 
 - Cluster sampling is a sampling method used when natural groups are evident in the population. 
 - The clusters should all be similar each other and roughly homogenous within each cluster. 
 - To take a cluster sample, we randomly select a certain number of clusters, and then use all observations within the sampled clusters.
 
-> Example: Say we want to look into the average heights of NHL players. We could randomly sample 3 teams (clusters), and record the heights of all of the players on these selected teams.
+<div style="text-align: center;">
+  <img src="https://www.scribbr.com/wp-content/uploads/2023/02/cluster-sampling-preview.webp" style="width: 50%;">
+</div>
+
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" target="_blank">Scribbr: Cluster Sampling</a>
+</div>
+
 
 ## Cluster Sampling Example
 Suppose each the student data had 30 class secions and we consider each `ClassSection` to be a cluster:
@@ -439,3 +453,10 @@ Discuss the similarities and differences between stratified random sampling and 
 - For now, it's important to note that consent, privacy, and the consideration of equity, diversity, and inclusion should be prioritized throughout any data collection process.
 
 - For further details on these considerations, check out [NSERC's guide on integrating equity, diversity and inclusion considerations in research](https://www.nserc-crsng.gc.ca/NSERC-CRSNG/Policies-Politiques/EDI_guidance-Conseils_EDI_eng.asp).
+
+## Key Takeaways
+<br></br>
+
+- Different random sampling methods each balance practicality and representativeness in different ways.
+- We covered four random sampling methods (simple random, systematic, stratified, and cluster), each with its own strengths and limitations.
+- Selecting an appropriate sampling method can minimize bias, but no method completely eliminates it. Being aware of various types of bias is crucial.

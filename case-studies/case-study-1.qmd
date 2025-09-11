@@ -39,7 +39,7 @@ library(hecedsm)
 
 Due dates are available on Canvas.
 
-Each submission will require the use of Jupyter to communicate the question asked, the analysis performed and the conclusions reached. Your submission must include: the source Jupyter notebook (`.ipynb` file), the rendered final document (`.html` or `.pdf` file) and a link to your GitHub repository.
+Each submission will require the use of Jupyter to communicate the question asked, the analysis performed and the conclusions reached. Your submission must include: the source Jupyter notebook (`.ipynb` file), the rendered final document (`.html` or `.pdf` file) and a **link to your GitHub repository**.
 
 ### Rubrics
 
@@ -76,53 +76,58 @@ Before moving forward, it is important to understand the context behind your dat
 
 1.  Choose one of the studies of your choice from the options above. Download the paper from the provided link and load data in R. (*Mechanics: 5 points*)
 
-2.  Read the paper and summarize the main goals of study. Write your summary in no more than 200 words. (*Writing: 4 points*)
+2.  Read the paper and summarize goals of study. Write your summary in no more than 200 words and be sure to clearly explain: (*Reasoning: 10 points*)
+- The primary research questions or objectives the authors aimed to address
+- The importance or relevance of these goals in the context of the field
+- Any specific hypotheses or outcomes the study sought to explore
 
-### Task 2: Explore data (10 points)
+
+
+### Task 2: Explore data (8 points)
 
 Exploring data is a crucial step before producing any plots. This often helps us to detect any missing values and have a better understanding of the type of variables that we are working with. Answer all questions in this task.
 
-3.  Use the `glimpse()` or `head()` function to examine your dataset. How many observations and variables are there in the dataset? What types of variables are present (e.g., numeric, categorical)? (*Reasoning: 1 point + Code Quality:1 point*)
+3.  Use the `glimpse()` or `head()` function to examine your dataset. How many observations and variables are there in the dataset? (*Writing: 1 point*)
 
-4.  What type of variables are in the dataset? (i.e Numerical vs Categorical). Explain briefly. (*Reasoning: 1 point + Code Quality:1 point*)
+4.  What type of variables are in the dataset? (i.e numerical vs. categorical). Explain briefly. (*Writing: 1 point*)
 
-5.  Would you need to convert any variable in the dataset before starting your analysis? Explain briefly why or why not. (*Reasoning: 1 point + Code Quality:1 point*)
+5.  Would you need to convert any variable in the dataset before starting your analysis? Explain briefly why or why not. (*Reasoning: 2 points*)
 
-6.  How many missing values are there for each variable in the dataset? Are there any variables with a large proportion of missing data (e.g., more than 20%)? (*Reasoning: 1 point + Code Quality:1 point*)
+6.  How many missing values are there for each variable in the dataset? Are there any variables with a large proportion of missing data (e.g., more than 20%)? (*Writing: 2 points*)
 
-7.  Is there evidence of class imbalance in any categorical variable in the dataset (e.g., one category makes up a large majority of the observations)? (*Reasoning: 1 point + Code Quality:1 point*)
+7.  Is there evidence of class imbalance in any categorical variable in the dataset (e.g., one category makes up a large majority of the observations)? (*Reasoning: 2 points*)
 
 ### Task 3: Data visualization (15 points)
 
-Alright! Now we are ready to start making some plots to gain more insights into our dataset. While coding this in R please avoid using basic R functionality for plotting (functions such as `plot`, `lines`, ect) for this case study. You are welcome to use them later in your tasks but we want you to learn using functions from `ggplot` and `dplyr` that we learnd in class. For this task answer three out of four questions of your choice.
+Alright! Now we are ready to start making some plots to gain more insights into our dataset. While coding this in R please avoid using basic R functionality for plotting (functions such as `plot`, `lines`, ect) for this case study. You are welcome to use them later in your tasks but we want you to learn using functions from `ggplot` and `dplyr` that we learned in class. For this task answer three out of four questions of your choice.
 
-8.  Select two numerical variables from the dataset and name them here. What type of plot would be appropriate to explore the relationship between these two variables? Write the R code to produce this plot. Describe any pattern you observe. (*Reasoning: 2.5 points + Code Quality: 2.5 points*)
+8.  Select two numerical variables from the dataset and name them here. What type of plot would be appropriate to explore the relationship between these two variables? Write the R code to produce this plot. Describe any pattern you observe. (*Reasoning: 2.5 points + Coding: 2.5 points*)
 
-9.  Create an appropriate plot to show the distribution of one numerical variable in the dataset. What does the distribution tell you about the variable? What is a typical observation from this distribution? (*Reasoning: 2.5 points + Code Quality: 2.5 points*)
+9.  Create an appropriate plot to show the distribution of one numerical variable in the dataset. What does the distribution tell you about the variable? What is a typical observation from this distribution? (*Reasoning: 2.5 points + Coding: 2.5 points*)
 
 10. Pick one numerical and one categorical variable from your dataset. Using an appropriate plot what insights can you draw about the relationship between these two variables? (*Reasoning: 2.5 points + Coding: 2.5 points*)
 
-11. Create an appropriate plot to show the distribution of one categorical variable in the dataset. What does the distribution tell you about the variable? (*Reasoning: 2.5 points + Code Quality: 2.5 points*)
+11. Create an appropriate plot to show the distribution of one categorical variable in the dataset. What does the distribution tell you about the variable? Is there a "typical" value? (*Reasoning: 2.5 points + Coding: 2.5 points*)
 
 ### Task 4: Find summary statistics (10 points)
 
 In this task, you will work with summary statistics. These numbers like means, medians, and standard deviations, can help us better understand patterns in the data, especially when used alongside plots. While we should not rely on summary statistics alone to draw conclusions, combining them with visualizations often gives a clearer picture. Choose and answer any two out of the three questions in this task.
 
-12. Choose one numerical variable from your dataset. Report an appropriate measure of central tendency and explain why this measure is appropriate for the variable you selected. (*Reasoning: 3 points + Code Quality: 2 points*)
+12. Choose one numerical variable from your dataset. Report an appropriate measure of central tendency and explain why this measure is appropriate for the variable you selected. (*Reasoning: 3 points + Coding:: 2 points*)
 
-13. Choose one categorical variable from your dataset. Report a relevant summary statistic and explain why it is informative. (*Reasoning: 3 points + Code Quality: 2 points*)
+13. Choose one categorical variable from your dataset. Report a relevant summary statistic and explain why it is informative. (*Reasoning: 3 points + Coding:: 2 points*)
 
-14. Choose two variables from your dataset and compute an appropriate correlation to measure their relationship. Interpret the value in a simple language. (*Reasoning: 3 points + Code Quality: 2 points*)
+14. Choose two variables from your dataset and compute an appropriate measure of association to measure their relationship. Interpret the value in a simple language. (*Reasoning: 3 points + Coding: 2 points*)
 
 ### Task 5: Develop a question (12 points)
 
-By now, you have spent some time exploring your dataset and have a better understanding of its structure and context. In addition to answering research questions, data scientists often play a key role in developing them. This task gives you a chance to practice that skill. Before attempting the questions, make sure to read the study’s paper carefully. Then, choose two out of the three questions in this task to answer.
+By now, you have spent some time exploring your dataset and have a better understanding of its structure and context. In addition to answering research questions, data scientists often play a key role in developing them. This task gives you a chance to practice that skill. Before attempting the questions, make sure to read the study’s paper carefully. Answer all of the questions in this task.
 
-15. Think of a research question you would like to explore using this dataset if you were the author of this paper. Write your question in one or two sentences in simple and plain language. (*Writing: 6 points*)
+15. Think of a research question you would like to explore using this dataset if you were the author of this paper. Write your question in one or two sentences in simple and plain language. (*Reasoning: 4 points*)
 
-16. Based on the question you wrote do you think you need to do the splitting of your data into train and test? Answer in two or three sentences. (*Reasoning: 6 points*)
+16. Based on the question you wrote do you think you need to do the splitting of your data into train and test? Answer in two or three sentences. (*Reasoning: 4 points*)
 
-17. Considering your dataset and research question, create a new feature derived from the existing variables in your dataset that could help you answer your question. Describe how you constructed this variable and explain why you think it will be useful. (*Reasoning: 3 points + Code Quality: 3 points*)
+17. Considering your dataset and research question, create a new feature derived from the existing variables in your dataset that could help you answer your question. Describe how you constructed this variable and explain why you think it will be useful. (*Reasoning: 2 points + Coding: 2 points*)
 
 ## 🏁 Milestone 2: Sampling and Study Design (40 points)
 
@@ -132,45 +137,45 @@ In this part of case study, we will practice with some of different sampling and
 
 Understanding the design of a study is important. You can often find some information about the design of a study in methodology section of a paper or its introduction part. Spend some time skimming through the text and answer all questions in this task.
 
-18. What type of data analysis questions are the authors of the paper hoping to answer? Recall the different types of data analysis questions you learned in DSCI 100 (e.g., descriptive, inferential, predictive, causal, exploratory). Which category or categories best describe the authors’ goals? (*Reasoning: 2.5 points + Code Quality: 2.5 points*)
+18. What type of data analysis questions are the authors of the paper hoping to answer? Recall the different types of data analysis questions you learned in DSCI 100 (e.g., descriptive, inferential, predictive, causal, exploratory). Which category or categories best describe the authors’ goals? (*Reasoning: 5 points*)
 
-19. Describe the population and sample used in this study. Clearly define both the population of interest and the sample that was actually observed in the study. (*Reasoning: 2.5 points + Code Quality: 2.5 points*)
+19. Describe the population and sample used in this study. Clearly define both the population of interest and the sample that was actually observed in the study. (*Reasoning: 5 points*)
 
-20. Was this an observational study or controlled experiment study? Explain your reasoning. (*Reasoning: 2.5 points + Code Quality: 2.5 points*)
+20. Was this an observational study or controlled experiment study? Explain your reasoning using relevant terminology. (*Reasoning: 5 points*)
 
 ### Task 2: Dive into the design! (15 points)
 
 As we discussed in the lecture notes, it is important to think about the presence of confounding variable in a study design. Also there are sources of sampling bias that can occur due to the way we choose to sample from population. Answer two out of three questions in this task.
 
-21. Did researchers control for any confounding variable in this study? If yes explain how. If no, can you think of any potential confounding variable that you can adjust for? Explain your reasoning. (*Reasoning: 4 points + Code Quality: 3.5 points*)
+21. Did researchers control for any confounding variable in this study? If yes explain how. If no, can you think of any potential confounding variable that you can adjust for? Explain your reasoning. (*Reasoning: 5 points*)
 
-22. What type of sampling method did the authors use? Cite the section of the paper where the sampling method is described or being inferred. Why do you think the authors chose this method over others? (*Reasoning: 4 points + Code Quality: 3.5 points*)
+22. What type of sampling method did the authors use? Cite the section of the paper where the sampling method is described or being inferred. Why do you think the authors chose this method over others? (*Reasoning: 5 points*)
 
-23. Were there any potential sources of sampling bias that may have affected the study’s conclusions? (*Reasoning: 4 points + Code Quality: 3.5 points*)
+23. Were there any potential sources of sampling bias that may have affected the study’s conclusions? Explain your reasoning. (*Reasoning: 5 points*)
 
 ### Task 3: Now it is your turn! (10 points)
 
 Having done the previous questions in different tasks, now you have a better understanding of the study that you chose. Take a moment to think about all you have explored here and use that to answer the following question:
 
-24. If you were to design this study yourself, would you use a different sampling and design method? Why or why not? Reflect on what you might do differently and how your choice of sampling method might affect the results. (*Reasoning: 5 points + Code Quality: 5 points*)
+24. If you were to design this study yourself, would you use a different sampling and design method? Why or why not? Reflect on what you might do differently and how your choice of sampling method might affect the results. Additionally, consider why the authors might have chosen not to use alternative sampling or design methods. What are the potential limitations or challenges of your proposed approach? (*Reasoning: 10 points*)
 
-## Reproducibility and Organization (3 points)
+## Reproducibility and Organization Checklist (10 points)
 
 Here are the criteria we’re looking for:
 
--   **Coherence** (0.5 points)
+-   **Coherence** (5 points)
 
 The document should read sensibly from top to bottom, with no major continuity errors and the `README` file should be up-to-date.
 
--   **File and folder structure** (1 point)
+-   **File and folder structure** (2 points)
 
 You should have at least three folders in the top level of your repository: one for each milestone, and one output folder. If there are any other folders, these are explained in the main `README`. Each milestone document is contained in its respective folder, and nowhere else. Every level-1 folder (that is, the ones stored in the top level, like “Milestone1”) has a `README` file, explaining in a sentence or two what is in the folder, in plain language (it’s enough to say something like “This folder contains the source for Milestone 1”).
 
--   **Output** (1 point)
+-   **Output** (2 points)
 
 All output is recent and relevant. All files are viewable without errors. Examples of errors: Missing plots, “Sorry about that, but we can’t show files that are this big right now” messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.
 
--   **Tagged release** (0.5 point)
+-   **Tagged release** (1 point)
 
 You’ve tagged a release for the corresponding milestone. Please visit [this link](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) to learn about mangaging releases in a repository.
 
