@@ -1,0 +1,160 @@
+---
+title: "Case Study III: Data Acquisition, Privacy, and Ownership"
+subtitle: "DSCI 200"
+format:
+  html
+editor: visual
+---
+
+## Intro
+
+Welcome to the third case study in DSCI 200! In this last case study, you will explore and practice some of the topics that you learned related to data acquisition, privacy, and ownership. As usual, this project is divided into milestones and tasks that align with the course material, allowing you to work on them progressively as you advance through the lectures.
+
+### Setup
+
+Before diving into the case study, let’s make sure all the required packages are available. If any are missing, you can install them by uncommenting the relevant lines below (i.e., remove the `#` symbol before the install command).
+
+```{r install packages, message=FALSE, warning=FALSE}
+#| warning: false
+#install.packages('tidyverse')
+#install.packages('httr')
+#install.packages('arrow')
+#install.packages('jsonlite')
+```
+
+Once all the necessary packages are installed, load them with:
+
+```{r load libraries, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(httr)
+library(arrow)
+library(jsonlite)
+```
+
+### Submission Instructions
+
+TBD. You must submit 2 files: the source Jupyter notebook (`.ipynb` file) the rendered final document (`.html` file)
+
+## The Data
+
+In this case study several data sources are available for you to work with. You will not use all of them. Instead you choose a few to focus on (see Milestones 1 and 2 for more details). The list of available data sources is provided below and categorized by data acquisition type.
+
+### Web Scraping
+
+**1. Books to Scrape**
+
+-   The `Books to Scrape` website loves to be scraped! It is a fictional e‑commerce style website intentionally designed as a safe sandbox for practicing web scraping, offering 1,000 book listings complete with titles, prices, availability, ratings, and artwork. Note that all content is randomly generated and holds no real commercial value. Visit [here](https://books.toscrape.com/index.html).
+
+**2. Board Game Geek (BGG)**
+
+-   The `Board Game Geek (BGG)` website is a board game database and a collection or catalog of data and information on traditional board games. This information is freely accessible. The hotness board presents the top 50 trending games for today. Visit [here](https://boardgamegeek.com/hotness).
+
+### APIs
+
+**3. NASA API**
+
+-   The `NASA API` website lets anyone accesss data related to space and universe! This includes images from Mars rovers, the daily space photo, or details about asteroids and other astronomical objects. Visit [here](https://api.nasa.gov/).
+
+**4. Spotify Web API**
+
+-   The `Spotify Web API` is a set of web services that gives access to Spotify music streaming service and its vast catalog of content. Visit [here](https://developer.spotify.com/documentation/web-api).
+
+### Parquet files
+
+**5. NYC TLC Trip Record Data**
+
+-   The `NYC TLC Trip Record Data` is a publicly available data set provided by the New York City Taxi and Limousine Commission (NYC TLC). It contains information such as pickup and drop-off dates and times, locations, trip distances, fares, and payment types collected from taxis in New York City (Both Yellow and Green taxi). This data set is used for transportation analysis, urban planning, and research on mobility patterns in New York City. Visit [here](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+
+**6. BTS TranStats Data**
+
+-   The `BTS TranStats Data` is a comprehensive repository of U.S. transportation statistics maintained by the Bureau of Transportation Statistics (BTS). It includes detailed data sets on airline on-time performance, flight delays, and other key aviation metrics. Visit [here](https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FGJ&QO_fu146_anzr=b0-gvzr).
+
+In the following milestones, you will work with data sources, acquire and clean data responsibly, and apply privacy techniques to protect sensitive information.
+
+## 🏁 Milestone 1: Data Acquisition & Ownership (60 points)
+
+We will begin by putting into practice the data acquisition and ownership topics we studied in class in the upcoming tasks below.
+
+### Task 1: Choose two of your favourite data sets (10 points)
+
+Before moving forward, it’s important to understand the context behind your data. In this task, you will select and explore two different types of data resources. Be sure to answer all questions in this task.
+
+1.  **(Mechanics 2 points)** Choose **two out of the six** online resources described above and name them here. You must select two resources of different types. For example, one that involves `web scraping`, one from an `API`, or one that uses a `Parquet file`. You may not choose two resources of the same type (e.g., two APIs).
+
+2.  **(Writing 8 points)** For each of the two resources you selected, write a short introduction (3–5 sentences) that describes the data sets and its context.
+
+Use the following guiding questions to help structure your response (you do not need to include all of them in your answer):
+
+-   What is the purpose of this resource?
+
+-   What kinds of variables or data types are included?
+
+-   How do you think the data was collected or generated?
+
+-   Who might find this data useful, and for what kinds of questions?
+
+### Task 2: Acquire Data (35 points)
+
+Now that you have chosen and explored your data sets, it’s time to collect the data in a responsible and reproducible way. In this task, you will apply the skills learned in class to programmatically accesss your data - whether by scraping a webpage, calling an API, or loading a structured file (e.g., Parquet). The method you use depends on the type of data you selected.
+
+Before doing so, you are expected to consider the ethical and legal aspects of accesssing the data. This includes checking whether the data can be scraped or accesssed automatically, reviewing the website’s terms of service, and thinking critically about what you intend to extract.
+
+Once confirmed, you will write `R` code to read and clean the data, and produce a well-defined data frame to work with in future tasks. Be thoughtful and precise in both your reasoning and your code. Be sure to answer all questions in this task.
+
+3.  **(Coding 2 points + Reasoning 3 points + Writing 2 points)** Use tools like the `robotstxt` package (as shown in lecture) and also review the website’s terms of service to see if it is possible and permitted to read data. Clearly explain your reasoning for each resource.
+
+4.  **(Writing 5 points)** Once you confirmed that reading from the online resource you selected is allowed, explain what is your goal when you read this data set? In other words, clearly explain the target `tibble` that you are imagining to have. This includes what variables you are reading.
+
+5.  **(Coding 13 points)** Write an `R` code to read and clean your data set using the tools we covered in class (e.g. using packages `rvest`, `arrow` or API calls). Save the result in a `tibble`, and make sure the data is tidy and ready for analysis. Save your raw scraped or API data to a local file.
+
+6.  **(Coding 7 points + Writing 3 points)** Maybe not a bad idea to review our EDA skills from previous case studies?! Think about one plot that you can create here to answer a question. First think about a question and then generate a plot that can help to answer that question. In your answer include the question you ask, `R` code to generate plot, and the answer to your question.
+
+### Task 3: Data Ownership (15 points)
+
+You have now selected and begun working with two data sets from the options provided. In this task, you will reflect on the ownership, licensing, and ethical use of those data sources. These questions are meant to help you critically apply the concepts discussed in lecture. Be sure to answer all questions.
+
+7.  **(Reasoning 2 points + Writing 1 point)** Does the fact that these data sets are publicly available mean that anyone is allowed to use them for anything? Why or why not? Briefly reflect on the difference between having accesss to data and having rights to use, redistribute, or profit from it.
+
+8.  **(Reasoning 2 points + Writing 2 point)** For each of your selected data sets, identify who owns or controls the data (e.g., an organization, private entity, company, or government agency). How might this affect what you are allowed to do with the data? (**Hint:** Consider reviewing the API documentation or data portal terms of use or license to answer this question)
+
+9.  **(Reasoning 2 points + Writing 2 point)** What license (if any) is associated with each of your two data sets? Describe what that license does or does not allow. For example, are you allowed to reuse, modify, or redistribute the data? Are there any restrictions for commercial use? If no license is specified, explain how that affects your use.
+
+10. **(Reasoning 2 points + Writing 2 point)** Pick one of your data sets and briefly discuss how it aligns (or does not align) with the FAIR principles (Findable, accesssible, Interoperable, Reusable) that you learned in lecture.
+
+## 🏁 Milestone 2: Data Privacy (40 points)
+
+Great job completing the first milestone of this case study! Now that you have acquired and explored your data sets, it is time to critically assess privacy risks. In this milestone, you will apply techniques introduced in the lecture (e.g., generalization, binning, adding noise) to enhance privacy protection while maintaining data utility. For this part, please choose only **ONE** of the two data sets you selected earlier and answer the following questions **ONLY** for that data set.
+
+### Task 1: Data Classification and Anonymization Strategies (20 points)
+
+In this task, you will identify and classify variables based on their privacy risk, and then choose from a set of anonymization strategies to reduce identifiability. The first question is mandatory, and you must then choose any three of the remaining four questions to answer (i.e., 4 in total).
+
+**Required:**
+
+11. **(Reasoning 3 points + Writing 2 point)** Identify which variables in your data set are **Direct identifiers**, **Quasi-identifiers** and **Sensitive attributes**. Provide a brief justification for your classification.
+
+**Choose any 3 of the following:**
+
+12. **(Reasoning 3 points + Writing 2 point)** If applicable, apply generalization to at least one quasi-identifier variable to reduce identifiability. Explain your reasoning and any trade-offs.
+
+13. **(Reasoning 3 points + Writing 2 point)** Discretize one continuous numerical sensitive attribute into meaningful groups (e.g., income ranges, score bands).
+
+14. **(Reasoning 3 points + Writing 2 point)** Apply suppression to any variable that you believe increases re-identification risk. Justify your decision.
+
+15. **(Reasoning 3 points + Writing 2 point)** Reflect on whether the transformed variables you used (generalized, discretized, suppressed, etc.) might still pose a risk of re-identification when combined with other information. Provide reasoning without referring to specific lecture examples.
+
+### Task 2: Add Noise and Evaluate Privacy Risks (10 points)
+
+In this task, add noise to one numerical variable by introducing small random variations using a Normal distribution. Then, discuss how this protects privacy and any drawbacks for analysis. Finally reflect on any remaining privacy risks that may persist even after anonymization techniques are applied. Answer two out of three questions here.
+
+16. **(Coding 5 points)** Add noise to one numerical variable in your data set by introducing small random variations, as we learned in the lecture. For this question you can consider a Normal distribution with your choice for the mean of distribution and a standard deviation of 1.
+
+17. **(Reasoning 3 points + Writing 2 points)** After adding noise discuss how does adding noise protect privacy in your data set, and what are the potential downsides of adding noise for data analysis? Please answer in the context of your data set.
+
+18. **(Reasoning 3 points + Writing 2 points)** Reflect on and comment about any remaining privacy risks in your data set.
+
+### Task 3: Applying Privacy Models: k-Anonymity and l-Diversity (10 points)
+
+19. **(Reasoning 3 points + Coding 2 points)** Try to apply the concept of k-anonymity using a combination of quasi-identifiers in your data set. If you were able to apply it, describe your approach and results. If not, explain why k-anonymity is not applicable in your case.
+
+20. **(Reasoning 3 points + Coding 2 points)** Consider whether your data set could satisfy l-diversity with respect to a sensitive attribute. If possible, explain how you tested it. If not, describe what makes this technique unsuitable for your data set.

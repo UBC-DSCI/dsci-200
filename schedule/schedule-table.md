@@ -24,7 +24,7 @@
 |18 Mar 26 | Data Acquisition      |[Slides](); [Worksheet data](data/currency-data.html)  |      |
 |23 Mar 26 | Data Ownership     |[Slides]()   |          |
 |25 Mar 26 | Data Ownership    |[Slides]()     |  Data Acquisition Worksheet Due at 11:59pm     |
-|30 Mar 26 |  Data Privacy    |[Slides]()   |          |
-|01 Apr 26 |  Data Privacy    |[Slides](); [Worksheet data](data/web-data.html)   |          |
+|30 Mar 26 |  Data Privacy    |[Slides](slides/13-data-privacy-1.qmd)   |          |
+|01 Apr 26 |  Data Privacy    |[Slides](slides/14-data-privacy-2.qmd); [Worksheet data](data/web-data.html)   |          |
 |06 Apr 26 |      |HOLIDAY      |          |
 |08 Apr 26 | Case Study 3 Work Period     |[Slides]()   | Case Study 3 and Data Privacy Worksheet Due at 11:59pm |
