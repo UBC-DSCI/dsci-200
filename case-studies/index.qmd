@@ -11,7 +11,7 @@ This page contains three case studies developed for DSCI 200. Each case study fo
 - [Case Study 2: Simulation, Missing Data and Outliers](#)  
   Explores how simulation can inform analysis, how to detect and address missing data and how to evaluate the impact of outliers on results.
 
-- [Case Study 3: Data Acquisition, Ownership and Privacy](case-study-3.qmd)   
+- [Case Study 3: Data Acquisition, Ownership and Privacy](#)   
   Focuses on the practical and ethical issues in obtaining data, including working with APIs, web scraping, and parquet files, as well as considerations related to data ownership and privacy.
 
 ## Project Template Setup

@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
+
+<title>data-privacy-2 – UBC DSCI 200</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-95d9d02bd968d6ef5b8fede0a93f2559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"><i class="fa-solid fa-chart-column" aria-label="chart-column"></i> UBC DSCI 200</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule/index.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/UBC-STAT/dsci-200"> 
+<span class="menu-text">Worksheets</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../computing/index.html"> 
+<span class="menu-text">Computing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../case-studies/index.html"> 
+<span class="menu-text">Case Studies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../faq.html"> 
+<span class="menu-text">FAQ</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/UBC-DSCI/dsci-200"> 
+<span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i> Github</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">14 - Data Privacy II</a></li>
+  <li><a href="#attribution" id="toc-attribution" class="nav-link" data-scroll-target="#attribution">Attribution</a></li>
+  <li><a href="#case-study-brogan-inc.-and-nihb-data" id="toc-case-study-brogan-inc.-and-nihb-data" class="nav-link" data-scroll-target="#case-study-brogan-inc.-and-nihb-data">Case Study: Brogan Inc.&nbsp;and NIHB Data</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#why-basic-deidentification-isnt-always-enough" id="toc-why-basic-deidentification-isnt-always-enough" class="nav-link" data-scroll-target="#why-basic-deidentification-isnt-always-enough">Why basic deidentification isn’t always enough</a></li>
+  <li><a href="#statistical-approaches-to-deidentification" id="toc-statistical-approaches-to-deidentification" class="nav-link" data-scroll-target="#statistical-approaches-to-deidentification">Statistical approaches to deidentification</a></li>
+  <li><a href="#overview-of-privacy-models" id="toc-overview-of-privacy-models" class="nav-link" data-scroll-target="#overview-of-privacy-models">Overview of privacy models</a></li>
+  <li><a href="#identifiers-quasi-identifiers-and-sensitive-attributes" id="toc-identifiers-quasi-identifiers-and-sensitive-attributes" class="nav-link" data-scroll-target="#identifiers-quasi-identifiers-and-sensitive-attributes">Identifiers, Quasi-Identifiers, and Sensitive Attributes</a></li>
+  <li><a href="#importance-of-correct-variable-categorization" id="toc-importance-of-correct-variable-categorization" class="nav-link" data-scroll-target="#importance-of-correct-variable-categorization">Importance of Correct Variable Categorization</a></li>
+  <li><a href="#k-anonymity" id="toc-k-anonymity" class="nav-link" data-scroll-target="#k-anonymity"><span class="math inline">\(k\)</span>-anonymity</a></li>
+  <li><a href="#making-a-data-set-k-anonymous" id="toc-making-a-data-set-k-anonymous" class="nav-link" data-scroll-target="#making-a-data-set-k-anonymous">Making a data set <span class="math inline">\(k\)</span>-anonymous</a></li>
+  <li><a href="#choosing-k" id="toc-choosing-k" class="nav-link" data-scroll-target="#choosing-k">Choosing <span class="math inline">\(k\)</span></a></li>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data">Example data</a></li>
+  <li><a href="#k2" id="toc-k2" class="nav-link" data-scroll-target="#k2"><span class="math inline">\(k=2\)</span></a></li>
+  <li><a href="#l-diversity" id="toc-l-diversity" class="nav-link" data-scroll-target="#l-diversity"><span class="math inline">\(l\)</span>-diversity</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#t-closeness" id="toc-t-closeness" class="nav-link" data-scroll-target="#t-closeness"><span class="math inline">\(t\)</span>-closeness</a></li>
+  <li><a href="#there-are-still-issues" id="toc-there-are-still-issues" class="nav-link" data-scroll-target="#there-are-still-issues">There are still issues…</a></li>
+  <li><a href="#differential-privacy" id="toc-differential-privacy" class="nav-link" data-scroll-target="#differential-privacy">Differential privacy</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
+  <li><a href="#iclicker-question-1" id="toc-iclicker-question-1" class="nav-link" data-scroll-target="#iclicker-question-1">iClicker Question 1</a></li>
+  <li><a href="#iclicker-question-2" id="toc-iclicker-question-2" class="nav-link" data-scroll-target="#iclicker-question-2">iClicker Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="14-data-privacy-2.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Katie Burak, Gabriela V. Cohen Freue </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="section" class="level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
+<h2 class="large anchored" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%" data-anchor-id="section">14 - Data Privacy II</h2>
+<p><span class="secondary">DSCI 200</span></p>
+<p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
+<p>Last modified – 22 October 2025</p>
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\maximize}{maximize}
+\DeclareMathOperator*{\find}{find}
+\DeclareMathOperator{\st}{subject\,\,to}
+\newcommand{\E}{E}
+\newcommand{\Expect}[1]{\E\left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left[ #1 \right]}
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[#1,\ #2\right]}
+\newcommand{\given}{\ \vert\ }
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\snorm}[1]{\lVert #1 \rVert}
+\newcommand{\tr}[1]{\mbox{tr}(#1)}
+\newcommand{\brt}{\widehat{\beta}^R_{s}}
+\newcommand{\brl}{\widehat{\beta}^R_{\lambda}}
+\newcommand{\bls}{\widehat{\beta}_{ols}}
+\newcommand{\blt}{\widehat{\beta}^L_{s}}
+\newcommand{\bll}{\widehat{\beta}^L_{\lambda}}
+\newcommand{\U}{\mathbf{U}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\V}{\mathbf{V}}
+\]</span></p>
+</section>
+<section id="attribution" class="level2">
+<h2 class="anchored" data-anchor-id="attribution">Attribution</h2>
+<p><br><br></p>
+<p><em>This material is adapted from the following sources:</em></p>
+<ul>
+<li><a href="https://utrechtuniversity.github.io/dataprivacyhandbook/"><em>Data Privacy Handbook</em></a></li>
+<li><a href="https://ubc-mds.github.io/course-descriptions/DSCI_541_priv-eth-sec/"><em>DSCI 541: Privacy, Ethics, and Security at UBC</em></a></li>
+<li><a href="https://privacytools.seas.harvard.edu/differential-privacy">Harvard University Privacy Tools Project: Differential Privacy</a></li>
+</ul>
+</section>
+<section id="case-study-brogan-inc.-and-nihb-data" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-brogan-inc.-and-nihb-data">Case Study: Brogan Inc.&nbsp;and NIHB Data</h2>
+<ul>
+<li>The Non-Insured Health Benefits (NIHB) database contains sensitive health data on First Nations use of services like prescriptions, dental care, and medical devices.</li>
+<li>In 2001, Health Canada began releasing de-identified NIHB pharmacy claims data to Brogan Inc., a private health consulting firm.</li>
+<li>Though personal identifiers were removed, community identifiers remained, and First Nations were not informed until 2007.</li>
+<li>Brogan sold the data to pharmaceutical companies for commercial research and marketing</li>
+<li>Health Canada justified the release by claiming no privacy interests remained since personally identifying information had been removed.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Kukutai, T., &amp; Taylor, J. (2016). Indigenous data sovereignty: Toward an agenda. ANU press.</p>
+</blockquote>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p>Take 5 minutes to discuss this case in groups of 2-3. Consider these questions to reflect on:</p>
+<ul>
+<li>Was the data truly de-identified?</li>
+<li>Should de-identified data still require community consent before being shared or sold?</li>
+<li>What are the limits of simply removing names and IDs from a dataset?</li>
+<li>How can we measure whether a dataset is truly “safe” to release?</li>
+</ul>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of today’s lesson, you should be able to:</p>
+<ul>
+<li>Define identifiers, quasi-identifiers and sensitive attributes in data sets<br>
+</li>
+<li>Explain the limitations of basic deidentification methods<br>
+</li>
+<li>Describe the concepts of <span class="math inline">\(k\)</span>-anonymity, <span class="math inline">\(l\)</span>-diversity and <span class="math inline">\(t\)</span>-closeness<br>
+</li>
+<li>Apply <span class="math inline">\(k\)</span>-anonymity and <span class="math inline">\(l\)</span>-diversity to de-identify data</li>
+<li>Understand the basic idea of differential privacy and its significance</li>
+</ul>
+</section>
+<section id="why-basic-deidentification-isnt-always-enough" class="level2">
+<h2 class="anchored" data-anchor-id="why-basic-deidentification-isnt-always-enough">Why basic deidentification isn’t always enough</h2>
+<ul>
+<li><p>Last class, we introduced some techniques for deidentification such as suppression and generalization.</p></li>
+<li><p>However, individuals can often be re-identified using other information.</p></li>
+<li><p>As datasets become more detailed and linkable, privacy risks increase.</p></li>
+<li><p>Statistical methods are needed to ensure meaningful deidentification while preserving data utility.</p></li>
+</ul>
+</section>
+<section id="statistical-approaches-to-deidentification" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-approaches-to-deidentification">Statistical approaches to deidentification</h2>
+<p><br><br></p>
+<ul>
+<li><span class="math inline">\(k\)</span>-anonymity<br>
+</li>
+<li><span class="math inline">\(l\)</span>-diversity<br>
+</li>
+<li><span class="math inline">\(t\)</span>-closeness<br>
+</li>
+<li>Differential privacy (advanced)</li>
+</ul>
+</section>
+<section id="overview-of-privacy-models" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-privacy-models">Overview of privacy models</h2>
+<ul>
+<li><span class="math inline">\(k\)</span>-anonymity, <span class="math inline">\(l\)</span>-diversity, and <span class="math inline">\(t\)</span>-closeness are <strong>statistical approaches</strong> that quantify the level of identifiability within a tabular dataset.<br>
+</li>
+<li>They focus on how variables combined can lead to identification.<br>
+</li>
+<li>These approaches are complementary: a dataset can be simultaneously <span class="math inline">\(k\)</span>-anonymous, <span class="math inline">\(l\)</span>-diverse, and <span class="math inline">\(t\)</span>-close, where <span class="math inline">\(k\)</span>, <span class="math inline">\(l\)</span>, and <span class="math inline">\(t\)</span> represent numeric thresholds.</li>
+<li><span class="math inline">\(k\)</span>-anonymity, <span class="math inline">\(l\)</span>-diversity, and <span class="math inline">\(t\)</span>-closeness are typically used to de-identify tabular datasets <em>before</em> sharing.</li>
+<li>They work best on relatively large datasets, where enough observations are present to preserve useful detail while still protecting privacy.</li>
+</ul>
+</section>
+<section id="identifiers-quasi-identifiers-and-sensitive-attributes" class="level2">
+<h2 class="anchored" data-anchor-id="identifiers-quasi-identifiers-and-sensitive-attributes">Identifiers, Quasi-Identifiers, and Sensitive Attributes</h2>
+<p>Privacy models distinguish between three types of variables:</p>
+<ul>
+<li><p><strong>Identifiers:</strong> Direct identifiers such as names, student numbers, email addresses.</p></li>
+<li><p><strong>Quasi-Identifiers:</strong> Indirect identifiers that can lead to identification when combined with other quasi-identifiers or external data.</p>
+<ul>
+<li>Examples: age, sex, place of residence, physical characteristics, timestamps, etc.</li>
+</ul></li>
+<li><p><strong>Sensitive Attributes:</strong> Variables of interest that need protection and cannot be altered as they are key outcomes.</p>
+<ul>
+<li>Examples: Medical condition, Income, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="importance-of-correct-variable-categorization" class="level2">
+<h2 class="anchored" data-anchor-id="importance-of-correct-variable-categorization">Importance of Correct Variable Categorization</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Correctly categorizing variables into identifiers, quasi-identifiers, and sensitive attributes is crucial.<br>
+</li>
+<li>This categorization determines how to de-identify your dataset effectively using <span class="math inline">\(k\)</span>-anonymity, <span class="math inline">\(l\)</span>-diversity, and <span class="math inline">\(t\)</span>-closeness.</li>
+<li>Now, let’s discuss each of these techniques in detail…</li>
+</ul>
+</div>
+</section>
+<section id="k-anonymity" class="level2">
+<h2 class="anchored" data-anchor-id="k-anonymity"><span class="math inline">\(k\)</span>-anonymity</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>A data set is <span class="math inline">\(k\)</span>-anonymous if each observation cannot be distinguished from at least <span class="math inline">\(k-1\)</span> other observations based on the quasi-identifiers.<br>
+</li>
+<li>This can be achieved through generalization, suppression and sometimes top- or bottom-coding of data values.</li>
+<li>Applying <span class="math inline">\(k\)</span>-anonymity makes it more difficult for an attacker to single out or re-identify specific individuals.<br>
+</li>
+<li>It also helps reduce the risk of the mosaic effect, where combining data points could lead to identification.</li>
+</ul>
+</div>
+</section>
+<section id="making-a-data-set-k-anonymous" class="level2">
+<h2 class="anchored" data-anchor-id="making-a-data-set-k-anonymous">Making a data set <span class="math inline">\(k\)</span>-anonymous</h2>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li>Identify variables as identifiers, quasi-identifiers and sensitive attributes.<br>
+</li>
+<li>Choose a value for <span class="math inline">\(k\)</span>.<br>
+</li>
+<li>Aggregate or transform the data so each combination of quasi-identifiers occurs at least k times.<br>
+</li>
+</ol>
+</div>
+</section>
+<section id="choosing-k" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-k">Choosing <span class="math inline">\(k\)</span></h2>
+<ul>
+<li>There is no single correct value for <span class="math inline">\(k\)</span>!</li>
+<li>Higher <span class="math inline">\(k\)</span> increases privacy, but reduces data detail and utility.<br>
+</li>
+<li>The choice depends on promises made to data subjects and acceptable risk levels.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="https://www.k2view.com/hubfs/K%20anonymity.png" class="img-fluid" width="600"></p>
+<p><small> Source: <a href="https://www.k2view.com/blog/what-is-k-anonymity" target="_blank">k2view.com</a> </small></p>
+</div>
+</section>
+<section id="example-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-data">Example data</h2>
+<ul>
+<li>Age and city are quasi-identifiers, and salary is considered a sensitive attribute.</li>
+</ul>
+<table style="width: 80%; border-collapse: collapse; font-size: 90%; line-height: 1;">
+<thead>
+<tr>
+<th style="text-align: left; border-bottom: 1px solid #ccc; padding: 4px 8px;">
+Age
+</th>
+<th style="text-align: left; border-bottom: 1px solid #ccc; padding: 4px 8px;">
+City
+</th>
+<th style="text-align: left; border-bottom: 1px solid #ccc; padding: 4px 8px;">
+Salary
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 2px 8px;">
+32
+</td>
+<td style="padding: 2px 8px;">
+Calgary
+</td>
+<td style="padding: 2px 8px;">
+91,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+37
+</td>
+<td style="padding: 2px 8px;">
+Toronto
+</td>
+<td style="padding: 2px 8px;">
+92,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+31
+</td>
+<td style="padding: 2px 8px;">
+Vancouver
+</td>
+<td style="padding: 2px 8px;">
+82,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+48
+</td>
+<td style="padding: 2px 8px;">
+Calgary
+</td>
+<td style="padding: 2px 8px;">
+115,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+39
+</td>
+<td style="padding: 2px 8px;">
+Vancouver
+</td>
+<td style="padding: 2px 8px;">
+118,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+37
+</td>
+<td style="padding: 2px 8px;">
+Calgary
+</td>
+<td style="padding: 2px 8px;">
+97,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+34
+</td>
+<td style="padding: 2px 8px;">
+Toronto
+</td>
+<td style="padding: 2px 8px;">
+98,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+33
+</td>
+<td style="padding: 2px 8px;">
+Vancouver
+</td>
+<td style="padding: 2px 8px;">
+89,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+32
+</td>
+<td style="padding: 2px 8px;">
+Toronto
+</td>
+<td style="padding: 2px 8px;">
+108,000
+</td>
+</tr>
+<tr>
+<td style="padding: 2px 8px;">
+45
+</td>
+<td style="padding: 2px 8px;">
+Calgary
+</td>
+<td style="padding: 2px 8px;">
+95,000
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="k2" class="level2">
+<h2 class="anchored" data-anchor-id="k2"><span class="math inline">\(k=2\)</span></h2>
+<table>
+<thead>
+<tr>
+<th>
+Age Range
+</th>
+<th>
+City
+</th>
+<th>
+Salary Range
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #FFEECC">
+<td>
+20–29
+</td>
+<td>
+Calgary
+</td>
+<td>
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td>
+30–39
+</td>
+<td>
+Toronto
+</td>
+<td>
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td>
+30–39
+</td>
+<td>
+Vancouver
+</td>
+<td>
+80,000–89,999
+</td>
+</tr>
+<tr style="background-color: #FFDDEE">
+<td>
+40–49
+</td>
+<td>
+Calgary
+</td>
+<td>
+110,000–119,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td>
+30–39
+</td>
+<td>
+Vancouver
+</td>
+<td>
+110,000–119,999
+</td>
+</tr>
+<tr style="background-color: #FFEECC">
+<td>
+20–29
+</td>
+<td>
+Calgary
+</td>
+<td>
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td>
+30–39
+</td>
+<td>
+Toronto
+</td>
+<td>
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td>
+30–39
+</td>
+<td>
+Vancouver
+</td>
+<td>
+80,000–89,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td>
+30–39
+</td>
+<td>
+Toronto
+</td>
+<td>
+100,000–109,999
+</td>
+</tr>
+<tr style="background-color: #FFDDEE">
+<td>
+40–49
+</td>
+<td>
+Calgary
+</td>
+<td>
+90,000–99,999
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="l-diversity" class="level2">
+<h2 class="anchored" data-anchor-id="l-diversity"><span class="math inline">\(l\)</span>-diversity</h2>
+<ul>
+<li><span class="math inline">\(l\)</span>-diversity is an extension of <span class="math inline">\(k\)</span>-anonymity that ensures sufficient variation in a <em>sensitive attribute</em>.</li>
+<li>This is important because if all individuals within a group share the same sensitive value, there is still a risk of inference.</li>
+<li>The approach requires at least <span class="math inline">\(l\)</span> different values for the sensitive attribute within each combination of quasi-identifiers.</li>
+<li>Again, there is no perfect value for <span class="math inline">\(l\)</span> (typically <span class="math inline">\(1&lt; l \leq k\)</span>).</li>
+</ul>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<ul>
+<li>Although these data are <span class="math inline">\(2\)</span>-anonymous, we can still infer that any 30-39 year old from Calgary who participated earns between 90-99k.</li>
+</ul>
+<table style="font-size: 90%; border-collapse: collapse;">
+<thead>
+<tr>
+<th style="padding: 4px;">
+Age Range
+</th>
+<th style="padding: 4px;">
+City
+</th>
+<th style="padding: 4px;">
+Salary Range
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #FFEECC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Calgary
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Toronto
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Vancouver
+</td>
+<td style="padding: 4px;">
+80,000–89,999
+</td>
+</tr>
+<tr style="background-color: #FFDDEE">
+<td style="padding: 4px;">
+40–49
+</td>
+<td style="padding: 4px;">
+Calgary
+</td>
+<td style="padding: 4px;">
+110,000–119,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Vancouver
+</td>
+<td style="padding: 4px;">
+110,000–119,999
+</td>
+</tr>
+<tr style="background-color: #FFEECC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Calgary
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Toronto
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Vancouver
+</td>
+<td style="padding: 4px;">
+80,000–89,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+Toronto
+</td>
+<td style="padding: 4px;">
+100,000–109,999
+</td>
+</tr>
+<tr style="background-color: #FFDDEE">
+<td style="padding: 4px;">
+40–49
+</td>
+<td style="padding: 4px;">
+Calgary
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<ul>
+<li>With <span class="math inline">\(l=2\)</span>, that means that for each combination of Age Range and City, there are at least 2 distinct Salary Ranges.</li>
+</ul>
+<table style="font-size: 90%; border-collapse: collapse;">
+<thead>
+<tr>
+<th style="padding: 4px;">
+Age Range
+</th>
+<th style="padding: 4px;">
+City
+</th>
+<th style="padding: 4px;">
+Salary Range
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #FFEECC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+80,000–89,999
+</td>
+</tr>
+<tr style="background-color: #FFDDEE">
+<td style="padding: 4px;">
+40–49
+</td>
+<td style="padding: 4px;">
+Calgary
+</td>
+<td style="padding: 4px;">
+110,000–119,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+110,000–119,999
+</td>
+</tr>
+<tr style="background-color: #FFEECC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+<tr style="background-color: #EEFFCC">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+80,000–89,999
+</td>
+</tr>
+<tr style="background-color: #CCEEFF">
+<td style="padding: 4px;">
+30–39
+</td>
+<td style="padding: 4px;">
+-
+</td>
+<td style="padding: 4px;">
+100,000–109,999
+</td>
+</tr>
+<tr style="background-color: #FFDDEE">
+<td style="padding: 4px;">
+40–49
+</td>
+<td style="padding: 4px;">
+Calgary
+</td>
+<td style="padding: 4px;">
+90,000–99,999
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="t-closeness" class="level2">
+<h2 class="anchored" data-anchor-id="t-closeness"><span class="math inline">\(t\)</span>-closeness</h2>
+<div class="incremental">
+<ul class="incremental">
+<li><span class="math inline">\(t\)</span>-closeness builds on k-anonymity and l-diversity by requiring that the distribution of the sensitive attribute within each group of quasi-identifiers is close to the distribution in the full dataset.</li>
+<li>This prevents situations where a sensitive value is overly dominant in a group, which could allow re-identification through skewed distributions.</li>
+<li>For example, in a dataset with Age and Sex as quasi-identifiers and Income as the sensitive attribute, applying t-closeness with <span class="math inline">\(t = 0.1\)</span> means the income distribution in each group must stay within 10% of the overall income distribution.</li>
+<li>In this course, we will focus mainly on <span class="math inline">\(k\)</span>-anonymity and <span class="math inline">\(l\)</span>-diversity as <span class="math inline">\(t\)</span>-closeness can get complicated to implement.</li>
+</ul>
+</div>
+</section>
+<section id="there-are-still-issues" class="level2">
+<h2 class="anchored" data-anchor-id="there-are-still-issues">There are still issues…</h2>
+<ul>
+<li><p>Even though the data is de-identified, some sensitive patterns can still leak through.</p></li>
+<li><p>In the example we discussed, both individuals are grouped into the same age range and city.</p></li>
+<li><p>While they are in different salary ranges and exact values are hidden, the range is still quite narrow.</p></li>
+<li><p>Due to the similarity of the salary ranges, one can still infer that both individuals earn between $90,000 and $119,999.</p></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>
+Age Range
+</th>
+<th>
+City
+</th>
+<th>
+Salary Range
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #FFDDEE">
+<td>
+40–49
+</td>
+<td>
+Calgary
+</td>
+<td>
+110,000–119,999
+</td>
+</tr>
+<tr style="background-color: #FFDDEE">
+<td>
+40–49
+</td>
+<td>
+Calgary
+</td>
+<td>
+90,000–99,999
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="differential-privacy" class="level2">
+<h2 class="anchored" data-anchor-id="differential-privacy">Differential privacy</h2>
+<ul>
+<li>So, we may need more sophisticated tools to privatize our data…</li>
+<li>Differential privacy is a mathematical approach to protecting privacy</li>
+<li>It ensures algorithm results are nearly the same whether one person’s data is included or not</li>
+<li>Differential privacy makes it hard to tell if any individual’s data is in the dataset, which protects individual’s information (even with unusual or unique data)</li>
+</ul>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<center>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/1*zRpTLYBAfumNAZIM7mZkXw.png" alt="Differential Privacy Example" width="70%"></p>
+<p><br></p>
+<span style="font-size: 0.8em;"> Source: <a href="https://medium.com/data-science/a-differential-privacy-example-for-beginners-ef3c23f69401">https://medium.com/data-science/a-differential-privacy-example-for-beginners-ef3c23f69401</a> </span>
+</center>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4"></h2>
+<ul>
+<li>Differential privacy is a complex topic and goes beyond the scope of this course<br>
+</li>
+<li>For a clear and accessible explanation, check out this short video:</li>
+</ul>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gI0wk1CXlsQ" title="Differential Privacy — Simply Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</center>
+</section>
+<section id="iclicker-question-1" class="level2">
+<h2 class="anchored" data-anchor-id="iclicker-question-1">iClicker Question 1</h2>
+<p>Given the data, which <strong>single</strong> field could you generalize to help achieve <strong>k = 3 anonymity</strong>?</p>
+<div style="font-size:0.8em; max-width: 400px; margin: auto;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age</th>
+<th>ZIP Code</th>
+<th>Disease</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>29</td>
+<td>13053</td>
+<td>Flu</td>
+</tr>
+<tr class="even">
+<td>27</td>
+<td>13068</td>
+<td>Flu</td>
+</tr>
+<tr class="odd">
+<td>28</td>
+<td>13068</td>
+<td>Cold</td>
+</tr>
+<tr class="even">
+<td>45</td>
+<td>14853</td>
+<td>Diabetes</td>
+</tr>
+<tr class="odd">
+<td>46</td>
+<td>14853</td>
+<td>Diabetes</td>
+</tr>
+<tr class="even">
+<td>47</td>
+<td>14853</td>
+<td>Cancer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>A. Generalize Age into age ranges (e.g., 20–29, 40–49)<br>
+</li>
+<li>B. Suppress Disease entirely<br>
+</li>
+<li>C. Generalize ZIP Code to first 3 digits (e.g., 130<strong>, 148</strong>)<br>
+</li>
+<li>D. Remove the 3rd row<br>
+</li>
+<li>E. It’s already <span class="math inline">\(k=3\)</span> anonymous</li>
+</ul>
+</section>
+<section id="iclicker-question-2" class="level2">
+<h2 class="anchored" data-anchor-id="iclicker-question-2">iClicker Question 2</h2>
+<p>Which of the following datasets violates <span class="math inline">\(k = 2\)</span> anonymity?</p>
+<div class="columns">
+<div class="column">
+<p><strong>Option A</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age</th>
+<th>Sex</th>
+<th>ZIP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>34</td>
+<td>M</td>
+<td>02138</td>
+</tr>
+<tr class="even">
+<td>34</td>
+<td>M</td>
+<td>02138</td>
+</tr>
+<tr class="odd">
+<td>34</td>
+<td>F</td>
+<td>02139</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column">
+<p><strong>Option B</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age</th>
+<th>Sex</th>
+<th>ZIP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>22</td>
+<td>F</td>
+<td>10011</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>F</td>
+<td>10011</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>F</td>
+<td>10011</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column">
+<p><strong>Option C</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age Range</th>
+<th>Sex</th>
+<th>ZIP Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>30–39</td>
+<td>*</td>
+<td>021**</td>
+</tr>
+<tr class="even">
+<td>30–39</td>
+<td>*</td>
+<td>021**</td>
+</tr>
+<tr class="odd">
+<td>30–39</td>
+<td>*</td>
+<td>021**</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>A. Only A<br>
+</li>
+<li>B. Only B<br>
+</li>
+<li>C. Only C<br>
+</li>
+<li>D. A and B</li>
+</ul>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<p>Consider this 3-anonymous dataset. Is it also 2-diverse with respect to “Condition”?</p>
+<div style="font-size:0.8em; max-width: 400px; margin: auto;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age Range</th>
+<th>ZIP Prefix</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20–29</td>
+<td>130**</td>
+<td>Flu</td>
+</tr>
+<tr class="even">
+<td>20–29</td>
+<td>130**</td>
+<td>Flu</td>
+</tr>
+<tr class="odd">
+<td>20–29</td>
+<td>130**</td>
+<td>Flu</td>
+</tr>
+<tr class="even">
+<td>30–39</td>
+<td>148**</td>
+<td>Cold</td>
+</tr>
+<tr class="odd">
+<td>30–39</td>
+<td>148**</td>
+<td>Cold</td>
+</tr>
+<tr class="even">
+<td>30–39</td>
+<td>148**</td>
+<td>Cancer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>A. Yes, both groups have 2 or more different values<br>
+</li>
+<li>B. No, one group violates l-diversity<br>
+</li>
+<li>C. Yes, because the dataset is already k-anonymous<br>
+</li>
+<li>D. No, both groups have only one distinct value</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>Removing direct identifiers alone does not guarantee privacy<br>
+</li>
+<li>Quasi-identifiers can lead to re-identification if not protected<br>
+</li>
+<li><span class="math inline">\(k\)</span>-anonymity makes each record indistinguishable from at least <span class="math inline">\(k - 1\)</span> others</li>
+<li><span class="math inline">\(l\)</span>-diversity improves protection by promoting diversity in sensitive attributes</li>
+<li>Differential privacy offers mathematical privacy guarantees<br>
+</li>
+<li>Choosing privacy parameters involves balancing risk and data utility</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This work by <a href="https://katieburak.github.io/">Katie Burak</a> and <a href="https://gcohenfr.github.io/">Gabriela V. Cohen Freue</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

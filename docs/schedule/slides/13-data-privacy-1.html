@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
+
+<title>data-privacy-1 – UBC DSCI 200</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-95d9d02bd968d6ef5b8fede0a93f2559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"><i class="fa-solid fa-chart-column" aria-label="chart-column"></i> UBC DSCI 200</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule/index.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/UBC-STAT/dsci-200"> 
+<span class="menu-text">Worksheets</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../computing/index.html"> 
+<span class="menu-text">Computing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../case-studies/index.html"> 
+<span class="menu-text">Case Studies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../faq.html"> 
+<span class="menu-text">FAQ</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/UBC-DSCI/dsci-200"> 
+<span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i> Github</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">13 - Data Privacy I</a></li>
+  <li><a href="#attribution" id="toc-attribution" class="nav-link" data-scroll-target="#attribution">Attribution</a></li>
+  <li><a href="#what-are-you-comfortable-sharing" id="toc-what-are-you-comfortable-sharing" class="nav-link" data-scroll-target="#what-are-you-comfortable-sharing">What Are You Comfortable Sharing?</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#what-happens-to-your-data" id="toc-what-happens-to-your-data" class="nav-link" data-scroll-target="#what-happens-to-your-data">What Happens to Your Data?</a></li>
+  <li><a href="#why-does-this-matter" id="toc-why-does-this-matter" class="nav-link" data-scroll-target="#why-does-this-matter">Why Does This Matter?</a></li>
+  <li><a href="#personally-identifiable-information-pii" id="toc-personally-identifiable-information-pii" class="nav-link" data-scroll-target="#personally-identifiable-information-pii">Personally Identifiable Information (PII)</a></li>
+  <li><a href="#personal-data" id="toc-personal-data" class="nav-link" data-scroll-target="#personal-data">Personal Data</a></li>
+  <li><a href="#scenario-can-this-data-identify-you" id="toc-scenario-can-this-data-identify-you" class="nav-link" data-scroll-target="#scenario-can-this-data-identify-you">Scenario: Can This Data Identify You?</a></li>
+  <li><a href="#the-mosaic-effect" id="toc-the-mosaic-effect" class="nav-link" data-scroll-target="#the-mosaic-effect">The Mosaic Effect</a></li>
+  <li><a href="#pseudonymization-and-anonymization" id="toc-pseudonymization-and-anonymization" class="nav-link" data-scroll-target="#pseudonymization-and-anonymization">Pseudonymization and Anonymization</a></li>
+  <li><a href="#pseudonymization" id="toc-pseudonymization" class="nav-link" data-scroll-target="#pseudonymization">Pseudonymization</a></li>
+  <li><a href="#anonymization" id="toc-anonymization" class="nav-link" data-scroll-target="#anonymization">Anonymization</a></li>
+  <li><a href="#identifiability-spectrum" id="toc-identifiability-spectrum" class="nav-link" data-scroll-target="#identifiability-spectrum">Identifiability Spectrum</a></li>
+  <li><a href="#when-are-data-truly-anonymous" id="toc-when-are-data-truly-anonymous" class="nav-link" data-scroll-target="#when-are-data-truly-anonymous">When Are Data Truly anonymous?</a></li>
+  <li><a href="#context-matters" id="toc-context-matters" class="nav-link" data-scroll-target="#context-matters">Context Matters</a></li>
+  <li><a href="#de-identification-techniques" id="toc-de-identification-techniques" class="nav-link" data-scroll-target="#de-identification-techniques">De-identification Techniques</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#suppression" id="toc-suppression" class="nav-link" data-scroll-target="#suppression">Suppression</a></li>
+  <li><a href="#suppression-example" id="toc-suppression-example" class="nav-link" data-scroll-target="#suppression-example">Suppression Example</a></li>
+  <li><a href="#generalization" id="toc-generalization" class="nav-link" data-scroll-target="#generalization">Generalization</a></li>
+  <li><a href="#generalization-example" id="toc-generalization-example" class="nav-link" data-scroll-target="#generalization-example">Generalization Example</a></li>
+  <li><a href="#replacement" id="toc-replacement" class="nav-link" data-scroll-target="#replacement">Replacement</a></li>
+  <li><a href="#creating-pseudonyms" id="toc-creating-pseudonyms" class="nav-link" data-scroll-target="#creating-pseudonyms">Creating Pseudonyms</a></li>
+  <li><a href="#replacement-with-pseudonyms" id="toc-replacement-with-pseudonyms" class="nav-link" data-scroll-target="#replacement-with-pseudonyms">Replacement with Pseudonyms</a></li>
+  <li><a href="#hashing" id="toc-hashing" class="nav-link" data-scroll-target="#hashing">Hashing</a></li>
+  <li><a href="#top--and-bottom-coding" id="toc-top--and-bottom-coding" class="nav-link" data-scroll-target="#top--and-bottom-coding">Top- and Bottom-Coding</a></li>
+  <li><a href="#top-coding-example" id="toc-top-coding-example" class="nav-link" data-scroll-target="#top-coding-example">Top-coding example</a></li>
+  <li><a href="#adding-noise" id="toc-adding-noise" class="nav-link" data-scroll-target="#adding-noise">Adding Noise</a></li>
+  <li><a href="#adding-noise-to-height" id="toc-adding-noise-to-height" class="nav-link" data-scroll-target="#adding-noise-to-height">Adding Noise to Height</a></li>
+  <li><a href="#permutation" id="toc-permutation" class="nav-link" data-scroll-target="#permutation">Permutation</a></li>
+  <li><a href="#permutation-of-height-values" id="toc-permutation-of-height-values" class="nav-link" data-scroll-target="#permutation-of-height-values">Permutation of Height Values</a></li>
+  <li><a href="#privacy-vs.-utility-tradeoff" id="toc-privacy-vs.-utility-tradeoff" class="nav-link" data-scroll-target="#privacy-vs.-utility-tradeoff">Privacy vs.&nbsp;Utility Tradeoff</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="13-data-privacy-1.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Katie Burak, Gabriela V. Cohen Freue </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="section" class="level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
+<h2 class="large anchored" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%" data-anchor-id="section">13 - Data Privacy I</h2>
+<p><span class="secondary">DSCI 200</span></p>
+<p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
+<p>Last modified – 22 October 2025</p>
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\maximize}{maximize}
+\DeclareMathOperator*{\find}{find}
+\DeclareMathOperator{\st}{subject\,\,to}
+\newcommand{\E}{E}
+\newcommand{\Expect}[1]{\E\left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left[ #1 \right]}
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[#1,\ #2\right]}
+\newcommand{\given}{\ \vert\ }
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\snorm}[1]{\lVert #1 \rVert}
+\newcommand{\tr}[1]{\mbox{tr}(#1)}
+\newcommand{\brt}{\widehat{\beta}^R_{s}}
+\newcommand{\brl}{\widehat{\beta}^R_{\lambda}}
+\newcommand{\bls}{\widehat{\beta}_{ols}}
+\newcommand{\blt}{\widehat{\beta}^L_{s}}
+\newcommand{\bll}{\widehat{\beta}^L_{\lambda}}
+\newcommand{\U}{\mathbf{U}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\V}{\mathbf{V}}
+\]</span></p>
+</section>
+<section id="attribution" class="level2">
+<h2 class="anchored" data-anchor-id="attribution">Attribution</h2>
+<p><br><br></p>
+<p><em>This material is adapted from the following sources:</em></p>
+<ul>
+<li><a href="https://utrechtuniversity.github.io/dataprivacyhandbook/"><em>Data Privacy Handbook</em></a></li>
+<li><a href="https://ubc-mds.github.io/course-descriptions/DSCI_541_priv-eth-sec/"><em>DSCI 541: Privacy, Ethics, and Security at UBC</em></a></li>
+<li><a href="https://sta199-s24.github.io/"><em>STA 199: Introduction to Data Science and Statistical Thinking, Duke University</em></a></li>
+</ul>
+<p><br><br></p>
+</section>
+<section id="what-are-you-comfortable-sharing" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-you-comfortable-sharing">What Are You Comfortable Sharing?</h2>
+<div class="column">
+<p>Consider different types of data:</p>
+<div class="incremental">
+<ul class="incremental">
+<li>Your favorite type of music<br>
+</li>
+<li>Your Instagram likes and follows<br>
+</li>
+<li>Your e-mail<br>
+</li>
+<li>Your name and DOB<br>
+</li>
+<li>Your GPS location throughout the day</li>
+<li>Your browsing history</li>
+<li>Your private messages/DMs<br>
+</li>
+</ul>
+</div>
+</div>
+<div class="column">
+<div class="incremental">
+<ul class="incremental">
+<li>Discussion:</li>
+</ul>
+<ol class="incremental" type="1">
+<li>Which of these data would you feel comfortable sharing with an app?<br>
+</li>
+<li>What questions would you want to ask before sharing this data?<br>
+</li>
+<li>What if it combined two or three pieces of information?</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of today’s lesson, you should be able to:</p>
+<div class="incremental">
+<ul class="incremental">
+<li><p>Understand key terms in data privacy, including PII, pseudonymization, and anonymization</p></li>
+<li><p>Identify direct and indirect identifiers in sample data sets</p></li>
+<li><p>Explain why de-identification is challenging and context-dependent</p></li>
+<li><p>Apply basic de-identification techniques (e.g., suppression, top-coding, permutation) using R</p></li>
+<li><p>Recognize the tradeoff between data utility and privacy risk</p></li>
+</ul>
+</div>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<ul>
+<li>Even something as simple as your Facebook “likes” can reveal a lot more than you think…</li>
+<li>Researchers at Cambridge showed that algorithms could predict:
+<ul>
+<li>Sexual orientation with up to 88% accuracy</li>
+<li>Race with 95% accuracy</li>
+<li>Political affiliation with 85% accuracy</li>
+</ul></li>
+<li>All from analyzing the pages and posts you “liked” (no profile bio or messages needed)!</li>
+</ul>
+<blockquote class="blockquote">
+<p><a href="https://www.cam.ac.uk/research/news/digital-records-could-expose-intimate-details-and-personality-traits-of-millions">https://www.cam.ac.uk/research/news/digital-records-could-expose-intimate-details-and-personality-traits-of-millions</a></p>
+</blockquote>
+</section>
+<section id="what-happens-to-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="what-happens-to-your-data">What Happens to Your Data?</h2>
+<p>Every time you use an app, visit a website, click on a link, fill out a survey or even just scroll on your device, your data is being:</p>
+<div class="incremental">
+<ul class="incremental">
+<li>Collected - What you click, search, watch, like or buy<br>
+</li>
+<li>Analyzed - Used to predict your behaviour, interests or identity<br>
+</li>
+<li>Shared or Sold - Passed to advertisers, data brokers or other companies<br>
+</li>
+</ul>
+</div>
+<p><img src="https://images.unsplash.com/photo-1579869847557-1f67382cc158?w=900&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c29jaWFsJTIwbWVkaWF8ZW58MHx8MHx8fDI%3D" class="img-fluid"></p>
+<hr>
+</section>
+<section id="why-does-this-matter" class="level2">
+<h2 class="anchored" data-anchor-id="why-does-this-matter">Why Does This Matter?</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>You may be targeted with ads, content and potentially misinformation<br>
+</li>
+<li>You could be judged or profiled based on your data (even if it’s not accurate)</li>
+<li>You rarely know who has your data (or what they’re doing with it) <br><br> <br><br></li>
+<li>So what does this mean for us? Let’s explore how data can be used, what makes certain information sensitive and why it matters.</li>
+</ul>
+</div>
+</section>
+<section id="personally-identifiable-information-pii" class="level2">
+<h2 class="anchored" data-anchor-id="personally-identifiable-information-pii">Personally Identifiable Information (PII)</h2>
+<ul>
+<li>PII refers to any data that can be used to identify a specific individual.</li>
+<li>Direct identifiers: These clearly and uniquely point to a person.
+<ul>
+<li>Examples: name, social security number, patient ID</li>
+</ul></li>
+<li>Indirect identifiers: These don’t identify someone on their own, but could when combined.
+<ul>
+<li>Examples: age, DOB, postal code, race, sex</li>
+</ul></li>
+</ul>
+</section>
+<section id="personal-data" class="level2">
+<h2 class="anchored" data-anchor-id="personal-data">Personal Data</h2>
+<p>Data can be identifiable when:</p>
+<div class="incremental">
+<ul class="incremental">
+<li>They contain directly identifying information.</li>
+<li>It’s possible to single out an individual</li>
+<li>It’s possible to infer information about an individual based on information in your dataset</li>
+<li>It’s possible to link records relating to an individual.</li>
+<li>De-identification is still reversible.</li>
+</ul>
+</div>
+</section>
+<section id="scenario-can-this-data-identify-you" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-can-this-data-identify-you">Scenario: Can This Data Identify You?</h2>
+<p>A fitness app shares anonymized data with researchers. The dataset includes:</p>
+<ul>
+<li>Step count per day</li>
+<li>General location (postal code)</li>
+<li>Age</li>
+<li>Time of day the user exercises</li>
+<li>Health conditions</li>
+</ul>
+<p>Separately, a publicly available dataset includes information from a local running club: names, age groups and 5K race times.</p>
+</section>
+<section id="the-mosaic-effect" class="level2">
+<h2 class="anchored" data-anchor-id="the-mosaic-effect">The Mosaic Effect</h2>
+<ul>
+<li><p>The “Mosaic Effect” can happens when separate pieces of data, which alone don’t identify anyone, are combined from different sources to reveal personal information or identify an individual.</p></li>
+<li><p>In 2000, 87% of the United States population was found to be identifiable using a combination of their ZIP code, gender and date of birth.</p></li>
+</ul>
+<p><img src="https://images.unsplash.com/photo-1622227920933-7fcd7377703f?q=80&amp;w=2940&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><a href="https://dataprivacylab.org/projects/identifiability/paper1.pdf">https://dataprivacylab.org/projects/identifiability/paper1.pdf</a></p>
+</blockquote>
+</section>
+<section id="pseudonymization-and-anonymization" class="level2">
+<h2 class="anchored" data-anchor-id="pseudonymization-and-anonymization">Pseudonymization and Anonymization</h2>
+<ul>
+<li>Pseudonymisation and a nonymisation are techniques to de-identify personal data</li>
+<li>Goal: reduce linkability of data to individuals</li>
+<li>We will now define each of these terms</li>
+</ul>
+</section>
+<section id="pseudonymization" class="level2">
+<h2 class="anchored" data-anchor-id="pseudonymization">Pseudonymization</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Reduces linkability of data to individuals</li>
+<li>Data cannot identify individuals <em>without additional information</em></li>
+<li>Often done by replacing direct identifiers with pseudonyms</li>
+<li>Link between real identifiers and pseudonyms is stored separately</li>
+<li>Re-identification remains possible!</li>
+</ul>
+</div>
+</section>
+<section id="anonymization" class="level2">
+<h2 class="anchored" data-anchor-id="anonymization">Anonymization</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Data are anonymized when no individual is identifiable (directly or indirectly)</li>
+<li>This applies even to the data controller</li>
+<li>Fully anonymized data are no longer personal data</li>
+<li>Anonymisation is difficult to achieve in practice</li>
+</ul>
+</div>
+</section>
+<section id="identifiability-spectrum" class="level2">
+<h2 class="anchored" data-anchor-id="identifiability-spectrum">Identifiability Spectrum</h2>
+<ul>
+<li>Identifiability is a spectrum</li>
+<li>More de-identified data = closer to anonymized</li>
+<li>Lower identifiability = lower re-identification risk</li>
+</ul>
+<p><img src="https://www.kdnuggets.com/wp-content/uploads/spectrum_data_privacy_KD.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><a href="https://www.kdnuggets.com/2020/08/anonymous-anonymized-data.html">https://www.kdnuggets.com/2020/08/anonymous-anonymized-data.html</a></p>
+</blockquote>
+</section>
+<section id="when-are-data-truly-anonymous" class="level2">
+<h2 class="anchored" data-anchor-id="when-are-data-truly-anonymous">When Are Data Truly anonymous?</h2>
+<ul>
+<li>Only if re-identification would require <em>unreasonable effort</em> (factors include cost, time and available technology)</li>
+<li>Data are not anonymous if:</li>
+</ul>
+<div class="incremental">
+<ul class="incremental">
+<li>Direct identifiers are present</li>
+<li>Individuals can be singled out from a group</li>
+<li>Re-identification possible via linking datasets (mosaic effect)</li>
+<li>Inference about identity is possible (e.g., through different variables)</li>
+<li>De-identification can be reversed</li>
+</ul>
+</div>
+</section>
+<section id="context-matters" class="level2">
+<h2 class="anchored" data-anchor-id="context-matters">Context Matters</h2>
+<ul>
+<li>Whether data are anonymous depends on:
+<ul>
+<li>The context of the research</li>
+<li>Available external information</li>
+<li>Future data uses</li>
+</ul></li>
+</ul>
+</section>
+<section id="de-identification-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="de-identification-techniques">De-identification Techniques</h2>
+<p>Techniques to deidentify your data include:</p>
+<ul>
+<li>Suppression</li>
+<li>Generalization</li>
+<li>Replacement</li>
+<li>Top- and bottom coding</li>
+<li>Adding noise</li>
+<li>Permutation</li>
+</ul>
+<p>We will talk about each of these techniques individually.</p>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>First, let’s generate some data we can use to help illustrate these concepts.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Joel Miller"</span>, <span class="st">"Ellie Williams"</span>, <span class="st">"Tommy Miller"</span>, <span class="st">"Abby Anderson"</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">19</span>, <span class="dv">48</span>, <span class="dv">28</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">height_cm =</span> <span class="fu">c</span>(<span class="dv">182</span>, <span class="dv">160</span>, <span class="dv">185</span>,<span class="dv">173</span>) </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name             age height_cm
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
+1 Joel Miller       52       182
+2 Ellie Williams    19       160
+3 Tommy Miller      48       185
+4 Abby Anderson     28       173</code></pre>
+</div>
+</div>
+</section>
+<section id="suppression" class="level2">
+<h2 class="anchored" data-anchor-id="suppression">Suppression</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Remove entire variables, values or records</li>
+<li>Used to eliminate highly identifying or unnecessary data</li>
+<li>Examples:
+<ul class="incremental">
+<li>Names, contact details, social security numbers</li>
+<li>GPS metadata, IP addresses, neuroimaging facial features</li>
+<li>Outliers or unique participants</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="suppression-example" class="level2">
+<h2 class="anchored" data-anchor-id="suppression-example">Suppression Example</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_suppressed <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_suppressed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+    age height_cm
+  &lt;dbl&gt;     &lt;dbl&gt;
+1    52       182
+2    19       160
+3    48       185
+4    28       173</code></pre>
+</div>
+</div>
+</section>
+<section id="generalization" class="level2">
+<h2 class="anchored" data-anchor-id="generalization">Generalization</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Reduces detail or granularity in the data</li>
+<li>Makes individuals harder to single out</li>
+<li>Examples:
+<ul class="incremental">
+<li>Convert date of birth to age, or group into ranges</li>
+<li>Replace address with town or region</li>
+<li>Recategorise rare labels into “other” or “missing”</li>
+<li>Abstract people or places in qualitative data (e.g., “Bob” to “[colleague]”)</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="generalization-example" class="level2">
+<h2 class="anchored" data-anchor-id="generalization-example">Generalization Example</h2>
+<p>Here we will show an example of generalization on the <code>age</code> column:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_generalized <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"under 30"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>     <span class="sc">~</span> <span class="st">"30+"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  ))<span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>age)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df_generalized</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name           height_cm age_group
+  &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;    
+1 Joel Miller          182 30+      
+2 Ellie Williams       160 under 30 
+3 Tommy Miller         185 30+      
+4 Abby Anderson        173 under 30 </code></pre>
+</div>
+</div>
+</section>
+<section id="replacement" class="level2">
+<h2 class="anchored" data-anchor-id="replacement">Replacement</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Swap identifying info with less informative alternatives</li>
+<li>Examples:
+<ul class="incremental">
+<li>Use pseudonyms for names (with securely stored keyfile)</li>
+<li>Replace with placeholders (e.g., “[redacted]”)</li>
+<li>Rounding numeric values</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="creating-pseudonyms" class="level2">
+<h2 class="anchored" data-anchor-id="creating-pseudonyms">Creating Pseudonyms</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Pseudonyms should reveal nothing about the subject</li>
+<li>Good pseudonyms:
+<ul class="incremental">
+<li>Are random or meaningless strings/numbers</li>
+<li>Are securely managed (e.g., encrypted keyfile)</li>
+</ul></li>
+<li>Can be generated using tools in Excel, R, Python, SPSS</li>
+</ul>
+</div>
+</section>
+<section id="replacement-with-pseudonyms" class="level2">
+<h2 class="anchored" data-anchor-id="replacement-with-pseudonyms">Replacement with Pseudonyms</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_pseudonymized <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pseudonym =</span> <span class="fu">paste0</span>(<span class="st">"ID"</span>, <span class="fu">row_number</span>())) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pseudonym, <span class="fu">everything</span>(), <span class="sc">-</span>name)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_pseudonymized</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  pseudonym   age height_cm
+  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 ID1          52       182
+2 ID2          19       160
+3 ID3          48       185
+4 ID4          28       173</code></pre>
+</div>
+</div>
+</section>
+<section id="hashing" class="level2">
+<h2 class="anchored" data-anchor-id="hashing">Hashing</h2>
+<ul>
+<li>Hashing converts names into fixed-length, irreversible strings.</li>
+<li>Unlike pseudonyms, hashed values cannot be easily reversed.</li>
+<li>In R, we can use the <code>digest</code> package (and function) to hash.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(digest) </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_hashed <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name_hash =</span> <span class="fu">digest</span>(name)) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name_hash, <span class="fu">everything</span>(), <span class="sc">-</span>name)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>df_hashed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name_hash                          age height_cm
+  &lt;chr&gt;                            &lt;dbl&gt;     &lt;dbl&gt;
+1 83ecf15bd80bd4b7c46e1f2717c08cd0    52       182
+2 83ecf15bd80bd4b7c46e1f2717c08cd0    19       160
+3 83ecf15bd80bd4b7c46e1f2717c08cd0    48       185
+4 83ecf15bd80bd4b7c46e1f2717c08cd0    28       173</code></pre>
+</div>
+</div>
+</section>
+<section id="top--and-bottom-coding" class="level2">
+<h2 class="anchored" data-anchor-id="top--and-bottom-coding">Top- and Bottom-Coding</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Limits extreme values in quantitative data</li>
+<li>Recode all values above or below a threshold</li>
+<li>Example: all incomes above $150,000 become $150,000</li>
+<li>Preserves much of the dataset, but distorts distribution tails</li>
+</ul>
+</div>
+</section>
+<section id="top-coding-example" class="level2">
+<h2 class="anchored" data-anchor-id="top-coding-example">Top-coding example</h2>
+<ul>
+<li>Consider 6ft (182.88cm) is considered our maximum height threshold.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_top_coded <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_cm =</span> <span class="fu">if_else</span>(height_cm <span class="sc">&gt;</span> <span class="fl">182.88</span>, <span class="fl">182.88</span>, height_cm))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df_top_coded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name             age height_cm
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
+1 Joel Miller       52      182 
+2 Ellie Williams    19      160 
+3 Tommy Miller      48      183.
+4 Abby Anderson     28      173 </code></pre>
+</div>
+</div>
+</section>
+<section id="adding-noise" class="level2">
+<h2 class="anchored" data-anchor-id="adding-noise">Adding Noise</h2>
+<ul>
+<li>Introduces randomness to protect sensitive info</li>
+<li>Examples:
+<ul>
+<li>Add a small random amount to numeric values</li>
+<li>Blur images or alter voices</li>
+<li>Use differential privacy algorithms (advanced)</li>
+</ul></li>
+</ul>
+</section>
+<section id="adding-noise-to-height" class="level2">
+<h2 class="anchored" data-anchor-id="adding-noise-to-height">Adding Noise to Height</h2>
+<p>This adds random noise to the height variable from a normal distribution (<span class="math inline">\(\mu=0\)</span>, <span class="math inline">\(\sigma=2\)</span>), reducing exact re-identification risk.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">200</span>) </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df_noisy <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_cm_noisy =</span> height_cm <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>height_cm)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>df_noisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name             age height_cm_noisy
+  &lt;chr&gt;          &lt;dbl&gt;           &lt;dbl&gt;
+1 Joel Miller       52            182.
+2 Ellie Williams    19            160.
+3 Tommy Miller      48            186.
+4 Abby Anderson     28            174.</code></pre>
+</div>
+</div>
+</section>
+<section id="permutation" class="level2">
+<h2 class="anchored" data-anchor-id="permutation">Permutation</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>Swap values between individuals</li>
+<li>Makes linking variables across a record more difficult</li>
+<li>Maintains distributions, but breaks correlations</li>
+<li>Can limit the types of analyses possible</li>
+</ul>
+</div>
+</section>
+<section id="permutation-of-height-values" class="level2">
+<h2 class="anchored" data-anchor-id="permutation-of-height-values">Permutation of Height Values</h2>
+<p>Here, the <code>height_cm</code> values are shuffled between individuals, preserving the overall distribution but breaking the link between person and value.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df_permuted <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_cm_permuted =</span> <span class="fu">sample</span>(height_cm)) <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>height_cm)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>df_permuted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name             age height_cm_permuted
+  &lt;chr&gt;          &lt;dbl&gt;              &lt;dbl&gt;
+1 Joel Miller       52                160
+2 Ellie Williams    19                173
+3 Tommy Miller      48                182
+4 Abby Anderson     28                185</code></pre>
+</div>
+</div>
+</section>
+<section id="privacy-vs.-utility-tradeoff" class="level2">
+<h2 class="anchored" data-anchor-id="privacy-vs.-utility-tradeoff">Privacy vs.&nbsp;Utility Tradeoff</h2>
+<p><img src="https://www.researchgate.net/publication/357987903/figure/fig1/AS:1114625957470208@1642758945429/Trade-off-between-privacy-level-and-utility-level-of-data.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><a href="https://www.researchgate.net/figure/Trade-off-between-privacy-level-and-utility-level-of-data_fig1_357987903">https://www.researchgate.net/figure/Trade-off-between-privacy-level-and-utility-level-of-data_fig1_357987903</a></p>
+</blockquote>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>Data exists on a spectrum of identifiability</li>
+<li>Even seemingly anonymous data can often be re-identified (e.g., mosaic effect)</li>
+<li>Different techniques offer varying levels of protection and utility</li>
+<li>Context, external data and technological capabilities all affect re-identification risk</li>
+<li>Responsible data handling requires both technical skill and ethical awareness</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This work by <a href="https://katieburak.github.io/">Katie Burak</a> and <a href="https://gcohenfr.github.io/">Gabriela V. Cohen Freue</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

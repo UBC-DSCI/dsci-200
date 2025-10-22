@@ -22,7 +22,7 @@ Instructions to create `.pdf`s of the lecture slides (works in Google Chrome or 
 1.  Change the **Layout** to **Landscape**.
 1.  Change the **Margins** to **None**.
 1.  Enable the **Background graphics** option.
-1.  Click **Save** 🎉
+1.  Click **Save**! 🎉
 
 </details>
 :::

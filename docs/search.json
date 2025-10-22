@@ -418,5 +418,453 @@
     "title": "UBC DSCI 200",
     "section": "About us",
     "text": "About us\n\n\n\nDr. Katie Burak\nkburak@stat.ubc.ca\nhttps://katieburak.github.io/\nAssistant Professor of Teaching, Department of Statistics\n\n\n\n\n\nDr. Gabriela V. Cohen Freue\ngcohen@stat.ubc.ca\nhttps://gcohenfr.github.io/\nAssociate Professor, Department of Statistics"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html",
+    "href": "schedule/slides/14-data-privacy-2.html",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "DSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 22 October 2025\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#section",
+    "href": "schedule/slides/14-data-privacy-2.html#section",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "DSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 22 October 2025\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#attribution",
+    "href": "schedule/slides/14-data-privacy-2.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\nThis material is adapted from the following sources:\n\nData Privacy Handbook\nDSCI 541: Privacy, Ethics, and Security at UBC\nHarvard University Privacy Tools Project: Differential Privacy"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#case-study-brogan-inc.-and-nihb-data",
+    "href": "schedule/slides/14-data-privacy-2.html#case-study-brogan-inc.-and-nihb-data",
+    "title": "UBC DSCI 200",
+    "section": "Case Study: Brogan Inc. and NIHB Data",
+    "text": "Case Study: Brogan Inc. and NIHB Data\n\nThe Non-Insured Health Benefits (NIHB) database contains sensitive health data on First Nations use of services like prescriptions, dental care, and medical devices.\nIn 2001, Health Canada began releasing de-identified NIHB pharmacy claims data to Brogan Inc., a private health consulting firm.\nThough personal identifiers were removed, community identifiers remained, and First Nations were not informed until 2007.\nBrogan sold the data to pharmaceutical companies for commercial research and marketing\nHealth Canada justified the release by claiming no privacy interests remained since personally identifying information had been removed.\n\n\nKukutai, T., & Taylor, J. (2016). Indigenous data sovereignty: Toward an agenda. ANU press."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#discussion",
+    "href": "schedule/slides/14-data-privacy-2.html#discussion",
+    "title": "UBC DSCI 200",
+    "section": "Discussion",
+    "text": "Discussion\nTake 5 minutes to discuss this case in groups of 2-3. Consider these questions to reflect on:\n\nWas the data truly de-identified?\nShould de-identified data still require community consent before being shared or sold?\nWhat are the limits of simply removing names and IDs from a dataset?\nHow can we measure whether a dataset is truly “safe” to release?"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#learning-objectives",
+    "href": "schedule/slides/14-data-privacy-2.html#learning-objectives",
+    "title": "UBC DSCI 200",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of today’s lesson, you should be able to:\n\nDefine identifiers, quasi-identifiers and sensitive attributes in data sets\n\nExplain the limitations of basic deidentification methods\n\nDescribe the concepts of \\(k\\)-anonymity, \\(l\\)-diversity and \\(t\\)-closeness\n\nApply \\(k\\)-anonymity and \\(l\\)-diversity to de-identify data\nUnderstand the basic idea of differential privacy and its significance"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#why-basic-deidentification-isnt-always-enough",
+    "href": "schedule/slides/14-data-privacy-2.html#why-basic-deidentification-isnt-always-enough",
+    "title": "UBC DSCI 200",
+    "section": "Why basic deidentification isn’t always enough",
+    "text": "Why basic deidentification isn’t always enough\n\nLast class, we introduced some techniques for deidentification such as suppression and generalization.\nHowever, individuals can often be re-identified using other information.\nAs datasets become more detailed and linkable, privacy risks increase.\nStatistical methods are needed to ensure meaningful deidentification while preserving data utility."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#statistical-approaches-to-deidentification",
+    "href": "schedule/slides/14-data-privacy-2.html#statistical-approaches-to-deidentification",
+    "title": "UBC DSCI 200",
+    "section": "Statistical approaches to deidentification",
+    "text": "Statistical approaches to deidentification\n\n\n\\(k\\)-anonymity\n\n\\(l\\)-diversity\n\n\\(t\\)-closeness\n\nDifferential privacy (advanced)"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#overview-of-privacy-models",
+    "href": "schedule/slides/14-data-privacy-2.html#overview-of-privacy-models",
+    "title": "UBC DSCI 200",
+    "section": "Overview of privacy models",
+    "text": "Overview of privacy models\n\n\\(k\\)-anonymity, \\(l\\)-diversity, and \\(t\\)-closeness are statistical approaches that quantify the level of identifiability within a tabular dataset.\n\nThey focus on how variables combined can lead to identification.\n\nThese approaches are complementary: a dataset can be simultaneously \\(k\\)-anonymous, \\(l\\)-diverse, and \\(t\\)-close, where \\(k\\), \\(l\\), and \\(t\\) represent numeric thresholds.\n\\(k\\)-anonymity, \\(l\\)-diversity, and \\(t\\)-closeness are typically used to de-identify tabular datasets before sharing.\nThey work best on relatively large datasets, where enough observations are present to preserve useful detail while still protecting privacy."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#identifiers-quasi-identifiers-and-sensitive-attributes",
+    "href": "schedule/slides/14-data-privacy-2.html#identifiers-quasi-identifiers-and-sensitive-attributes",
+    "title": "UBC DSCI 200",
+    "section": "Identifiers, Quasi-Identifiers, and Sensitive Attributes",
+    "text": "Identifiers, Quasi-Identifiers, and Sensitive Attributes\nPrivacy models distinguish between three types of variables:\n\nIdentifiers: Direct identifiers such as names, student numbers, email addresses.\nQuasi-Identifiers: Indirect identifiers that can lead to identification when combined with other quasi-identifiers or external data.\n\nExamples: age, sex, place of residence, physical characteristics, timestamps, etc.\n\nSensitive Attributes: Variables of interest that need protection and cannot be altered as they are key outcomes.\n\nExamples: Medical condition, Income, etc."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#importance-of-correct-variable-categorization",
+    "href": "schedule/slides/14-data-privacy-2.html#importance-of-correct-variable-categorization",
+    "title": "UBC DSCI 200",
+    "section": "Importance of Correct Variable Categorization",
+    "text": "Importance of Correct Variable Categorization\n\n\nCorrectly categorizing variables into identifiers, quasi-identifiers, and sensitive attributes is crucial.\n\nThis categorization determines how to de-identify your dataset effectively using \\(k\\)-anonymity, \\(l\\)-diversity, and \\(t\\)-closeness.\nNow, let’s discuss each of these techniques in detail…"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#k-anonymity",
+    "href": "schedule/slides/14-data-privacy-2.html#k-anonymity",
+    "title": "UBC DSCI 200",
+    "section": "\\(k\\)-anonymity",
+    "text": "\\(k\\)-anonymity\n\n\nA data set is \\(k\\)-anonymous if each observation cannot be distinguished from at least \\(k-1\\) other observations based on the quasi-identifiers.\n\nThis can be achieved through generalization, suppression and sometimes top- or bottom-coding of data values.\nApplying \\(k\\)-anonymity makes it more difficult for an attacker to single out or re-identify specific individuals.\n\nIt also helps reduce the risk of the mosaic effect, where combining data points could lead to identification."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#making-a-data-set-k-anonymous",
+    "href": "schedule/slides/14-data-privacy-2.html#making-a-data-set-k-anonymous",
+    "title": "UBC DSCI 200",
+    "section": "Making a data set \\(k\\)-anonymous",
+    "text": "Making a data set \\(k\\)-anonymous\n\n\nIdentify variables as identifiers, quasi-identifiers and sensitive attributes.\n\nChoose a value for \\(k\\).\n\nAggregate or transform the data so each combination of quasi-identifiers occurs at least k times."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#choosing-k",
+    "href": "schedule/slides/14-data-privacy-2.html#choosing-k",
+    "title": "UBC DSCI 200",
+    "section": "Choosing \\(k\\)",
+    "text": "Choosing \\(k\\)\n\nThere is no single correct value for \\(k\\)!\nHigher \\(k\\) increases privacy, but reduces data detail and utility.\n\nThe choice depends on promises made to data subjects and acceptable risk levels.\n\n\n\n Source: k2view.com"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#example-data",
+    "href": "schedule/slides/14-data-privacy-2.html#example-data",
+    "title": "UBC DSCI 200",
+    "section": "Example data",
+    "text": "Example data\n\nAge and city are quasi-identifiers, and salary is considered a sensitive attribute.\n\n\n\n\n\nAge\n\n\nCity\n\n\nSalary\n\n\n\n\n\n\n32\n\n\nCalgary\n\n\n91,000\n\n\n\n\n37\n\n\nToronto\n\n\n92,000\n\n\n\n\n31\n\n\nVancouver\n\n\n82,000\n\n\n\n\n48\n\n\nCalgary\n\n\n115,000\n\n\n\n\n39\n\n\nVancouver\n\n\n118,000\n\n\n\n\n37\n\n\nCalgary\n\n\n97,000\n\n\n\n\n34\n\n\nToronto\n\n\n98,000\n\n\n\n\n33\n\n\nVancouver\n\n\n89,000\n\n\n\n\n32\n\n\nToronto\n\n\n108,000\n\n\n\n\n45\n\n\nCalgary\n\n\n95,000"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#k2",
+    "href": "schedule/slides/14-data-privacy-2.html#k2",
+    "title": "UBC DSCI 200",
+    "section": "\\(k=2\\)",
+    "text": "\\(k=2\\)\n\n\n\n\nAge Range\n\n\nCity\n\n\nSalary Range\n\n\n\n\n\n\n20–29\n\n\nCalgary\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nToronto\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nVancouver\n\n\n80,000–89,999\n\n\n\n\n40–49\n\n\nCalgary\n\n\n110,000–119,999\n\n\n\n\n30–39\n\n\nVancouver\n\n\n110,000–119,999\n\n\n\n\n20–29\n\n\nCalgary\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nToronto\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nVancouver\n\n\n80,000–89,999\n\n\n\n\n30–39\n\n\nToronto\n\n\n100,000–109,999\n\n\n\n\n40–49\n\n\nCalgary\n\n\n90,000–99,999"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#l-diversity",
+    "href": "schedule/slides/14-data-privacy-2.html#l-diversity",
+    "title": "UBC DSCI 200",
+    "section": "\\(l\\)-diversity",
+    "text": "\\(l\\)-diversity\n\n\\(l\\)-diversity is an extension of \\(k\\)-anonymity that ensures sufficient variation in a sensitive attribute.\nThis is important because if all individuals within a group share the same sensitive value, there is still a risk of inference.\nThe approach requires at least \\(l\\) different values for the sensitive attribute within each combination of quasi-identifiers.\nAgain, there is no perfect value for \\(l\\) (typically \\(1&lt; l \\leq k\\))."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#section-1",
+    "href": "schedule/slides/14-data-privacy-2.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Although these data are \\(2\\)-anonymous, we can still infer that any 30-39 year old from Calgary who participated earns between 90-99k.\n\n\n\n\n\nAge Range\n\n\nCity\n\n\nSalary Range\n\n\n\n\n\n\n30–39\n\n\nCalgary\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nToronto\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nVancouver\n\n\n80,000–89,999\n\n\n\n\n40–49\n\n\nCalgary\n\n\n110,000–119,999\n\n\n\n\n30–39\n\n\nVancouver\n\n\n110,000–119,999\n\n\n\n\n30–39\n\n\nCalgary\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nToronto\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\nVancouver\n\n\n80,000–89,999\n\n\n\n\n30–39\n\n\nToronto\n\n\n100,000–109,999\n\n\n\n\n40–49\n\n\nCalgary\n\n\n90,000–99,999"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#section-2",
+    "href": "schedule/slides/14-data-privacy-2.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "With \\(l=2\\), that means that for each combination of Age Range and City, there are at least 2 distinct Salary Ranges.\n\n\n\n\n\nAge Range\n\n\nCity\n\n\nSalary Range\n\n\n\n\n\n\n30–39\n\n\n-\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\n-\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\n-\n\n\n80,000–89,999\n\n\n\n\n40–49\n\n\nCalgary\n\n\n110,000–119,999\n\n\n\n\n30–39\n\n\n-\n\n\n110,000–119,999\n\n\n\n\n30–39\n\n\n-\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\n-\n\n\n90,000–99,999\n\n\n\n\n30–39\n\n\n-\n\n\n80,000–89,999\n\n\n\n\n30–39\n\n\n-\n\n\n100,000–109,999\n\n\n\n\n40–49\n\n\nCalgary\n\n\n90,000–99,999"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#t-closeness",
+    "href": "schedule/slides/14-data-privacy-2.html#t-closeness",
+    "title": "UBC DSCI 200",
+    "section": "\\(t\\)-closeness",
+    "text": "\\(t\\)-closeness\n\n\n\\(t\\)-closeness builds on k-anonymity and l-diversity by requiring that the distribution of the sensitive attribute within each group of quasi-identifiers is close to the distribution in the full dataset.\nThis prevents situations where a sensitive value is overly dominant in a group, which could allow re-identification through skewed distributions.\nFor example, in a dataset with Age and Sex as quasi-identifiers and Income as the sensitive attribute, applying t-closeness with \\(t = 0.1\\) means the income distribution in each group must stay within 10% of the overall income distribution.\nIn this course, we will focus mainly on \\(k\\)-anonymity and \\(l\\)-diversity as \\(t\\)-closeness can get complicated to implement."
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#there-are-still-issues",
+    "href": "schedule/slides/14-data-privacy-2.html#there-are-still-issues",
+    "title": "UBC DSCI 200",
+    "section": "There are still issues…",
+    "text": "There are still issues…\n\nEven though the data is de-identified, some sensitive patterns can still leak through.\nIn the example we discussed, both individuals are grouped into the same age range and city.\nWhile they are in different salary ranges and exact values are hidden, the range is still quite narrow.\nDue to the similarity of the salary ranges, one can still infer that both individuals earn between $90,000 and $119,999.\n\n\n\n\n\nAge Range\n\n\nCity\n\n\nSalary Range\n\n\n\n\n\n\n40–49\n\n\nCalgary\n\n\n110,000–119,999\n\n\n\n\n40–49\n\n\nCalgary\n\n\n90,000–99,999"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#differential-privacy",
+    "href": "schedule/slides/14-data-privacy-2.html#differential-privacy",
+    "title": "UBC DSCI 200",
+    "section": "Differential privacy",
+    "text": "Differential privacy\n\nSo, we may need more sophisticated tools to privatize our data…\nDifferential privacy is a mathematical approach to protecting privacy\nIt ensures algorithm results are nearly the same whether one person’s data is included or not\nDifferential privacy makes it hard to tell if any individual’s data is in the dataset, which protects individual’s information (even with unusual or unique data)"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#section-3",
+    "href": "schedule/slides/14-data-privacy-2.html#section-3",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Source: https://medium.com/data-science/a-differential-privacy-example-for-beginners-ef3c23f69401"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#section-4",
+    "href": "schedule/slides/14-data-privacy-2.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Differential privacy is a complex topic and goes beyond the scope of this course\n\nFor a clear and accessible explanation, check out this short video:"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#iclicker-question-1",
+    "href": "schedule/slides/14-data-privacy-2.html#iclicker-question-1",
+    "title": "UBC DSCI 200",
+    "section": "iClicker Question 1",
+    "text": "iClicker Question 1\nGiven the data, which single field could you generalize to help achieve k = 3 anonymity?\n\n\n\n\nAge\nZIP Code\nDisease\n\n\n\n\n29\n13053\nFlu\n\n\n27\n13068\nFlu\n\n\n28\n13068\nCold\n\n\n45\n14853\nDiabetes\n\n\n46\n14853\nDiabetes\n\n\n47\n14853\nCancer\n\n\n\n\n\nA. Generalize Age into age ranges (e.g., 20–29, 40–49)\n\nB. Suppress Disease entirely\n\nC. Generalize ZIP Code to first 3 digits (e.g., 130, 148)\n\nD. Remove the 3rd row\n\nE. It’s already \\(k=3\\) anonymous"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#iclicker-question-2",
+    "href": "schedule/slides/14-data-privacy-2.html#iclicker-question-2",
+    "title": "UBC DSCI 200",
+    "section": "iClicker Question 2",
+    "text": "iClicker Question 2\nWhich of the following datasets violates \\(k = 2\\) anonymity?\n\n\nOption A\n\n\n\nAge\nSex\nZIP\n\n\n\n\n34\nM\n02138\n\n\n34\nM\n02138\n\n\n34\nF\n02139\n\n\n\n\nOption B\n\n\n\nAge\nSex\nZIP\n\n\n\n\n22\nF\n10011\n\n\n22\nF\n10011\n\n\n22\nF\n10011\n\n\n\n\nOption C\n\n\n\nAge Range\nSex\nZIP Prefix\n\n\n\n\n30–39\n*\n021**\n\n\n30–39\n*\n021**\n\n\n30–39\n*\n021**\n\n\n\n\n\n\nA. Only A\n\nB. Only B\n\nC. Only C\n\nD. A and B"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#question-3",
+    "href": "schedule/slides/14-data-privacy-2.html#question-3",
+    "title": "UBC DSCI 200",
+    "section": "Question 3",
+    "text": "Question 3\nConsider this 3-anonymous dataset. Is it also 2-diverse with respect to “Condition”?\n\n\n\n\nAge Range\nZIP Prefix\nCondition\n\n\n\n\n20–29\n130**\nFlu\n\n\n20–29\n130**\nFlu\n\n\n20–29\n130**\nFlu\n\n\n30–39\n148**\nCold\n\n\n30–39\n148**\nCold\n\n\n30–39\n148**\nCancer\n\n\n\n\n\nA. Yes, both groups have 2 or more different values\n\nB. No, one group violates l-diversity\n\nC. Yes, because the dataset is already k-anonymous\n\nD. No, both groups have only one distinct value"
+  },
+  {
+    "objectID": "schedule/slides/14-data-privacy-2.html#key-takeaways",
+    "href": "schedule/slides/14-data-privacy-2.html#key-takeaways",
+    "title": "UBC DSCI 200",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nRemoving direct identifiers alone does not guarantee privacy\n\nQuasi-identifiers can lead to re-identification if not protected\n\n\\(k\\)-anonymity makes each record indistinguishable from at least \\(k - 1\\) others\n\\(l\\)-diversity improves protection by promoting diversity in sensitive attributes\nDifferential privacy offers mathematical privacy guarantees\n\nChoosing privacy parameters involves balancing risk and data utility"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html",
+    "href": "schedule/slides/13-data-privacy-1.html",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "DSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 22 October 2025\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#section",
+    "href": "schedule/slides/13-data-privacy-1.html#section",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "DSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 22 October 2025\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#attribution",
+    "href": "schedule/slides/13-data-privacy-1.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\nThis material is adapted from the following sources:\n\nData Privacy Handbook\nDSCI 541: Privacy, Ethics, and Security at UBC\nSTA 199: Introduction to Data Science and Statistical Thinking, Duke University"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#what-are-you-comfortable-sharing",
+    "href": "schedule/slides/13-data-privacy-1.html#what-are-you-comfortable-sharing",
+    "title": "UBC DSCI 200",
+    "section": "What Are You Comfortable Sharing?",
+    "text": "What Are You Comfortable Sharing?\n\nConsider different types of data:\n\n\nYour favorite type of music\n\nYour Instagram likes and follows\n\nYour e-mail\n\nYour name and DOB\n\nYour GPS location throughout the day\nYour browsing history\nYour private messages/DMs\n\n\n\n\n\n\n\nDiscussion:\n\n\nWhich of these data would you feel comfortable sharing with an app?\n\nWhat questions would you want to ask before sharing this data?\n\nWhat if it combined two or three pieces of information?"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#learning-objectives",
+    "href": "schedule/slides/13-data-privacy-1.html#learning-objectives",
+    "title": "UBC DSCI 200",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of today’s lesson, you should be able to:\n\n\nUnderstand key terms in data privacy, including PII, pseudonymization, and anonymization\nIdentify direct and indirect identifiers in sample data sets\nExplain why de-identification is challenging and context-dependent\nApply basic de-identification techniques (e.g., suppression, top-coding, permutation) using R\nRecognize the tradeoff between data utility and privacy risk"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#section-1",
+    "href": "schedule/slides/13-data-privacy-1.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Even something as simple as your Facebook “likes” can reveal a lot more than you think…\nResearchers at Cambridge showed that algorithms could predict:\n\nSexual orientation with up to 88% accuracy\nRace with 95% accuracy\nPolitical affiliation with 85% accuracy\n\nAll from analyzing the pages and posts you “liked” (no profile bio or messages needed)!\n\n\nhttps://www.cam.ac.uk/research/news/digital-records-could-expose-intimate-details-and-personality-traits-of-millions"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#what-happens-to-your-data",
+    "href": "schedule/slides/13-data-privacy-1.html#what-happens-to-your-data",
+    "title": "UBC DSCI 200",
+    "section": "What Happens to Your Data?",
+    "text": "What Happens to Your Data?\nEvery time you use an app, visit a website, click on a link, fill out a survey or even just scroll on your device, your data is being:\n\n\nCollected - What you click, search, watch, like or buy\n\nAnalyzed - Used to predict your behaviour, interests or identity\n\nShared or Sold - Passed to advertisers, data brokers or other companies"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#why-does-this-matter",
+    "href": "schedule/slides/13-data-privacy-1.html#why-does-this-matter",
+    "title": "UBC DSCI 200",
+    "section": "Why Does This Matter?",
+    "text": "Why Does This Matter?\n\n\nYou may be targeted with ads, content and potentially misinformation\n\nYou could be judged or profiled based on your data (even if it’s not accurate)\nYou rarely know who has your data (or what they’re doing with it)  \nSo what does this mean for us? Let’s explore how data can be used, what makes certain information sensitive and why it matters."
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#personally-identifiable-information-pii",
+    "href": "schedule/slides/13-data-privacy-1.html#personally-identifiable-information-pii",
+    "title": "UBC DSCI 200",
+    "section": "Personally Identifiable Information (PII)",
+    "text": "Personally Identifiable Information (PII)\n\nPII refers to any data that can be used to identify a specific individual.\nDirect identifiers: These clearly and uniquely point to a person.\n\nExamples: name, social security number, patient ID\n\nIndirect identifiers: These don’t identify someone on their own, but could when combined.\n\nExamples: age, DOB, postal code, race, sex"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#personal-data",
+    "href": "schedule/slides/13-data-privacy-1.html#personal-data",
+    "title": "UBC DSCI 200",
+    "section": "Personal Data",
+    "text": "Personal Data\nData can be identifiable when:\n\n\nThey contain directly identifying information.\nIt’s possible to single out an individual\nIt’s possible to infer information about an individual based on information in your dataset\nIt’s possible to link records relating to an individual.\nDe-identification is still reversible."
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#scenario-can-this-data-identify-you",
+    "href": "schedule/slides/13-data-privacy-1.html#scenario-can-this-data-identify-you",
+    "title": "UBC DSCI 200",
+    "section": "Scenario: Can This Data Identify You?",
+    "text": "Scenario: Can This Data Identify You?\nA fitness app shares anonymized data with researchers. The dataset includes:\n\nStep count per day\nGeneral location (postal code)\nAge\nTime of day the user exercises\nHealth conditions\n\nSeparately, a publicly available dataset includes information from a local running club: names, age groups and 5K race times."
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#the-mosaic-effect",
+    "href": "schedule/slides/13-data-privacy-1.html#the-mosaic-effect",
+    "title": "UBC DSCI 200",
+    "section": "The Mosaic Effect",
+    "text": "The Mosaic Effect\n\nThe “Mosaic Effect” can happens when separate pieces of data, which alone don’t identify anyone, are combined from different sources to reveal personal information or identify an individual.\nIn 2000, 87% of the United States population was found to be identifiable using a combination of their ZIP code, gender and date of birth.\n\n\n\nhttps://dataprivacylab.org/projects/identifiability/paper1.pdf"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#pseudonymization-and-anonymization",
+    "href": "schedule/slides/13-data-privacy-1.html#pseudonymization-and-anonymization",
+    "title": "UBC DSCI 200",
+    "section": "Pseudonymization and Anonymization",
+    "text": "Pseudonymization and Anonymization\n\nPseudonymisation and a nonymisation are techniques to de-identify personal data\nGoal: reduce linkability of data to individuals\nWe will now define each of these terms"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#pseudonymization",
+    "href": "schedule/slides/13-data-privacy-1.html#pseudonymization",
+    "title": "UBC DSCI 200",
+    "section": "Pseudonymization",
+    "text": "Pseudonymization\n\n\nReduces linkability of data to individuals\nData cannot identify individuals without additional information\nOften done by replacing direct identifiers with pseudonyms\nLink between real identifiers and pseudonyms is stored separately\nRe-identification remains possible!"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#anonymization",
+    "href": "schedule/slides/13-data-privacy-1.html#anonymization",
+    "title": "UBC DSCI 200",
+    "section": "Anonymization",
+    "text": "Anonymization\n\n\nData are anonymized when no individual is identifiable (directly or indirectly)\nThis applies even to the data controller\nFully anonymized data are no longer personal data\nAnonymisation is difficult to achieve in practice"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#identifiability-spectrum",
+    "href": "schedule/slides/13-data-privacy-1.html#identifiability-spectrum",
+    "title": "UBC DSCI 200",
+    "section": "Identifiability Spectrum",
+    "text": "Identifiability Spectrum\n\nIdentifiability is a spectrum\nMore de-identified data = closer to anonymized\nLower identifiability = lower re-identification risk\n\n\n\nhttps://www.kdnuggets.com/2020/08/anonymous-anonymized-data.html"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#when-are-data-truly-anonymous",
+    "href": "schedule/slides/13-data-privacy-1.html#when-are-data-truly-anonymous",
+    "title": "UBC DSCI 200",
+    "section": "When Are Data Truly anonymous?",
+    "text": "When Are Data Truly anonymous?\n\nOnly if re-identification would require unreasonable effort (factors include cost, time and available technology)\nData are not anonymous if:\n\n\n\nDirect identifiers are present\nIndividuals can be singled out from a group\nRe-identification possible via linking datasets (mosaic effect)\nInference about identity is possible (e.g., through different variables)\nDe-identification can be reversed"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#context-matters",
+    "href": "schedule/slides/13-data-privacy-1.html#context-matters",
+    "title": "UBC DSCI 200",
+    "section": "Context Matters",
+    "text": "Context Matters\n\nWhether data are anonymous depends on:\n\nThe context of the research\nAvailable external information\nFuture data uses"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#de-identification-techniques",
+    "href": "schedule/slides/13-data-privacy-1.html#de-identification-techniques",
+    "title": "UBC DSCI 200",
+    "section": "De-identification Techniques",
+    "text": "De-identification Techniques\nTechniques to deidentify your data include:\n\nSuppression\nGeneralization\nReplacement\nTop- and bottom coding\nAdding noise\nPermutation\n\nWe will talk about each of these techniques individually."
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#section-2",
+    "href": "schedule/slides/13-data-privacy-1.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "First, let’s generate some data we can use to help illustrate these concepts.\n\nlibrary(tidyverse)\n\ndf &lt;- tibble(\n  name = c(\"Joel Miller\", \"Ellie Williams\", \"Tommy Miller\", \"Abby Anderson\"),\n  age = c(52, 19, 48, 28),\n  height_cm = c(182, 160, 185,173) \n)\n\ndf\n\n# A tibble: 4 × 3\n  name             age height_cm\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;\n1 Joel Miller       52       182\n2 Ellie Williams    19       160\n3 Tommy Miller      48       185\n4 Abby Anderson     28       173"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#suppression",
+    "href": "schedule/slides/13-data-privacy-1.html#suppression",
+    "title": "UBC DSCI 200",
+    "section": "Suppression",
+    "text": "Suppression\n\n\nRemove entire variables, values or records\nUsed to eliminate highly identifying or unnecessary data\nExamples:\n\nNames, contact details, social security numbers\nGPS metadata, IP addresses, neuroimaging facial features\nOutliers or unique participants"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#suppression-example",
+    "href": "schedule/slides/13-data-privacy-1.html#suppression-example",
+    "title": "UBC DSCI 200",
+    "section": "Suppression Example",
+    "text": "Suppression Example\n\ndf_suppressed &lt;- df %&gt;%\n  select(-name)\n\ndf_suppressed\n\n# A tibble: 4 × 2\n    age height_cm\n  &lt;dbl&gt;     &lt;dbl&gt;\n1    52       182\n2    19       160\n3    48       185\n4    28       173"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#generalization",
+    "href": "schedule/slides/13-data-privacy-1.html#generalization",
+    "title": "UBC DSCI 200",
+    "section": "Generalization",
+    "text": "Generalization\n\n\nReduces detail or granularity in the data\nMakes individuals harder to single out\nExamples:\n\nConvert date of birth to age, or group into ranges\nReplace address with town or region\nRecategorise rare labels into “other” or “missing”\nAbstract people or places in qualitative data (e.g., “Bob” to “[colleague]”)"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#generalization-example",
+    "href": "schedule/slides/13-data-privacy-1.html#generalization-example",
+    "title": "UBC DSCI 200",
+    "section": "Generalization Example",
+    "text": "Generalization Example\nHere we will show an example of generalization on the age column:\n\ndf_generalized &lt;- df |&gt;\n  mutate(age_group = case_when(\n    age &lt; 30 ~ \"under 30\",\n    TRUE     ~ \"30+\"\n  ))|&gt;\n  select(-age)\n\ndf_generalized\n\n# A tibble: 4 × 3\n  name           height_cm age_group\n  &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;    \n1 Joel Miller          182 30+      \n2 Ellie Williams       160 under 30 \n3 Tommy Miller         185 30+      \n4 Abby Anderson        173 under 30"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#replacement",
+    "href": "schedule/slides/13-data-privacy-1.html#replacement",
+    "title": "UBC DSCI 200",
+    "section": "Replacement",
+    "text": "Replacement\n\n\nSwap identifying info with less informative alternatives\nExamples:\n\nUse pseudonyms for names (with securely stored keyfile)\nReplace with placeholders (e.g., “[redacted]”)\nRounding numeric values"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#creating-pseudonyms",
+    "href": "schedule/slides/13-data-privacy-1.html#creating-pseudonyms",
+    "title": "UBC DSCI 200",
+    "section": "Creating Pseudonyms",
+    "text": "Creating Pseudonyms\n\n\nPseudonyms should reveal nothing about the subject\nGood pseudonyms:\n\nAre random or meaningless strings/numbers\nAre securely managed (e.g., encrypted keyfile)\n\nCan be generated using tools in Excel, R, Python, SPSS"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#replacement-with-pseudonyms",
+    "href": "schedule/slides/13-data-privacy-1.html#replacement-with-pseudonyms",
+    "title": "UBC DSCI 200",
+    "section": "Replacement with Pseudonyms",
+    "text": "Replacement with Pseudonyms\n\ndf_pseudonymized &lt;- df |&gt;\n  mutate(pseudonym = paste0(\"ID\", row_number())) |&gt;\n  select(pseudonym, everything(), -name)\n\ndf_pseudonymized\n\n# A tibble: 4 × 3\n  pseudonym   age height_cm\n  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 ID1          52       182\n2 ID2          19       160\n3 ID3          48       185\n4 ID4          28       173"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#hashing",
+    "href": "schedule/slides/13-data-privacy-1.html#hashing",
+    "title": "UBC DSCI 200",
+    "section": "Hashing",
+    "text": "Hashing\n\nHashing converts names into fixed-length, irreversible strings.\nUnlike pseudonyms, hashed values cannot be easily reversed.\nIn R, we can use the digest package (and function) to hash.\n\n\nlibrary(digest) \n\ndf_hashed &lt;- df |&gt;\n  mutate(name_hash = digest(name)) |&gt;\n  select(name_hash, everything(), -name)\n\ndf_hashed\n\n# A tibble: 4 × 3\n  name_hash                          age height_cm\n  &lt;chr&gt;                            &lt;dbl&gt;     &lt;dbl&gt;\n1 83ecf15bd80bd4b7c46e1f2717c08cd0    52       182\n2 83ecf15bd80bd4b7c46e1f2717c08cd0    19       160\n3 83ecf15bd80bd4b7c46e1f2717c08cd0    48       185\n4 83ecf15bd80bd4b7c46e1f2717c08cd0    28       173"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#top--and-bottom-coding",
+    "href": "schedule/slides/13-data-privacy-1.html#top--and-bottom-coding",
+    "title": "UBC DSCI 200",
+    "section": "Top- and Bottom-Coding",
+    "text": "Top- and Bottom-Coding\n\n\nLimits extreme values in quantitative data\nRecode all values above or below a threshold\nExample: all incomes above $150,000 become $150,000\nPreserves much of the dataset, but distorts distribution tails"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#top-coding-example",
+    "href": "schedule/slides/13-data-privacy-1.html#top-coding-example",
+    "title": "UBC DSCI 200",
+    "section": "Top-coding example",
+    "text": "Top-coding example\n\nConsider 6ft (182.88cm) is considered our maximum height threshold.\n\n\ndf_top_coded &lt;- df |&gt;\n  mutate(height_cm = if_else(height_cm &gt; 182.88, 182.88, height_cm))\n\ndf_top_coded\n\n# A tibble: 4 × 3\n  name             age height_cm\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;\n1 Joel Miller       52      182 \n2 Ellie Williams    19      160 \n3 Tommy Miller      48      183.\n4 Abby Anderson     28      173"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#adding-noise",
+    "href": "schedule/slides/13-data-privacy-1.html#adding-noise",
+    "title": "UBC DSCI 200",
+    "section": "Adding Noise",
+    "text": "Adding Noise\n\nIntroduces randomness to protect sensitive info\nExamples:\n\nAdd a small random amount to numeric values\nBlur images or alter voices\nUse differential privacy algorithms (advanced)"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#adding-noise-to-height",
+    "href": "schedule/slides/13-data-privacy-1.html#adding-noise-to-height",
+    "title": "UBC DSCI 200",
+    "section": "Adding Noise to Height",
+    "text": "Adding Noise to Height\nThis adds random noise to the height variable from a normal distribution (\\(\\mu=0\\), \\(\\sigma=2\\)), reducing exact re-identification risk.\n\nset.seed(200) \n\ndf_noisy &lt;- df |&gt;\n  mutate(height_cm_noisy = height_cm + rnorm(n(), mean = 0, sd = 2)) |&gt;\n    select(-height_cm)\n\ndf_noisy\n\n# A tibble: 4 × 3\n  name             age height_cm_noisy\n  &lt;chr&gt;          &lt;dbl&gt;           &lt;dbl&gt;\n1 Joel Miller       52            182.\n2 Ellie Williams    19            160.\n3 Tommy Miller      48            186.\n4 Abby Anderson     28            174."
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#permutation",
+    "href": "schedule/slides/13-data-privacy-1.html#permutation",
+    "title": "UBC DSCI 200",
+    "section": "Permutation",
+    "text": "Permutation\n\n\nSwap values between individuals\nMakes linking variables across a record more difficult\nMaintains distributions, but breaks correlations\nCan limit the types of analyses possible"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#permutation-of-height-values",
+    "href": "schedule/slides/13-data-privacy-1.html#permutation-of-height-values",
+    "title": "UBC DSCI 200",
+    "section": "Permutation of Height Values",
+    "text": "Permutation of Height Values\nHere, the height_cm values are shuffled between individuals, preserving the overall distribution but breaking the link between person and value.\n\nset.seed(200)\n\ndf_permuted &lt;- df |&gt;\n  mutate(height_cm_permuted = sample(height_cm)) |&gt;\n    select(-height_cm)\n\ndf_permuted\n\n# A tibble: 4 × 3\n  name             age height_cm_permuted\n  &lt;chr&gt;          &lt;dbl&gt;              &lt;dbl&gt;\n1 Joel Miller       52                160\n2 Ellie Williams    19                173\n3 Tommy Miller      48                182\n4 Abby Anderson     28                185"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#privacy-vs.-utility-tradeoff",
+    "href": "schedule/slides/13-data-privacy-1.html#privacy-vs.-utility-tradeoff",
+    "title": "UBC DSCI 200",
+    "section": "Privacy vs. Utility Tradeoff",
+    "text": "Privacy vs. Utility Tradeoff\n\n\nhttps://www.researchgate.net/figure/Trade-off-between-privacy-level-and-utility-level-of-data_fig1_357987903"
+  },
+  {
+    "objectID": "schedule/slides/13-data-privacy-1.html#key-takeaways",
+    "href": "schedule/slides/13-data-privacy-1.html#key-takeaways",
+    "title": "UBC DSCI 200",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nData exists on a spectrum of identifiability\nEven seemingly anonymous data can often be re-identified (e.g., mosaic effect)\nDifferent techniques offer varying levels of protection and utility\nContext, external data and technological capabilities all affect re-identification risk\nResponsible data handling requires both technical skill and ethical awareness"
   }
 ]
