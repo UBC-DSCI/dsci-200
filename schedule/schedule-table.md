@@ -6,7 +6,7 @@
 |14 Jan 26 | Fundamentals of Sampling and Variability     |[Slides]()   |  EDA Worksheet Due at 11:59pm |
 |19 Jan 26 | Simulation I  |[Slides]()   |          |
 |21 Jan 26 | Simulation I |[Slides]()   |    Sampling Worksheet Due at 11:59pm      |
-|26 Jan 26 | Sampling Design  |[Slides](slides/05-sampling-design.qmd)   |          |
+|26 Jan 26 | Sampling Design  |[Slides]()   |          |
 |28 Jan 26 | Study Design  |[Slides]()   |   Simulation I Worksheet Due at 11:59pm        |
 |02 Feb 26 | Case Study 1 Work Period  |[Slides]()   |          |
 |04 Feb 26 | Missing Data  |[Slides]()   |  Case Study I Due at 11:59pm        |

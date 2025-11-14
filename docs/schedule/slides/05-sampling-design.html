@@ -6,8 +6,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-095e6f6405c331e3b33229e03003579f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.8">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
   <title>UBC DSCI 200 – sampling-design</title>
@@ -29,9 +29,8 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -42,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -95,7 +94,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b4ee4c89f33195ff85aef29361b1c2bf.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-3faac352b6474bbecd2b121c3fec1fe3.css">
   <link rel="stylesheet" href="tachyons-minimal.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -249,6 +248,7 @@
 <section id="asking-a-question" class="slide level2">
 <h2>Asking a Question</h2>
 <p><br><br> Let’s recall the 6 types of data analysis questions we learned about in DSCI 100: <br><br></p>
+<div>
 <ul>
 <li class="fragment">Descriptive</li>
 <li class="fragment">Exploratory</li>
@@ -257,6 +257,7 @@
 <li class="fragment">Causal</li>
 <li class="fragment">Mechanistic</li>
 </ul>
+</div>
 </section>
 <section id="a-sample" class="slide level2">
 <h2>A Sample</h2>
@@ -301,12 +302,14 @@
 <section id="random-sampling-methods" class="slide level2">
 <h2>Random Sampling Methods</h2>
 <p><br><br> We will explore four key random sampling methods: <br><br></p>
+<div>
 <ul>
 <li class="fragment">Simple Random Sampling (SRS)</li>
 <li class="fragment">Systematic Sampling</li>
 <li class="fragment">Stratified Sampling</li>
 <li class="fragment">Cluster Sampling</li>
 </ul>
+</div>
 </section>
 <section id="simple-random-sampling-srs" class="slide level2">
 <h2>Simple Random Sampling (SRS)</h2>
@@ -329,7 +332,7 @@
 <h2></h2>
 <p>Let’s revisit this example in R</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="co"># Simulate student population data</span></span>
@@ -341,11 +344,11 @@
 <span id="cb1-10"><a></a>  <span class="at">GPA =</span> <span class="fu">runif</span>(<span class="dv">45000</span>, <span class="at">min =</span> <span class="fl">2.5</span>, <span class="at">max =</span> <span class="fl">4.0</span>)  <span class="co"># Generate random GPAs between 2.5 and 4.0</span></span>
 <span id="cb1-11"><a></a>)</span>
 <span id="cb1-12"><a></a></span>
-<span id="cb1-13"><a></a><span class="fu">dim</span>(student_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a></a><span class="fu">dim</span>(student_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 45000     2</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">head</span>(student_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">head</span>(student_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
   Student     GPA
@@ -363,12 +366,12 @@
 <h2></h2>
 <p>Use the <a href="https://dplyr.tidyverse.org/reference/slice_sample.html"><code>slice_sample</code></a> function from <code>dplyr</code> to draw a sample of size 100:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>srs_student <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>)</span>
-<span id="cb5-2"><a></a><span class="fu">dim</span>(srs_student)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>srs_student <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb5-2"><a></a><span class="fu">dim</span>(srs_student)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100   2</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">head</span>(srs_student)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">head</span>(srs_student)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
   Student         GPA
@@ -380,8 +383,8 @@
 5 Student 17378  3.87
 6 Student 10243  3.57</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>srs_student <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a></a>    <span class="fu">summarise</span>(<span class="at">Mean_GPA =</span> <span class="fu">mean</span>(GPA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>srs_student <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a></a>    <span class="fu">summarise</span>(<span class="at">Mean_GPA =</span> <span class="fu">mean</span>(GPA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   Mean_GPA
@@ -394,7 +397,7 @@
 <h2></h2>
 <p>Alternative solution using dplyr’s <code>sample_frac()</code> function:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>student_data <span class="sc">|&gt;</span> <span class="fu">sample_frac</span>(<span class="at">size =</span> <span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>student_data <span class="sc">|&gt;</span> <span class="fu">sample_frac</span>(<span class="at">size =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,500 × 2
    Student         GPA
@@ -416,17 +419,21 @@
 <section id="srs-pros-and-cons" class="slide level2">
 <h2>SRS: Pros and Cons</h2>
 <p>Pros:</p>
+<div>
 <ul>
 <li class="fragment">The selection of one element does not affect the selection of others.</li>
 <li class="fragment">Each possible sample, of a given size, has an equal chance of being selected.</li>
 <li class="fragment">Simple random samples tend to be fairly reasonable representations of the population.</li>
 <li class="fragment">Requires little knowledge of the population.</li>
 </ul>
+</div>
 <p>Cons:</p>
+<div>
 <ul>
 <li class="fragment">If there are small subgroups within the population, a SRS may not give an accurate representation of that subgroup (especially true if the sample size is small).</li>
 <li class="fragment">If the population is large, it can be expensive (both in time and money) to collect the data.</li>
 </ul>
+</div>
 </section>
 <section id="systematic-sampling" class="slide level2">
 <h2>Systematic Sampling</h2>
@@ -446,12 +453,12 @@
 <li>Let’s look at our <code>student_data</code> again and perform a 1-in-10 systematic sample:</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
 <span id="cb13-2"><a></a></span>
 <span id="cb13-3"><a></a>start <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span>) <span class="co"># randomly define a student to start with</span></span>
 <span id="cb13-4"><a></a></span>
 <span id="cb13-5"><a></a>student_data <span class="sc">|&gt;</span> </span>
-<span id="cb13-6"><a></a>    <span class="fu">slice</span>(<span class="fu">seq</span>(start, <span class="fu">n</span>(), <span class="at">by =</span> <span class="dv">10</span>)) <span class="co"># sample every 10th student</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-6"><a></a>    <span class="fu">slice</span>(<span class="fu">seq</span>(start, <span class="fu">n</span>(), <span class="at">by =</span> <span class="dv">10</span>)) <span class="co"># sample every 10th student</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,500 × 2
    Student      GPA
@@ -473,17 +480,21 @@
 <section id="systematic-sampling-pros-and-cons" class="slide level2">
 <h2>Systematic Sampling: Pros and Cons</h2>
 <p>Pros:</p>
+<div>
 <ul>
 <li class="fragment">Assures an even, random sampling of the population.</li>
 <li class="fragment">When the population is an ordered list, a systematic sample gives a better representation of the population than a SRS.</li>
 <li class="fragment">Can be used in situations where a SRS is difficult or impossible.</li>
 <li class="fragment">It is especially useful when the population that you are studying is arranged in time.</li>
 </ul>
+</div>
 <p>Cons:</p>
+<div>
 <ul>
 <li class="fragment"><p>Not every combination has an equal chance of being selected. Many combinations will never be selected using a systematic sample!</p></li>
 <li class="fragment"><p>If there is periodicity in the population (i.e., after ordering, the selections match some pattern in the list), the sample may not be representative of the population.</p></li>
 </ul>
+</div>
 </section>
 <section id="iclicker-question" class="slide level2">
 <h2>iClicker Question</h2>
@@ -575,7 +586,7 @@
 <li>Suppose we consider student major as a strata:</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
 <span id="cb15-2"><a></a></span>
 <span id="cb15-3"><a></a>majors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CS"</span>, <span class="st">"Math"</span>, <span class="st">"Stat"</span>, <span class="st">"Bio"</span>, <span class="st">"Data Science"</span>, <span class="st">"Phys"</span>, <span class="st">"Chem"</span>)</span>
 <span id="cb15-4"><a></a></span>
@@ -586,7 +597,7 @@
 <span id="cb15-9"><a></a>  <span class="fu">group_by</span>(Major) <span class="sc">|&gt;</span></span>
 <span id="cb15-10"><a></a>  <span class="fu">slice_sample</span>(<span class="at">n=</span><span class="dv">100</span>) <span class="co"># sample 100 students from each major </span></span>
 <span id="cb15-11"><a></a></span>
-<span id="cb15-12"><a></a><span class="fu">head</span>(strat_sampled_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-12"><a></a><span class="fu">head</span>(strat_sampled_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
 # Groups:   Major [1]
@@ -604,15 +615,19 @@
 <section id="stratified-sampling-pros-and-cons" class="slide level2">
 <h2>Stratified Sampling: Pros and Cons</h2>
 <p>Pros:</p>
+<div>
 <ul>
 <li class="fragment"><p>Representative of the population, because elements from all strata are included in the sample.</p></li>
 <li class="fragment"><p>Ensures that specific groups are represented, sometimes even proportionally, in the sample.</p></li>
 <li class="fragment"><p>Allows comparisons to be made between strata, if necessary. For example, a stratified sample allows you to easily compare the mean GPA of Biology students to the mean GPA of Chemistry students.</p></li>
 </ul>
+</div>
 <p>Cons:</p>
+<div>
 <ul>
 <li class="fragment">Requires prior knowledge of the population. You have to know something about the population to be able to split into strata!</li>
 </ul>
+</div>
 </section>
 <section id="conceptual-question" class="slide level2">
 <h2>Conceptual Question</h2>
@@ -644,7 +659,7 @@
 <h2>Cluster Sampling Example</h2>
 <p>Suppose each the student data had 30 class secions and we consider each <code>ClassSection</code> to be a cluster:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
 <span id="cb17-2"><a></a></span>
 <span id="cb17-3"><a></a><span class="co"># Add simulated class sections (clusters)</span></span>
 <span id="cb17-4"><a></a>student_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span></span>
@@ -659,7 +674,7 @@
 <span id="cb17-13"><a></a>cluster_sampled_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span></span>
 <span id="cb17-14"><a></a>  <span class="fu">filter</span>(ClassSection <span class="sc">%in%</span> selected_clusters)</span>
 <span id="cb17-15"><a></a></span>
-<span id="cb17-16"><a></a><span class="fu">head</span>(cluster_sampled_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-16"><a></a><span class="fu">head</span>(cluster_sampled_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 × 4
 # ℹ 4 variables: Student &lt;chr&gt;, GPA &lt;dbl&gt;, Major &lt;chr&gt;, ClassSection &lt;chr&gt;</code></pre>
@@ -670,10 +685,12 @@
 <h2>Think, Pair, Share</h2>
 <p><br><br></p>
 <p>Discuss the similarities and differences between stratified random sampling and cluster sampling. Be prepared to share with the class!</p>
+<div>
 <ul>
 <li class="fragment">In a stratified sample, the differences between stratum are high while the differences within strata are low.</li>
 <li class="fragment">In a cluster sample, the differences between clusters are low while the differences within clusters are high.</li>
 </ul>
+</div>
 </section>
 <section id="sampling-scenario-1" class="slide level2">
 <h2>Sampling Scenario</h2>
@@ -689,6 +706,7 @@
 </section>
 <section id="sampling-bias" class="slide level2">
 <h2>Sampling Bias</h2>
+<div>
 <ul>
 <li class="fragment">A sampling method is considered <em>biased</em> if it systemically produces samples that do not accurately reflect the population, where certain individuals are more or less likely to be selected</li>
 <li class="fragment">Sampling bias can lead to an unrepresentative sample (i.e., a sample that does not reflect the population of interest).</li>
@@ -699,6 +717,7 @@
 <li class="fragment">Response bias</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="selection-bias" class="slide level2">
 <h2>Selection Bias</h2>
@@ -711,23 +730,28 @@
 <section id="convenience-sampling" class="slide level2">
 <h2>Convenience Sampling</h2>
 <p><br><br></p>
+<div>
 <ul>
 <li class="fragment"><p>Convenience sampling is the practice of sampling observations that are easy to access or are readily available, making it convenient for the person collecting the data.</p></li>
 <li class="fragment"><p>A convenience sample can suffer from selection bias, as it can lead to the underrepresentation or omission of certain subgroups in the population.</p></li>
 <li class="fragment"><p>Example: I wanted to have an idea of people’s thoughts on the food quality on campus, so I ask my DSCI 200 class.</p></li>
 </ul>
+</div>
 </section>
 <section id="volunteer-sampling" class="slide level2">
 <h2>Volunteer Sampling</h2>
+<div>
 <ul>
 <li class="fragment">As the name suggests, volunter sampling is when a sample is collected from subjects that have volunteered to participate (i.e., individuals self-select whether or not to participate).</li>
 <li class="fragment">Oftentimes, people with strong opinions who feel compelled to participate are overrepresented and individuals with neutral opinions may opt to not participate, resulting in a biased sample.</li>
 <li class="fragment">In a volunteer sample you are also leaving it up to each member of the population to find out about your survey to have the opportunity to participate.</li>
 <li class="fragment">Example: In a survey about campus food quality, students who have strong opinions (either positive or negative) may be more likely to volunteer to participate, leading to a sample that over-represents those with extreme views and under-represents students with neutral opinions.</li>
 </ul>
+</div>
 </section>
 <section id="nonresponse-bias" class="slide level2">
 <h2>Nonresponse Bias</h2>
+<div>
 <ul>
 <li class="fragment">If we avoid selection bias (perhaps by choosing a sampling scheme like SRS), we still need participants to consent to participate to being sampled.</li>
 <li class="fragment">Indiviudals may refuse to participate or we may not be able to contact them at all.</li>
@@ -738,9 +762,11 @@
 <li class="fragment">In an email survey about healthcare, older adults who may not have access to email or are less familiar with technology might not participate, resulting in nonresponse bias where the sample overrepresents younger, tech-savvy individuals and underrepresents older populations.</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="response-bias" class="slide level2">
 <h2>Response Bias</h2>
+<div>
 <ul>
 <li class="fragment">The way a survey question is phrased can influence how subjects respond.</li>
 <li class="fragment">For example, consider the wording in the following questions and how the phrasing might impact responses:
@@ -750,9 +776,11 @@
 </ul></li>
 <li class="fragment">A sampling method exhibits <strong>response bias</strong> if the way the questions are asked or framed tends to influence the individuals’ responses.</li>
 </ul>
+</div>
 </section>
 <section id="factors-influencing-response-bias" class="slide level2">
 <h2>Factors Influencing Response Bias</h2>
+<div>
 <ul>
 <li class="fragment">Deliberate (or unintentional) wording bias</li>
 <li class="fragment">Desire of the respondents to please</li>
@@ -762,6 +790,7 @@
 <li class="fragment">Confidentiality concerns</li>
 <li class="fragment">Certain groups (e.g., minorities, marginalized populations) may be left out or underrepresented if the sampling frame does not fully capture the diversity of the population or contains inherent biases.</li>
 </ul>
+</div>
 </section>
 <section id="a-case-study-of-sampling-bias-and-black-voters-in-online-opt-in-polls" class="slide level2">
 <h2>A Case Study of Sampling Bias and Black Voters in Online, Opt-In Polls</h2>
@@ -1052,180 +1081,197 @@
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-      window.document.addEventListener("DOMContentLoaded", function (event) {
-        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-        tabsets.forEach(function(tabset) {
-          const tabby = new Tabby('#' + tabset.id);
-        });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
         }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
         }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
-          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-          var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
-          var isInternal = (href) => {
-              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-          }
-          // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-          for (var i=0; i<links.length; i++) {
-            const link = links[i];
-            if (!isInternal(link.href)) {
-              // undo the damage that might have been done by quarto-nav.js in the case of
-              // links that we want to consider external
-              if (link.dataset.originalHref !== undefined) {
-                link.href = link.dataset.originalHref;
-              }
-                // target, if specified
-                link.setAttribute("target", "_blank");
-                if (link.getAttribute("rel") === null) {
-                  link.setAttribute("rel", "noopener");
-                }
-                // default icon
-                link.classList.add("external");
-            }
-          }
-        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-          const config = {
-            allowHTML: true,
-            maxWidth: 500,
-            delay: 100,
-            arrow: false,
-            appendTo: function(el) {
-                return el.closest('section.slide') || el.parentElement;
-            },
-            interactive: true,
-            interactiveBorder: 10,
-            theme: 'light-border',
-            placement: 'bottom-start',
-          };
-          if (contentFn) {
-            config.content = contentFn;
-          }
-          if (onTriggerFn) {
-            config.onTrigger = onTriggerFn;
-          }
-          if (onUntriggerFn) {
-            config.onUntrigger = onUntriggerFn;
-          }
-            config['offset'] = [0,0];
-            config['maxWidth'] = 700;
-          window.tippy(el, config); 
-        }
-        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-        for (var i=0; i<noterefs.length; i++) {
-          const ref = noterefs[i];
-          tippyHover(ref, function() {
-            // use id or data attribute instead here
-            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-            try { href = new URL(href).hash; } catch {}
-            const id = href.replace(/^#\/?/, "");
-            const note = window.document.getElementById(id);
-            if (note) {
-              return note.innerHTML;
-            } else {
-              return "";
-            }
-          });
-        }
-        const findCites = (el) => {
-          const parentEl = el.parentElement;
-          if (parentEl) {
-            const cites = parentEl.dataset.cites;
-            if (cites) {
-              return {
-                el,
-                cites: cites.split(' ')
-              };
-            } else {
-              return findCites(el.parentElement)
-            }
-          } else {
-            return undefined;
-          }
-        };
-        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-        for (var i=0; i<bibliorefs.length; i++) {
-          const ref = bibliorefs[i];
-          const citeInfo = findCites(ref);
-          if (citeInfo) {
-            tippyHover(citeInfo.el, function() {
-              var popup = window.document.createElement('div');
-              citeInfo.cites.forEach(function(cite) {
-                var citeDiv = window.document.createElement('div');
-                citeDiv.classList.add('hanging-indent');
-                citeDiv.classList.add('csl-entry');
-                var biblioDiv = window.document.getElementById('ref-' + cite);
-                if (biblioDiv) {
-                  citeDiv.innerHTML = biblioDiv.innerHTML;
-                }
-                popup.appendChild(citeDiv);
-              });
-              return popup.innerHTML;
-            });
-          }
-        }
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      </script>
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
     
 
 </body></html>
