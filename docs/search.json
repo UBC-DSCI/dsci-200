@@ -67,21 +67,21 @@
     "href": "schedule/slides/14-data-privacy-2.html#importance-of-correct-variable-categorization",
     "title": "UBC DSCI 200",
     "section": "Importance of Correct Variable Categorization",
-    "text": "Importance of Correct Variable Categorization\n\n\nCorrectly categorizing variables into identifiers, quasi-identifiers, and sensitive attributes is crucial.\n\nThis categorization determines how to de-identify your dataset effectively using \\(k\\)-anonymity, \\(l\\)-diversity, and \\(t\\)-closeness.\nNow, let’s discuss each of these techniques in detail…"
+    "text": "Importance of Correct Variable Categorization\n\nCorrectly categorizing variables into identifiers, quasi-identifiers, and sensitive attributes is crucial.\n\nThis categorization determines how to de-identify your dataset effectively using \\(k\\)-anonymity, \\(l\\)-diversity, and \\(t\\)-closeness.\nNow, let’s discuss each of these techniques in detail…"
   },
   {
     "objectID": "schedule/slides/14-data-privacy-2.html#k-anonymity",
     "href": "schedule/slides/14-data-privacy-2.html#k-anonymity",
     "title": "UBC DSCI 200",
     "section": "\\(k\\)-anonymity",
-    "text": "\\(k\\)-anonymity\n\n\nA data set is \\(k\\)-anonymous if each observation cannot be distinguished from at least \\(k-1\\) other observations based on the quasi-identifiers.\n\nThis can be achieved through generalization, suppression and sometimes top- or bottom-coding of data values.\nApplying \\(k\\)-anonymity makes it more difficult for an attacker to single out or re-identify specific individuals.\n\nIt also helps reduce the risk of the mosaic effect, where combining data points could lead to identification."
+    "text": "\\(k\\)-anonymity\n\nA data set is \\(k\\)-anonymous if each observation cannot be distinguished from at least \\(k-1\\) other observations based on the quasi-identifiers.\n\nThis can be achieved through generalization, suppression and sometimes top- or bottom-coding of data values.\nApplying \\(k\\)-anonymity makes it more difficult for an attacker to single out or re-identify specific individuals.\n\nIt also helps reduce the risk of the mosaic effect, where combining data points could lead to identification."
   },
   {
     "objectID": "schedule/slides/14-data-privacy-2.html#making-a-data-set-k-anonymous",
     "href": "schedule/slides/14-data-privacy-2.html#making-a-data-set-k-anonymous",
     "title": "UBC DSCI 200",
     "section": "Making a data set \\(k\\)-anonymous",
-    "text": "Making a data set \\(k\\)-anonymous\n\n\nIdentify variables as identifiers, quasi-identifiers and sensitive attributes.\n\nChoose a value for \\(k\\).\n\nAggregate or transform the data so each combination of quasi-identifiers occurs at least k times."
+    "text": "Making a data set \\(k\\)-anonymous\n\nIdentify variables as identifiers, quasi-identifiers and sensitive attributes.\n\nChoose a value for \\(k\\).\n\nAggregate or transform the data so each combination of quasi-identifiers occurs at least k times."
   },
   {
     "objectID": "schedule/slides/14-data-privacy-2.html#choosing-k",
@@ -130,7 +130,7 @@
     "href": "schedule/slides/14-data-privacy-2.html#t-closeness",
     "title": "UBC DSCI 200",
     "section": "\\(t\\)-closeness",
-    "text": "\\(t\\)-closeness\n\n\n\\(t\\)-closeness builds on k-anonymity and l-diversity by requiring that the distribution of the sensitive attribute within each group of quasi-identifiers is close to the distribution in the full dataset.\nThis prevents situations where a sensitive value is overly dominant in a group, which could allow re-identification through skewed distributions.\nFor example, in a dataset with Age and Sex as quasi-identifiers and Income as the sensitive attribute, applying t-closeness with \\(t = 0.1\\) means the income distribution in each group must stay within 10% of the overall income distribution.\nIn this course, we will focus mainly on \\(k\\)-anonymity and \\(l\\)-diversity as \\(t\\)-closeness can get complicated to implement."
+    "text": "\\(t\\)-closeness\n\n\\(t\\)-closeness builds on k-anonymity and l-diversity by requiring that the distribution of the sensitive attribute within each group of quasi-identifiers is close to the distribution in the full dataset.\nThis prevents situations where a sensitive value is overly dominant in a group, which could allow re-identification through skewed distributions.\nFor example, in a dataset with Age and Sex as quasi-identifiers and Income as the sensitive attribute, applying t-closeness with \\(t = 0.1\\) means the income distribution in each group must stay within 10% of the overall income distribution.\nIn this course, we will focus mainly on \\(k\\)-anonymity and \\(l\\)-diversity as \\(t\\)-closeness can get complicated to implement."
   },
   {
     "objectID": "schedule/slides/14-data-privacy-2.html#there-are-still-issues",
@@ -214,7 +214,7 @@
     "href": "schedule/slides/05-sampling-design.html#asking-a-question",
     "title": "UBC DSCI 200",
     "section": "Asking a Question",
-    "text": "Asking a Question\n Let’s recall the 6 types of data analysis questions we learned about in DSCI 100: \n\n\nDescriptive\nExploratory\nPredictive\nInferential\nCausal\nMechanistic"
+    "text": "Asking a Question\n Let’s recall the 6 types of data analysis questions we learned about in DSCI 100: \n\nDescriptive\nExploratory\nPredictive\nInferential\nCausal\nMechanistic"
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#a-sample",
@@ -249,7 +249,7 @@
     "href": "schedule/slides/05-sampling-design.html#random-sampling-methods",
     "title": "UBC DSCI 200",
     "section": "Random Sampling Methods",
-    "text": "Random Sampling Methods\n We will explore four key random sampling methods: \n\n\nSimple Random Sampling (SRS)\nSystematic Sampling\nStratified Sampling\nCluster Sampling"
+    "text": "Random Sampling Methods\n We will explore four key random sampling methods: \n\nSimple Random Sampling (SRS)\nSystematic Sampling\nStratified Sampling\nCluster Sampling"
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#simple-random-sampling-srs",
@@ -291,7 +291,7 @@
     "href": "schedule/slides/05-sampling-design.html#srs-pros-and-cons",
     "title": "UBC DSCI 200",
     "section": "SRS: Pros and Cons",
-    "text": "SRS: Pros and Cons\nPros:\n\n\nThe selection of one element does not affect the selection of others.\nEach possible sample, of a given size, has an equal chance of being selected.\nSimple random samples tend to be fairly reasonable representations of the population.\nRequires little knowledge of the population.\n\n\nCons:\n\n\nIf there are small subgroups within the population, a SRS may not give an accurate representation of that subgroup (especially true if the sample size is small).\nIf the population is large, it can be expensive (both in time and money) to collect the data."
+    "text": "SRS: Pros and Cons\nPros:\n\nThe selection of one element does not affect the selection of others.\nEach possible sample, of a given size, has an equal chance of being selected.\nSimple random samples tend to be fairly reasonable representations of the population.\nRequires little knowledge of the population.\n\nCons:\n\nIf there are small subgroups within the population, a SRS may not give an accurate representation of that subgroup (especially true if the sample size is small).\nIf the population is large, it can be expensive (both in time and money) to collect the data."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#systematic-sampling",
@@ -312,7 +312,7 @@
     "href": "schedule/slides/05-sampling-design.html#systematic-sampling-pros-and-cons",
     "title": "UBC DSCI 200",
     "section": "Systematic Sampling: Pros and Cons",
-    "text": "Systematic Sampling: Pros and Cons\nPros:\n\n\nAssures an even, random sampling of the population.\nWhen the population is an ordered list, a systematic sample gives a better representation of the population than a SRS.\nCan be used in situations where a SRS is difficult or impossible.\nIt is especially useful when the population that you are studying is arranged in time.\n\n\nCons:\n\n\nNot every combination has an equal chance of being selected. Many combinations will never be selected using a systematic sample!\nIf there is periodicity in the population (i.e., after ordering, the selections match some pattern in the list), the sample may not be representative of the population."
+    "text": "Systematic Sampling: Pros and Cons\nPros:\n\nAssures an even, random sampling of the population.\nWhen the population is an ordered list, a systematic sample gives a better representation of the population than a SRS.\nCan be used in situations where a SRS is difficult or impossible.\nIt is especially useful when the population that you are studying is arranged in time.\n\nCons:\n\nNot every combination has an equal chance of being selected. Many combinations will never be selected using a systematic sample!\nIf there is periodicity in the population (i.e., after ordering, the selections match some pattern in the list), the sample may not be representative of the population."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#iclicker-question",
@@ -340,7 +340,7 @@
     "href": "schedule/slides/05-sampling-design.html#stratified-sampling-pros-and-cons",
     "title": "UBC DSCI 200",
     "section": "Stratified Sampling: Pros and Cons",
-    "text": "Stratified Sampling: Pros and Cons\nPros:\n\n\nRepresentative of the population, because elements from all strata are included in the sample.\nEnsures that specific groups are represented, sometimes even proportionally, in the sample.\nAllows comparisons to be made between strata, if necessary. For example, a stratified sample allows you to easily compare the mean GPA of Biology students to the mean GPA of Chemistry students.\n\n\nCons:\n\n\nRequires prior knowledge of the population. You have to know something about the population to be able to split into strata!"
+    "text": "Stratified Sampling: Pros and Cons\nPros:\n\nRepresentative of the population, because elements from all strata are included in the sample.\nEnsures that specific groups are represented, sometimes even proportionally, in the sample.\nAllows comparisons to be made between strata, if necessary. For example, a stratified sample allows you to easily compare the mean GPA of Biology students to the mean GPA of Chemistry students.\n\nCons:\n\nRequires prior knowledge of the population. You have to know something about the population to be able to split into strata!"
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#conceptual-question",
@@ -368,7 +368,7 @@
     "href": "schedule/slides/05-sampling-design.html#think-pair-share",
     "title": "UBC DSCI 200",
     "section": "Think, Pair, Share",
-    "text": "Think, Pair, Share\n\nDiscuss the similarities and differences between stratified random sampling and cluster sampling. Be prepared to share with the class!\n\n\nIn a stratified sample, the differences between stratum are high while the differences within strata are low.\nIn a cluster sample, the differences between clusters are low while the differences within clusters are high."
+    "text": "Think, Pair, Share\n\nDiscuss the similarities and differences between stratified random sampling and cluster sampling. Be prepared to share with the class!\n\nIn a stratified sample, the differences between stratum are high while the differences within strata are low.\nIn a cluster sample, the differences between clusters are low while the differences within clusters are high."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#sampling-scenario-1",
@@ -382,7 +382,7 @@
     "href": "schedule/slides/05-sampling-design.html#sampling-bias",
     "title": "UBC DSCI 200",
     "section": "Sampling Bias",
-    "text": "Sampling Bias\n\n\nA sampling method is considered biased if it systemically produces samples that do not accurately reflect the population, where certain individuals are more or less likely to be selected\nSampling bias can lead to an unrepresentative sample (i.e., a sample that does not reflect the population of interest).\nWe will now introduce three different types of sampling bias:\n\nSelection bias\nNonresponse bias\nResponse bias"
+    "text": "Sampling Bias\n\nA sampling method is considered biased if it systemically produces samples that do not accurately reflect the population, where certain individuals are more or less likely to be selected\nSampling bias can lead to an unrepresentative sample (i.e., a sample that does not reflect the population of interest).\nWe will now introduce three different types of sampling bias:\n\nSelection bias\nNonresponse bias\nResponse bias"
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#selection-bias",
@@ -396,35 +396,35 @@
     "href": "schedule/slides/05-sampling-design.html#convenience-sampling",
     "title": "UBC DSCI 200",
     "section": "Convenience Sampling",
-    "text": "Convenience Sampling\n\n\n\nConvenience sampling is the practice of sampling observations that are easy to access or are readily available, making it convenient for the person collecting the data.\nA convenience sample can suffer from selection bias, as it can lead to the underrepresentation or omission of certain subgroups in the population.\nExample: I wanted to have an idea of people’s thoughts on the food quality on campus, so I ask my DSCI 200 class."
+    "text": "Convenience Sampling\n\n\nConvenience sampling is the practice of sampling observations that are easy to access or are readily available, making it convenient for the person collecting the data.\nA convenience sample can suffer from selection bias, as it can lead to the underrepresentation or omission of certain subgroups in the population.\nExample: I wanted to have an idea of people’s thoughts on the food quality on campus, so I ask my DSCI 200 class."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#volunteer-sampling",
     "href": "schedule/slides/05-sampling-design.html#volunteer-sampling",
     "title": "UBC DSCI 200",
     "section": "Volunteer Sampling",
-    "text": "Volunteer Sampling\n\n\nAs the name suggests, volunter sampling is when a sample is collected from subjects that have volunteered to participate (i.e., individuals self-select whether or not to participate).\nOftentimes, people with strong opinions who feel compelled to participate are overrepresented and individuals with neutral opinions may opt to not participate, resulting in a biased sample.\nIn a volunteer sample you are also leaving it up to each member of the population to find out about your survey to have the opportunity to participate.\nExample: In a survey about campus food quality, students who have strong opinions (either positive or negative) may be more likely to volunteer to participate, leading to a sample that over-represents those with extreme views and under-represents students with neutral opinions."
+    "text": "Volunteer Sampling\n\nAs the name suggests, volunter sampling is when a sample is collected from subjects that have volunteered to participate (i.e., individuals self-select whether or not to participate).\nOftentimes, people with strong opinions who feel compelled to participate are overrepresented and individuals with neutral opinions may opt to not participate, resulting in a biased sample.\nIn a volunteer sample you are also leaving it up to each member of the population to find out about your survey to have the opportunity to participate.\nExample: In a survey about campus food quality, students who have strong opinions (either positive or negative) may be more likely to volunteer to participate, leading to a sample that over-represents those with extreme views and under-represents students with neutral opinions."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#nonresponse-bias",
     "href": "schedule/slides/05-sampling-design.html#nonresponse-bias",
     "title": "UBC DSCI 200",
     "section": "Nonresponse Bias",
-    "text": "Nonresponse Bias\n\n\nIf we avoid selection bias (perhaps by choosing a sampling scheme like SRS), we still need participants to consent to participate to being sampled.\nIndiviudals may refuse to participate or we may not be able to contact them at all.\nA sampling method exhibits nonresponse bias if people who choose to participate in the survey systematically differ from the population in some important way.\nExamples:\n\nIn a survey about drug use, individuals who engage in illegal or behaviours perceived as “taboo” may be less likely to respond, leading to nonresponse bias where the sample underrepresents people who use drugs.\nIn an email survey about healthcare, older adults who may not have access to email or are less familiar with technology might not participate, resulting in nonresponse bias where the sample overrepresents younger, tech-savvy individuals and underrepresents older populations."
+    "text": "Nonresponse Bias\n\nIf we avoid selection bias (perhaps by choosing a sampling scheme like SRS), we still need participants to consent to participate to being sampled.\nIndiviudals may refuse to participate or we may not be able to contact them at all.\nA sampling method exhibits nonresponse bias if people who choose to participate in the survey systematically differ from the population in some important way.\nExamples:\n\nIn a survey about drug use, individuals who engage in illegal or behaviours perceived as “taboo” may be less likely to respond, leading to nonresponse bias where the sample underrepresents people who use drugs.\nIn an email survey about healthcare, older adults who may not have access to email or are less familiar with technology might not participate, resulting in nonresponse bias where the sample overrepresents younger, tech-savvy individuals and underrepresents older populations."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#response-bias",
     "href": "schedule/slides/05-sampling-design.html#response-bias",
     "title": "UBC DSCI 200",
     "section": "Response Bias",
-    "text": "Response Bias\n\n\nThe way a survey question is phrased can influence how subjects respond.\nFor example, consider the wording in the following questions and how the phrasing might impact responses:\n\n“How much do you agree that climate change is a serious issue that requires immediate action?”\n“What are your thoughts on the issue of climate change and the need for action?”\n\nA sampling method exhibits response bias if the way the questions are asked or framed tends to influence the individuals’ responses."
+    "text": "Response Bias\n\nThe way a survey question is phrased can influence how subjects respond.\nFor example, consider the wording in the following questions and how the phrasing might impact responses:\n\n“How much do you agree that climate change is a serious issue that requires immediate action?”\n“What are your thoughts on the issue of climate change and the need for action?”\n\nA sampling method exhibits response bias if the way the questions are asked or framed tends to influence the individuals’ responses."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#factors-influencing-response-bias",
     "href": "schedule/slides/05-sampling-design.html#factors-influencing-response-bias",
     "title": "UBC DSCI 200",
     "section": "Factors Influencing Response Bias",
-    "text": "Factors Influencing Response Bias\n\n\nDeliberate (or unintentional) wording bias\nDesire of the respondents to please\nAsking the uninformed\nUnnecessary complexity\nOrdering of questions\nConfidentiality concerns\nCertain groups (e.g., minorities, marginalized populations) may be left out or underrepresented if the sampling frame does not fully capture the diversity of the population or contains inherent biases."
+    "text": "Factors Influencing Response Bias\n\nDeliberate (or unintentional) wording bias\nDesire of the respondents to please\nAsking the uninformed\nUnnecessary complexity\nOrdering of questions\nConfidentiality concerns\nCertain groups (e.g., minorities, marginalized populations) may be left out or underrepresented if the sampling frame does not fully capture the diversity of the population or contains inherent biases."
   },
   {
     "objectID": "schedule/slides/05-sampling-design.html#a-case-study-of-sampling-bias-and-black-voters-in-online-opt-in-polls",
@@ -508,7 +508,7 @@
     "href": "syllabus.html",
     "title": " Syllabus",
     "section": "",
-    "text": "Term 2025 Winter 2: January - April 2026"
+    "text": "NoteTerm 2025 Winter 2: January - April 2026"
   },
   {
     "objectID": "syllabus.html#course-info",
@@ -585,14 +585,14 @@
     "href": "schedule/slides/13-data-privacy-1.html#what-are-you-comfortable-sharing",
     "title": "UBC DSCI 200",
     "section": "What Are You Comfortable Sharing?",
-    "text": "What Are You Comfortable Sharing?\n\nConsider different types of data:\n\n\nYour favorite type of music\n\nYour Instagram likes and follows\n\nYour e-mail\n\nYour name and DOB\n\nYour GPS location throughout the day\nYour browsing history\nYour private messages/DMs\n\n\n\n\n\n\nDiscussion:\n\n\nWhich of these data would you feel comfortable sharing with an app?\n\nWhat questions would you want to ask before sharing this data?\n\nWhat if it combined two or three pieces of information?"
+    "text": "What Are You Comfortable Sharing?\n\nConsider different types of data:\n\nYour favorite type of music\n\nYour Instagram likes and follows\n\nYour e-mail\n\nYour name and DOB\n\nYour GPS location throughout the day\nYour browsing history\nYour private messages/DMs\n\n\n\n\nDiscussion:\n\n\nWhich of these data would you feel comfortable sharing with an app?\n\nWhat questions would you want to ask before sharing this data?\n\nWhat if it combined two or three pieces of information?"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#learning-objectives",
     "href": "schedule/slides/13-data-privacy-1.html#learning-objectives",
     "title": "UBC DSCI 200",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of today’s lesson, you should be able to:\n\n\nUnderstand key terms in data privacy, including PII, pseudonymization, and anonymization\nIdentify direct and indirect identifiers in sample data sets\nExplain why de-identification is challenging and context-dependent\nApply basic de-identification techniques (e.g., suppression, top-coding, permutation) using R\nRecognize the tradeoff between data utility and privacy risk"
+    "text": "Learning Objectives\nBy the end of today’s lesson, you should be able to:\n\nUnderstand key terms in data privacy, including PII, pseudonymization, and anonymization\nIdentify direct and indirect identifiers in sample data sets\nExplain why de-identification is challenging and context-dependent\nApply basic de-identification techniques (e.g., suppression, top-coding, permutation) using R\nRecognize the tradeoff between data utility and privacy risk"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#section-1",
@@ -606,14 +606,14 @@
     "href": "schedule/slides/13-data-privacy-1.html#what-happens-to-your-data",
     "title": "UBC DSCI 200",
     "section": "What Happens to Your Data?",
-    "text": "What Happens to Your Data?\nEvery time you use an app, visit a website, click on a link, fill out a survey or even just scroll on your device, your data is being:\n\n\nCollected - What you click, search, watch, like or buy\n\nAnalyzed - Used to predict your behaviour, interests or identity\n\nShared or Sold - Passed to advertisers, data brokers or other companies"
+    "text": "What Happens to Your Data?\nEvery time you use an app, visit a website, click on a link, fill out a survey or even just scroll on your device, your data is being:\n\nCollected - What you click, search, watch, like or buy\n\nAnalyzed - Used to predict your behaviour, interests or identity\n\nShared or Sold - Passed to advertisers, data brokers or other companies"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#why-does-this-matter",
     "href": "schedule/slides/13-data-privacy-1.html#why-does-this-matter",
     "title": "UBC DSCI 200",
     "section": "Why Does This Matter?",
-    "text": "Why Does This Matter?\n\n\nYou may be targeted with ads, content and potentially misinformation\n\nYou could be judged or profiled based on your data (even if it’s not accurate)\nYou rarely know who has your data (or what they’re doing with it)  \nSo what does this mean for us? Let’s explore how data can be used, what makes certain information sensitive and why it matters."
+    "text": "Why Does This Matter?\n\nYou may be targeted with ads, content and potentially misinformation\n\nYou could be judged or profiled based on your data (even if it’s not accurate)\nYou rarely know who has your data (or what they’re doing with it)  \nSo what does this mean for us? Let’s explore how data can be used, what makes certain information sensitive and why it matters."
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#personally-identifiable-information-pii",
@@ -627,7 +627,7 @@
     "href": "schedule/slides/13-data-privacy-1.html#personal-data",
     "title": "UBC DSCI 200",
     "section": "Personal Data",
-    "text": "Personal Data\nData can be identifiable when:\n\n\nThey contain directly identifying information.\nIt’s possible to single out an individual\nIt’s possible to infer information about an individual based on information in your dataset\nIt’s possible to link records relating to an individual.\nDe-identification is still reversible."
+    "text": "Personal Data\nData can be identifiable when:\n\nThey contain directly identifying information.\nIt’s possible to single out an individual\nIt’s possible to infer information about an individual based on information in your dataset\nIt’s possible to link records relating to an individual.\nDe-identification is still reversible."
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#scenario-can-this-data-identify-you",
@@ -655,14 +655,14 @@
     "href": "schedule/slides/13-data-privacy-1.html#pseudonymization",
     "title": "UBC DSCI 200",
     "section": "Pseudonymization",
-    "text": "Pseudonymization\n\n\nReduces linkability of data to individuals\nData cannot identify individuals without additional information\nOften done by replacing direct identifiers with pseudonyms\nLink between real identifiers and pseudonyms is stored separately\nRe-identification remains possible!"
+    "text": "Pseudonymization\n\nReduces linkability of data to individuals\nData cannot identify individuals without additional information\nOften done by replacing direct identifiers with pseudonyms\nLink between real identifiers and pseudonyms is stored separately\nRe-identification remains possible!"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#anonymization",
     "href": "schedule/slides/13-data-privacy-1.html#anonymization",
     "title": "UBC DSCI 200",
     "section": "Anonymization",
-    "text": "Anonymization\n\n\nData are anonymized when no individual is identifiable (directly or indirectly)\nThis applies even to the data controller\nFully anonymized data are no longer personal data\nAnonymisation is difficult to achieve in practice"
+    "text": "Anonymization\n\nData are anonymized when no individual is identifiable (directly or indirectly)\nThis applies even to the data controller\nFully anonymized data are no longer personal data\nAnonymisation is difficult to achieve in practice"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#identifiability-spectrum",
@@ -676,7 +676,7 @@
     "href": "schedule/slides/13-data-privacy-1.html#when-are-data-truly-anonymous",
     "title": "UBC DSCI 200",
     "section": "When Are Data Truly anonymous?",
-    "text": "When Are Data Truly anonymous?\n\nOnly if re-identification would require unreasonable effort (factors include cost, time and available technology)\nData are not anonymous if:\n\n\n\nDirect identifiers are present\nIndividuals can be singled out from a group\nRe-identification possible via linking datasets (mosaic effect)\nInference about identity is possible (e.g., through different variables)\nDe-identification can be reversed"
+    "text": "When Are Data Truly anonymous?\n\nOnly if re-identification would require unreasonable effort (factors include cost, time and available technology)\nData are not anonymous if:\n\n\nDirect identifiers are present\nIndividuals can be singled out from a group\nRe-identification possible via linking datasets (mosaic effect)\nInference about identity is possible (e.g., through different variables)\nDe-identification can be reversed"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#context-matters",
@@ -704,7 +704,7 @@
     "href": "schedule/slides/13-data-privacy-1.html#suppression",
     "title": "UBC DSCI 200",
     "section": "Suppression",
-    "text": "Suppression\n\n\nRemove entire variables, values or records\nUsed to eliminate highly identifying or unnecessary data\nExamples:\n\nNames, contact details, social security numbers\nGPS metadata, IP addresses, neuroimaging facial features\nOutliers or unique participants"
+    "text": "Suppression\n\nRemove entire variables, values or records\nUsed to eliminate highly identifying or unnecessary data\nExamples:\n\nNames, contact details, social security numbers\nGPS metadata, IP addresses, neuroimaging facial features\nOutliers or unique participants"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#suppression-example",
@@ -718,7 +718,7 @@
     "href": "schedule/slides/13-data-privacy-1.html#generalization",
     "title": "UBC DSCI 200",
     "section": "Generalization",
-    "text": "Generalization\n\n\nReduces detail or granularity in the data\nMakes individuals harder to single out\nExamples:\n\nConvert date of birth to age, or group into ranges\nReplace address with town or region\nRecategorise rare labels into “other” or “missing”\nAbstract people or places in qualitative data (e.g., “Bob” to “[colleague]”)"
+    "text": "Generalization\n\nReduces detail or granularity in the data\nMakes individuals harder to single out\nExamples:\n\nConvert date of birth to age, or group into ranges\nReplace address with town or region\nRecategorise rare labels into “other” or “missing”\nAbstract people or places in qualitative data (e.g., “Bob” to “[colleague]”)"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#generalization-example",
@@ -732,14 +732,14 @@
     "href": "schedule/slides/13-data-privacy-1.html#replacement",
     "title": "UBC DSCI 200",
     "section": "Replacement",
-    "text": "Replacement\n\n\nSwap identifying info with less informative alternatives\nExamples:\n\nUse pseudonyms for names (with securely stored keyfile)\nReplace with placeholders (e.g., “[redacted]”)\nRounding numeric values"
+    "text": "Replacement\n\nSwap identifying info with less informative alternatives\nExamples:\n\nUse pseudonyms for names (with securely stored keyfile)\nReplace with placeholders (e.g., “[redacted]”)\nRounding numeric values"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#creating-pseudonyms",
     "href": "schedule/slides/13-data-privacy-1.html#creating-pseudonyms",
     "title": "UBC DSCI 200",
     "section": "Creating Pseudonyms",
-    "text": "Creating Pseudonyms\n\n\nPseudonyms should reveal nothing about the subject\nGood pseudonyms:\n\nAre random or meaningless strings/numbers\nAre securely managed (e.g., encrypted keyfile)\n\nCan be generated using tools in Excel, R, Python, SPSS"
+    "text": "Creating Pseudonyms\n\nPseudonyms should reveal nothing about the subject\nGood pseudonyms:\n\nAre random or meaningless strings/numbers\nAre securely managed (e.g., encrypted keyfile)\n\nCan be generated using tools in Excel, R, Python, SPSS"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#replacement-with-pseudonyms",
@@ -760,7 +760,7 @@
     "href": "schedule/slides/13-data-privacy-1.html#top--and-bottom-coding",
     "title": "UBC DSCI 200",
     "section": "Top- and Bottom-Coding",
-    "text": "Top- and Bottom-Coding\n\n\nLimits extreme values in quantitative data\nRecode all values above or below a threshold\nExample: all incomes above $150,000 become $150,000\nPreserves much of the dataset, but distorts distribution tails"
+    "text": "Top- and Bottom-Coding\n\nLimits extreme values in quantitative data\nRecode all values above or below a threshold\nExample: all incomes above $150,000 become $150,000\nPreserves much of the dataset, but distorts distribution tails"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#top-coding-example",
@@ -788,7 +788,7 @@
     "href": "schedule/slides/13-data-privacy-1.html#permutation",
     "title": "UBC DSCI 200",
     "section": "Permutation",
-    "text": "Permutation\n\n\nSwap values between individuals\nMakes linking variables across a record more difficult\nMaintains distributions, but breaks correlations\nCan limit the types of analyses possible"
+    "text": "Permutation\n\nSwap values between individuals\nMakes linking variables across a record more difficult\nMaintains distributions, but breaks correlations\nCan limit the types of analyses possible"
   },
   {
     "objectID": "schedule/slides/13-data-privacy-1.html#permutation-of-height-values",
