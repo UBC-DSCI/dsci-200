@@ -2,7 +2,7 @@
 title: "{{< fa brands r-project >}} Computing"
 ---
 
-In this class, we will use R as our programming language. Similar to DSCI 100, we will utilize a server to complete and submit assignments.
+In this class, we will use R as our programming language. Similar to DSCI 100, we will utilize a server to complete and submit assignments. Please refer to [DSCI 100's JupyterLab Guide](https://github.com/UBC-DSCI/dsci-100-student/blob/jupyterlab-guide/JUPYTERLAB_GUIDE.md) for tips and FAQs related to using JupyterLab. 
 
 You will also need to create a Github account for the case study projects. 
 

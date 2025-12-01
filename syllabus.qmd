@@ -130,9 +130,7 @@ In short: whatever grade the autograder returns after 5 minutes (assuming the te
 
 Students may review their midterm and final exams during the designated CBTF exam review windows. During this period, you may submit an issue if you believe a grading error occurred. All regrade requests should be reasonable and supported by clear justification.
 
-If you have a question about your score on a case study assignment or believe a grading error occurred, you may submit a regrade request through Gradescope. Regrade requests must be submitted within one week of the grade release date. After that deadline, the grade is final.
-
-To account for minor grading errors throughout the course, every student will get a **bonus of one percentage point** at the end of the semester. We only accept worksheet regrade requests for major errors in grading. If you think there is an error of more than 10% on a single worksheet, please reach out to your instructor. 
+To account for minor grading errors throughout the course, every student will get a **bonus of one percentage point** at the end of the semester. If you have a question about your score on a case study assignment or believe a grading error occurred, you may submit a regrade request through Gradescope. We only accept worksheet regrade requests for major errors in grading. If you think there is a grading error of more than 10% on a single worksheet, please submit a copy of your worksheet on Gradescope along with a regrade request. Regrade requests must be submitted within one week of the grade release date. After that deadline, the grade is final.
 
 ### Device/Browser
 

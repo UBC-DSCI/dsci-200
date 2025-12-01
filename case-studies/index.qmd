@@ -14,25 +14,3 @@ This page contains three case studies developed for DSCI 200. Each case study fo
 - [Case Study 3: Data Acquisition, Ownership and Privacy](#)   
   Focuses on the practical and ethical issues in obtaining data, including working with APIs, web scraping, and parquet files, as well as considerations related to data ownership and privacy.
 
-## Project Template Setup
-
-Students should use the following template when starting a case study project:
-
-Template repository:  
-[https://github.com/UBC-DSCI/dsci-200-case-study-template/](https://github.com/UBC-DSCI/dsci-200-case-study-template/)
-
-To set up your project:
-
-1. Go to the base project template linked above.
-
-2. Click "Use this template" to create your own GitHub repository using the template.
-
-3. Clone your new repository into your JupyterHub home folder:  
-   [https://datasciencebook.ca/version-control.html#cloning-a-repository-using-jupyter](https://datasciencebook.ca/version-control.html#cloning-a-repository-using-jupyter)
-
-> Note: Do not clone into your `dsci-200-student` folder. If you do, move it out! 
-
-4. Repository names must be unique within your GitHub account, but multiple users can use the same name.
-
-
-
