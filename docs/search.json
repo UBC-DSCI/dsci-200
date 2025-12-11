@@ -469,13 +469,6 @@
     "text": "This page contains three case studies developed for DSCI 200. Each case study focuses on a distinct set of topics from the course, providing students with an opportunity to apply key concepts in a real-world context. The case studies are designed to be completed in sequence, aligning with the progression of topics in DSCI 200.\n\nCase Study 1: From Exploration to Design Investigates how to ask and refine questions with data, apply sampling strategies and assess study design choices to draw valid conclusions.\nCase Study 2: Simulation, Missing Data and Outliers\nExplores how simulation can inform analysis, how to detect and address missing data and how to evaluate the impact of outliers on results.\nCase Study 3: Data Acquisition, Ownership and Privacy\nFocuses on the practical and ethical issues in obtaining data, including working with APIs, web scraping, and parquet files, as well as considerations related to data ownership and privacy."
   },
   {
-    "objectID": "case-studies/index.html#project-template-setup",
-    "href": "case-studies/index.html#project-template-setup",
-    "title": "Case Studies",
-    "section": "Project Template Setup",
-    "text": "Project Template Setup\nStudents should use the following template when starting a case study project:\nTemplate repository:\nhttps://github.com/UBC-DSCI/dsci-200-case-study-template/\nTo set up your project:\n\nGo to the base project template linked above.\nClick “Use this template” to create your own GitHub repository using the template.\nClone your new repository into your JupyterHub home folder:\nhttps://datasciencebook.ca/version-control.html#cloning-a-repository-using-jupyter\n\n\nNote: Do not clone into your dsci-200-student folder. If you do, move it out!\n\n\nRepository names must be unique within your GitHub account, but multiple users can use the same name."
-  },
-  {
     "objectID": "faq.html",
     "href": "faq.html",
     "title": " Frequently asked questions",
@@ -508,7 +501,7 @@
     "href": "syllabus.html",
     "title": " Syllabus",
     "section": "",
-    "text": "Term 2025 Winter 2: January - April 2026"
+    "text": "NoteTerm 2025 Winter 2: January - April 2026"
   },
   {
     "objectID": "syllabus.html#course-info",
