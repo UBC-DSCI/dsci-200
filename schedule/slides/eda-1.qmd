@@ -38,7 +38,7 @@ wildfire <- read_csv("data/wildfire.csv")
 - **Dr. Gabriela V. Cohen Freue**  
 - [gcohen@stat.ubc.ca](mailto:gcohen@stat.ubc.ca){.email}  
 - <https://gcohenfr.github.io/>  
-- Associate Professor, Department of Statistics
+- Professor, Department of Statistics
 
 <img src="https://www.stat.ubc.ca/sites/default/files/styles/250x250userphoto/public/profile_portrait/GbrielaCohen.jpeg?itok=yVAE8lfj"
      alt="Gabriela V. Cohen Freue"
