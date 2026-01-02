@@ -18,7 +18,7 @@
     "href": "schedule/slides/eda-2.html#learning-objectives",
     "title": "UBC DSCI 200",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lesson, you will be able to:\n\nInvestigate relationships between variables using correlation\nExamine the limitations of Pearson’s correlation and recognize scenarios where it can be misleading, including Simpson’s Paradox\nDiscuss how choices made during EDA can impact the entire data analysis pipeline\nRecognize the role of data splitting in preventing bias and ensuring generalizability"
+    "text": "Learning Objectives\nBy the end of this lesson, you will be able to:\n\n\nInvestigate relationships between variables using correlation\nExamine the limitations of Pearson’s correlation and recognize scenarios where it can be misleading, including Simpson’s Paradox\nDiscuss how choices made during EDA can impact the entire data analysis pipeline\nRecognize the role of data splitting in preventing bias and ensuring generalizability"
   },
   {
     "objectID": "schedule/slides/eda-2.html#review",
@@ -32,7 +32,7 @@
     "href": "schedule/slides/eda-2.html#what-is-correlation",
     "title": "UBC DSCI 200",
     "section": "What is Correlation?",
-    "text": "What is Correlation?\n\nCorrelation measures the strength and direction of a relationship between variables\nFor example, correlation analysis could help us explore the following questions:\n\nIs there a relationship between social media usage and mental health scores among teenagers?\nDo housing prices correlate with interest rates in different regions?\nDoes the frequency of push notifications correlate with user engagement in a mobile app?"
+    "text": "What is Correlation?\n\n\nCorrelation measures the strength and direction of a relationship between variables\nFor example, correlation analysis could help us explore the following questions:\n\nIs there a relationship between social media usage and mental health scores among teenagers?\nDo housing prices correlate with interest rates in different regions?\nDoes the frequency of push notifications correlate with user engagement in a mobile app?"
   },
   {
     "objectID": "schedule/slides/eda-2.html#pearson-correlation",
@@ -116,7 +116,7 @@
     "href": "schedule/slides/eda-2.html#limitations-of-pearson-correlation-1",
     "title": "UBC DSCI 200",
     "section": "Limitations of Pearson Correlation",
-    "text": "Limitations of Pearson Correlation\n\nAssumes both variables are continuous and normally distributed\nPearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables\nAlternatives exist :\n\nSpearman’s rho (for ordinal or ranked data)\nKendall’s tau (for ordinal or ranked data)\nPhi coefficient (for two binary variables)"
+    "text": "Limitations of Pearson Correlation\n\n\nAssumes both variables are continuous and normally distributed\nPearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables\nAlternatives exist :\n\nSpearman’s rho (for ordinal or ranked data)\nKendall’s tau (for ordinal or ranked data)\nPhi coefficient (for two binary variables)"
   },
   {
     "objectID": "schedule/slides/eda-2.html#scenario",
@@ -172,7 +172,7 @@
     "href": "schedule/slides/eda-2.html#eda-and-the-data-pipeline",
     "title": "UBC DSCI 200",
     "section": "EDA and the Data Pipeline",
-    "text": "EDA and the Data Pipeline\n\nEDA choices are not just cosmetic; they can fundamentally alter your analysis!\nWhat we filter, transform, and create in EDA directly shapes:\n\nWhat models we build\nHow well they perform\nHow we interpret results"
+    "text": "EDA and the Data Pipeline\n\n\nEDA choices are not just cosmetic; they can fundamentally alter your analysis!\nWhat we filter, transform, and create in EDA directly shapes:\n\nWhat models we build\nHow well they perform\nHow we interpret results"
   },
   {
     "objectID": "schedule/slides/eda-2.html#in-class-exercise",
@@ -256,21 +256,21 @@
     "href": "schedule/slides/eda-2.html#why-split-before-eda",
     "title": "UBC DSCI 200",
     "section": "Why Split Before EDA?",
-    "text": "Why Split Before EDA?\n\nIt is often recommended to split your data before performing EDA.\nAnalyzing the full dataset can leak information from the test set into the model or analysis.\nIf we tailor preprocessing, feature engineering or generate hypotheses using the whole dataset:\n\nIt introduces data snooping bias.\nThe model may overfit to patterns it shouldn’t have access to.\n\nRemember your test set should simulate unseen data!"
+    "text": "Why Split Before EDA?\n\n\nIt is often recommended to split your data before performing EDA.\nAnalyzing the full dataset can leak information from the test set into the model or analysis.\nIf we tailor preprocessing, feature engineering or generate hypotheses using the whole dataset:\n\nIt introduces data snooping bias.\nThe model may overfit to patterns it shouldn’t have access to.\n\nRemember your test set should simulate unseen data!"
   },
   {
     "objectID": "schedule/slides/eda-2.html#its-not-always-one-size-fits-all",
     "href": "schedule/slides/eda-2.html#its-not-always-one-size-fits-all",
     "title": "UBC DSCI 200",
     "section": "It’s Not Always One-Size-Fits-All!",
-    "text": "It’s Not Always One-Size-Fits-All!\n\nThe decision to split before or after EDA depends on your goals and the context.\nSometimes it makes sense to perform minimal checks on the full dataset to:\n\nDetect inconsistent data types\nCheck for class imbalance\nIdentify missing values or obvious data issues\n\nIf your goal is descriptive analysis (not predictive modeling or inference), a train/test split may not be necessary.\nThe key is to think critically about your objectives and the potential for data leakage."
+    "text": "It’s Not Always One-Size-Fits-All!\n\n\nThe decision to split before or after EDA depends on your goals and the context.\nSometimes it makes sense to perform minimal checks on the full dataset to:\n\nDetect inconsistent data types\nCheck for class imbalance\nIdentify missing values or obvious data issues\n\nIf your goal is descriptive analysis (not predictive modeling or inference), a train/test split may not be necessary.\nThe key is to think critically about your objectives and the potential for data leakage."
   },
   {
     "objectID": "schedule/slides/eda-2.html#key-takeaways",
     "href": "schedule/slides/eda-2.html#key-takeaways",
     "title": "UBC DSCI 200",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nCorrelation quantifies the strength and direction of relationships between variables\nPearson’s correlation captures only linear relationships and it may miss or misrepresent more complex patterns\nChoices during EDA (e.g., filtering, transforming, and feature selection) shape your modeling outcomes\nSplitting data before EDA helps prevent leakage and supports valid inference and model evaluation"
+    "text": "Key Takeaways\n\n\nCorrelation quantifies the strength and direction of relationships between variables\nPearson’s correlation captures only linear relationships and it may miss or misrepresent more complex patterns\nChoices during EDA (e.g., filtering, transforming, and feature selection) shape your modeling outcomes\nSplitting data before EDA helps prevent leakage and supports valid inference and model evaluation"
   },
   {
     "objectID": "schedule/index.html",
@@ -368,7 +368,7 @@
     "href": "syllabus.html",
     "title": " Syllabus",
     "section": "",
-    "text": "NoteTerm 2025 Winter 2: January - April 2026"
+    "text": "Term 2025 Winter 2: January - April 2026"
   },
   {
     "objectID": "syllabus.html#course-info",
