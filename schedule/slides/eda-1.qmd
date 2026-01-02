@@ -1,0 +1,820 @@
+---
+lecture: "Exploratory Data Analysis"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+```{r}
+#| context: global
+#| include: false
+library(tidyverse)
+# preload data once, globally
+wildfire <- read_csv("data/wildfire.csv")
+```
+
+
+## Welcome to DSCI 200! 🎉{.center}
+
+## About us
+
+:::: columns
+
+::: column
+- **Dr. Katie Burak**  
+- [kburak@stat.ubc.ca](mailto:kburak@stat.ubc.ca){.email}  
+- <https://katieburak.github.io/>  
+- Assistant Professor of Teaching, Department of Statistics
+
+<img src="https://katieburak.github.io/profile.png"
+     alt="Katie Burak"
+     width="300px"
+     style="border-radius: 50%" />
+:::
+
+::: column
+- **Dr. Gabriela V. Cohen Freue**  
+- [gcohen@stat.ubc.ca](mailto:gcohen@stat.ubc.ca){.email}  
+- <https://gcohenfr.github.io/>  
+- Associate Professor, Department of Statistics
+
+<img src="https://www.stat.ubc.ca/sites/default/files/styles/250x250userphoto/public/profile_portrait/GbrielaCohen.jpeg?itok=yVAE8lfj"
+     alt="Gabriela V. Cohen Freue"
+     width="300px"
+     style="border-radius: 50%" />
+:::
+
+::::
+
+## Course breakdown
+
+| Deliverable            | Percent Grade |
+|------------------------|---------------|
+| Worksheets             | 7%            |
+| iClicker               | 2%            |
+| Case studies               | 15%            |
+| Midterm                | 25%           |
+| Final                  | 50%           |
+| **Bonus regrade percent** | **1%**        |
+
+## Coruse-level Learning Objectives
+
+:::incremental
+- Conduct exploratory data analysis using statistical and visualization tools to generate hypotheses.
+- Reflect on how data were collected, identify design improvements, and discuss study limitations.
+- Choose appropriate data acquisition strategies and write reproducible code to import data.
+- Recognize when simulation is useful and design and run appropriate simulations.
+- Detect outliers and anomalies, apply handling strategies, and assess their impact on conclusions.
+- Identify missing data mechanisms, apply handling strategies, and assess their impact on conclusions.
+- Choose a data acquisition strategy and write reproducible scripts to read data.
+- Evaluate data privacy needs, apply suitable privacy techniques, and reflect on their consequences.
+- Determine and justify data ownership in a given context.
+:::
+
+## Course website
+
+[https://ubc-dsci.github.io/dsci-200/](https://ubc-dsci.github.io/dsci-200/)
+
+<div style="text-align: center;">
+  <img src="img/course-site.png" alt="Course Site" width="500">
+</div>
+
+## Attribution
+<br><br>
+
+*This material is adapted from* [*Chapter 10 of R for Data Science (2e)*](https://r4ds.hadley.nz/EDA.html) *and* [*Exploratory Data Analysis with R*](https://bookdown.org/rdpeng/exdata/).
+
+<br><br>
+
+
+## What Is EDA?
+
+Before jumping into analysis or building models, we need to *understand* the data. This is where exploratory data analysis (EDA) comes in.
+<br><br>
+
+EDA is not a strict process. Instead, it's a flexible and creative cycle where you:
+
+:::incremental
+- Come up with questions about the data  
+- Investigate possible answers using visualizations, transformations, and simple models  
+- Let the answers inspire new or refined questions
+- Eventually, you'll land on insights that are worth digging into and sharing
+:::
+
+
+## EDA 
+<br><br>
+
+Even if you're given a clear research question, EDA still plays a key role. It's how we check data quality, spot inconsistencies, and detect patterns. For example, 
+
+:::incremental
+- Are there missing values?
+- Do variables have unexpected distributions?
+- Are there data points that don't belong?
+	- *All of these questions fall under the umbrella of EDA!*
+:::
+
+## Learning Objectives
+By the end of this lesson, you will be able to:
+
+- Explain the purpose and importance of exploratory data analysis (EDA).
+- Evaluate appropriate statistical measures for central tendency and variability.
+- Select suitable visualizations for different variable types and communication goals.
+- Use computer code to effectively visualize data, including understanding how different layers can be utilized to improve a visualization. 
+- Critique visualizations to identify and suggest improvements.
+
+## Data Visualization
+<br><br>
+
+- Data visualization is an important part of EDA.
+- Let's start by reviewing some of the plots we introduced in DSCI 100, as well as introducing some new ones! 
+
+## Visualizing Numerical Variables
+<br></br>
+
+Thinking back to DSCI 100, what are some examples of plots that can be useful to visualize numerical/quantitative variables?
+
+:::incremental
+- Histograms
+- Boxplots
+- Line plots
+- Jitter plots (new)
+- Violin plots (new)
+:::
+
+
+## Loading the Data
+
+We will be looking at historical data on Alberta's wildfires. This data set can be found on the [Diverse Data Hub]((https://diverse-data-hub.github.io/)), a resource designed to promote the use of data focused on socially relevant topics. 
+
+```{r}
+library(tidyverse)
+```
+
+## 
+
+```{r}
+wildfire <- read_csv("data/wildfire.csv")
+wildfire <- wildfire |> drop_na()
+head(wildfire)
+```
+
+
+## Boxplot
+
+Boxplot to investigate the temperature conditions (°C) for the various wildfires.
+
+```{r}
+#| warning: false
+
+wildfire |>
+  ggplot(aes(y = temperature)) +
+  geom_boxplot(fill = "cornflowerblue", outlier.color = "maroon", outlier.alpha = 0.5) +
+  labs(
+    title = "Boxplot of Temperature",
+    y = "Temperature (°C)"
+  ) +
+  theme_minimal() + 
+  coord_flip()
+```
+
+## Violin Plot
+
+- Violin plots are an alternative to boxplots that can show more granularity. 
+
+```{r}
+wildfire |>
+  ggplot(aes(x = "", y = temperature)) +
+  geom_violin(fill = "cornflowerblue", alpha = 0.6) +
+  labs(
+    title = "Violin Plot of Temperature",
+    y = "Temperature (°C)",
+    x = NULL
+  ) +
+	coord_flip() +
+  theme_minimal()
+```
+
+## Jitter plot 
+
+- Jitter plots are another way to visualize a numerical variable. 
+- You can play around with the width and transparency (`alpha`) to make the plot more readable and avoid too much overlap.
+- As you will see, it's not particularly suitable when you have a large number of observations.
+
+## 
+
+```{r}
+wildfire |>
+  ggplot(aes(x = "", y = temperature)) +
+  geom_jitter(width = 0.1, alpha = 0.2, color = "cornflowerblue") +
+  labs(
+    title = "Jitter Plot of Temperature",
+    y = "Temperature (°C)"
+  ) +
+  theme_minimal() 
+```
+
+## Histogram
+
+Histograms also show the distribution of a quantitative variable.
+
+```{r}
+wildfire |>
+  ggplot(aes(x = temperature)) +
+  geom_histogram(bins = 30, fill = "cornflowerblue", color = "white") +
+  labs(
+    title = "Histogram of Temperature",
+    x = "Temperature (°C)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+## Line plots
+
+Line plots help us visualize a quantity over time. 
+
+```{r}
+wildfire |>
+  group_by(year) |>
+  summarise(avg_temperature = mean(temperature, na.rm = TRUE)) |>
+  ggplot(aes(x = year, y = avg_temperature)) +
+  geom_line(color = "cornflowerblue", linewidth = 1) +
+  geom_point(color = "cornflowerblue", size = 2) +
+  labs(
+    title = "Average Temperature Over Time",
+    x = "Year",
+    y = "Average Temperature (°C)"
+  ) +
+  theme_minimal()
+```
+
+## Visualizing Categorical Data
+
+What is a plot we can use to visualize categorical variables?
+
+:::incremental
+- Bar plots
+:::
+
+
+## Bar plots
+
+```{r}
+true_cause_summary <- wildfire |>
+  count(true_cause, sort = TRUE) |>
+  slice_max(n, n = 10)
+
+
+barplot <- ggplot(true_cause_summary,
+       aes(x = n,
+           y = fct_reorder(true_cause, n))) +
+  geom_bar(stat = "identity", fill = "cornflowerblue") +
+  labs(x = "Count", y = "True Cause", title = "Top 10 Wildfire Causes") + 
+  theme(
+  plot.title = element_text(size = 16),
+  axis.title.x = element_text(size = 12),
+  axis.title.y = element_text(size = 12)
+  )
+```
+
+## 
+
+```{r}
+barplot
+```
+
+
+## Asking Questions
+- Now that we have reviewed some common plots, let's get back to the *why*. 
+- EDA is driven by questions. Each one shines a light on a different part of the dataset.
+- The goal isn’t to answer every question, but to use them to guide exploration. 
+
+Here are some examples: 
+
+
+:::incremental
+- What does this variable look like?
+- How does it relate to other variables?
+- Are there unusual values?
+- What patterns emerge over time or across groups?
+:::
+
+##
+
+<br><br>
+
+You don’t need the perfect question at the start! Often, you won’t know what to ask until you’ve seen the data...
+<br><br>
+
+:::incremental
+- Start with broad questions  
+- Let early insights shape new, more specific ones  
+- Dig deeper with each iteration  
+:::
+
+## Types of Questions
+
+<br><br>
+
+Although there are many types of exploratory questions, we will focus on the following three questions:
+<br><br>
+
+:::incremental
+1. What is the central tendency of my variable(s)?
+2. What type of variation occurs *within* my variables?
+3. What type of covariation occurs *between* my variables?
+:::
+
+## Measures of Central Tendency
+<br><br>
+
+- When we want to summarize a numeric variable with a single value, we often report a measure of central tendency.
+- Common measures include the mean, median and mode. 
+
+- These help answer questions like:
+	- What’s typical?
+	- What’s average?
+	- What’s most common?
+
+## The Mean
+<br></br>
+
+- The mean is what most people think of as "the average". 
+- The sample mean is denoted as $\bar{x}$ and is calculated by adding up all the values and dividing by how many there are.
+
+$$\bar{x} = \sum_{i=1}^n \frac{x_i}{n},$$
+where $x_i$ are the observed values and $n$ is the sample size. 
+
+
+
+## The Median
+
+:::incremental
+-  The median is the middle observation in the data when all values are sorted from smallest to largest.
+- 50% of the data will be above and below the median. 
+- For an odd number of observations, order them and take the middle value. 
+$$
+\{3, 4, {\color{blue}6}, 7, 10\} \rightarrow \text{median} = {\color{blue}6}
+$$
+
+- For an even number of observations, order them and average the two middle values.
+$$
+\{3, 4, {\color{blue}6}, {\color{blue}7}, 10, 12\} \rightarrow \text{median}=\frac{6+7}{2}=6.5
+$$
+:::
+
+## Discussion
+<br></br>
+When reporting household earnings in Vancouver, what measure of center would you choose and why?
+<br></br>
+Take 1-2 minutes to discuss this question with your neighbours and be prepared to discuss as a class! 
+
+## Mean vs. Median
+<br></br>
+
+:::incremental
+- The mean can be sensitive to skewness and extreme values (outliers) - *much more to come later in this course about working with outliers!* 
+- The median is more robust (less affected) by skewness and outliers in the data.
+- When the data is roughly symmetric with few outliers, the mean and median will be very close.
+- However, in the presence of outliers or skewness, the median may be preferred. 
+:::
+
+## Example
+<br></br>
+
+```{r}
+a <- c(5,5,6,5.5,4,6)
+b <- c(5,5,6,5.5,4,6,20)
+
+results <- tibble(
+  Vector = c("a", "b"),
+  Mean = c(mean(a), mean(b)),
+  Median = c(median(a), median(b))
+)
+
+print(results)
+```
+
+
+## iClicker question
+
+The following is a histogram of relative humidity. Which statement is true?
+
+```{r}
+#| echo: false
+#| autorun: true
+#| fig-width: 7
+#| fig-height: 4
+
+library(tidyverse)
+
+wildfire <- read_csv("data/wildfire.csv")
+wildfire <- wildfire |> drop_na()
+
+wildfire |>
+  ggplot(aes(x = temperature)) +
+  geom_histogram(bins = 30, fill = "cornflowerblue", color = "white") +
+  labs(
+    title = "Histogram of Temperature",
+    x = "Temperature (°C)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+- A) The mean and median are equal. 
+- B) The mean will be greater than the median.
+- C) The median will be greater than the mean.
+- D) Not enough information to make any conclusion.
+
+##
+
+To verify this, let's compute the mean and median temperature:
+<br></br>
+
+```{r}
+wildfire |> 
+  summarise(
+    Mean = mean(temperature, na.rm = TRUE),
+    Median = median(temperature, na.rm = TRUE)
+  )
+```
+
+
+## The Mode
+
+- The mode is the most frequent value or category for a variable.
+- Data can be unimodal, bimodal or multimodal (i.e., having more than one "mode" or peak).
+- The mode isn't as commonly reported for numerical variables, but it comes in handy as a measure of central tendency for categorical data. 
+- For example, reporting the most common cause of wildfires. 
+
+```{r}
+#| echo: false
+#| autorun: true
+#| fig-width: 7
+#| fig-height: 4
+#| 
+library(tidyverse)
+set.seed(123)
+
+data <- c(rnorm(500, mean = 2, sd = 1),  # First peak
+          rnorm(500, mean = 7, sd = 0.5))  # Second peak
+df <- data.frame(values = data)
+
+ggplot(df, aes(x = values)) +
+  geom_density(fill = "cornflowerblue", alpha = 0.5) +  
+  theme_minimal() +
+  labs(title = " ", 
+       x = "Value", y = "Density")
+```
+
+
+## Measures of Variablity
+<br></br>
+
+- If we want to understand the variation that occurs within a variable, we need a notion of variaiblity or spread.
+- Common measures include:
+	- Variance or standard deviation
+	- Interquartile Range (IQR)
+	- Range 
+
+## Variance
+
+- The variance measures how much the observations deviate from the average value.
+- The sample variance is denoted as $s^2$ and is calculated as 
+
+$$s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2.$$
+
+- If the variance is low, it means the data points are close to the average, so the values are pretty similar to each other.
+- If the variance is high, it means the data points are spread out over a wider range, so the values are more different from each other.
+
+## Standard deviation
+
+- The standard deviation is often used as it is easier to interpret. 
+- It is the square root of the variance, so it has the same units as the original data.
+- The sample standard deviation is denoted as $s$ and is calculated as 
+
+$$s = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2}.$$
+
+## Quartiles
+
+- Before we introduce the Interquartile Range (IQR) as a measure of variability, we will first introduce the concept of quartiles. 
+- **Quartiles** divide a dataset into four equal parts, each containing 25% of the data.
+  - **Q1 (First Quartile)**: The median of the lower half of the data (25% of the data is below Q1).
+  - **Q2 (Second Quartile / Median)**: The middle value that divides the data into two halves (50% of the data is below Q2).
+  - **Q3 (Third Quartile)**: The median of the upper half of the data (75% of the data is below Q3).
+  
+## 
+
+```{r}
+#| echo: false
+#| autorun: true
+#| fig-width: 7
+#| fig-height: 4
+
+library(tidyverse)
+set.seed(123)
+data <- rnorm(1000) 
+
+Q1 <- quantile(data, 0.25)
+Q2 <- quantile(data, 0.5)  
+Q3 <- quantile(data, 0.75)
+
+ggplot(data.frame(x = data), aes(x = x)) +
+  geom_density(fill = "cornflowerblue", alpha = 0.5) +
+  geom_vline(xintercept = Q1, color = "maroon", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = Q2, color = "darkgreen", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = Q3, color = "navy", linetype = "dashed", size = 1) +
+  geom_text(aes(x = Q1, y = 0.2, label = "Q1"), color = "maroon", angle = 90, vjust = -0.5) +
+  geom_text(aes(x = Q2, y = 0.2, label = "Q2"), color = "darkgreen", angle = 90, vjust = -0.5) +
+  geom_text(aes(x = Q3, y = 0.2, label = "Q3"), color = "navy", angle = 90, vjust = -0.5) +
+  labs(title = "Density Plot with Quartiles", 
+       x = "Value", y = "Density") +
+  theme_minimal()
+```
+
+## IQR
+
+- The Interquartile Range is the distance between the first quartile (Q1) and third quartile (Q3). That is,
+
+$$\text{IQR} = {Q3}-{Q1}$$ 
+
+```{r}
+#| echo: false
+#| autorun: true
+#| fig-width: 7
+#| fig-height: 4
+
+library(tidyverse)
+
+ggplot(data.frame(x = data), aes(x = x)) +
+  geom_density(fill = "cornflowerblue", alpha = 0.5) +
+  stat_function(fun = dnorm, args = list(mean = mean(data), sd = sd(data)), 
+                geom = "area", fill = "lightgreen", alpha = 0.3,
+                xlim = c(Q1, Q3)) +
+  geom_vline(xintercept = Q1, color = "maroon", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = Q3, color = "navy", linetype = "dashed", size = 1) +
+  geom_text(aes(x = Q1, y = 0.2, label = "Q1"), color = "maroon", angle = 90, vjust = -0.5) +
+  geom_text(aes(x = Q3, y = 0.2, label = "Q3"), color = "navy", angle = 90, vjust = -0.5) +
+	geom_text(aes(x = Q2, y = 0.2, label = "IQR"), color = "darkgreen", vjust = -0.5) +
+  labs(title = " ", 
+       x = "Value", y = "Density") +
+  theme_minimal()
+```
+
+## 
+
+Quartiles define the lines on a boxplot: 
+
+```{r}
+#| echo: false
+#| autorun: true
+#| fig-width: 7
+#| fig-height: 4
+
+library(tidyverse)
+
+quartiles <- quantile(wildfire$temperature, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
+Q1 <- quartiles[1]
+Q2 <- quartiles[2]
+Q3 <- quartiles[3]
+
+ggplot(wildfire, aes(y = temperature)) +
+  geom_boxplot(fill = "cornflowerblue", outlier.color = "gray") +
+  annotate("text", x = 0.45, y = Q1-1, label = "Q1", color = "maroon") +
+  annotate("text", x = 0.52, y = Q2, label = "Median (Q2)", color = "darkgreen") +
+  annotate("text", x = 0.45, y = Q3 +1, label = "Q3", color = "navy") +
+  labs(title = "Boxplot of Temperature",
+       y = "Temperature",
+       x = "") +
+	xlim(-.5,.8)+
+  theme_minimal() 
+```
+
+##
+
+Let's compute the variance, standard devation and IQR of temperature:
+<br></br>
+
+```{r}
+wildfire |> 
+  summarise(
+    variance = var(temperature, na.rm = TRUE),
+    sd = sd(temperature, na.rm = TRUE),
+    IQR = quantile(temperature, 0.75, na.rm = TRUE)- quantile(temperature, 0.25, na.rm = TRUE),
+  )
+```
+
+
+## iClicker Question
+<br></br>
+
+Which of the following is true regarding the use of standard deviation compared to the interquartile range (IQR)?
+
+- A) Standard deviation is more resistant to outliers and skewness than the IQR
+- B) IQR is a fairly resistant measure, while standard deviation is more sensitive to outliers and skewness.
+- C) Both standard deviation and IQR are resistant to skewness.
+- D) Neither standard deviation nor IQR are affected by extreme values.
+
+
+## Range
+<br></br>
+
+- The range is simply the difference between the maximum and minimum value of a variable. 
+
+$$\text{range(X)=max(X)-min(X)}$$
+
+```{r}
+wildfire |> 
+  summarise(
+    range = max(temperature, na.rm = TRUE) - min(temperature, na.rm = TRUE)
+  )
+```
+
+
+## iClicker Question
+<br></br>
+
+Why can the range be potentially misleading as a measure of variability?
+
+- A) It only considers the middle 50% of the data
+- B) It uses all data points equally
+- C) It is only influenced by the smallest and largest values
+- D) It accounts for how data is clustered around the mean
+
+
+## Covariation
+<br><br>
+
+- Variation measures the variability *within* a variable. 
+- Covariation measures the variation *between* two or more variables. 
+- The way we measure or investigate covariation depends on the nature of the variables we are interested in, but a good start is to visualize the relationships! 
+
+
+## Two categorical variables
+
+- Suppose we wanted to investigate the top 10 causes of wildfires by season. 
+
+- We will create a `season` variable and extract the top 10 causes and store it in a separate object: 
+
+```{r}
+# Create season variable based on fire_start_date
+wildfire_season <- wildfire |>
+  mutate(
+    month = month(fire_start_date),
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% 3:5 ~ "Spring",
+      month %in% 6:8 ~ "Summer",
+      month %in% 9:11 ~ "Fall"
+    ),
+    season = factor(season, levels = c("Winter", "Spring", "Summer", "Fall"))
+  )
+
+top_10_causes <- wildfire |>
+  count(true_cause, sort = TRUE) |>
+  slice_max(n, n = 10) |>
+  pull(true_cause)
+```
+
+## Contingency table
+
+- Contingency tables can help display infomration for two categorical variables. However, at times they can be difficult to digest and are often better represented visually. 
+
+```{r}
+wildfire_season |>
+  filter(!is.na(season), true_cause %in% top_10_causes) |>
+  count(true_cause, season) |>
+  pivot_wider(names_from = season, values_from = n)
+```
+
+## Stacked Bar Plots
+
+Remember that we can stack bar plots so we can include another categorical variable in the visualization. 
+
+```{r}
+true_cause_season_counts <- wildfire_season |>
+  filter(!is.na(season), true_cause %in% top_10_causes) |>
+  count(true_cause, season)
+
+# Plot stacked bar chart
+stacked_bar <- ggplot(true_cause_season_counts,
+       aes(x = n,
+           y = fct_reorder(true_cause, n),
+           fill = season)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Wildfires by True Cause and Season",
+    x = "Count",
+    y = "True Cause",
+    fill = "Season"
+  ) +
+  theme_minimal()
+```
+
+##
+
+```{r}
+stacked_bar
+```
+## Categorical & Numerical Variables
+
+- To look at the relationship between a categorical variable and a numerical variable, we can look at these plots of a numerical variable separated by each level of a categorical variable. 
+
+```{r}
+violin_plot2 <- wildfire_season |>
+  filter(!is.na(season)) |>
+  ggplot(aes(x = season, y = temperature, fill = season)) +
+  geom_violin(alpha = 0.6) +
+  labs(
+    title = "Violin Plot of Temperature by Season",
+    y = "Temperature (°C)",
+    x = "Season"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+##
+
+```{r}
+violin_plot2
+```
+
+
+## 
+
+```{r}
+wildfire_season |>
+  filter(!is.na(season)) |>
+  ggplot(aes(x = temperature, fill = season)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30, color = "white") +
+  labs(
+    title = "Histogram of Temperature by Season",
+    x = "Temperature (°C)",
+    y = "Count",
+    fill = "Season"
+  ) +
+  theme_minimal()
+```
+
+## 
+
+Remember the use of `facet_wrap()` can help make complex plots much easier to interpret by splitting the data into multiple panels.
+
+```{r}
+wildfire_season |>
+  filter(!is.na(season)) |>
+  ggplot(aes(x = temperature, fill = season)) +
+  geom_histogram(bins = 30, color = "white", alpha = 0.7) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Histogram of Temperature by Season",
+    x = "Temperature (°C)",
+    y = "Count"
+  ) +
+  theme_minimal() 
+```
+
+## Two numerical variables
+<br><br>
+
+We can use a scatterplot to visualize the relationship between two numerical variables. 
+
+```{r}
+scatterplot <- wildfire |>
+	filter(assessment_hectares > 100)|>
+  ggplot(aes(x = wind_speed, y = assessment_hectares)) +
+  geom_point(alpha = 0.5, color = "cornflowerblue") +
+  labs(
+    title = "Scatterplot of Assessment Hectares vs Wind Speed",
+    x = "Wind Speed",
+    y = "Assessment Hectares"
+  ) +
+  theme_minimal()
+```
+
+## 
+
+How would you describe the relationship between the wind speed and the size of the wildfire in terms of assessment hectares?
+
+```{r}
+scatterplot
+```
+
+
+## Next Class
+<br></br>
+
+We will introduce *correlation* as a way to quantify the relationship between two numerical variables. 
+
+## Key Takeaways
+
+- EDA is a flexible, question-driven process to understand your data before modelling
+
+- Visualization helps reveal patterns, outliers and relationships
+
+- Choose appropriate plots based on variable types and what you're trying to show
+
+- Use the right summary based on data shape and presence of outliers

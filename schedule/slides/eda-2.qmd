@@ -1,0 +1,690 @@
+---
+lecture: "Exploratory Data Analysis"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+```{r}
+#| context: global
+#| include: false
+library(tidyverse)
+library(corrr)
+```
+
+## Attribution
+<br><br>
+
+This material is adapted from the following sources:
+
+- [*Chapter 10 of R for Data Science (2e)*](https://r4ds.hadley.nz/EDA.html) 
+- [*Exploratory Data Analysis with R*](https://bookdown.org/rdpeng/exdata/).
+- [*The Simpson's Paradox*](https://www.data-to-viz.com/caveat/simpson.html)
+- [https://www.natekratzer.com/posts/simpsons_paradox/](https://www.natekratzer.com/posts/simpsons_paradox/)
+- [*Data Science with R*](https://kirenz.github.io/data-science-r/docs/data.html)
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+
+:::incremental
+- Investigate relationships between variables using correlation
+
+- Examine the limitations of Pearson’s correlation and recognize scenarios where it can be misleading, including Simpson’s Paradox
+
+- Discuss how choices made during EDA can impact the entire data analysis pipeline
+
+- Recognize the role of data splitting in preventing bias and ensuring generalizability
+:::
+
+## Review
+
+- Last class we recalled the usage of scatterplots as a useful way to visualize the relationship between two numerical variables. 
+
+- However, it would be nice to be able to quantify this relationship with some measure of covariation...
+
+```{r, echo=FALSE}
+library(tidyverse)
+set.seed(123)
+
+x <- rnorm(100)
+y <- 3*x+rnorm(100)
+
+x <- rnorm(100)
+y <- 3 * x + rnorm(100)
+
+sim_data <- tibble(x = x, y = y)
+
+ggplot(sim_data, aes(x = x, y = y)) +
+  geom_point(alpha = 0.6, color = "steelblue") +
+  theme_minimal()
+```
+
+## What is Correlation?
+
+:::incremental
+- Correlation measures the strength and direction of a relationship between variables
+- For example, correlation analysis could help us explore the following questions:
+	- Is there a relationship between social media usage and mental health scores among teenagers?
+	- Do housing prices correlate with interest rates in different regions?
+	- Does the frequency of push notifications correlate with user engagement in a mobile app?
+:::
+
+## Pearson Correlation
+
+- Pearson correlation is perhaps the most common, and it measures the strength of a linear relationship between two numeric variables. 
+- Values range from -1 to 1:
+  - 1: perfect positive linear relationship
+  - -1: perfect negative linear relationship
+  - 0: no linear relationship
+
+## Pearson Correlation
+
+For two variables $X$ and $Y$, the estimated pearson correlation coefficient, $r$, is given by the following formula: 
+
+$$ r = \frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^n(x_i-\bar{x})^2(y_i-\bar{y})^2}},$$
+
+where 
+
+- $n$ is the sample size
+- $x_i$ and $y_i$ are the $i^{th}$ observations of $X$ and $Y$, respectively
+- $\bar{x}$ and $\bar{y}$ are the estimated sample means of $X$ and $Y$, respectively
+
+
+##
+
+```{r, echo=FALSE}
+library(tidyverse)
+
+# Define correlations and labels in the desired order
+cor_labels <- tibble(
+  correlation = c(-1, -0.75, -0.05, 0.05, 0.75, 1),
+  label = factor(c(
+    "Perfect Negative Correlation",
+    "Moderate Negative Correlation",
+    "Weak Negative Correlation",
+    "Weak Positive Correlation",
+    "Moderate Positive Correlation",
+    "Perfect Positive Correlation"
+  ), levels = c(
+    "Perfect Negative Correlation",
+    "Moderate Negative Correlation",
+    "Weak Negative Correlation",
+    "Weak Positive Correlation",
+    "Moderate Positive Correlation",
+    "Perfect Positive Correlation"
+  ))
+)
+
+# Simulate and combine data
+set.seed(123)
+sim_data <- map2_dfr(cor_labels$correlation, cor_labels$label, ~{
+  x <- rnorm(100)
+  y <- .x * x + sqrt(1 - .x^2) * rnorm(100)
+  tibble(x = x, y = y, label = .y)
+})
+
+# Plot with ordered facets
+ggplot(sim_data, aes(x = x, y = y)) +
+  geom_point(alpha = 0.6, color="steelblue") +
+  facet_wrap(~label, ncol = 3) +
+  theme_minimal() +
+  theme(strip.text = element_text(size = 8, face = "bold"))
+
+```
+  
+  
+## Guess the Correlation
+  
+  
+Take a minute and play a few rounds of "[Guess the Correlation](https://www.guessthecorrelation.com/)" to get a better idea about the strength of different correlations.
+
+![](img/guess-cor.png)
+
+## Load packages
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(corrr)
+```
+
+## Computing correlations in R 
+- Luckily, there are functions in R that compute correlations for us! 
+- While there is a default function `cor()` in base R, the `correlate()` function in the `corrr` package integrates more smoothly with our tidy workflows. 
+- Let's work with `airquality` data from the `datasets` pacakge.
+
+```{r}
+head(airquality)
+```
+
+## 
+
+- Let's investigate the relationship between mean ozone (ppb) from 1-3pm and maximum daily temperature in degrees Fahrenheit.
+- We can see a moderately strong positive relationship.
+
+```{r}
+ggplot(airquality, aes(x = Ozone, y = Temp)) +
+  geom_point(alpha = 0.6, color = "steelblue") +
+  theme_minimal()
+```
+
+## Compute correlation
+
+```{r}
+airquality |> 
+	select(Ozone, Temp) |>
+	correlate()
+```
+
+> *Note that the diagonal values are printed as `NA`, but the correlation between a variable and itself is simply 1.*
+
+## 
+
+To just extract the single correlation value: 
+
+```{r}
+airquality |> 
+	select(Ozone, Temp) |>
+	correlate() |> 
+	filter(term == "Ozone") |>
+	pull(Temp)
+```
+
+
+
+## Correlation matrices
+
+- Sometimes, we want to calculate the correlations among multiple numeric variables at once.
+- In such cases, a correlation matrix is useful for exploring the relationships between several variables simultaneously.
+
+```{r}
+airquality |> 
+	select(Ozone,Solar.R,Temp,Wind) |>
+  correlate()
+```
+
+
+
+## Visualizing Correlation
+
+```{r}
+correlations <- airquality |> 
+select(Ozone,Solar.R,Temp,Wind) |>
+correlate() |>
+rearrange() |> 
+shave() 
+
+rplot(correlations)
+```
+
+## Limitations of Pearson Correlation
+
+- Pearson $r$ measures **linear** relationships only.
+- It can be 0 even when a strong nonlinear relationship exists!
+
+```{r, echo=FALSE}
+set.seed(123)
+n <- 500
+angles <- runif(n, 0, 2 * pi)
+radii <- 1 + 0.2 * rnorm(n)
+
+donut_df <- tibble(
+  x = radii * cos(angles),
+  y = radii * sin(angles)
+)
+
+corr_val <- donut_df |>
+  correlate() |>
+	slice(1) |> 
+	pull(y) |>
+	round(3)
+
+donut_df |>
+  ggplot(aes(x, y)) +
+  geom_point(color = "steelblue", alpha = 0.6) +
+	annotate("text", x = 0, y = 0, label = paste0("r = ", corr_val),
+           size = 6, fontface = "bold", color = "darkred") +
+  theme_minimal() +
+  labs(
+    x = "X",
+    y = "Y"
+  )
+
+
+```
+
+## Limitations of Pearson Correlation
+
+:::incremental
+- Assumes both variables are continuous and normally distributed
+- Pearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables
+- Alternatives exist : 
+	- Spearman’s rho (for ordinal or ranked data)
+	- Kendall's tau (for ordinal or ranked data)
+	- Phi coefficient (for two binary variables)
+:::
+
+
+
+## Scenario
+
+- What do you think the correlation is between $X$ and $Y$?
+
+```{r, echo=FALSE}
+set.seed(123)
+
+n <- 50
+
+# Cluster A: strong negative correlation, shifted to bottom-left
+cluster_A <- tibble(
+  x = runif(n, 1, 5),
+  y = 13 - 1.2 * x + rnorm(n, 0, 2),
+  group = "A"
+)
+
+# Cluster B: strong negative correlation, shifted to top-right
+cluster_B <- tibble(
+  x = runif(n, 3, 8),
+  y = 20 - 1.1 * x + rnorm(n, 0, 2),
+  group = "B"
+)
+
+# Combine clusters
+df <- bind_rows(cluster_A, cluster_B)
+
+# Compute correlations
+group_corr <- df |>
+  group_by(group) |>
+  summarise(cor = cor(x, y) |> round(2))
+
+p1 <- df |>
+  ggplot(aes(x, y)) +
+  geom_point(color = "steelblue", alpha = 0.7, size = 2) +
+  labs(
+    x = "X", y = "Y"
+  ) +
+  theme_minimal()
+
+p2 <- df |>
+  ggplot(aes(x, y, color = group)) +
+  geom_point(alpha = 0.7, size = 2) +
+  labs(
+    title = "Data Split into Groups",
+    subtitle = paste0(
+      "Group A cor = ", group_corr$cor[group_corr$group == "A"], 
+      " | Group B cor = ", group_corr$cor[group_corr$group == "B"]
+    ),
+    x = "X", y = "Y",
+    color = "Group"
+  ) +
+  scale_color_manual(values = c("orange", "purple")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+p1
+```
+
+## Compute correlation
+
+- $r=0.187$ (weak, positive correlation)
+```{r}
+df |>
+  select(x, y) |>
+  correlate() 
+```
+
+## 
+
+```{r}
+p2
+```
+
+
+## Simpson’s Paradox
+
+- **Simpson’s Paradox** is a statistical phenomenon in which an association between two variables in an overall population appears, disappears, or reverses when the population is separated into subpopulations.
+ 
+
+![](https://raw.githubusercontent.com/simplystats/simplystats.github.io/master/_images/simpsons-paradox.gif)
+
+> [https://simplystatistics.org/posts/2017-08-08-code-for-my-educational-gifs/](https://simplystatistics.org/posts/2017-08-08-code-for-my-educational-gifs/)
+
+## Bill Length vs. Bill Depth
+
+Using the `palmerpenguins` dataset:
+
+1. Make a scatterplot of **bill length** vs. **bill depth**
+2. Compute the **correlation** between the two variables
+3. Then, color the points by **species** and observe what changes
+
+![](https://www.natekratzer.com/posts/simpsons_paradox/culmen_depth.png)
+
+## iClicker Question
+
+What best describes the relationship between bill length and bill depth?
+
+- A. Negative correlation overall; still negative within each species  
+- B. Positive correlation overall; stronger within each species  
+- C. Negative correlation overall; positive within each species  
+- D. Minimal correlation overall or within groups
+
+##
+
+```{r, echo=FALSE, fig.width=12, fig.height=5}
+library(palmerpenguins)
+library(gridExtra)
+
+# Clean data
+penguins_clean <- penguins |>
+	filter(!is.na(bill_length_mm), !is.na(bill_depth_mm))
+
+# Overall correlation
+cor_overall <- penguins_clean |>
+	select(bill_length_mm, bill_depth_mm) |>
+	correlate() |>
+	filter(term == "bill_length_mm") |>
+	pull(bill_depth_mm) |>
+	round(2)
+
+
+# Correlations by species
+cors_by_species <- penguins_clean |>
+	group_by(species) |>
+	summarise(
+		cor = select(cur_data(), bill_length_mm, bill_depth_mm) |>
+			correlate() |>
+			filter(term == "bill_length_mm") |>
+			pull(bill_depth_mm) |>
+			round(2)
+	)
+
+# Plot 1: no color
+p1 <- ggplot(penguins_clean, aes(bill_length_mm, bill_depth_mm)) +
+	geom_point(alpha = 0.7) +
+	labs(
+		title = "Bill Length vs. Bill Depth",
+		subtitle = paste("Correlation =", cor_overall),
+		x = "Bill Length (mm)", y = "Bill Depth (mm)"
+	) +
+	theme_minimal()
+
+# Plot 2: colored by species with correlation labels
+cors_by_species <- cors_by_species |>
+	mutate(
+		x_pos = c(30, 50, 33),  # tweak these numbers as needed for each species
+		y_pos = c(22, 17.5, 14) # custom y positions spaced nicely
+	)
+
+p2 <- ggplot(penguins_clean, aes(bill_length_mm, bill_depth_mm, color = species)) +
+	geom_point(alpha = 0.7) +
+	labs(
+		title = "Coloured by Species",
+		x = "Bill Length (mm)",
+		y = "Bill Depth (mm)"
+	) +
+	theme_minimal() +
+	geom_text(
+		data = cors_by_species,
+		aes(
+			x = x_pos,
+			y = y_pos,
+			label = paste(species, "cor =", cor),
+			color = species
+		),
+		inherit.aes = FALSE,
+		hjust = 0,
+		show.legend = FALSE
+	)
+
+# Arrange side-by-side
+grid.arrange(p1, p2, ncol = 2)
+
+```
+
+
+## Correlation ≠ Causation
+
+- Just because two variables are correlated, does not mean one causes the other! 
+- Correlation can also be coincidental or arise from a confounding variable (more to come later in the course).
+
+<div style="text-align: center;">
+  <img src="https://gallery.mailchimp.com/0625ea07a42772bf4ec49dee5/images/e40ff83b-ae8f-439a-b745-2a7b3b5d215a.jpg" style="width: 60%; max-width: 500px">
+</div>
+
+<div style="text-align: center; font-size: 0.5em;">
+Source: <a href="https://meltchocolates.com/newsletters/chocolate-makes-you-smart/" target="_blank">https://meltchocolates.com/newsletters/chocolate-makes-you-smart/</a>
+</div>
+
+
+## EDA and the Data Pipeline
+
+:::incremental
+- EDA choices are not just cosmetic; they can fundamentally alter your analysis!
+- What we filter, transform, and create in EDA directly shapes:
+  - What models we build
+  - How well they perform
+  - How we interpret results
+:::
+
+## In-class Exercise
+
+
+- You're working with data from a large tech company that wants to predict which employees are likely to leave within the next year.
+
+- The dataset includes:
+	- `income`: current salary
+	- `years_exp`: total years of experience
+	- `postalcode`: employee home location
+	- `left_company`: target variable (1 = left, 0 = stayed)
+
+- You’re doing EDA to prep for modeling `left_company`.
+
+
+## In-class Exercise
+
+Given the EDA pipeline below, discuss with a neighbour:
+
+- Which steps might improve modeling?
+- Which could bias results or reduce generalizability?
+- What would you ask your team before proceeding?
+
+```{r, eval=FALSE}
+# EDA pipeline in R
+df <- raw_data |> 
+  filter(income > 0) |>
+  mutate(
+    log_income = log(income),
+    seniority = years_exp > 5
+  ) |>
+  select(-postalcode)
+```
+
+## Diamonds Example 
+
+- You're working with diamond pricing data (`diamonds` data from `ggplot2` pacakge). 💎
+- Goal: Predict the price of a diamond (`price`) using its carat weight (`carat`).
+
+```{r}
+head(diamonds)
+```
+
+## 
+
+- Before diving into modeling, a colleague says:
+
+> *“We usually talk about diamond size in terms of groups XS-XL when discussing pricing with customers. Should we just model with those?”*
+
+- You now face a choice:
+	- Model `carat` as a **continuous** variable  
+	- Or bin `carat` into categories 
+
+- What do you think the tradeoffs are?
+
+## 
+
+Let's compare:
+
+- Model A: Continuous `carat`
+- Model B: Binned `carat_group`
+
+
+```{r}
+df <- diamonds |>
+  select(price, carat) |>
+  mutate(
+    carat_group = cut(
+      carat,
+      breaks = c(0, 0.5, 1, 1.5, 2, 5),
+      labels = c("extra small", "small", "medium", "large", "extra large"),
+      right = FALSE
+    )
+  ) |>
+  filter(!is.na(carat_group))
+```
+
+## 
+
+```{r, echo=FALSE}
+df |>
+  ggplot(aes(x = carat, y = price)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  geom_vline(xintercept = c(0.5, 1, 1.5, 2), linetype = "dashed", color = "red") +
+  labs(title = "Price vs. Carat")
+```
+##
+
+```{r}
+df |>
+  ggplot(aes(x = carat_group, y = price)) +
+  geom_boxplot(fill="cornflowerblue") +
+  labs(title = "Diamond Price by Carat Group") +
+	theme_minimal()
+```
+
+##
+
+```{r}
+library(rsample)
+library(tidymodels)
+
+set.seed(200)
+diamond_split <- initial_split(df, prop = 0.75, strata = price)
+diamond_train <- training(diamond_split)
+diamond_test <- testing(diamond_split)
+
+# Model spec
+lm_spec <- linear_reg() |>
+  set_engine("lm") |>
+  set_mode("regression")
+
+# Recipe for Model A (carat continuous)
+lm_recipe_A <- recipe(price ~ carat, data = diamond_train)
+
+# Recipe for Model B (carat binned categories)
+lm_recipe_B <- recipe(price ~ carat_group, data = diamond_train) 
+
+# Workflow for Model A
+lm_fit_A <- workflow() |>
+  add_recipe(lm_recipe_A) |>
+  add_model(lm_spec) |>
+  fit(data = diamond_train)
+
+# Workflow for Model B
+lm_fit_B <- workflow() |>
+  add_recipe(lm_recipe_B) |>
+  add_model(lm_spec) |>
+  fit(data = diamond_train)
+```
+
+## Fitted models
+
+```{r}
+tidy(lm_fit_A)
+```
+
+```{r}
+tidy(lm_fit_B)
+```
+
+## RMSPE 
+
+```{r}
+# Model A (carat continuous)
+rmse_A <- lm_fit_A |>
+  predict(diamond_test) |>
+  bind_cols(diamond_test) |>
+  rmse(truth = price, estimate = .pred) |>
+  mutate(model = "Carat continuous")
+
+# Model B (carat binned)
+rmse_B <- lm_fit_B |>
+  predict(diamond_test) |>
+  bind_cols(diamond_test) |>
+  rmse(truth = price, estimate = .pred) |>
+  mutate(model = "Carat binned")
+
+rmse_results <- bind_rows(rmse_A, rmse_B) |>
+  select(model, .metric, .estimator, .estimate)
+
+print(rmse_results)
+```
+
+## Discussion: Think, Pair, Share
+
+- Continuous or binned: which strategy would you choose and why?
+
+- What do we assume when we bin carat?
+
+- Could this influence pricing strategies?
+
+
+## iClicker Question
+
+In your opinion, when is it most appropriate to split your data into training and test sets?
+
+- A. Before doing any EDA  
+- B. After EDA
+- C. Right before modeling  
+- D. I'm not sure
+
+## Why Split Before EDA?
+
+:::incremental
+- It is often recommended to split your data *before* performing EDA. 
+- Analyzing the full dataset can leak information from the test set into the model or analysis. 
+- If we tailor preprocessing, feature engineering or generate hypotheses using the whole dataset:
+  - It introduces data snooping bias.
+  - The model may overfit to patterns it shouldn't have access to.
+- Remember your test set should simulate unseen data!
+:::
+
+## It’s Not Always One-Size-Fits-All!
+
+:::incremental
+- The decision to split before or after EDA depends on your goals and the context.
+
+- Sometimes it makes sense to perform minimal checks on the full dataset to:
+  - Detect inconsistent data types
+  - Check for class imbalance
+  - Identify missing values or obvious data issues
+
+- If your goal is descriptive analysis (not predictive modeling or inference), a train/test split may not be necessary.
+
+- The key is to think critically about your objectives and the potential for data leakage.
+:::
+
+## Key Takeaways 
+
+:::incremental
+- Correlation quantifies the strength and direction of relationships between variables
+
+- Pearson’s correlation captures only linear relationships and it may miss or misrepresent more complex patterns
+
+- Choices during EDA (e.g., filtering, transforming, and feature selection) shape your modeling outcomes
+
+- Splitting data before EDA helps prevent leakage and supports valid inference and model evaluation
+:::

@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs
   lib-dir: site_libs
   render:
     - index.qmd
@@ -10,7 +11,6 @@ project:
     - course-setup.qmd
     - schedule/index.qmd
     - schedule/slides/*.qmd
-  output-dir: docs
 
 execute:
   freeze: auto
@@ -24,9 +24,7 @@ website:
   repo-url: https://github.com/UBC-DSCI/dsci-200
   issue-url: https://github.com/UBC-DSCI/dsci-200/issues/new/
   repo-actions: [source, issue, edit]
-  page-footer:
-    background: primary
-    center: "This work by [Katie Burak](https://katieburak.github.io/) and [Gabriela V. Cohen Freue](https://gcohenfr.github.io/) is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0)<img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1'><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1' /><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1' />"
+
   navbar:
     pinned: true
     title: "{{< fa chart-column >}} UBC DSCI 200"
@@ -45,8 +43,9 @@ website:
         url: faq.qmd
       - text: "{{< fa brands github >}} Github"
         url: https://github.com/UBC-DSCI/dsci-200
-
+        
 format:
   html:
     theme: [cosmo, assets/styles.scss]
     toc: true
+

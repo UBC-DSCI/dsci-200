@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en-CA"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
+  <title>UBC DSCI 200 – eda-2</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-3faac352b6474bbecd2b121c3fec1fe3.css">
+  <link rel="stylesheet" href="tachyons-minimal.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
+<h2>Exploratory Data Analysis</h2>
+<p><span class="secondary">DSCI 200</span></p>
+<p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
+<p>Last modified – 02 January 2026</p>
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\maximize}{maximize}
+\DeclareMathOperator*{\find}{find}
+\DeclareMathOperator{\st}{subject\,\,to}
+\newcommand{\E}{E}
+\newcommand{\Expect}[1]{\E\left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left[ #1 \right]}
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[#1,\ #2\right]}
+\newcommand{\given}{\ \vert\ }
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\snorm}[1]{\lVert #1 \rVert}
+\newcommand{\tr}[1]{\mbox{tr}(#1)}
+\newcommand{\brt}{\widehat{\beta}^R_{s}}
+\newcommand{\brl}{\widehat{\beta}^R_{\lambda}}
+\newcommand{\bls}{\widehat{\beta}_{ols}}
+\newcommand{\blt}{\widehat{\beta}^L_{s}}
+\newcommand{\bll}{\widehat{\beta}^L_{\lambda}}
+\newcommand{\U}{\mathbf{U}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\V}{\mathbf{V}}
+\]</span></p>
+</section>
+<section id="attribution" class="slide level2">
+<h2>Attribution</h2>
+<p><br><br></p>
+<p>This material is adapted from the following sources:</p>
+<ul>
+<li><a href="https://r4ds.hadley.nz/EDA.html"><em>Chapter 10 of R for Data Science (2e)</em></a></li>
+<li><a href="https://bookdown.org/rdpeng/exdata/"><em>Exploratory Data Analysis with R</em></a>.</li>
+<li><a href="https://www.data-to-viz.com/caveat/simpson.html"><em>The Simpson’s Paradox</em></a></li>
+<li><a href="https://www.natekratzer.com/posts/simpsons_paradox/">https://www.natekratzer.com/posts/simpsons_paradox/</a></li>
+<li><a href="https://kirenz.github.io/data-science-r/docs/data.html"><em>Data Science with R</em></a></li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning Objectives</h2>
+<p>By the end of this lesson, you will be able to:</p>
+<div>
+<ul>
+<li class="fragment"><p>Investigate relationships between variables using correlation</p></li>
+<li class="fragment"><p>Examine the limitations of Pearson’s correlation and recognize scenarios where it can be misleading, including Simpson’s Paradox</p></li>
+<li class="fragment"><p>Discuss how choices made during EDA can impact the entire data analysis pipeline</p></li>
+<li class="fragment"><p>Recognize the role of data splitting in preventing bias and ensuring generalizability</p></li>
+</ul>
+</div>
+</section>
+<section id="review" class="slide level2">
+<h2>Review</h2>
+<ul>
+<li><p>Last class we recalled the usage of scatterplots as a useful way to visualize the relationship between two numerical variables.</p></li>
+<li><p>However, it would be nice to be able to quantify this relationship with some measure of covariation…</p></li>
+</ul>
+
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="what-is-correlation" class="slide level2">
+<h2>What is Correlation?</h2>
+<div>
+<ul>
+<li class="fragment">Correlation measures the strength and direction of a relationship between variables</li>
+<li class="fragment">For example, correlation analysis could help us explore the following questions:
+<ul>
+<li class="fragment">Is there a relationship between social media usage and mental health scores among teenagers?</li>
+<li class="fragment">Do housing prices correlate with interest rates in different regions?</li>
+<li class="fragment">Does the frequency of push notifications correlate with user engagement in a mobile app?</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="pearson-correlation" class="slide level2">
+<h2>Pearson Correlation</h2>
+<ul>
+<li>Pearson correlation is perhaps the most common, and it measures the strength of a linear relationship between two numeric variables.</li>
+<li>Values range from -1 to 1:
+<ul>
+<li>1: perfect positive linear relationship</li>
+<li>-1: perfect negative linear relationship</li>
+<li>0: no linear relationship</li>
+</ul></li>
+</ul>
+</section>
+<section id="pearson-correlation-1" class="slide level2">
+<h2>Pearson Correlation</h2>
+<p>For two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, the estimated pearson correlation coefficient, <span class="math inline">\(r\)</span>, is given by the following formula:</p>
+<p><span class="math display">\[ r = \frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^n(x_i-\bar{x})^2(y_i-\bar{y})^2}},\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(n\)</span> is the sample size</li>
+<li><span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> are the <span class="math inline">\(i^{th}\)</span> observations of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, respectively</li>
+<li><span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> are the estimated sample means of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, respectively</li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-3-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="guess-the-correlation" class="slide level2">
+<h2>Guess the Correlation</h2>
+<p>Take a minute and play a few rounds of “<a href="https://www.guessthecorrelation.com/">Guess the Correlation</a>” to get a better idea about the strength of different correlations.</p>
+
+<img data-src="img/guess-cor.png" class="r-stretch"></section>
+<section id="load-packages" class="slide level2">
+<h2>Load packages</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(corrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="computing-correlations-in-r" class="slide level2">
+<h2>Computing correlations in R</h2>
+<ul>
+<li>Luckily, there are functions in R that compute correlations for us!</li>
+<li>While there is a default function <code>cor()</code> in base R, the <code>correlate()</code> function in the <code>corrr</code> package integrates more smoothly with our tidy workflows.</li>
+<li>Let’s work with <code>airquality</code> data from the <code>datasets</code> pacakge.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">head</span>(airquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Ozone Solar.R Wind Temp Month Day
+1    41     190  7.4   67     5   1
+2    36     118  8.0   72     5   2
+3    12     149 12.6   74     5   3
+4    18     313 11.5   62     5   4
+5    NA      NA 14.3   56     5   5
+6    28      NA 14.9   66     5   6</code></pre>
+</div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<ul>
+<li>Let’s investigate the relationship between mean ozone (ppb) from 1-3pm and maximum daily temperature in degrees Fahrenheit.</li>
+<li>We can see a moderately strong positive relationship.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x =</span> Ozone, <span class="at">y =</span> Temp)) <span class="sc">+</span></span>
+<span id="cb4-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-6-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="compute-correlation" class="slide level2">
+<h2>Compute correlation</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a></a>    <span class="fu">select</span>(Ozone, Temp) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a></a>    <span class="fu">correlate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  term   Ozone   Temp
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Ozone NA      0.698
+2 Temp   0.698 NA    </code></pre>
+</div>
+</div>
+<blockquote>
+<p><em>Note that the diagonal values are printed as <code>NA</code>, but the correlation between a variable and itself is simply 1.</em></p>
+</blockquote>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p>To just extract the single correlation value:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a></a>    <span class="fu">select</span>(Ozone, Temp) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a></a>    <span class="fu">correlate</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a></a>    <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"Ozone"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a></a>    <span class="fu">pull</span>(Temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6983603</code></pre>
+</div>
+</div>
+</section>
+<section id="correlation-matrices" class="slide level2">
+<h2>Correlation matrices</h2>
+<ul>
+<li>Sometimes, we want to calculate the correlations among multiple numeric variables at once.</li>
+<li>In such cases, a correlation matrix is useful for exploring the relationships between several variables simultaneously.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a></a>    <span class="fu">select</span>(Ozone,Solar.R,Temp,Wind) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a></a>  <span class="fu">correlate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term     Ozone Solar.R   Temp    Wind
+  &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1 Ozone   NA      0.348   0.698 -0.602 
+2 Solar.R  0.348 NA       0.276 -0.0568
+3 Temp     0.698  0.276  NA     -0.458 
+4 Wind    -0.602 -0.0568 -0.458 NA     </code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-correlation" class="slide level2">
+<h2>Visualizing Correlation</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>correlations <span class="ot">&lt;-</span> airquality <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a></a><span class="fu">select</span>(Ozone,Solar.R,Temp,Wind) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a></a><span class="fu">correlate</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a></a><span class="fu">rearrange</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb11-5"><a></a><span class="fu">shave</span>() </span>
+<span id="cb11-6"><a></a></span>
+<span id="cb11-7"><a></a><span class="fu">rplot</span>(correlations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-10-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="limitations-of-pearson-correlation" class="slide level2">
+<h2>Limitations of Pearson Correlation</h2>
+<ul>
+<li>Pearson <span class="math inline">\(r\)</span> measures <strong>linear</strong> relationships only.</li>
+<li>It can be 0 even when a strong nonlinear relationship exists!</li>
+</ul>
+
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-11-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="limitations-of-pearson-correlation-1" class="slide level2">
+<h2>Limitations of Pearson Correlation</h2>
+<div>
+<ul>
+<li class="fragment">Assumes both variables are continuous and normally distributed</li>
+<li class="fragment">Pearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables</li>
+<li class="fragment">Alternatives exist :
+<ul>
+<li class="fragment">Spearman’s rho (for ordinal or ranked data)</li>
+<li class="fragment">Kendall’s tau (for ordinal or ranked data)</li>
+<li class="fragment">Phi coefficient (for two binary variables)</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="scenario" class="slide level2">
+<h2>Scenario</h2>
+<ul>
+<li>What do you think the correlation is between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>?</li>
+</ul>
+
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-12-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="compute-correlation-1" class="slide level2">
+<h2>Compute correlation</h2>
+<ul>
+<li><span class="math inline">\(r=0.187\)</span> (weak, positive correlation)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>df <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">select</span>(x, y) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">correlate</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  term       x      y
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 x     NA      0.187
+2 y      0.187 NA    </code></pre>
+</div>
+</div>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-14-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="simpsons-paradox" class="slide level2">
+<h2>Simpson’s Paradox</h2>
+<ul>
+<li><strong>Simpson’s Paradox</strong> is a statistical phenomenon in which an association between two variables in an overall population appears, disappears, or reverses when the population is separated into subpopulations.</li>
+</ul>
+
+<img data-src="https://raw.githubusercontent.com/simplystats/simplystats.github.io/master/_images/simpsons-paradox.gif" class="r-stretch"><blockquote>
+<p><a href="https://simplystatistics.org/posts/2017-08-08-code-for-my-educational-gifs/">https://simplystatistics.org/posts/2017-08-08-code-for-my-educational-gifs/</a></p>
+</blockquote>
+</section>
+<section id="bill-length-vs.-bill-depth" class="slide level2">
+<h2>Bill Length vs.&nbsp;Bill Depth</h2>
+<p>Using the <code>palmerpenguins</code> dataset:</p>
+<ol type="1">
+<li>Make a scatterplot of <strong>bill length</strong> vs.&nbsp;<strong>bill depth</strong></li>
+<li>Compute the <strong>correlation</strong> between the two variables</li>
+<li>Then, color the points by <strong>species</strong> and observe what changes</li>
+</ol>
+
+<img data-src="https://www.natekratzer.com/posts/simpsons_paradox/culmen_depth.png" class="r-stretch"></section>
+<section id="iclicker-question" class="slide level2">
+<h2>iClicker Question</h2>
+<p>What best describes the relationship between bill length and bill depth?</p>
+<ul>
+<li>A. Negative correlation overall; still negative within each species<br>
+</li>
+<li>B. Positive correlation overall; stronger within each species<br>
+</li>
+<li>C. Negative correlation overall; positive within each species<br>
+</li>
+<li>D. Minimal correlation overall or within groups</li>
+</ul>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-15-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="correlation-causation" class="slide level2">
+<h2>Correlation ≠ Causation</h2>
+<ul>
+<li>Just because two variables are correlated, does not mean one causes the other!</li>
+<li>Correlation can also be coincidental or arise from a confounding variable (more to come later in the course).</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="https://gallery.mailchimp.com/0625ea07a42772bf4ec49dee5/images/e40ff83b-ae8f-439a-b745-2a7b3b5d215a.jpg" style="width: 60%; max-width: 500px"></p>
+</div>
+<div style="text-align: center; font-size: 0.5em;">
+<p>Source: <a href="https://meltchocolates.com/newsletters/chocolate-makes-you-smart/" target="_blank">https://meltchocolates.com/newsletters/chocolate-makes-you-smart/</a></p>
+</div>
+</section>
+<section id="eda-and-the-data-pipeline" class="slide level2">
+<h2>EDA and the Data Pipeline</h2>
+<div>
+<ul>
+<li class="fragment">EDA choices are not just cosmetic; they can fundamentally alter your analysis!</li>
+<li class="fragment">What we filter, transform, and create in EDA directly shapes:
+<ul>
+<li class="fragment">What models we build</li>
+<li class="fragment">How well they perform</li>
+<li class="fragment">How we interpret results</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="in-class-exercise" class="slide level2">
+<h2>In-class Exercise</h2>
+<ul>
+<li><p>You’re working with data from a large tech company that wants to predict which employees are likely to leave within the next year.</p></li>
+<li><p>The dataset includes:</p>
+<ul>
+<li><code>income</code>: current salary</li>
+<li><code>years_exp</code>: total years of experience</li>
+<li><code>postalcode</code>: employee home location</li>
+<li><code>left_company</code>: target variable (1 = left, 0 = stayed)</li>
+</ul></li>
+<li><p>You’re doing EDA to prep for modeling <code>left_company</code>.</p></li>
+</ul>
+</section>
+<section id="in-class-exercise-1" class="slide level2">
+<h2>In-class Exercise</h2>
+<p>Given the EDA pipeline below, discuss with a neighbour:</p>
+<ul>
+<li>Which steps might improve modeling?</li>
+<li>Which could bias results or reduce generalizability?</li>
+<li>What would you ask your team before proceeding?</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># EDA pipeline in R</span></span>
+<span id="cb15-2"><a></a>df <span class="ot">&lt;-</span> raw_data <span class="sc">|&gt;</span> </span>
+<span id="cb15-3"><a></a>  <span class="fu">filter</span>(income <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-5"><a></a>    <span class="at">log_income =</span> <span class="fu">log</span>(income),</span>
+<span id="cb15-6"><a></a>    <span class="at">seniority =</span> years_exp <span class="sc">&gt;</span> <span class="dv">5</span></span>
+<span id="cb15-7"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-8"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>postalcode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="diamonds-example" class="slide level2">
+<h2>Diamonds Example</h2>
+<ul>
+<li>You’re working with diamond pricing data (<code>diamonds</code> data from <code>ggplot2</code> pacakge). 💎</li>
+<li>Goal: Predict the price of a diamond (<code>price</code>) using its carat weight (<code>carat</code>).</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">head</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  carat cut       color clarity depth table price     x     y     z
+  &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
+</div>
+</div>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<ul>
+<li>Before diving into modeling, a colleague says:</li>
+</ul>
+<blockquote>
+<p><em>“We usually talk about diamond size in terms of groups XS-XL when discussing pricing with customers. Should we just model with those?”</em></p>
+</blockquote>
+<ul>
+<li>You now face a choice:
+<ul>
+<li>Model <code>carat</code> as a <strong>continuous</strong> variable<br>
+</li>
+<li>Or bin <code>carat</code> into categories</li>
+</ul></li>
+<li>What do you think the tradeoffs are?</li>
+</ul>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<p>Let’s compare:</p>
+<ul>
+<li>Model A: Continuous <code>carat</code></li>
+<li>Model B: Binned <code>carat_group</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>df <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a></a>  <span class="fu">select</span>(price, carat) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-4"><a></a>    <span class="at">carat_group =</span> <span class="fu">cut</span>(</span>
+<span id="cb18-5"><a></a>      carat,</span>
+<span id="cb18-6"><a></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb18-7"><a></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"extra small"</span>, <span class="st">"small"</span>, <span class="st">"medium"</span>, <span class="st">"large"</span>, <span class="st">"extra large"</span>),</span>
+<span id="cb18-8"><a></a>      <span class="at">right =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-9"><a></a>    )</span>
+<span id="cb18-10"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb18-11"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(carat_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-19-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>df <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat_group, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb19-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">"cornflowerblue"</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Diamond Price by Carat Group"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="eda-2_files/figure-revealjs/unnamed-chunk-20-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(rsample)</span>
+<span id="cb20-2"><a></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb20-3"><a></a></span>
+<span id="cb20-4"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb20-5"><a></a>diamond_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(df, <span class="at">prop =</span> <span class="fl">0.75</span>, <span class="at">strata =</span> price)</span>
+<span id="cb20-6"><a></a>diamond_train <span class="ot">&lt;-</span> <span class="fu">training</span>(diamond_split)</span>
+<span id="cb20-7"><a></a>diamond_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(diamond_split)</span>
+<span id="cb20-8"><a></a></span>
+<span id="cb20-9"><a></a><span class="co"># Model spec</span></span>
+<span id="cb20-10"><a></a>lm_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-11"><a></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-12"><a></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>)</span>
+<span id="cb20-13"><a></a></span>
+<span id="cb20-14"><a></a><span class="co"># Recipe for Model A (carat continuous)</span></span>
+<span id="cb20-15"><a></a>lm_recipe_A <span class="ot">&lt;-</span> <span class="fu">recipe</span>(price <span class="sc">~</span> carat, <span class="at">data =</span> diamond_train)</span>
+<span id="cb20-16"><a></a></span>
+<span id="cb20-17"><a></a><span class="co"># Recipe for Model B (carat binned categories)</span></span>
+<span id="cb20-18"><a></a>lm_recipe_B <span class="ot">&lt;-</span> <span class="fu">recipe</span>(price <span class="sc">~</span> carat_group, <span class="at">data =</span> diamond_train) </span>
+<span id="cb20-19"><a></a></span>
+<span id="cb20-20"><a></a><span class="co"># Workflow for Model A</span></span>
+<span id="cb20-21"><a></a>lm_fit_A <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-22"><a></a>  <span class="fu">add_recipe</span>(lm_recipe_A) <span class="sc">|&gt;</span></span>
+<span id="cb20-23"><a></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">|&gt;</span></span>
+<span id="cb20-24"><a></a>  <span class="fu">fit</span>(<span class="at">data =</span> diamond_train)</span>
+<span id="cb20-25"><a></a></span>
+<span id="cb20-26"><a></a><span class="co"># Workflow for Model B</span></span>
+<span id="cb20-27"><a></a>lm_fit_B <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-28"><a></a>  <span class="fu">add_recipe</span>(lm_recipe_B) <span class="sc">|&gt;</span></span>
+<span id="cb20-29"><a></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">|&gt;</span></span>
+<span id="cb20-30"><a></a>  <span class="fu">fit</span>(<span class="at">data =</span> diamond_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fitted-models" class="slide level2">
+<h2>Fitted models</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">tidy</span>(lm_fit_A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 (Intercept)   -2250.      15.0     -150.       0
+2 carat          7745.      16.2      479.       0</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">tidy</span>(lm_fit_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  term                   estimate std.error statistic p.value
+  &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 (Intercept)                792.      13.5      58.5       0
+2 carat_groupsmall          1705.      19.3      88.3       0
+3 carat_groupmedium         5345.      20.9     256.        0
+4 carat_grouplarge         10081.      31.3     322.        0
+5 carat_groupextra large   14012.      41.1     341.        0</code></pre>
+</div>
+</div>
+</section>
+<section id="rmspe" class="slide level2">
+<h2>RMSPE</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Model A (carat continuous)</span></span>
+<span id="cb25-2"><a></a>rmse_A <span class="ot">&lt;-</span> lm_fit_A <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a></a>  <span class="fu">predict</span>(diamond_test) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a></a>  <span class="fu">bind_cols</span>(diamond_test) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a></a>  <span class="fu">rmse</span>(<span class="at">truth =</span> price, <span class="at">estimate =</span> .pred) <span class="sc">|&gt;</span></span>
+<span id="cb25-6"><a></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Carat continuous"</span>)</span>
+<span id="cb25-7"><a></a></span>
+<span id="cb25-8"><a></a><span class="co"># Model B (carat binned)</span></span>
+<span id="cb25-9"><a></a>rmse_B <span class="ot">&lt;-</span> lm_fit_B <span class="sc">|&gt;</span></span>
+<span id="cb25-10"><a></a>  <span class="fu">predict</span>(diamond_test) <span class="sc">|&gt;</span></span>
+<span id="cb25-11"><a></a>  <span class="fu">bind_cols</span>(diamond_test) <span class="sc">|&gt;</span></span>
+<span id="cb25-12"><a></a>  <span class="fu">rmse</span>(<span class="at">truth =</span> price, <span class="at">estimate =</span> .pred) <span class="sc">|&gt;</span></span>
+<span id="cb25-13"><a></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Carat binned"</span>)</span>
+<span id="cb25-14"><a></a></span>
+<span id="cb25-15"><a></a>rmse_results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(rmse_A, rmse_B) <span class="sc">|&gt;</span></span>
+<span id="cb25-16"><a></a>  <span class="fu">select</span>(model, .metric, .estimator, .estimate)</span>
+<span id="cb25-17"><a></a></span>
+<span id="cb25-18"><a></a><span class="fu">print</span>(rmse_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  model            .metric .estimator .estimate
+  &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 Carat continuous rmse    standard       1561.
+2 Carat binned     rmse    standard       1572.</code></pre>
+</div>
+</div>
+</section>
+<section id="discussion-think-pair-share" class="slide level2">
+<h2>Discussion: Think, Pair, Share</h2>
+<ul>
+<li><p>Continuous or binned: which strategy would you choose and why?</p></li>
+<li><p>What do we assume when we bin carat?</p></li>
+<li><p>Could this influence pricing strategies?</p></li>
+</ul>
+</section>
+<section id="iclicker-question-1" class="slide level2">
+<h2>iClicker Question</h2>
+<p>In your opinion, when is it most appropriate to split your data into training and test sets?</p>
+<ul>
+<li>A. Before doing any EDA<br>
+</li>
+<li>B. After EDA</li>
+<li>C. Right before modeling<br>
+</li>
+<li>D. I’m not sure</li>
+</ul>
+</section>
+<section id="why-split-before-eda" class="slide level2">
+<h2>Why Split Before EDA?</h2>
+<div>
+<ul>
+<li class="fragment">It is often recommended to split your data <em>before</em> performing EDA.</li>
+<li class="fragment">Analyzing the full dataset can leak information from the test set into the model or analysis.</li>
+<li class="fragment">If we tailor preprocessing, feature engineering or generate hypotheses using the whole dataset:
+<ul>
+<li class="fragment">It introduces data snooping bias.</li>
+<li class="fragment">The model may overfit to patterns it shouldn’t have access to.</li>
+</ul></li>
+<li class="fragment">Remember your test set should simulate unseen data!</li>
+</ul>
+</div>
+</section>
+<section id="its-not-always-one-size-fits-all" class="slide level2">
+<h2>It’s Not Always One-Size-Fits-All!</h2>
+<div>
+<ul>
+<li class="fragment"><p>The decision to split before or after EDA depends on your goals and the context.</p></li>
+<li class="fragment"><p>Sometimes it makes sense to perform minimal checks on the full dataset to:</p>
+<ul>
+<li class="fragment">Detect inconsistent data types</li>
+<li class="fragment">Check for class imbalance</li>
+<li class="fragment">Identify missing values or obvious data issues</li>
+</ul></li>
+<li class="fragment"><p>If your goal is descriptive analysis (not predictive modeling or inference), a train/test split may not be necessary.</p></li>
+<li class="fragment"><p>The key is to think critically about your objectives and the potential for data leakage.</p></li>
+</ul>
+</div>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<div>
+<ul>
+<li class="fragment"><p>Correlation quantifies the strength and direction of relationships between variables</p></li>
+<li class="fragment"><p>Pearson’s correlation captures only linear relationships and it may miss or misrepresent more complex patterns</p></li>
+<li class="fragment"><p>Choices during EDA (e.g., filtering, transforming, and feature selection) shape your modeling outcomes</p></li>
+<li class="fragment"><p>Splitting data before EDA helps prevent leakage and supports valid inference and model evaluation</p></li>
+</ul>
+</div>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>UBC DSCI 200</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
