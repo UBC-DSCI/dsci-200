@@ -33,8 +33,8 @@ website:
         url: syllabus.qmd
       - text: Schedule
         url: schedule/index.qmd
-      - text: Worksheets
-        url: https://github.com/UBC-STAT/dsci-200
+     # - text: Worksheets
+     #   url: https://github.com/UBC-STAT/dsci-200
       - text: Computing
         url: computing/index.qmd
       - text: Case Studies
