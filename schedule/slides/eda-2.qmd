@@ -74,7 +74,7 @@ ggplot(sim_data, aes(x = x, y = y)) +
 
 ## Pearson Correlation
 
-- Pearson correlation is perhaps the most common, and it measures the strength of a linear relationship between two numeric variables. 
+- Pearson correlation is maybe the most common, and it measures the strength of a linear relationship between two numeric variables. 
 - Values range from -1 to 1:
   - 1: perfect positive linear relationship
   - -1: perfect negative linear relationship
