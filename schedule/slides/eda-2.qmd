@@ -41,7 +41,7 @@ By the end of this lesson, you will be able to:
 
 ## Review
 
-- Last class we recalled the usage of scatterplots as a useful way to visualize the relationship between two numerical variables. 
+- Last class we saw the usage of scatterplots as a useful way to visualize the relationship between two numerical variables. 
 
 - However, it would be nice to be able to quantify this relationship with some measure of covariation...
 
