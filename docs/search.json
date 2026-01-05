@@ -4,7 +4,7 @@
     "href": "schedule/slides/eda-2.html#section",
     "title": "UBC DSCI 200",
     "section": "Exploratory Data Analysis",
-    "text": "Exploratory Data Analysis\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 02 January 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+    "text": "Exploratory Data Analysis\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 05 January 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
     "objectID": "schedule/slides/eda-2.html#attribution",
@@ -25,7 +25,7 @@
     "href": "schedule/slides/eda-2.html#review",
     "title": "UBC DSCI 200",
     "section": "Review",
-    "text": "Review\n\nLast class we recalled the usage of scatterplots as a useful way to visualize the relationship between two numerical variables.\nHowever, it would be nice to be able to quantify this relationship with some measure of covariation…"
+    "text": "Review\n\nLast class we saw the usage of scatterplots as a useful way to visualize the relationship between two numerical variables.\nHowever, it would be nice to be able to quantify this relationship with some measure of covariation…"
   },
   {
     "objectID": "schedule/slides/eda-2.html#what-is-correlation",
@@ -39,7 +39,7 @@
     "href": "schedule/slides/eda-2.html#pearson-correlation",
     "title": "UBC DSCI 200",
     "section": "Pearson Correlation",
-    "text": "Pearson Correlation\n\nPearson correlation is perhaps the most common, and it measures the strength of a linear relationship between two numeric variables.\nValues range from -1 to 1:\n\n1: perfect positive linear relationship\n-1: perfect negative linear relationship\n0: no linear relationship"
+    "text": "Pearson Correlation\n\nPearson correlation is maybe the most common, and it measures the strength of a linear relationship between two numeric variables.\nValues range from -1 to 1:\n\n1: perfect positive linear relationship\n-1: perfect negative linear relationship\n0: no linear relationship"
   },
   {
     "objectID": "schedule/slides/eda-2.html#pearson-correlation-1",
