@@ -557,7 +557,7 @@
     "href": "schedule/slides/eda-1.html#visualizing-categorical-data",
     "title": "UBC DSCI 200",
     "section": "Visualizing Categorical Data",
-    "text": "Visualizing Categorical Data\nWhat is a plot we can use to visualize categorical variables?\n\n\nBar plots"
+    "text": "Visualizing Categorical Data\nWhat is a plot we can use to visualize a categorical variable?\n\n\nBar plots"
   },
   {
     "objectID": "schedule/slides/eda-1.html#bar-plots",

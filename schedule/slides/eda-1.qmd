@@ -251,7 +251,7 @@ wildfire |>
 
 ## Visualizing Categorical Data
 
-What is a plot we can use to visualize categorical variables?
+What is a plot we can use to visualize a categorical variable?
 
 :::incremental
 - Bar plots
