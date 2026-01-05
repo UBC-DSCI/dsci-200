@@ -6,8 +6,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-095e6f6405c331e3b33229e03003579f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.8">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
   <title>UBC DSCI 200 – eda-2</title>
@@ -29,9 +29,8 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -42,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -95,7 +94,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b4ee4c89f33195ff85aef29361b1c2bf.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-3faac352b6474bbecd2b121c3fec1fe3.css">
   <link rel="stylesheet" href="tachyons-minimal.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -246,12 +245,14 @@
 <section id="learning-objectives" class="slide level2">
 <h2>Learning Objectives</h2>
 <p>By the end of this lesson, you will be able to:</p>
+<div>
 <ul>
 <li class="fragment"><p>Investigate relationships between variables using correlation</p></li>
 <li class="fragment"><p>Examine the limitations of Pearson’s correlation and recognize scenarios where it can be misleading, including Simpson’s Paradox</p></li>
 <li class="fragment"><p>Discuss how choices made during EDA can impact the entire data analysis pipeline</p></li>
 <li class="fragment"><p>Recognize the role of data splitting in preventing bias and ensuring generalizability</p></li>
 </ul>
+</div>
 </section>
 <section id="review" class="slide level2">
 <h2>Review</h2>
@@ -263,6 +264,7 @@
 <img data-src="eda-2_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="what-is-correlation" class="slide level2">
 <h2>What is Correlation?</h2>
+<div>
 <ul>
 <li class="fragment">Correlation measures the strength and direction of a relationship between variables</li>
 <li class="fragment">For example, correlation analysis could help us explore the following questions:
@@ -272,6 +274,7 @@
 <li class="fragment">Does the frequency of push notifications correlate with user engagement in a mobile app?</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="pearson-correlation" class="slide level2">
 <h2>Pearson Correlation</h2>
@@ -308,9 +311,9 @@
 <section id="load-packages" class="slide level2">
 <h2>Load packages</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(corrr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a></a><span class="fu">library</span>(corrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="computing-correlations-in-r" class="slide level2">
@@ -321,7 +324,7 @@
 <li>Let’s work with <code>airquality</code> data from the <code>datasets</code> pacakge.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">head</span>(airquality)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">head</span>(airquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Ozone Solar.R Wind Temp Month Day
 1    41     190  7.4   67     5   1
@@ -340,18 +343,18 @@
 <li>We can see a moderately strong positive relationship.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x =</span> Ozone, <span class="at">y =</span> Temp)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x =</span> Ozone, <span class="at">y =</span> Temp)) <span class="sc">+</span></span>
 <span id="cb4-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb4-3"><a></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="eda-2_files/figure-revealjs/unnamed-chunk-6-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="compute-correlation" class="slide level2">
 <h2>Compute correlation</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a></a>    <span class="fu">select</span>(Ozone, Temp) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a></a>    <span class="fu">correlate</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a></a>    <span class="fu">correlate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   term   Ozone   Temp
@@ -368,11 +371,11 @@
 <h2></h2>
 <p>To just extract the single correlation value:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a></a>    <span class="fu">select</span>(Ozone, Temp) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a></a>    <span class="fu">correlate</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb7-4"><a></a>    <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"Ozone"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a></a>    <span class="fu">pull</span>(Temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-5"><a></a>    <span class="fu">pull</span>(Temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6983603</code></pre>
 </div>
@@ -385,9 +388,9 @@
 <li>In such cases, a correlation matrix is useful for exploring the relationships between several variables simultaneously.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>airquality <span class="sc">|&gt;</span> </span>
 <span id="cb9-2"><a></a>    <span class="fu">select</span>(Ozone,Solar.R,Temp,Wind) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a></a>  <span class="fu">correlate</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-3"><a></a>  <span class="fu">correlate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   term     Ozone Solar.R   Temp    Wind
@@ -402,13 +405,13 @@
 <section id="visualizing-correlation" class="slide level2">
 <h2>Visualizing Correlation</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>correlations <span class="ot">&lt;-</span> airquality <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>correlations <span class="ot">&lt;-</span> airquality <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a></a><span class="fu">select</span>(Ozone,Solar.R,Temp,Wind) <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a></a><span class="fu">correlate</span>() <span class="sc">|&gt;</span></span>
 <span id="cb11-4"><a></a><span class="fu">rearrange</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb11-5"><a></a><span class="fu">shave</span>() </span>
 <span id="cb11-6"><a></a></span>
-<span id="cb11-7"><a></a><span class="fu">rplot</span>(correlations)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-7"><a></a><span class="fu">rplot</span>(correlations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="eda-2_files/figure-revealjs/unnamed-chunk-10-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
@@ -422,6 +425,7 @@
 <img data-src="eda-2_files/figure-revealjs/unnamed-chunk-11-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="limitations-of-pearson-correlation-1" class="slide level2">
 <h2>Limitations of Pearson Correlation</h2>
+<div>
 <ul>
 <li class="fragment">Assumes both variables are continuous and normally distributed</li>
 <li class="fragment">Pearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables</li>
@@ -432,6 +436,7 @@
 <li class="fragment">Phi coefficient (for two binary variables)</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="scenario" class="slide level2">
 <h2>Scenario</h2>
@@ -446,9 +451,9 @@
 <li><span class="math inline">\(r=0.187\)</span> (weak, positive correlation)</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>df <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>df <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a></a>  <span class="fu">select</span>(x, y) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a></a>  <span class="fu">correlate</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-3"><a></a>  <span class="fu">correlate</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   term       x      y
@@ -461,7 +466,7 @@
 <section id="section-4" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="eda-2_files/figure-revealjs/unnamed-chunk-14-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
@@ -517,6 +522,7 @@
 </section>
 <section id="eda-and-the-data-pipeline" class="slide level2">
 <h2>EDA and the Data Pipeline</h2>
+<div>
 <ul>
 <li class="fragment">EDA choices are not just cosmetic; they can fundamentally alter your analysis!</li>
 <li class="fragment">What we filter, transform, and create in EDA directly shapes:
@@ -526,6 +532,7 @@
 <li class="fragment">How we interpret results</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="in-class-exercise" class="slide level2">
 <h2>In-class Exercise</h2>
@@ -550,14 +557,14 @@
 <li>What would you ask your team before proceeding?</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># EDA pipeline in R</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># EDA pipeline in R</span></span>
 <span id="cb15-2"><a></a>df <span class="ot">&lt;-</span> raw_data <span class="sc">|&gt;</span> </span>
 <span id="cb15-3"><a></a>  <span class="fu">filter</span>(income <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
 <span id="cb15-4"><a></a>  <span class="fu">mutate</span>(</span>
 <span id="cb15-5"><a></a>    <span class="at">log_income =</span> <span class="fu">log</span>(income),</span>
 <span id="cb15-6"><a></a>    <span class="at">seniority =</span> years_exp <span class="sc">&gt;</span> <span class="dv">5</span></span>
 <span id="cb15-7"><a></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb15-8"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>postalcode)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-8"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>postalcode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="diamonds-example" class="slide level2">
@@ -567,7 +574,7 @@
 <li>Goal: Predict the price of a diamond (<code>price</code>) using its carat weight (<code>carat</code>).</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">head</span>(diamonds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">head</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
   carat cut       color clarity depth table price     x     y     z
@@ -607,7 +614,7 @@
 <li>Model B: Binned <code>carat_group</code></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>df <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>df <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a></a>  <span class="fu">select</span>(price, carat) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a></a>  <span class="fu">mutate</span>(</span>
 <span id="cb18-4"><a></a>    <span class="at">carat_group =</span> <span class="fu">cut</span>(</span>
@@ -617,7 +624,7 @@
 <span id="cb18-8"><a></a>      <span class="at">right =</span> <span class="cn">FALSE</span></span>
 <span id="cb18-9"><a></a>    )</span>
 <span id="cb18-10"><a></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb18-11"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(carat_group))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-11"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(carat_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-8" class="slide level2">
@@ -627,18 +634,18 @@
 <section id="section-9" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>df <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>df <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat_group, <span class="at">y =</span> price)) <span class="sc">+</span></span>
 <span id="cb19-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">"cornflowerblue"</span>) <span class="sc">+</span></span>
 <span id="cb19-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Diamond Price by Carat Group"</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-5"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="eda-2_files/figure-revealjs/unnamed-chunk-20-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="section-10" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(rsample)</span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(rsample)</span>
 <span id="cb20-2"><a></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb20-3"><a></a></span>
 <span id="cb20-4"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
@@ -667,13 +674,13 @@
 <span id="cb20-27"><a></a>lm_fit_B <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">|&gt;</span></span>
 <span id="cb20-28"><a></a>  <span class="fu">add_recipe</span>(lm_recipe_B) <span class="sc">|&gt;</span></span>
 <span id="cb20-29"><a></a>  <span class="fu">add_model</span>(lm_spec) <span class="sc">|&gt;</span></span>
-<span id="cb20-30"><a></a>  <span class="fu">fit</span>(<span class="at">data =</span> diamond_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-30"><a></a>  <span class="fu">fit</span>(<span class="at">data =</span> diamond_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="fitted-models" class="slide level2">
 <h2>Fitted models</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">tidy</span>(lm_fit_A)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">tidy</span>(lm_fit_A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic p.value
@@ -683,7 +690,7 @@
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">tidy</span>(lm_fit_B)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">tidy</span>(lm_fit_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
   term                   estimate std.error statistic p.value
@@ -699,7 +706,7 @@
 <section id="rmspe" class="slide level2">
 <h2>RMSPE</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Model A (carat continuous)</span></span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Model A (carat continuous)</span></span>
 <span id="cb25-2"><a></a>rmse_A <span class="ot">&lt;-</span> lm_fit_A <span class="sc">|&gt;</span></span>
 <span id="cb25-3"><a></a>  <span class="fu">predict</span>(diamond_test) <span class="sc">|&gt;</span></span>
 <span id="cb25-4"><a></a>  <span class="fu">bind_cols</span>(diamond_test) <span class="sc">|&gt;</span></span>
@@ -716,7 +723,7 @@
 <span id="cb25-15"><a></a>rmse_results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(rmse_A, rmse_B) <span class="sc">|&gt;</span></span>
 <span id="cb25-16"><a></a>  <span class="fu">select</span>(model, .metric, .estimator, .estimate)</span>
 <span id="cb25-17"><a></a></span>
-<span id="cb25-18"><a></a><span class="fu">print</span>(rmse_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-18"><a></a><span class="fu">print</span>(rmse_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   model            .metric .estimator .estimate
@@ -748,6 +755,7 @@
 </section>
 <section id="why-split-before-eda" class="slide level2">
 <h2>Why Split Before EDA?</h2>
+<div>
 <ul>
 <li class="fragment">It is often recommended to split your data <em>before</em> performing EDA.</li>
 <li class="fragment">Analyzing the full dataset can leak information from the test set into the model or analysis.</li>
@@ -758,9 +766,11 @@
 </ul></li>
 <li class="fragment">Remember your test set should simulate unseen data!</li>
 </ul>
+</div>
 </section>
 <section id="its-not-always-one-size-fits-all" class="slide level2">
 <h2>It’s Not Always One-Size-Fits-All!</h2>
+<div>
 <ul>
 <li class="fragment"><p>The decision to split before or after EDA depends on your goals and the context.</p></li>
 <li class="fragment"><p>Sometimes it makes sense to perform minimal checks on the full dataset to:</p>
@@ -772,15 +782,18 @@
 <li class="fragment"><p>If your goal is descriptive analysis (not predictive modeling or inference), a train/test split may not be necessary.</p></li>
 <li class="fragment"><p>The key is to think critically about your objectives and the potential for data leakage.</p></li>
 </ul>
+</div>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key Takeaways</h2>
+<div>
 <ul>
 <li class="fragment"><p>Correlation quantifies the strength and direction of relationships between variables</p></li>
 <li class="fragment"><p>Pearson’s correlation captures only linear relationships and it may miss or misrepresent more complex patterns</p></li>
 <li class="fragment"><p>Choices during EDA (e.g., filtering, transforming, and feature selection) shape your modeling outcomes</p></li>
 <li class="fragment"><p>Splitting data before EDA helps prevent leakage and supports valid inference and model evaluation</p></li>
 </ul>
+</div>
 
 
 </section>
@@ -1040,180 +1053,197 @@
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-      window.document.addEventListener("DOMContentLoaded", function (event) {
-        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-        tabsets.forEach(function(tabset) {
-          const tabby = new Tabby('#' + tabset.id);
-        });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
         }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
         }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
-          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-          var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
-          var isInternal = (href) => {
-              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-          }
-          // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-          for (var i=0; i<links.length; i++) {
-            const link = links[i];
-            if (!isInternal(link.href)) {
-              // undo the damage that might have been done by quarto-nav.js in the case of
-              // links that we want to consider external
-              if (link.dataset.originalHref !== undefined) {
-                link.href = link.dataset.originalHref;
-              }
-                // target, if specified
-                link.setAttribute("target", "_blank");
-                if (link.getAttribute("rel") === null) {
-                  link.setAttribute("rel", "noopener");
-                }
-                // default icon
-                link.classList.add("external");
-            }
-          }
-        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-          const config = {
-            allowHTML: true,
-            maxWidth: 500,
-            delay: 100,
-            arrow: false,
-            appendTo: function(el) {
-                return el.closest('section.slide') || el.parentElement;
-            },
-            interactive: true,
-            interactiveBorder: 10,
-            theme: 'light-border',
-            placement: 'bottom-start',
-          };
-          if (contentFn) {
-            config.content = contentFn;
-          }
-          if (onTriggerFn) {
-            config.onTrigger = onTriggerFn;
-          }
-          if (onUntriggerFn) {
-            config.onUntrigger = onUntriggerFn;
-          }
-            config['offset'] = [0,0];
-            config['maxWidth'] = 700;
-          window.tippy(el, config); 
-        }
-        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-        for (var i=0; i<noterefs.length; i++) {
-          const ref = noterefs[i];
-          tippyHover(ref, function() {
-            // use id or data attribute instead here
-            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-            try { href = new URL(href).hash; } catch {}
-            const id = href.replace(/^#\/?/, "");
-            const note = window.document.getElementById(id);
-            if (note) {
-              return note.innerHTML;
-            } else {
-              return "";
-            }
-          });
-        }
-        const findCites = (el) => {
-          const parentEl = el.parentElement;
-          if (parentEl) {
-            const cites = parentEl.dataset.cites;
-            if (cites) {
-              return {
-                el,
-                cites: cites.split(' ')
-              };
-            } else {
-              return findCites(el.parentElement)
-            }
-          } else {
-            return undefined;
-          }
-        };
-        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-        for (var i=0; i<bibliorefs.length; i++) {
-          const ref = bibliorefs[i];
-          const citeInfo = findCites(ref);
-          if (citeInfo) {
-            tippyHover(citeInfo.el, function() {
-              var popup = window.document.createElement('div');
-              citeInfo.cites.forEach(function(cite) {
-                var citeDiv = window.document.createElement('div');
-                citeDiv.classList.add('hanging-indent');
-                citeDiv.classList.add('csl-entry');
-                var biblioDiv = window.document.getElementById('ref-' + cite);
-                if (biblioDiv) {
-                  citeDiv.innerHTML = biblioDiv.innerHTML;
-                }
-                popup.appendChild(citeDiv);
-              });
-              return popup.innerHTML;
-            });
-          }
-        }
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      </script>
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
     
 
 </body></html>

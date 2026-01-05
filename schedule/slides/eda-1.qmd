@@ -64,7 +64,6 @@ wildfire <- read_csv("data/wildfire.csv")
 :::incremental
 - Conduct exploratory data analysis using statistical and visualization tools to generate hypotheses.
 - Reflect on how data were collected, identify design improvements, and discuss study limitations.
-- Choose appropriate data acquisition strategies and write reproducible code to import data.
 - Recognize when simulation is useful and design and run appropriate simulations.
 - Detect outliers and anomalies, apply handling strategies, and assess their impact on conclusions.
 - Identify missing data mechanisms, apply handling strategies, and assess their impact on conclusions.
