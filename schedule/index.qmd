@@ -32,7 +32,8 @@ Instructions to create `.pdf`s of the lecture slides (works in Google Chrome or 
 
 ## Midterm exam
 
-The midterm exam is tentatively set to occur in the window of February 11-16, 2026. This is subject to scheduling availability in the CBTF.
+The midterm exam is tentatively set to occur in the window of February 11-14, 2026. This is subject to scheduling availability in the CBTF.
+
 
 ## Final exam
 

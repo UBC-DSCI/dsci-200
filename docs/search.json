@@ -18,7 +18,7 @@
     "href": "schedule/slides/eda-2.html#learning-objectives",
     "title": "UBC DSCI 200",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lesson, you will be able to:\n\nInvestigate relationships between variables using correlation\nExamine the limitations of Pearson’s correlation and recognize scenarios where it can be misleading, including Simpson’s Paradox\nDiscuss how choices made during EDA can impact the entire data analysis pipeline\nRecognize the role of data splitting in preventing bias and ensuring generalizability"
+    "text": "Learning Objectives\nBy the end of this lesson, you will be able to:\n\n\nInvestigate relationships between variables using correlation\nExamine the limitations of Pearson’s correlation and recognize scenarios where it can be misleading, including Simpson’s Paradox\nDiscuss how choices made during EDA can impact the entire data analysis pipeline\nRecognize the role of data splitting in preventing bias and ensuring generalizability"
   },
   {
     "objectID": "schedule/slides/eda-2.html#review",
@@ -32,7 +32,7 @@
     "href": "schedule/slides/eda-2.html#what-is-correlation",
     "title": "UBC DSCI 200",
     "section": "What is Correlation?",
-    "text": "What is Correlation?\n\nCorrelation measures the strength and direction of a relationship between variables\nFor example, correlation analysis could help us explore the following questions:\n\nIs there a relationship between social media usage and mental health scores among teenagers?\nDo housing prices correlate with interest rates in different regions?\nDoes the frequency of push notifications correlate with user engagement in a mobile app?"
+    "text": "What is Correlation?\n\n\nCorrelation measures the strength and direction of a relationship between variables\nFor example, correlation analysis could help us explore the following questions:\n\nIs there a relationship between social media usage and mental health scores among teenagers?\nDo housing prices correlate with interest rates in different regions?\nDoes the frequency of push notifications correlate with user engagement in a mobile app?"
   },
   {
     "objectID": "schedule/slides/eda-2.html#pearson-correlation",
@@ -116,7 +116,7 @@
     "href": "schedule/slides/eda-2.html#limitations-of-pearson-correlation-1",
     "title": "UBC DSCI 200",
     "section": "Limitations of Pearson Correlation",
-    "text": "Limitations of Pearson Correlation\n\nAssumes both variables are continuous and normally distributed\nPearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables\nAlternatives exist :\n\nSpearman’s rho (for ordinal or ranked data)\nKendall’s tau (for ordinal or ranked data)\nPhi coefficient (for two binary variables)"
+    "text": "Limitations of Pearson Correlation\n\n\nAssumes both variables are continuous and normally distributed\nPearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables\nAlternatives exist :\n\nSpearman’s rho (for ordinal or ranked data)\nKendall’s tau (for ordinal or ranked data)\nPhi coefficient (for two binary variables)"
   },
   {
     "objectID": "schedule/slides/eda-2.html#scenario",
@@ -172,7 +172,7 @@
     "href": "schedule/slides/eda-2.html#eda-and-the-data-pipeline",
     "title": "UBC DSCI 200",
     "section": "EDA and the Data Pipeline",
-    "text": "EDA and the Data Pipeline\n\nEDA choices are not just cosmetic; they can fundamentally alter your analysis!\nWhat we filter, transform, and create in EDA directly shapes:\n\nWhat models we build\nHow well they perform\nHow we interpret results"
+    "text": "EDA and the Data Pipeline\n\n\nEDA choices are not just cosmetic; they can fundamentally alter your analysis!\nWhat we filter, transform, and create in EDA directly shapes:\n\nWhat models we build\nHow well they perform\nHow we interpret results"
   },
   {
     "objectID": "schedule/slides/eda-2.html#in-class-exercise",
@@ -256,21 +256,21 @@
     "href": "schedule/slides/eda-2.html#why-split-before-eda",
     "title": "UBC DSCI 200",
     "section": "Why Split Before EDA?",
-    "text": "Why Split Before EDA?\n\nIt is often recommended to split your data before performing EDA.\nAnalyzing the full dataset can leak information from the test set into the model or analysis.\nIf we tailor preprocessing, feature engineering or generate hypotheses using the whole dataset:\n\nIt introduces data snooping bias.\nThe model may overfit to patterns it shouldn’t have access to.\n\nRemember your test set should simulate unseen data!"
+    "text": "Why Split Before EDA?\n\n\nIt is often recommended to split your data before performing EDA.\nAnalyzing the full dataset can leak information from the test set into the model or analysis.\nIf we tailor preprocessing, feature engineering or generate hypotheses using the whole dataset:\n\nIt introduces data snooping bias.\nThe model may overfit to patterns it shouldn’t have access to.\n\nRemember your test set should simulate unseen data!"
   },
   {
     "objectID": "schedule/slides/eda-2.html#its-not-always-one-size-fits-all",
     "href": "schedule/slides/eda-2.html#its-not-always-one-size-fits-all",
     "title": "UBC DSCI 200",
     "section": "It’s Not Always One-Size-Fits-All!",
-    "text": "It’s Not Always One-Size-Fits-All!\n\nThe decision to split before or after EDA depends on your goals and the context.\nSometimes it makes sense to perform minimal checks on the full dataset to:\n\nDetect inconsistent data types\nCheck for class imbalance\nIdentify missing values or obvious data issues\n\nIf your goal is descriptive analysis (not predictive modeling or inference), a train/test split may not be necessary.\nThe key is to think critically about your objectives and the potential for data leakage."
+    "text": "It’s Not Always One-Size-Fits-All!\n\n\nThe decision to split before or after EDA depends on your goals and the context.\nSometimes it makes sense to perform minimal checks on the full dataset to:\n\nDetect inconsistent data types\nCheck for class imbalance\nIdentify missing values or obvious data issues\n\nIf your goal is descriptive analysis (not predictive modeling or inference), a train/test split may not be necessary.\nThe key is to think critically about your objectives and the potential for data leakage."
   },
   {
     "objectID": "schedule/slides/eda-2.html#key-takeaways",
     "href": "schedule/slides/eda-2.html#key-takeaways",
     "title": "UBC DSCI 200",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nCorrelation quantifies the strength and direction of relationships between variables\nPearson’s correlation captures only linear relationships and it may miss or misrepresent more complex patterns\nChoices during EDA (e.g., filtering, transforming, and feature selection) shape your modeling outcomes\nSplitting data before EDA helps prevent leakage and supports valid inference and model evaluation"
+    "text": "Key Takeaways\n\n\nCorrelation quantifies the strength and direction of relationships between variables\nPearson’s correlation captures only linear relationships and it may miss or misrepresent more complex patterns\nChoices during EDA (e.g., filtering, transforming, and feature selection) shape your modeling outcomes\nSplitting data before EDA helps prevent leakage and supports valid inference and model evaluation"
   },
   {
     "objectID": "schedule/index.html",
@@ -278,6 +278,13 @@
     "title": " Schedule",
     "section": "",
     "text": "Slides are listed below for each lesson."
+  },
+  {
+    "objectID": "schedule/index.html#midterm-exam",
+    "href": "schedule/index.html#midterm-exam",
+    "title": " Schedule",
+    "section": "Midterm exam",
+    "text": "Midterm exam\nThe midterm exam is tentatively set to occur in the window of February 11-14, 2026. This is subject to scheduling availability in the CBTF."
   },
   {
     "objectID": "schedule/index.html#final-exam",
@@ -368,7 +375,7 @@
     "href": "syllabus.html",
     "title": " Syllabus",
     "section": "",
-    "text": "NoteTerm 2025 Winter 2: January - April 2026"
+    "text": "Term 2025 Winter 2: January - April 2026"
   },
   {
     "objectID": "syllabus.html#course-info",
@@ -445,7 +452,7 @@
     "href": "schedule/slides/eda-1.html#coruse-level-learning-objectives",
     "title": "UBC DSCI 200",
     "section": "Coruse-level Learning Objectives",
-    "text": "Coruse-level Learning Objectives\n\nConduct exploratory data analysis using statistical and visualization tools to generate hypotheses.\nReflect on how data were collected, identify design improvements, and discuss study limitations.\nRecognize when simulation is useful and design and run appropriate simulations.\nDetect outliers and anomalies, apply handling strategies, and assess their impact on conclusions.\nIdentify missing data mechanisms, apply handling strategies, and assess their impact on conclusions.\nChoose a data acquisition strategy and write reproducible scripts to read data.\nEvaluate data privacy needs, apply suitable privacy techniques, and reflect on their consequences.\nDetermine and justify data ownership in a given context."
+    "text": "Coruse-level Learning Objectives\n\n\nConduct exploratory data analysis using statistical and visualization tools to generate hypotheses.\nReflect on how data were collected, identify design improvements, and discuss study limitations.\nRecognize when simulation is useful and design and run appropriate simulations.\nDetect outliers and anomalies, apply handling strategies, and assess their impact on conclusions.\nIdentify missing data mechanisms, apply handling strategies, and assess their impact on conclusions.\nChoose a data acquisition strategy and write reproducible scripts to read data.\nEvaluate data privacy needs, apply suitable privacy techniques, and reflect on their consequences.\nDetermine and justify data ownership in a given context."
   },
   {
     "objectID": "schedule/slides/eda-1.html#course-website",
@@ -466,14 +473,14 @@
     "href": "schedule/slides/eda-1.html#what-is-eda",
     "title": "UBC DSCI 200",
     "section": "What Is EDA?",
-    "text": "What Is EDA?\nBefore jumping into analysis or building models, we need to understand the data. This is where exploratory data analysis (EDA) comes in. \nEDA is not a strict process. Instead, it’s a flexible and creative cycle where you:\n\nCome up with questions about the data\n\nInvestigate possible answers using visualizations, transformations, and simple models\n\nLet the answers inspire new or refined questions\nEventually, you’ll land on insights that are worth digging into and sharing"
+    "text": "What Is EDA?\nBefore jumping into analysis or building models, we need to understand the data. This is where exploratory data analysis (EDA) comes in. \nEDA is not a strict process. Instead, it’s a flexible and creative cycle where you:\n\n\nCome up with questions about the data\n\nInvestigate possible answers using visualizations, transformations, and simple models\n\nLet the answers inspire new or refined questions\nEventually, you’ll land on insights that are worth digging into and sharing"
   },
   {
     "objectID": "schedule/slides/eda-1.html#eda",
     "href": "schedule/slides/eda-1.html#eda",
     "title": "UBC DSCI 200",
     "section": "EDA",
-    "text": "EDA\n\nEven if you’re given a clear research question, EDA still plays a key role. It’s how we check data quality, spot inconsistencies, and detect patterns. For example,\n\nAre there missing values?\nDo variables have unexpected distributions?\nAre there data points that don’t belong?\n\nAll of these questions fall under the umbrella of EDA!"
+    "text": "EDA\n\nEven if you’re given a clear research question, EDA still plays a key role. It’s how we check data quality, spot inconsistencies, and detect patterns. For example,\n\n\nAre there missing values?\nDo variables have unexpected distributions?\nAre there data points that don’t belong?\n\nAll of these questions fall under the umbrella of EDA!"
   },
   {
     "objectID": "schedule/slides/eda-1.html#learning-objectives",
@@ -494,7 +501,7 @@
     "href": "schedule/slides/eda-1.html#visualizing-numerical-variables",
     "title": "UBC DSCI 200",
     "section": "Visualizing Numerical Variables",
-    "text": "Visualizing Numerical Variables\n\nThinking back to DSCI 100, what are some examples of plots that can be useful to visualize numerical/quantitative variables?\n\nHistograms\nBoxplots\nLine plots\nJitter plots (new)\nViolin plots (new)"
+    "text": "Visualizing Numerical Variables\n\nThinking back to DSCI 100, what are some examples of plots that can be useful to visualize numerical/quantitative variables?\n\n\nHistograms\nBoxplots\nLine plots\nJitter plots (new)\nViolin plots (new)"
   },
   {
     "objectID": "schedule/slides/eda-1.html#loading-the-data",
@@ -557,7 +564,7 @@
     "href": "schedule/slides/eda-1.html#visualizing-categorical-data",
     "title": "UBC DSCI 200",
     "section": "Visualizing Categorical Data",
-    "text": "Visualizing Categorical Data\nWhat is a plot we can use to visualize a categorical variable?\n\nBar plots"
+    "text": "Visualizing Categorical Data\nWhat is a plot we can use to visualize a categorical variable?\n\n\nBar plots"
   },
   {
     "objectID": "schedule/slides/eda-1.html#bar-plots",
@@ -578,21 +585,21 @@
     "href": "schedule/slides/eda-1.html#asking-questions",
     "title": "UBC DSCI 200",
     "section": "Asking Questions",
-    "text": "Asking Questions\n\nNow that we have reviewed some common plots, let’s get back to the why.\nEDA is driven by questions. Each one shines a light on a different part of the dataset.\nThe goal isn’t to answer every question, but to use them to guide exploration.\n\nHere are some examples:\n\nWhat does this variable look like?\nHow does it relate to other variables?\nAre there unusual values?\nWhat patterns emerge over time or across groups?"
+    "text": "Asking Questions\n\nNow that we have reviewed some common plots, let’s get back to the why.\nEDA is driven by questions. Each one shines a light on a different part of the dataset.\nThe goal isn’t to answer every question, but to use them to guide exploration.\n\nHere are some examples:\n\n\nWhat does this variable look like?\nHow does it relate to other variables?\nAre there unusual values?\nWhat patterns emerge over time or across groups?"
   },
   {
     "objectID": "schedule/slides/eda-1.html#section-4",
     "href": "schedule/slides/eda-1.html#section-4",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "You don’t need the perfect question at the start! Often, you won’t know what to ask until you’ve seen the data… \n\nStart with broad questions\n\nLet early insights shape new, more specific ones\n\nDig deeper with each iteration"
+    "text": "You don’t need the perfect question at the start! Often, you won’t know what to ask until you’ve seen the data… \n\n\nStart with broad questions\n\nLet early insights shape new, more specific ones\n\nDig deeper with each iteration"
   },
   {
     "objectID": "schedule/slides/eda-1.html#types-of-questions",
     "href": "schedule/slides/eda-1.html#types-of-questions",
     "title": "UBC DSCI 200",
     "section": "Types of Questions",
-    "text": "Types of Questions\n\nAlthough there are many types of exploratory questions, we will focus on the following three questions: \n\nWhat is the central tendency of my variable(s)?\nWhat type of variation occurs within my variables?\nWhat type of covariation occurs between my variables?"
+    "text": "Types of Questions\n\nAlthough there are many types of exploratory questions, we will focus on the following three questions: \n\n\nWhat is the central tendency of my variable(s)?\nWhat type of variation occurs within my variables?\nWhat type of covariation occurs between my variables?"
   },
   {
     "objectID": "schedule/slides/eda-1.html#measures-of-central-tendency",
@@ -613,7 +620,7 @@
     "href": "schedule/slides/eda-1.html#the-median",
     "title": "UBC DSCI 200",
     "section": "The Median",
-    "text": "The Median\n\nThe median is the middle observation in the data when all values are sorted from smallest to largest.\n50% of the data will be above and below the median.\nFor an odd number of observations, order them and take the middle value. \\[\n\\{3, 4, {\\color{blue}6}, 7, 10\\} \\rightarrow \\text{median} = {\\color{blue}6}\n\\]\nFor an even number of observations, order them and average the two middle values. \\[\n\\{3, 4, {\\color{blue}6}, {\\color{blue}7}, 10, 12\\} \\rightarrow \\text{median}=\\frac{6+7}{2}=6.5\n\\]"
+    "text": "The Median\n\n\nThe median is the middle observation in the data when all values are sorted from smallest to largest.\n50% of the data will be above and below the median.\nFor an odd number of observations, order them and take the middle value. \\[\n\\{3, 4, {\\color{blue}6}, 7, 10\\} \\rightarrow \\text{median} = {\\color{blue}6}\n\\]\nFor an even number of observations, order them and average the two middle values. \\[\n\\{3, 4, {\\color{blue}6}, {\\color{blue}7}, 10, 12\\} \\rightarrow \\text{median}=\\frac{6+7}{2}=6.5\n\\]"
   },
   {
     "objectID": "schedule/slides/eda-1.html#discussion",
@@ -627,7 +634,7 @@
     "href": "schedule/slides/eda-1.html#mean-vs.-median",
     "title": "UBC DSCI 200",
     "section": "Mean vs. Median",
-    "text": "Mean vs. Median\n\n\nThe mean can be sensitive to skewness and extreme values (outliers) - much more to come later in this course about working with outliers!\nThe median is more robust (less affected) by skewness and outliers in the data.\nWhen the data is roughly symmetric with few outliers, the mean and median will be very close.\nHowever, in the presence of outliers or skewness, the median may be preferred."
+    "text": "Mean vs. Median\n\n\n\nThe mean can be sensitive to skewness and extreme values (outliers) - much more to come later in this course about working with outliers!\nThe median is more robust (less affected) by skewness and outliers in the data.\nWhen the data is roughly symmetric with few outliers, the mean and median will be very close.\nHowever, in the presence of outliers or skewness, the median may be preferred."
   },
   {
     "objectID": "schedule/slides/eda-1.html#example",
