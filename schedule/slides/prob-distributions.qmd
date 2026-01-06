@@ -1,0 +1,417 @@
+---
+lecture: "Random Variables and Distributions"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+*This material is adapted from* [*Chapters 5 of Elementary Statistics with R*](https://homerhanumat.github.io/elemStats/).
+
+<br><br>
+
+## Learning Objectives 
+<br><br>
+
+- Distinguish between sampling from a finite population and model-based approaches to randomness. 
+- Define and interpret basic probability concepts such as a sample space, event and random variable. 
+- Classify random variables as discrete or continuous, with supporting examples. 
+- Recognize common types of probability distributions and when they are appropriate. 
+
+## Last time: Sampling from a finite population
+<br></br>
+
+- We sampled from some finite population (e.g., all students in a university)
+- Our sample is a subset of actual individuals or observations
+- Variation occurs because each sample can be different
+
+## Model-based approach 
+<br>
+
+| Sampling from a Finite Population         | Model-Based Approach                           |
+|-------------------------------------------|------------------------------------------------|
+| Finite population    | Data generated from a probability model         |
+| Sample is a subset of actual units         | Values are outcomes from a distribution         |
+| Sampling variability comes from the sample | Variability comes from randomness in the model  |
+
+## Sample Space
+
+- The **sample space** is the set of all possible outcomes of an experiment.
+
+	- Example: Tossing a fair coin
+
+- The sample space is:  `{H, T}`
+
+- Each outcome represents a possible result of the experiment
+
+We denote the sample space using a capital **S** or curly braces.
+
+![](https://images.unsplash.com/photo-1574641820089-d431bff40336?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+## Event
+
+- An **event** is a subset of the sample space, and it's a collection of one or more outcomes.
+- Events can include:
+  - A single outcome (e.g., `{H}`)
+  - Multiple outcomes (e.g., `{H, T}`)
+  - No outcomes (the empty set)
+
+If all outcomes are equally likely, then the probability of that event, $P(\text{event})$, is computed as:
+
+$$P(\text{event}) = \frac{(\text{number of outcomes in the event})} {(\text{total number of outcomes in the sample space})}$$
+
+## Example: Tossing a Coin
+
+- Sample space: `{H, T}`
+- Event: Toss a head = `{H}`
+- Since the coin is fair, both outcomes are equally likely
+
+$$P(H) = 1 / 2 = 0.5$$
+
+## Random variables
+
+:::incremental 
+- A **random variable** is a function whose value is the outcome of a chance experiment.
+- It's actually a function on the sample space that assigns a number to each possible outcome.
+- It can take on multiple possible values, some potentially more likely than others.
+- Before we observe it, the value is unknown. After observation, it is fixed.
+::: 
+
+## Random variable notation
+
+- Random variables are usually represented by **uppercase letters** (e.g., \( X \), \( Y \), \( Z \))
+- The values they take are represented by **lowercase letters** (e.g., \( x \), \( y \), \( z \))
+
+Example: 
+
+- Let $X$ represent the outcome of a coin toss
+- Possible values:
+  - $x = 1$ → outcome is "heads"
+  - $x = 0$ → outcome is "tails"
+
+## 
+<br>
+
+- A random variable $X$ is said to *follow* a certain distribution.
+- We write this as: $$X \sim \text{Distribution}(\text{parameters})$$
+- Just like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible outcomes.
+
+
+## Discrete vs Continuous Random Variables
+
+- Random variables are classified based on the type of values they can take:	
+	- Discrete: values are countable (e.g., 0, 1, 2, ...)
+	- Continuous: values fall in a range and can take infinitely many possibilities
+- Examples:
+	- Discrete: number of heads in 10 coin tosses
+	- Continuous: height of a randomly selected student
+
+## Scenario
+
+A game involves rolling a fair six-sided die. Let $X$ represent the number of dots showing on the top face after the roll.
+
+Questions:
+
+1. What is the sample space?
+2. Define one event of interest.
+3. Describe the random variable $X$. What values can it take?
+4. Is $X$ discrete or continuous?
+
+
+Take 1-2 minutes to discuss with a partner.
+
+## Discrete Random Variables
+<br>
+
+Today, we’ll look at three types of discrete random variables:
+
+- Bernoulli
+- Binomial
+- Poisson
+
+## Bernoulli
+
+- A Bernoulli random variable represents a **single trial** with two possible outcomes:
+	- The event of interest **occurs** → we call this a **success**
+	- The event of interest **does not occur** → we call this a **failure**
+- Notation:  $$X \sim \text{Bernoulli}(p)$$
+
+where $p$ is the probability of success (so $1 - p$ is failure).
+
+## Bernoulli
+<br>
+
+- Possible values:  
+	- 1 = success  
+	- 0 = failure
+
+- Examples:
+	- Did a user click on an ad? (yes = 1, no = 0)  
+	- Did a lightbulb work when tested? (works = 1, doesn’t work = 0)
+
+## Binomial
+
+- The Binomial random variable builds on the Bernoulli trial.
+- Instead of just one trial, we repeat the experiment a fixed number of times.
+- Each trial:
+	- Has only two possible outcomes: success or failure
+	- Is independent of the others
+- Notation:  $$X \sim \text{Binomial}(n, p)$$
+
+where:
+
+- $n$ - number of trials  
+- $p$ - probability of success on each trial
+
+## Binomial (continued)
+
+- A binomial random variable represents the **number of successes** in a fixed number of independent trials.
+- The probability of success is the same each time and the number of trials is fixed in advance.
+- Examples:
+	- Number of people who vote in favour of a proposal out of 100 surveyed
+	- Number of lightbulbs that pass a test out of 10 tested
+	- Number of correct answers on a multiple-choice quiz with 5 questions
+	
+## Poisson 
+
+- A poisson random variable counts the number of times an event occurs in a fixed interval of time or space.
+- Events happen independently of one another and occur at a constant average rate.
+- There’s no upper limit to the number of occurrences, but large counts become increasingly rare
+- Notation:  
+$$X \sim \text{Poisson}(\lambda)$$
+
+where  $\lambda$ is the **expected number of events** in the interval.
+
+
+##  Example of a Poisson Random Variable
+<br>
+
+- Number of customers arriving at a store in an hour
+- Number of emails received per day
+- Number of typos on a printed page
+
+
+## Summary: Discrete Random Variables
+
+
+| Distribution | Notation                       | Parameters         | Scenario Example                                 |
+|--------------|--------------------------------|--------------------|--------------------------------------------------|
+| Bernoulli    | $X \sim \text{Bernoulli}(p)$   | $p$ = chance of success | Single yes/no outcome (e.g., clicked or not)     |
+| Binomial     | $X \sim \text{Binomial}(n, p)$ | $n$ = trials, $p$ = success rate | Count of successes in fixed # of trials           |
+| Poisson      | $X \sim \text{Poisson}(\lambda)$ | $\lambda$ = rate | Count of events in time or space (e.g., arrivals) |
+
+
+> *Note: There are many other types of discrete random variables you may encounter in future courses (e.g., STAT 302).*
+
+
+## Continuous random variables
+
+A continuous random variable can take on any value in a continuous range (not just whole numbers).
+
+Today, we’ll look at three types of continuous random variables:
+
+- Uniform
+- Exponential
+- Normal
+
+We'll describe the type of data each models and how we use parameters to define their distributions.
+
+## Uniform Distribution
+
+- All values in a given interval are **equally likely**
+- The graph of the distribution is a flat horizontal line
+
+- Notation:  
+  $$X \sim \text{Uniform}(a, b)$$
+
+where:
+
+- $a$ is the minimum value  
+- $b$ the maximum value  
+- $X$ takes any value in the interval $[a, b]$
+
+## 
+
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+library(ggplot2)
+
+ggplot(data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = function(x) dunif(x, min = 0, max = 1), geom = "area", fill = "#1f77b4", alpha = 0.6) +
+  stat_function(fun = function(x) dunif(x, min = 0, max = 1), color = "#1f77b4", size = 1) +
+  labs(title = "Uniform(0,1) Distribution", y = "Density", x = "X") +
+  theme_minimal() +
+	xlim(-0.5,1.5)
+```
+
+
+## Examples of a Uniform Random Variable
+<br>
+
+- Randomly picking a number between 0 and 1  
+- Generating a random number to assign users to A/B test groups  
+- Simulating noise or jitter in synthetic datasets  
+- Sampling a timestamp uniformly within a day for testing  
+  
+## Exponential Distribution
+
+- Models **waiting times** between independent events that happen at a constant average rate.
+- Events are memoryless, meaning that the past doesn’t affect the future.
+
+- Notation:  
+  $$X \sim \text{Exponential}(\lambda)$$
+
+where:
+
+- $\lambda$ is rate parameter (average number of events per unit time)  
+- $X$ represents the time until the next event
+
+  
+##
+
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+ggplot(data.frame(x = c(0, 8)), aes(x)) +
+  stat_function(fun = function(x) dexp(x, rate = 1), geom = "area", fill = "#ff7f0e", alpha = 0.6) +
+  stat_function(fun = function(x) dexp(x, rate = 1), color = "#ff7f0e", size = 1) +
+  labs(title = "Exponential Distribution (λ = 1)", y = "Density", x = "X") +
+  theme_minimal()+ xlim(-1,10)
+```
+## Examples of an Exponential Random Variable
+<br>
+
+  - Time until next website visitor arrives  
+  - Time until next customer enters a store  
+  - Time between radioactive particle emissions
+  
+
+## Normal Distribution
+
+- Perhaps the most widely used distribution in statistics!
+- Bell-shaped and symmetric around the mean.
+- Values can go from $-\infty$ to $+\infty$.
+- Many natural phenomena tend to follow (or approximate) this distribution.
+- Notation:  
+  $$X \sim \text{Normal}(\mu, \sigma)$$
+
+where:
+
+- $\mu$ - mean (center of the distribution)  
+- $\sigma$ - standard deviation (spread)
+
+
+
+##
+
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+ggplot(data.frame(x = c(-4, 4)), aes(x)) +
+  stat_function(fun = function(x) dnorm(x, mean = 0, sd = 1), geom = "area", fill = "#2ca02c", alpha = 0.6) +
+  stat_function(fun = function(x) dnorm(x, mean = 0, sd = 1), color = "#2ca02c", size = 1) +
+  labs(title = "Normal Distribution (μ = 0, σ = 1)", y = "Density", x = "X") +
+  theme_minimal()
+```
+
+
+
+## Examples of a Normal Random Variable
+<br>
+
+  - Heights of adult humans  
+  - Measurement errors in instruments  
+  - IQ scores
+  - Daily temperature fluctuations
+  
+## Summary: Continuous Random Variables
+
+| Distribution | Notation                          | Parameters             | Scenario Example                                      |
+|--------------|-----------------------------------|------------------------|-------------------------------------------------------|
+| Uniform      | $X \sim \text{Uniform}(a, b)$     | $a$, $b$ = min/max     | Value equally likely anywhere in a range              |
+| Exponential  | $X \sim \text{Exponential}(\lambda)$ | $\lambda$ = rate     | Time between independent events                       |
+| Normal       | $X \sim \text{Normal}(\mu, \sigma)$ | $\mu$ = mean, $\sigma$ = SD | Symmetric, bell-shaped data (e.g., heights, measurements) |
+
+
+## iClicker 1
+<br>
+
+You’re running an online A/B test where each website visitor is randomly assigned to either version A or version B. For each visitor, you record whether they click the "Sign Up" button (yes or no).
+
+Which random variable best models the click outcome for a single visitor?
+
+</br>
+
+A. Binomial  
+B. Bernoulli  
+C. Poisson  
+D. Uniform  
+E. Normal  
+
+
+## iClicker 2 
+<br>
+Your data science team is analyzing the number of times customers log into an app during a single day. Login events happen independently, and you want to model the how many logins there are per user per day.
+
+Which random variable would best represent the number of logins in a day?
+
+</br>
+
+A. Binomial  
+B. Bernoulli  
+C. Poisson  
+D. Uniform  
+E. Normal  
+
+## iClicker 3
+<br>
+
+Daily profits of a startup vary around zero, sometimes positive, sometimes negative, with most days near the average.
+
+Which random variable best models this?
+
+</br>
+
+A. Binomial  
+B. Bernoulli  
+C. Poisson  
+D. Uniform  
+E. Normal 
+
+
+## iClicker 4 
+<br>
+
+In a marketing survey, you contact 50 randomly selected customers to ask if they would recommend your product. Each customer independently responds "yes" or "no." You want to model the total number of "yes" responses in your sample.
+
+Which random variable is most appropriate for modeling the number of positive responses?
+
+</br>
+
+A. Binomial  
+B. Bernoulli  
+C. Poisson  
+D. Uniform  
+E. Normal 
+
+## iClicker 5
+<br>
+
+You are simulating the load times for a web app where the server response time is equally likely to be anywhere between 0.5 and 2.5 seconds.
+
+Which random variable best models this server response time?
+
+</br>
+
+A. Binomial  
+B. Bernoulli  
+C. Poisson  
+D. Uniform  
+E. Normal  
+
+## Key takeaways
+
+- Sample space is the set of all possible outcomes; an event is a subset of that space.
+- A random variable assigns numbers to outcomes of a random process.
+- Random variables can be discrete (countable values) or continuous (range of values).
+- Different types of random variables are modeled by different distributions (e.g., Bernoulli, Binomial, Poisson, Uniform).
+

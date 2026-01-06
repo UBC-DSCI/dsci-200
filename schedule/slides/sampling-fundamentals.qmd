@@ -1,0 +1,441 @@
+---
+lecture: "Fundamentals of Sampling and Variability"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+{{< include _titleslide.qmd >}}
+
+```{r}
+#| context: global
+#| include: false
+library(tidyverse)
+library(infer)
+
+wildfire <- read_csv("data/wildfire.csv")
+```
+
+## Attribution
+<br><br>
+
+*This material is adapted from* [*Chapters 5 of Elementary Statistics with R*](https://homerhanumat.github.io/elemStats/).
+
+<br><br>
+
+## Learning Objectives 
+<br><br>
+
+- Distinguish between a population and a sample from a finite population. 
+
+- Define commonly used population parameters and their corresponding point estimates.   
+
+- Identify the population, sample, parameters and point estimates in a given scenario. 
+
+- Explain what sampling variability is and how it arises from samples drawn at random. 
+
+- Define standard error of an estimator and describe how it relates to sampling variability.  
+
+
+## The Data: Wildfires in Alberta
+
+- Alberta has been heavily affected by wildfires in recent years. 
+- Wildfires cause environmental, economic and social harm:
+  - Destruction of forests and infrastructure
+  - Widespread evacuations
+  - Disproportionate impacts on rural and Indigenous communities
+- Data helps us plan and respond more effectively and equitably.
+
+## Packages
+
+```{r}
+library(tidyverse)
+#library(diversedata)
+library(infer)
+```
+
+##
+
+We will load `wildfire` data from the `diversedata` R package: 
+```{r}
+wildfire <- read_csv("data/wildfire.csv")
+
+head(wildfire)
+dim(wildfire)
+```
+
+
+## Population 
+
+::: columns
+::: {.column width="50%"}
+
+- A <span class="secondary">population</span> is a collection of all subjects or observations we are interested in (e.g., all UBC students).
+
+- For today's discussion, we will think of the wildfire data as a **finite population**, consisting of 26551 wildfire records in Alberta from 2006-2024.
+
+:::
+
+::: {.column width="50%"}
+
+<div style="text-align: center;">
+  <img src="img/wildfire.png" alt="Wildfire map" style="width: 65%; border-radius: 12px;" />
+</div>
+
+<div style="text-align: center; font-size: 12px; margin-top: 0.5em;">
+  Source: <a href="https://diverse-data-hub.github.io/website_files/description_pages/wildfire.html" target="_blank">diverse-data-hub.github.io</a>
+</div>
+
+:::
+:::
+
+
+## Temperature
+
+- Let's focus on all wildfire-related temperature values:
+  
+```{r}
+ggplot(wildfire, aes(x = temperature)) +
+  geom_histogram(binwidth = 2, fill = "#1f78b4", color = "white", alpha = 0.8) +
+  labs(title = "Histogram of Wildfire Temperatures", x = "Temperature (°C)", y = "Count") +
+  theme_minimal()
+```
+
+
+
+## Parameters
+
+- From our population distribution of temperature, we may want to compute some quantities (e.g., mean, median, standard deviations).
+- A **parameter** is a numerical quantity that describes the **population**.
+- Here are some parameters computed from our population of wildfire temperature's:
+
+```{r}
+wildfire |>
+  summarise(
+    mean_temp = mean(temperature, na.rm = TRUE),
+    med_temp = median(temperature, na.rm = TRUE),
+    var_temp = var(temperature, na.rm = TRUE),
+    sd_temp = sd(temperature, na.rm = TRUE),
+    min_temp = min(temperature, na.rm = TRUE),
+    max_temp = max(temperature, na.rm = TRUE)
+  )
+```
+
+## Sample 
+
+- In practice, it is fairly uncommon to have data on the entire population. 
+
+- A <span class="secondary">sample</span> is a subset of of our population that we will use to draw conclusions about the larger population. 
+
+<div style="text-align: center;">
+  <img src="https://www.scribbr.com/wp-content/uploads/2019/09/population-vs-sample-1.png" style="width: 30%;">
+</div>
+
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" target="_blank">Scribbr: Population vs. Sample</a>
+</div>
+
+## Sample Wildfire Data
+
+Instead of looking at the whole population, let's take a sample of size $n=100$. 
+
+```{r}
+set.seed(200)
+
+wildfire_sample <- wildfire |> rep_sample_n(size = 100)
+head(wildfire_sample)
+```
+
+## Statistics
+
+- Now, from our sample distribution of temperature, we may want to compute some numerical quantities as we did before.
+- A **statistic** is a numerical quantity that describes the **sample**. Alternatively, when we are using a value to estimate a population parameter, they are often referred to as *point estimates*. 
+- Here are some statistics computed from our population of wildfire temperature's:
+
+```{r}
+wildfire_sample |>
+  summarise(
+    mean_temp = mean(temperature, na.rm = TRUE),
+    med_temp = median(temperature, na.rm = TRUE),
+    var_temp = var(temperature, na.rm = TRUE),
+    sd_temp = sd(temperature, na.rm = TRUE),
+    min_temp = min(temperature, na.rm = TRUE),
+    max_temp = max(temperature, na.rm = TRUE), .groups = "drop"
+  )
+```
+## Common parameters and their point estimates
+
+| Population Parameter | Description                    | Point Estimate | Description                     |
+|------------------------------|--------------------------------|-----------------------|---------------------------------|
+| $\mu$                        | Population mean                | $\bar{x}$             | Sample mean    |
+| $\tilde{\mu}$ or $M$          | Population median              | $\tilde{x}$           | Sample median  |
+| $\sigma$                     | Population standard deviation  | $s$                   | Sample standard deviation|
+| $p$                          | Population proportion          | $\hat{p}$             | Sample proportion  |
+| $\rho$                       | Population correlation         | $r$                   | Sample correlation  |
+## iClicker: Another sample
+
+Suppose we take a **new random sample** of size $n = 100$ from the wildfire data and we calculate the mean temperature again.  What do you expect?
+
+- A) The new sample mean will be the same as before  
+- B) The new sample mean will likely be a little different, but close to the first one  
+- C) The new sample mean has no relationship with the first one 
+- D) We need more information 
+
+
+## Computing another sample
+
+- We can see that in a new sample of size 100 the sample mean of 17.19 is quite close to our previous sample mean of 17.11, although they aren't exactly the same. 
+
+```{r}
+set.seed(123)
+
+wildfire_sample2 <- wildfire |> rep_sample_n(size = 100)
+wildfire_sample2 |>
+  summarise(
+    mean_temp = mean(temperature, na.rm = TRUE)
+  ) 
+```
+
+##
+
+```{r}
+
+#| echo: false
+#| autorun: true
+#| fig-width: 7
+#| fig-height: 4
+
+library(tidyverse)
+
+wildfire <- read_csv("data/wildfire.csv")
+wildfire <- wildfire |> drop_na()
+
+set.seed(123)
+
+wildfire_sample2 <- wildfire |> rep_sample_n(size = 100)
+wildfire_sample2 |>
+  select(temperature) |>
+  summarise(
+    mean_temp = mean(temperature, na.rm = TRUE)
+  ) 
+
+
+# Label each sample
+sample1_labeled <- wildfire_sample |> mutate(sample = "Sample 1")
+sample2_labeled <- wildfire_sample2 |> mutate(sample = "Sample 2")
+
+# Combine into one dataset
+combined_samples <- bind_rows(sample1_labeled, sample2_labeled)
+
+# Calculate means
+mean1 <- mean(wildfire_sample$temperature, na.rm = TRUE)
+mean2 <- mean(wildfire_sample2$temperature, na.rm = TRUE)
+
+# Plot
+ggplot(combined_samples, aes(x = temperature, fill = sample)) +
+  geom_histogram(binwidth = 2, alpha = 0.6, position = "identity", color = "white") +
+  geom_vline(xintercept = mean1, linetype = "dashed", color = "#1f78b4", linewidth = 1) +
+  geom_vline(xintercept = mean2, linetype = "dashed", color = "#e31ad1", linewidth = 1) +
+  scale_fill_manual(values = c("Sample 1" = "#1f78b4", "Sample 2" = "#e31ad1")) +
+  labs(
+    title = "Overlayed Histograms of Two Wildfire Samples",
+    x = "Temperature (°C)",
+    y = "Count",
+    fill = "Sample"
+  ) +
+  theme_minimal()
+
+```
+
+
+## Sampling variability
+
+- If we draw a different random sample, we get a different set of temperatures.
+- That means our point estimate (e.g., sample mean) will also likely change.
+- The changes in point estimates across samples is called **sampling variability**.
+
+## The sampling distribution
+
+- If we took many samples of the same size from the population and calculated the sample mean each time, the distribution of those means would form a **sampling distribution**.
+- In our case, the **sampling distribution of the sample mean** shows how the mean varies from sample to sample.
+
+## Estimating a sampling distribution 
+
+Imagine repeating our wildfire sampling process many times:
+
+1. Take a random sample of size $n = 100$
+2. Compute the sample mean temperature
+3. Repeat this 1000+ times
+
+## 
+
+```{r}
+sampling_dist <- wildfire |>
+  rep_sample_n(size = 100, reps = 1000) |> 
+	group_by(replicate) |> 
+	summarise(sample_mean = mean(temperature, na.rm=TRUE))
+
+head(sampling_dist)
+```
+
+## 
+
+A plot of the sample means allows us to visualize the sampling distribution of the sample mean.
+
+```{r}
+ggplot(sampling_dist, aes(x = sample_mean)) +
+  geom_histogram(binwidth = 0.5, color = "white", fill = "steelblue") +
+  labs(
+    title = "Sampling Distribution of Mean Temperature",
+    x = "Sample Mean Temperature",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+## Discuss
+
+- What patterns do you see in the distribution (think about shape, center and spread)?
+
+- How does this compare to the histogram of the full population?
+
+- What would happen if we increased or decreased the sample size?
+
+## Sample size
+
+- Now, let's see how increasing the sample size to 500 impacts the sampling distribution.
+
+```{r}
+set.seed(200)
+
+sampling_dist_500 <- wildfire |>
+  rep_sample_n(size = 500, reps = 1000) |>
+	group_by(replicate) |>
+  summarise(sample_mean = mean(temperature, na.rm = TRUE))
+
+```
+
+
+##
+
+```{r}
+ggplot(sampling_dist_500, aes(x = sample_mean)) +
+  geom_histogram(binwidth = 0.1, fill = "#1f78b4", color = "white") +
+  labs(
+    title = "Sampling Distribution of the Sample Mean (n = 500)",
+    x = "Sample Mean Temperature (°C)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+## 
+
+```{r, echo=FALSE}
+
+library(infer)
+wildfire <- read_csv("data/wildfire.csv")
+wildfire <- wildfire |> drop_na()
+set.seed(200)
+
+# Sampling distribution with n=100
+sampling_dist_100 <- wildfire |>
+  rep_sample_n(size = 100, reps = 1000, replace = TRUE) |>
+  group_by(replicate) |>          # <-- important step
+  summarise(sample_mean = mean(temperature, na.rm = TRUE)) |>
+  mutate(sample_size = "n = 100")
+
+# Sampling distribution with n=500
+sampling_dist_500 <- wildfire |>
+  rep_sample_n(size = 500, reps = 1000, replace = TRUE) |>
+  group_by(replicate) |>          # <-- important step
+  summarise(sample_mean = mean(temperature, na.rm = TRUE)) |>
+  mutate(sample_size = "n = 500")
+
+# Combine both datasets
+combined_sampling <- bind_rows(sampling_dist_100, sampling_dist_500)
+
+# Plot overlayed histogram
+ggplot(combined_sampling, aes(x = sample_mean, fill = sample_size)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30, color = "white") +
+  labs(
+    title = "Overlayed Sampling Distributions of the Sample Mean",
+    x = "Sample Mean Temperature (°C)",
+    y = "Count",
+    fill = "Sample Size"
+  ) +
+  theme_minimal() +
+  scale_fill_manual(values = c("n = 100" = "#1f78b4", "n = 500" = "#33a02c"))
+```
+
+
+## Impact of sample size on sampling distributions
+
+- As sample size increases, the sampling distribution of the sample mean becomes narrower.
+
+- Larger samples result in sample means that are more closely clustered around the true population mean, whereas smaller samples show greater variability and a wider spread of sample means.
+
+
+## Why do we care?
+
+:::incremental
+- As a statistician, you don’t know the true population parameters, only your sample data!
+- From a sample, we can compute the **sample mean** $\bar{x}$.
+- This is our best guess at the population mean $\mu$, which is typically not observed. 
+- But if we had taken a different sample, we might have gotten a different $\bar{x}$. 
+- The **standard error** helps us understand how much $\bar{x}$ might vary from sample to sample.
+:::
+
+
+## Standard error
+
+- The **standard error (SE)** measures how much a sample statistic (like the mean) is expected to vary across different random samples.
+- It tells us how **precise** our estimate is.  
+	- A smaller SE means our estimate is likely close to the population value  
+	- A larger SE means more uncertainty in our estimate
+
+
+## Standard error of the sample mean
+
+- The standard error of the sample mean is estimated by:  
+
+$$SE(\bar{x}) = \frac{s}{\sqrt{n}}$$
+
+
+ where
+ 
+- $s$ is the sample standard deviation  
+- $n$ is the sample size  
+
+This estimates the standard deviation of the sample mean across repeated random samples.
+
+## Computing the SE
+
+Let's calculate the standard error of the sample mean temperature from our wildfire sample ($n = 100$):
+
+```{r}
+wildfire_sample |>
+  summarise(
+    n = sum(!is.na(temperature)),
+    s = sd(temperature, na.rm = TRUE),
+    se_xbar = s / sqrt(n)
+  )
+```
+
+This value tells us how much the sample mean is expected to vary across repeated samples of size 100.
+
+
+## What about other estimators?
+
+- Other estimators (like medians, proportions, or standard deviations) also have standard errors.  
+- Each has its own formula or method to estimate variability. 
+- Today, we are focusing on the **standard error of the mean**, but the same general idea applies:
+  - Use the sample to estimate how much a statistic would vary across samples
+
+## Key Takeaways
+
+- A **population** includes all observations of interest; a **sample** is a subset we actually collect
+- A **parameter** describes the population (e.g., population mean $ \mu $), but it's usually unknown  
+- A **statistic** (like the sample mean $\bar{x}$) is a point estimate of the parameter, based on the sample 
+- **Sampling variability** means statistics will vary from one random sample to another  
+- The **standard error (SE)** measures how much a statistic is expected to vary across samples  
+- A **smaller SE** means the estimate is more precise — and we can achieve that with a **larger sample size**
