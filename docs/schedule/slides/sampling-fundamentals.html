@@ -199,7 +199,7 @@
 <h2>Fundamentals of Sampling and Variability</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
-<p>Last modified – 05 January 2026</p>
+<p>Last modified – 11 January 2026</p>
 <p><span class="math display">\[
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -358,7 +358,7 @@
 <h2>Sample</h2>
 <ul>
 <li><p>In practice, it is fairly uncommon to have data on the entire population.</p></li>
-<li><p>A <span class="secondary">sample</span> is a subset of of our population that we will use to draw conclusions about the larger population.</p></li>
+<li><p>A <span class="secondary">sample</span> is a subset of our population that we will use to draw conclusions about the larger population.</p></li>
 </ul>
 <div style="text-align: center;">
 <p><img src="https://www.scribbr.com/wp-content/uploads/2019/09/population-vs-sample-1.png" style="width: 30%;"></p>
@@ -400,7 +400,10 @@
 <h2>Statistics</h2>
 <ul>
 <li>Now, from our sample distribution of temperature, we may want to compute some numerical quantities as we did before.</li>
-<li>A <strong>statistic</strong> is a numerical quantity that describes the <strong>sample</strong>. Alternatively, when we are using a value to estimate a population parameter, they are often referred to as <em>point estimates</em>.</li>
+<li>A <strong>statistic</strong> is a numerical quantity that describes the <strong>sample</strong>.
+<ul>
+<li>When we use a statistic to estimate a population parameter, they are often referred to as <em>point estimates</em>.</li>
+</ul></li>
 <li>Here are some statistics computed from our population of wildfire temperature’s:</li>
 </ul>
 <div class="cell" data-layout-align="center">
@@ -472,8 +475,8 @@
 </tbody>
 </table>
 </section>
-<section id="iclicker-another-sample" class="slide level2">
-<h2>iClicker: Another sample</h2>
+<section id="iclicker-1-another-sample" class="slide level2">
+<h2>iClicker 1: Another sample</h2>
 <p>Suppose we take a <strong>new random sample</strong> of size <span class="math inline">\(n = 100\)</span> from the wildfire data and we calculate the mean temperature again. What do you expect?</p>
 <ul>
 <li><ol type="A">
@@ -481,7 +484,7 @@
 </li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>The new sample mean will likely be a little different, but close to the first one<br>
+<li>The new sample mean will likely be different, but close to the first one<br>
 </li>
 </ol></li>
 <li><ol start="3" type="A">
@@ -516,30 +519,30 @@
 <section id="section-2" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co">#| echo: false</span></span>
-<span id="cb15-2"><a></a><span class="co">#| autorun: true</span></span>
-<span id="cb15-3"><a></a><span class="co">#| fig-width: 7</span></span>
-<span id="cb15-4"><a></a><span class="co">#| fig-height: 4</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a>wildfire <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wildfire.csv"</span>)</span>
+<span id="cb15-4"><a></a>wildfire <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span> <span class="fu">drop_na</span>()</span>
 <span id="cb15-5"><a></a></span>
-<span id="cb15-6"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-6"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb15-7"><a></a></span>
-<span id="cb15-8"><a></a>wildfire <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wildfire.csv"</span>)</span>
-<span id="cb15-9"><a></a>wildfire <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span> <span class="fu">drop_na</span>()</span>
-<span id="cb15-10"><a></a></span>
-<span id="cb15-11"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb15-12"><a></a></span>
-<span id="cb15-13"><a></a>wildfire_sample2 <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span> <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">100</span>)</span>
-<span id="cb15-14"><a></a>wildfire_sample2 <span class="sc">|&gt;</span></span>
-<span id="cb15-15"><a></a>  <span class="fu">select</span>(temperature) <span class="sc">|&gt;</span></span>
-<span id="cb15-16"><a></a>  <span class="fu">summarise</span>(</span>
-<span id="cb15-17"><a></a>    <span class="at">mean_temp =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-18"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-8"><a></a>wildfire_sample2 <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span> <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">100</span>)</span>
+<span id="cb15-9"><a></a>wildfire_sample2 <span class="sc">|&gt;</span></span>
+<span id="cb15-10"><a></a>  <span class="fu">select</span>(temperature) <span class="sc">|&gt;</span></span>
+<span id="cb15-11"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-12"><a></a>    <span class="at">mean_temp =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-13"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   replicate mean_temp
       &lt;int&gt;     &lt;dbl&gt;
 1         1      18.6</code></pre>
 </div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># Label each sample</span></span>
 <span id="cb17-2"><a></a>sample1_labeled <span class="ot">&lt;-</span> wildfire_sample <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">sample =</span> <span class="st">"Sample 1"</span>)</span>
 <span id="cb17-3"><a></a>sample2_labeled <span class="ot">&lt;-</span> wildfire_sample2 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">sample =</span> <span class="st">"Sample 2"</span>)</span>
@@ -548,25 +551,34 @@
 <span id="cb17-6"><a></a>combined_samples <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sample1_labeled, sample2_labeled)</span>
 <span id="cb17-7"><a></a></span>
 <span id="cb17-8"><a></a><span class="co"># Calculate means</span></span>
-<span id="cb17-9"><a></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(wildfire_sample<span class="sc">$</span>temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-10"><a></a>mean2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(wildfire_sample2<span class="sc">$</span>temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-11"><a></a></span>
-<span id="cb17-12"><a></a><span class="co"># Plot</span></span>
-<span id="cb17-13"><a></a><span class="fu">ggplot</span>(combined_samples, <span class="fu">aes</span>(<span class="at">x =</span> temperature, <span class="at">fill =</span> sample)) <span class="sc">+</span></span>
-<span id="cb17-14"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb17-15"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean1, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"#1f78b4"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb17-16"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean2, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"#e31ad1"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb17-17"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Sample 1"</span> <span class="ot">=</span> <span class="st">"#1f78b4"</span>, <span class="st">"Sample 2"</span> <span class="ot">=</span> <span class="st">"#e31ad1"</span>)) <span class="sc">+</span></span>
-<span id="cb17-18"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-19"><a></a>    <span class="at">title =</span> <span class="st">"Overlayed Histograms of Two Wildfire Samples"</span>,</span>
-<span id="cb17-20"><a></a>    <span class="at">x =</span> <span class="st">"Temperature (°C)"</span>,</span>
-<span id="cb17-21"><a></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
-<span id="cb17-22"><a></a>    <span class="at">fill =</span> <span class="st">"Sample"</span></span>
-<span id="cb17-23"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb17-24"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-9"><a></a>(mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(wildfire_sample<span class="sc">$</span>temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17.11868</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>(mean2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(wildfire_sample2<span class="sc">$</span>temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.624</code></pre>
+</div>
+</div>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Plot</span></span>
+<span id="cb21-2"><a></a><span class="fu">ggplot</span>(combined_samples, <span class="fu">aes</span>(<span class="at">x =</span> temperature, <span class="at">fill =</span> sample)) <span class="sc">+</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean1, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"#1f78b4"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mean2, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"#e31ad1"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Sample 1"</span> <span class="ot">=</span> <span class="st">"#1f78b4"</span>, <span class="st">"Sample 2"</span> <span class="ot">=</span> <span class="st">"#e31ad1"</span>)) <span class="sc">+</span></span>
+<span id="cb21-7"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-8"><a></a>    <span class="at">title =</span> <span class="st">"Overlayed Histograms of Two Wildfire Samples"</span>,</span>
+<span id="cb21-9"><a></a>    <span class="at">x =</span> <span class="st">"Temperature (°C)"</span>,</span>
+<span id="cb21-10"><a></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb21-11"><a></a>    <span class="at">fill =</span> <span class="st">"Sample"</span>) <span class="sc">+</span></span>
+<span id="cb21-12"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-9-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-11-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="sampling-variability" class="slide level2">
 <h2>Sampling variability</h2>
 <ul>
@@ -581,9 +593,72 @@
 <li>If we took many samples of the same size from the population and calculated the sample mean each time, the distribution of those means would form a <strong>sampling distribution</strong>.</li>
 <li>In our case, the <strong>sampling distribution of the sample mean</strong> shows how the mean varies from sample to sample.</li>
 </ul>
+<p>Let’s use this <a href="https://www.zoology.ubc.ca/~whitlock/Kingfisher/SamplingNormal.htm">sampling distribution app</a>, by Dr.&nbsp;Whitlock (UBC), to understand what the sampling distribution is.</p>
+<blockquote>
+<p>Note: The app does not use a finite population. It generates data using a Normal distribution (we will learn this next class).</p>
+</blockquote>
 </section>
-<section id="estimating-a-sampling-distribution" class="slide level2">
-<h2>Estimating a sampling distribution</h2>
+<section id="iclicker-2-fish-data" class="slide level2">
+<h2>iClicker 2: fish data</h2>
+<p>Use the default values <span class="math inline">\(\mu =106\)</span> and <span class="math inline">\(\sigma = 30\)</span> and generate a sample of size <code>n = 10</code>.</p>
+<p>After measuring all sampled fish, the app shows a histogram in the middle panel that visualizes:</p>
+<ul>
+<li><ol type="A">
+<li>The population distribution</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>The sample distribution</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>The sampling distribution</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>None of the above</li>
+</ol></li>
+</ul>
+</section>
+<section id="iclicker-3-fish-measurements" class="slide level2">
+<h2>iClicker 3: fish measurements</h2>
+<p>Calculate the sample mean and compare it with the people around you. Which statement is most accurate?</p>
+<ul>
+<li><ol type="A">
+<li>We all got the population mean equal to 106</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>We all got the same sample mean close to 106</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>We all got different sample means close to 106</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>None of the above</li>
+</ol></li>
+</ul>
+</section>
+<section id="iclicker-4-sampling-distribution" class="slide level2">
+<h2>iClicker 4: Sampling distribution</h2>
+<p>Use the tab “MEANS FROM MANY SAMPLES” to generate many sample means.</p>
+<blockquote>
+<p>The app will not show individual samples, only the sample means from each sample.</p>
+</blockquote>
+<p>The app now displays the distribution of the sample means. Compare what you see with the people around you. What do you observe?</p>
+<ul>
+<li><ol type="A">
+<li>The distribution of the sample means is similar to the sample distribution of fish lengths</li>
+</ol></li>
+<li><ol start="2" type="A">
+<li>We all get the same distribution of sample means</li>
+</ol></li>
+<li><ol start="3" type="A">
+<li>We all get different distributions, but look like the sample distribution of fish lengths</li>
+</ol></li>
+<li><ol start="4" type="A">
+<li>We all get different distributions, but look bell-shaped</li>
+</ol></li>
+</ul>
+</section>
+<section id="our-turn-in-r" class="slide level2">
+<h2>Our turn in R</h2>
 <p>Imagine repeating our wildfire sampling process many times:</p>
 <ol type="1">
 <li>Take a random sample of size <span class="math inline">\(n = 100\)</span></li>
@@ -591,15 +666,15 @@
 <li>Repeat this 1000+ times</li>
 </ol>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>sampling_dist <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a></a>    <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span> </span>
-<span id="cb18-4"><a></a>    <span class="fu">summarise</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb18-5"><a></a></span>
-<span id="cb18-6"><a></a><span class="fu">head</span>(sampling_dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>sampling_dist <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a></a>    <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span> </span>
+<span id="cb22-4"><a></a>    <span class="fu">summarise</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb22-5"><a></a></span>
+<span id="cb22-6"><a></a><span class="fu">head</span>(sampling_dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
   replicate sample_mean
@@ -613,21 +688,21 @@
 </div>
 </div>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <p>A plot of the sample means allows us to visualize the sampling distribution of the sample mean.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">ggplot</span>(sampling_dist, <span class="fu">aes</span>(<span class="at">x =</span> sample_mean)) <span class="sc">+</span></span>
-<span id="cb20-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb20-3"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-4"><a></a>    <span class="at">title =</span> <span class="st">"Sampling Distribution of Mean Temperature"</span>,</span>
-<span id="cb20-5"><a></a>    <span class="at">x =</span> <span class="st">"Sample Mean Temperature"</span>,</span>
-<span id="cb20-6"><a></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
-<span id="cb20-7"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb20-8"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">ggplot</span>(sampling_dist, <span class="fu">aes</span>(<span class="at">x =</span> sample_mean)) <span class="sc">+</span></span>
+<span id="cb24-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-4"><a></a>    <span class="at">title =</span> <span class="st">"Sampling Distribution of Mean Temperature"</span>,</span>
+<span id="cb24-5"><a></a>    <span class="at">x =</span> <span class="st">"Sample Mean Temperature"</span>,</span>
+<span id="cb24-6"><a></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb24-7"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb24-8"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-11-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-13-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="discuss" class="slide level2">
 <h2>Discuss</h2>
 <ul>
@@ -642,32 +717,32 @@
 <li>Now, let’s see how increasing the sample size to 500 impacts the sampling distribution.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb21-2"><a></a></span>
-<span id="cb21-3"><a></a>sampling_dist_500 <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">500</span>, <span class="at">reps =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
-<span id="cb21-5"><a></a>    <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span></span>
-<span id="cb21-6"><a></a>  <span class="fu">summarise</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb25-2"><a></a></span>
+<span id="cb25-3"><a></a>sampling_dist_500 <span class="ot">&lt;-</span> wildfire <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">500</span>, <span class="at">reps =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a></a>    <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span></span>
+<span id="cb25-6"><a></a>  <span class="fu">summarise</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">ggplot</span>(sampling_dist_500, <span class="fu">aes</span>(<span class="at">x =</span> sample_mean)) <span class="sc">+</span></span>
-<span id="cb22-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"#1f78b4"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb22-3"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb22-4"><a></a>    <span class="at">title =</span> <span class="st">"Sampling Distribution of the Sample Mean (n = 500)"</span>,</span>
-<span id="cb22-5"><a></a>    <span class="at">x =</span> <span class="st">"Sample Mean Temperature (°C)"</span>,</span>
-<span id="cb22-6"><a></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb22-7"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb22-8"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">ggplot</span>(sampling_dist_500, <span class="fu">aes</span>(<span class="at">x =</span> sample_mean)) <span class="sc">+</span></span>
+<span id="cb26-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"#1f78b4"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb26-4"><a></a>    <span class="at">title =</span> <span class="st">"Sampling Distribution of the Sample Mean (n = 500)"</span>,</span>
+<span id="cb26-5"><a></a>    <span class="at">x =</span> <span class="st">"Sample Mean Temperature (°C)"</span>,</span>
+<span id="cb26-6"><a></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb26-7"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb26-8"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-13-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="section-6" class="slide level2">
+<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-15-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="section-8" class="slide level2">
 <h2></h2>
 
-<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-14-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="sampling-fundamentals_files/figure-revealjs/unnamed-chunk-16-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="impact-of-sample-size-on-sampling-distributions" class="slide level2">
 <h2>Impact of sample size on sampling distributions</h2>
 <ul>
@@ -717,12 +792,12 @@
 <h2>Computing the SE</h2>
 <p>Let’s calculate the standard error of the sample mean temperature from our wildfire sample (<span class="math inline">\(n = 100\)</span>):</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>wildfire_sample <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a></a>  <span class="fu">summarise</span>(</span>
-<span id="cb23-3"><a></a>    <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(temperature)),</span>
-<span id="cb23-4"><a></a>    <span class="at">s =</span> <span class="fu">sd</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb23-5"><a></a>    <span class="at">se_xbar =</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb23-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>wildfire_sample <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb27-3"><a></a>    <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(temperature)),</span>
+<span id="cb27-4"><a></a>    <span class="at">s =</span> <span class="fu">sd</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb27-5"><a></a>    <span class="at">se_xbar =</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb27-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
   replicate     n     s se_xbar

@@ -4,7 +4,7 @@
     "href": "schedule/slides/sampling-fundamentals.html#section",
     "title": "UBC DSCI 200",
     "section": "Fundamentals of Sampling and Variability",
-    "text": "Fundamentals of Sampling and Variability\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 05 January 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+    "text": "Fundamentals of Sampling and Variability\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 11 January 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
     "objectID": "schedule/slides/sampling-fundamentals.html#attribution",
@@ -67,7 +67,7 @@
     "href": "schedule/slides/sampling-fundamentals.html#sample",
     "title": "UBC DSCI 200",
     "section": "Sample",
-    "text": "Sample\n\nIn practice, it is fairly uncommon to have data on the entire population.\nA sample is a subset of of our population that we will use to draw conclusions about the larger population.\n\n\n\n\n\nSource: Scribbr: Population vs. Sample"
+    "text": "Sample\n\nIn practice, it is fairly uncommon to have data on the entire population.\nA sample is a subset of our population that we will use to draw conclusions about the larger population.\n\n\n\n\n\nSource: Scribbr: Population vs. Sample"
   },
   {
     "objectID": "schedule/slides/sampling-fundamentals.html#sample-wildfire-data",
@@ -81,7 +81,7 @@
     "href": "schedule/slides/sampling-fundamentals.html#statistics",
     "title": "UBC DSCI 200",
     "section": "Statistics",
-    "text": "Statistics\n\nNow, from our sample distribution of temperature, we may want to compute some numerical quantities as we did before.\nA statistic is a numerical quantity that describes the sample. Alternatively, when we are using a value to estimate a population parameter, they are often referred to as point estimates.\nHere are some statistics computed from our population of wildfire temperature’s:\n\n\nwildfire_sample |&gt;\n  summarise(\n    mean_temp = mean(temperature, na.rm = TRUE),\n    med_temp = median(temperature, na.rm = TRUE),\n    var_temp = var(temperature, na.rm = TRUE),\n    sd_temp = sd(temperature, na.rm = TRUE),\n    min_temp = min(temperature, na.rm = TRUE),\n    max_temp = max(temperature, na.rm = TRUE), .groups = \"drop\"\n  )\n\n# A tibble: 1 × 7\n  replicate mean_temp med_temp var_temp sd_temp min_temp max_temp\n      &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1         1      17.1       18     52.4    7.24       -3       30"
+    "text": "Statistics\n\nNow, from our sample distribution of temperature, we may want to compute some numerical quantities as we did before.\nA statistic is a numerical quantity that describes the sample.\n\nWhen we use a statistic to estimate a population parameter, they are often referred to as point estimates.\n\nHere are some statistics computed from our population of wildfire temperature’s:\n\n\nwildfire_sample |&gt;\n  summarise(\n    mean_temp = mean(temperature, na.rm = TRUE),\n    med_temp = median(temperature, na.rm = TRUE),\n    var_temp = var(temperature, na.rm = TRUE),\n    sd_temp = sd(temperature, na.rm = TRUE),\n    min_temp = min(temperature, na.rm = TRUE),\n    max_temp = max(temperature, na.rm = TRUE), .groups = \"drop\"\n  )\n\n# A tibble: 1 × 7\n  replicate mean_temp med_temp var_temp sd_temp min_temp max_temp\n      &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1         1      17.1       18     52.4    7.24       -3       30"
   },
   {
     "objectID": "schedule/slides/sampling-fundamentals.html#common-parameters-and-their-point-estimates",
@@ -91,11 +91,11 @@
     "text": "Common parameters and their point estimates\n\n\n\n\n\n\n\n\n\nPopulation Parameter\nDescription\nPoint Estimate\nDescription\n\n\n\n\n\\(\\mu\\)\nPopulation mean\n\\(\\bar{x}\\)\nSample mean\n\n\n\\(\\tilde{\\mu}\\) or \\(M\\)\nPopulation median\n\\(\\tilde{x}\\)\nSample median\n\n\n\\(\\sigma\\)\nPopulation standard deviation\n\\(s\\)\nSample standard deviation\n\n\n\\(p\\)\nPopulation proportion\n\\(\\hat{p}\\)\nSample proportion\n\n\n\\(\\rho\\)\nPopulation correlation\n\\(r\\)\nSample correlation"
   },
   {
-    "objectID": "schedule/slides/sampling-fundamentals.html#iclicker-another-sample",
-    "href": "schedule/slides/sampling-fundamentals.html#iclicker-another-sample",
+    "objectID": "schedule/slides/sampling-fundamentals.html#iclicker-1-another-sample",
+    "href": "schedule/slides/sampling-fundamentals.html#iclicker-1-another-sample",
     "title": "UBC DSCI 200",
-    "section": "iClicker: Another sample",
-    "text": "iClicker: Another sample\nSuppose we take a new random sample of size \\(n = 100\\) from the wildfire data and we calculate the mean temperature again. What do you expect?\n\n\nThe new sample mean will be the same as before\n\n\n\nThe new sample mean will likely be a little different, but close to the first one\n\n\n\nThe new sample mean has no relationship with the first one\n\n\nWe need more information"
+    "section": "iClicker 1: Another sample",
+    "text": "iClicker 1: Another sample\nSuppose we take a new random sample of size \\(n = 100\\) from the wildfire data and we calculate the mean temperature again. What do you expect?\n\n\nThe new sample mean will be the same as before\n\n\n\nThe new sample mean will likely be different, but close to the first one\n\n\n\nThe new sample mean has no relationship with the first one\n\n\nWe need more information"
   },
   {
     "objectID": "schedule/slides/sampling-fundamentals.html#computing-another-sample",
@@ -109,7 +109,21 @@
     "href": "schedule/slides/sampling-fundamentals.html#section-2",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "#| echo: false\n#| autorun: true\n#| fig-width: 7\n#| fig-height: 4\n\nlibrary(tidyverse)\n\nwildfire &lt;- read_csv(\"data/wildfire.csv\")\nwildfire &lt;- wildfire |&gt; drop_na()\n\nset.seed(123)\n\nwildfire_sample2 &lt;- wildfire |&gt; rep_sample_n(size = 100)\nwildfire_sample2 |&gt;\n  select(temperature) |&gt;\n  summarise(\n    mean_temp = mean(temperature, na.rm = TRUE)\n  ) \n\n# A tibble: 1 × 2\n  replicate mean_temp\n      &lt;int&gt;     &lt;dbl&gt;\n1         1      18.6\n\n# Label each sample\nsample1_labeled &lt;- wildfire_sample |&gt; mutate(sample = \"Sample 1\")\nsample2_labeled &lt;- wildfire_sample2 |&gt; mutate(sample = \"Sample 2\")\n\n# Combine into one dataset\ncombined_samples &lt;- bind_rows(sample1_labeled, sample2_labeled)\n\n# Calculate means\nmean1 &lt;- mean(wildfire_sample$temperature, na.rm = TRUE)\nmean2 &lt;- mean(wildfire_sample2$temperature, na.rm = TRUE)\n\n# Plot\nggplot(combined_samples, aes(x = temperature, fill = sample)) +\n  geom_histogram(binwidth = 2, alpha = 0.6, position = \"identity\", color = \"white\") +\n  geom_vline(xintercept = mean1, linetype = \"dashed\", color = \"#1f78b4\", linewidth = 1) +\n  geom_vline(xintercept = mean2, linetype = \"dashed\", color = \"#e31ad1\", linewidth = 1) +\n  scale_fill_manual(values = c(\"Sample 1\" = \"#1f78b4\", \"Sample 2\" = \"#e31ad1\")) +\n  labs(\n    title = \"Overlayed Histograms of Two Wildfire Samples\",\n    x = \"Temperature (°C)\",\n    y = \"Count\",\n    fill = \"Sample\"\n  ) +\n  theme_minimal()"
+    "text": "library(tidyverse)\n\nwildfire &lt;- read_csv(\"data/wildfire.csv\")\nwildfire &lt;- wildfire |&gt; drop_na()\n\nset.seed(123)\n\nwildfire_sample2 &lt;- wildfire |&gt; rep_sample_n(size = 100)\nwildfire_sample2 |&gt;\n  select(temperature) |&gt;\n  summarise(\n    mean_temp = mean(temperature, na.rm = TRUE)\n  ) \n\n# A tibble: 1 × 2\n  replicate mean_temp\n      &lt;int&gt;     &lt;dbl&gt;\n1         1      18.6"
+  },
+  {
+    "objectID": "schedule/slides/sampling-fundamentals.html#section-3",
+    "href": "schedule/slides/sampling-fundamentals.html#section-3",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "# Label each sample\nsample1_labeled &lt;- wildfire_sample |&gt; mutate(sample = \"Sample 1\")\nsample2_labeled &lt;- wildfire_sample2 |&gt; mutate(sample = \"Sample 2\")\n\n# Combine into one dataset\ncombined_samples &lt;- bind_rows(sample1_labeled, sample2_labeled)\n\n# Calculate means\n(mean1 &lt;- mean(wildfire_sample$temperature, na.rm = TRUE))\n\n[1] 17.11868\n\n(mean2 &lt;- mean(wildfire_sample2$temperature, na.rm = TRUE))\n\n[1] 18.624"
+  },
+  {
+    "objectID": "schedule/slides/sampling-fundamentals.html#section-4",
+    "href": "schedule/slides/sampling-fundamentals.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "# Plot\nggplot(combined_samples, aes(x = temperature, fill = sample)) +\n  geom_histogram(binwidth = 2, alpha = 0.6, position = \"identity\", color = \"white\") +\n  geom_vline(xintercept = mean1, linetype = \"dashed\", color = \"#1f78b4\", linewidth = 1) +\n  geom_vline(xintercept = mean2, linetype = \"dashed\", color = \"#e31ad1\", linewidth = 1) +\n  scale_fill_manual(values = c(\"Sample 1\" = \"#1f78b4\", \"Sample 2\" = \"#e31ad1\")) +\n  labs(\n    title = \"Overlayed Histograms of Two Wildfire Samples\",\n    x = \"Temperature (°C)\",\n    y = \"Count\",\n    fill = \"Sample\") +\n  theme_minimal()"
   },
   {
     "objectID": "schedule/slides/sampling-fundamentals.html#sampling-variability",
@@ -123,25 +137,46 @@
     "href": "schedule/slides/sampling-fundamentals.html#the-sampling-distribution",
     "title": "UBC DSCI 200",
     "section": "The sampling distribution",
-    "text": "The sampling distribution\n\nIf we took many samples of the same size from the population and calculated the sample mean each time, the distribution of those means would form a sampling distribution.\nIn our case, the sampling distribution of the sample mean shows how the mean varies from sample to sample."
+    "text": "The sampling distribution\n\nIf we took many samples of the same size from the population and calculated the sample mean each time, the distribution of those means would form a sampling distribution.\nIn our case, the sampling distribution of the sample mean shows how the mean varies from sample to sample.\n\nLet’s use this sampling distribution app, by Dr. Whitlock (UBC), to understand what the sampling distribution is.\n\nNote: The app does not use a finite population. It generates data using a Normal distribution (we will learn this next class)."
   },
   {
-    "objectID": "schedule/slides/sampling-fundamentals.html#estimating-a-sampling-distribution",
-    "href": "schedule/slides/sampling-fundamentals.html#estimating-a-sampling-distribution",
+    "objectID": "schedule/slides/sampling-fundamentals.html#iclicker-2-fish-data",
+    "href": "schedule/slides/sampling-fundamentals.html#iclicker-2-fish-data",
     "title": "UBC DSCI 200",
-    "section": "Estimating a sampling distribution",
-    "text": "Estimating a sampling distribution\nImagine repeating our wildfire sampling process many times:\n\nTake a random sample of size \\(n = 100\\)\nCompute the sample mean temperature\nRepeat this 1000+ times"
+    "section": "iClicker 2: fish data",
+    "text": "iClicker 2: fish data\nUse the default values \\(\\mu =106\\) and \\(\\sigma = 30\\) and generate a sample of size n = 10.\nAfter measuring all sampled fish, the app shows a histogram in the middle panel that visualizes:\n\n\nThe population distribution\n\n\nThe sample distribution\n\n\nThe sampling distribution\n\n\nNone of the above"
   },
   {
-    "objectID": "schedule/slides/sampling-fundamentals.html#section-3",
-    "href": "schedule/slides/sampling-fundamentals.html#section-3",
+    "objectID": "schedule/slides/sampling-fundamentals.html#iclicker-3-fish-measurements",
+    "href": "schedule/slides/sampling-fundamentals.html#iclicker-3-fish-measurements",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 3: fish measurements",
+    "text": "iClicker 3: fish measurements\nCalculate the sample mean and compare it with the people around you. Which statement is most accurate?\n\n\nWe all got the population mean equal to 106\n\n\nWe all got the same sample mean close to 106\n\n\nWe all got different sample means close to 106\n\n\nNone of the above"
+  },
+  {
+    "objectID": "schedule/slides/sampling-fundamentals.html#iclicker-4-sampling-distribution",
+    "href": "schedule/slides/sampling-fundamentals.html#iclicker-4-sampling-distribution",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 4: Sampling distribution",
+    "text": "iClicker 4: Sampling distribution\nUse the tab “MEANS FROM MANY SAMPLES” to generate many sample means.\n\nThe app will not show individual samples, only the sample means from each sample.\n\nThe app now displays the distribution of the sample means. Compare what you see with the people around you. What do you observe?\n\n\nThe distribution of the sample means is similar to the sample distribution of fish lengths\n\n\nWe all get the same distribution of sample means\n\n\nWe all get different distributions, but look like the sample distribution of fish lengths\n\n\nWe all get different distributions, but look bell-shaped"
+  },
+  {
+    "objectID": "schedule/slides/sampling-fundamentals.html#our-turn-in-r",
+    "href": "schedule/slides/sampling-fundamentals.html#our-turn-in-r",
+    "title": "UBC DSCI 200",
+    "section": "Our turn in R",
+    "text": "Our turn in R\nImagine repeating our wildfire sampling process many times:\n\nTake a random sample of size \\(n = 100\\)\nCompute the sample mean temperature\nRepeat this 1000+ times"
+  },
+  {
+    "objectID": "schedule/slides/sampling-fundamentals.html#section-5",
+    "href": "schedule/slides/sampling-fundamentals.html#section-5",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "sampling_dist &lt;- wildfire |&gt;\n  rep_sample_n(size = 100, reps = 1000) |&gt; \n    group_by(replicate) |&gt; \n    summarise(sample_mean = mean(temperature, na.rm=TRUE))\n\nhead(sampling_dist)\n\n# A tibble: 6 × 2\n  replicate sample_mean\n      &lt;int&gt;       &lt;dbl&gt;\n1         1        21.0\n2         2        19.7\n3         3        19.6\n4         4        18.9\n5         5        18.6\n6         6        19.3"
   },
   {
-    "objectID": "schedule/slides/sampling-fundamentals.html#section-4",
-    "href": "schedule/slides/sampling-fundamentals.html#section-4",
+    "objectID": "schedule/slides/sampling-fundamentals.html#section-6",
+    "href": "schedule/slides/sampling-fundamentals.html#section-6",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "A plot of the sample means allows us to visualize the sampling distribution of the sample mean.\n\nggplot(sampling_dist, aes(x = sample_mean)) +\n  geom_histogram(binwidth = 0.5, color = \"white\", fill = \"steelblue\") +\n  labs(\n    title = \"Sampling Distribution of Mean Temperature\",\n    x = \"Sample Mean Temperature\",\n    y = \"Frequency\"\n  ) +\n  theme_minimal()"
@@ -161,8 +196,8 @@
     "text": "Sample size\n\nNow, let’s see how increasing the sample size to 500 impacts the sampling distribution.\n\n\nset.seed(200)\n\nsampling_dist_500 &lt;- wildfire |&gt;\n  rep_sample_n(size = 500, reps = 1000) |&gt;\n    group_by(replicate) |&gt;\n  summarise(sample_mean = mean(temperature, na.rm = TRUE))"
   },
   {
-    "objectID": "schedule/slides/sampling-fundamentals.html#section-5",
-    "href": "schedule/slides/sampling-fundamentals.html#section-5",
+    "objectID": "schedule/slides/sampling-fundamentals.html#section-7",
+    "href": "schedule/slides/sampling-fundamentals.html#section-7",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "ggplot(sampling_dist_500, aes(x = sample_mean)) +\n  geom_histogram(binwidth = 0.1, fill = \"#1f78b4\", color = \"white\") +\n  labs(\n    title = \"Sampling Distribution of the Sample Mean (n = 500)\",\n    x = \"Sample Mean Temperature (°C)\",\n    y = \"Count\"\n  ) +\n  theme_minimal()"
