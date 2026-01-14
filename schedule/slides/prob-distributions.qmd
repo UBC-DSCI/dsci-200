@@ -10,7 +10,11 @@ metadata-files:
 ## Attribution
 <br><br>
 
-*This material is adapted from* [*Chapters 5 of Elementary Statistics with R*](https://homerhanumat.github.io/elemStats/).
+*This material is based on content adapted from* 
+
+- [*Chapter 5 of Elementary Statistics with R*](https://homerhanumat.github.io/elemStats/)
+
+- [*Chapters 1, 2.1-2.3, and 4.1-4.3 of An Introduction to Probability and Simulation*](https://bookdown.org/kevin_davisross/probsim-book/)
 
 <br><br>
 
@@ -23,82 +27,174 @@ metadata-files:
 - Recognize common types of probability distributions and when they are appropriate. 
 
 ## Last time: Sampling from a finite population
-<br></br>
+<br>
 
 - We sampled from some finite population (e.g., all students in a university)
 - Our sample is a subset of actual individuals or observations
-- Variation occurs because each sample can be different
+- Variation occurred because each sample was selected *at random*
+  - different samples yield different results.
+- This random selection generates a random sample.
 
-## Model-based approach 
 <br>
 
-| Sampling from a Finite Population         | Model-Based Approach                           |
-|-------------------------------------------|------------------------------------------------|
-| Finite population    | Data generated from a probability model         |
-| Sample is a subset of actual units         | Values are outcomes from a distribution         |
-| Sampling variability comes from the sample | Variability comes from randomness in the model  |
+### Today, we'll focus on defining and characterizing random phenomena more broadly, beyond random selection
 
-## Sample Space
+## Randomness beyond sampling
 
-- The **sample space** is the set of all possible outcomes of an experiment.
+Words like **probability, chance, and odds** are commonly used to express uncertainty:
 
-	- Example: Tossing a fair coin
+:::incremental
+- 'Very high' probability that Canada will see coronavirus, says Toronto respirologist, [(CBC News, Jan, 2020)](https://www.cbc.ca/player/play/video/1.5435801)
 
-- The sample space is:  `{H, T}`
+- CDC says flu activity probably has not peaked amid record-breaking season [(CNN, Jan 2026)](https://www.cnn.com/2026/01/09/health/flu-illness-2026-peak)
 
-- Each outcome represents a possible result of the experiment
+- The riskiest asteroid on record now has near-zero chance of hitting Earth [(CNN, Feb 2025)](https://www.cnn.com/2025/02/24/science/asteroid-2024-yr4-impact-risk-decrease)
 
-We denote the sample space using a capital **S** or curly braces.
+- The probability of a recession has fallen to 40%, [(JP Morgan, May 2025)](https://www.jpmorgan.com/insights/global-research/economy/recession-probability)
 
-![](https://images.unsplash.com/photo-1574641820089-d431bff40336?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+- 2025-26 Stanley Cup odds: Avalanche, Hurricanes, Lightning lead favorites [(ESPN, Jan 2026)](https://www.espn.com/nfl/story/_/id/47600644/sources-mike-tomlin-step-steelers-head-coach)
 
-## Event
+- The odds of winning the Powerball lottery with single ticket is about 1 in 300 million.
+:::
 
-- An **event** is a subset of the sample space, and it's a collection of one or more outcomes.
-- Events can include:
-  - A single outcome (e.g., `{H}`)
-  - Multiple outcomes (e.g., `{H, T}`)
-  - No outcomes (the empty set)
+::: {style="font-size: 13px; margin-top: -30px; color: grey;"}
+More stories in [eBook by K. Ross](https://bookdown.org/kevin_davisross/probsim-book/prob-literacy.html)
+:::
 
-If all outcomes are equally likely, then the probability of that event, $P(\text{event})$, is computed as:
+#### Each story reflects a case where the outcome is uncertain, capturing randomness.
 
-$$P(\text{event}) = \frac{(\text{number of outcomes in the event})} {(\text{total number of outcomes in the sample space})}$$
+## 
 
-## Example: Tossing a Coin
+**Randomness** can come from:
 
-- Sample space: `{H, T}`
+- physical events (e.g, flipping a coin)
+- selection mechanisms (e.g., selecting individuals from a population)
+- experimental designs (random assignment in a randomized experiment)
+- complex systems (e.g., stock market fluctuations)
+- simulations or algorithms (e.g., random number generator in software)
+- biological processes (e.g., random assortment of chromosomes)
+
+<br>
+
+#### In a **random** phenomenon there is **uncertainty** about which of several **potential outcomes** will take place. Outcomes or events may not be equally likely.
+
+## Terminology
+
+<br>
+
+- **Outcomes**: possible results of the random phenomenon, not necessarily numeric (e.g, side of a coin, students selected for a survey)
+
+- **Events**: a collection of outcomes (e.g, winning all games of the season) 
+
+- **Probability of events**: a number between 0 and 1 that measures the uncertainty of an event, how likely an event is to occur.
+
+::: {.callout-note}
+In many situations, we won't be focus on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible
+:::
+
+## Example of random phenomenom: 
+
+<br>
+
+::: {.columns}
+
+::: {.column width="65%"}
+### Tossing a Coin 
+
+- All possible outcomes (aka sample space): `{H, T}`
 - Event: Toss a head = `{H}`
-- Since the coin is fair, both outcomes are equally likely
+:::
+::: {.column width="35%"}
 
-$$P(H) = 1 / 2 = 0.5$$
+![](https://images.unsplash.com/photo-1574641820089-d431bff40336?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D){width=60%}
+:::
+:::
+
+
+Since the coin is fair, both outcomes are equally likely
+
+$$P(H) = P(\text{event}) = \frac{(\text{number of outcomes in the event})} {(\text{total number of possible outcomes})} = \frac{1}{2} = 0.5$$
+
+#### The interpretation of probability as *frequency* applies to many real examples. 
+> For example, probability of high temperature in wildfires randomly selected from all fires in Alberta
+
+## A different example of a random phenomenom
+
+::: {.columns}
+
+::: {.column width="55%"}
+### Student arrival to class
+
+The exact arrival time is uncertain and depends on many unpredictable factors (traffic, delays, decisions).
+
+- All possible outcomes: any time of the day
+
+- Event: times in the interval [8:55, 9:05]
+
+:::
+::: {.column width="45%"}
+
+![](https://images.unsplash.com/photo-1736086501687-6666b5b742bb?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D){width=80%}
+
+::: {style="font-size: 13px; margin-top: -30px; color: grey;"}
+Photo by Dominic Kurniawan Suryaputra, Unsplash
+:::
+:::
+
+:::
+
+
+<br>
+
+We can't compute the probability of the event using frequencies. 
+
+#### Instead, we rely on a model-based approach: assume a distribution to reflect uncertainty about the arrival time.
 
 ## Random variables
 
-:::incremental 
-- A **random variable** is a function whose value is the outcome of a chance experiment.
-- It's actually a function on the sample space that assigns a number to each possible outcome.
+
+- **Random variables**:  a number assigned to each outcome, representing a quantity of interest (e.g., age of students selected, temperature the day of a fire)
+
 - It can take on multiple possible values, some potentially more likely than others.
+
 - Before we observe it, the value is unknown. After observation, it is fixed.
-::: 
+
+
+<br>
+
+::: {.callout-tip title="Why is it called a *random variable*?"}
+Technically, random variables are functions that assign numbers to outcomes. The name reflects two ideas: the value can change (it’s a variable), and it's uncertain which value it will take (it’s *random*).
+:::
+
 
 ## Random variable notation
 
 - Random variables are usually represented by **uppercase letters** (e.g., \( X \), \( Y \), \( Z \))
 - The values they take are represented by **lowercase letters** (e.g., \( x \), \( y \), \( z \))
 
-Example: 
+Example: tossing a coin 
 
-- Let $X$ represent the outcome of a coin toss
+- Let $X$ represent the number of "heads"
 - Possible values:
   - $x = 1$ → outcome is "heads"
   - $x = 0$ → outcome is "tails"
 
-## 
+## Distribution
+
 <br>
 
-- A random variable $X$ is said to *follow* a certain distribution.
+The **distribution of a random variable**: is a function that describes the variability of the random variable.
+
+:::incremental
 - We write this as: $$X \sim \text{Distribution}(\text{parameters})$$
-- Just like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible outcomes.
+- Just like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible values
+
+- Distributions can be used to calculate probabilities associated with random variables. 
+
+- In some cases, but not always, the distribution is defined by a specific formula. 
+
+- Some distributions have have special names (e.g., Bernoulli, Normal)
+:::
 
 
 ## Discrete vs Continuous Random Variables
@@ -110,19 +206,6 @@ Example:
 	- Discrete: number of heads in 10 coin tosses
 	- Continuous: height of a randomly selected student
 
-## Scenario
-
-A game involves rolling a fair six-sided die. Let $X$ represent the number of dots showing on the top face after the roll.
-
-Questions:
-
-1. What is the sample space?
-2. Define one event of interest.
-3. Describe the random variable $X$. What values can it take?
-4. Is $X$ discrete or continuous?
-
-
-Take 1-2 minutes to discuss with a partner.
 
 ## Discrete Random Variables
 <br>
@@ -135,65 +218,57 @@ Today, we’ll look at three types of discrete random variables:
 
 ## Bernoulli
 
-- A Bernoulli random variable represents a **single trial** with two possible outcomes:
+- A Bernoulli random variable assigns a numeric value to the outcome of a single trial with two possible results:
+
 	- The event of interest **occurs** → we call this a **success**
 	- The event of interest **does not occur** → we call this a **failure**
-- Notation:  $$X \sim \text{Bernoulli}(p)$$
 
-where $p$ is the probability of success (so $1 - p$ is failure).
 
-## Bernoulli
-<br>
+- Notation:
+$$X \sim \text{Bernoulli}(p)$$
 
-- Possible values:  
-	- 1 = success  
-	- 0 = failure
+where $p$ is the probability of success fixed in advance (so $1 - p$ is failure).
 
-- Examples:
-	- Did a user click on an ad? (yes = 1, no = 0)  
-	- Did a lightbulb work when tested? (works = 1, doesn’t work = 0)
+$$x = \left\{ \begin{array}{ll}
+         1 & \text{if oucome = success};\\
+         0 & \text{if oucome = failure}\end{array} \right.$$
+         
+> for example: did a user click on an ad? (yes = 1, no = 0)  
+
+
 
 ## Binomial
 
-- The Binomial random variable builds on the Bernoulli trial.
-- Instead of just one trial, we repeat the experiment a fixed number of times.
-- Each trial:
-	- Has only two possible outcomes: success or failure
-	- Is independent of the others
-- Notation:  $$X \sim \text{Binomial}(n, p)$$
+- A binomial random variable represents the **number of successes** in a fixed number of independent Bernoulli trials.
+
+
+- Notation:
+
+$$X \sim \text{Binomial}(n, p)$$
 
 where:
 
 - $n$ - number of trials  
-- $p$ - probability of success on each trial
+- $p$ - probability of success on each trial fixed in advance
 
-## Binomial (continued)
+- $X$ can take values in $\{0, 1, \ldots, n\}$
 
-- A binomial random variable represents the **number of successes** in a fixed number of independent trials.
-- The probability of success is the same each time and the number of trials is fixed in advance.
-- Examples:
-	- Number of people who vote in favour of a proposal out of 100 surveyed
-	- Number of lightbulbs that pass a test out of 10 tested
-	- Number of correct answers on a multiple-choice quiz with 5 questions
+> for example: number of people who vote in favour of a proposal out of 100 surveyed
 	
 ## Poisson 
 
-- A poisson random variable counts the number of times an event occurs in a fixed interval of time or space.
+- A Poisson random variable counts the number of times an event occurs in a fixed interval of time or space.
 - Events happen independently of one another and occur at a constant average rate.
 - There’s no upper limit to the number of occurrences, but large counts become increasingly rare
-- Notation:  
+
+
+- Notation:
+
 $$X \sim \text{Poisson}(\lambda)$$
 
 where  $\lambda$ is the **expected number of events** in the interval.
 
-
-##  Example of a Poisson Random Variable
-<br>
-
-- Number of customers arriving at a store in an hour
-- Number of emails received per day
-- Number of typos on a printed page
-
+> for example: the number of customers arriving at a store in an hour
 
 ## Summary: Discrete Random Variables
 
@@ -225,7 +300,7 @@ We'll describe the type of data each models and how we use parameters to define 
 - All values in a given interval are **equally likely**
 - The graph of the distribution is a flat horizontal line
 
-- Notation:  
+- Notation:
   $$X \sim \text{Uniform}(a, b)$$
 
 where:
@@ -252,7 +327,6 @@ ggplot(data.frame(x = c(0, 1)), aes(x)) +
 <br>
 
 - Randomly picking a number between 0 and 1  
-- Generating a random number to assign users to A/B test groups  
 - Simulating noise or jitter in synthetic datasets  
 - Sampling a timestamp uniformly within a day for testing  
   
@@ -410,8 +484,28 @@ E. Normal
 
 ## Key takeaways
 
+:::incremental
+- Outcomes of random phenomena are uncertain.
+
+- Randomness may be the result of physical events, selection, assignment, or complex processes, among others. 
+
+- Outcomes or events may not be equally likely.
+
 - Sample space is the set of all possible outcomes; an event is a subset of that space.
 - A random variable assigns numbers to outcomes of a random process.
 - Random variables can be discrete (countable values) or continuous (range of values).
 - Different types of random variables are modeled by different distributions (e.g., Bernoulli, Binomial, Poisson, Uniform).
+:::
 
+<!--
+> Note
+
+Model-based approach 
+<br>
+
+| Sampling from a Finite Population         | Model-Based Approach                           |
+|-------------------------------------------|------------------------------------------------|
+| Finite population    | Data generated from a probability model         |
+| Sample is a subset of actual units         | Values are outcomes from a distribution         |
+| Sampling variability comes from the sample | Variability comes from randomness in the model  |
+-->
