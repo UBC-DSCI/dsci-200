@@ -1162,6 +1162,13 @@
     "text": "Distribution\n\nThe distribution of a random variable: is a function that describes the variability of the random variable.\n\n\nWe write this as: \\[X \\sim \\text{Distribution}(\\text{parameters})\\]\nJust like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible values\nDistributions can be used to calculate probabilities associated with random variables.\nIn some cases, but not always, the distribution is defined by a specific formula.\nSome distributions have have special names (e.g., Bernoulli, Normal)"
   },
   {
+    "objectID": "schedule/slides/prob-distributions.html#finite-vs-model-based",
+    "href": "schedule/slides/prob-distributions.html#finite-vs-model-based",
+    "title": "UBC DSCI 200",
+    "section": "Finite vs Model-Based",
+    "text": "Finite vs Model-Based\nIn Statistics and Data Science:\n\nrows of data can be thought as realizations of outcomes\ncolumns of data can be thought as realizations of random variables\n\n\n\n\n\n\n\n\nFinite Population\nModel-Based Approach\n\n\n\n\nFinite population\nData generated from a probability model\n\n\nOutcomes are a subset of actual units\nOutcomes are generated from a distribution\n\n\nFinite sample space\nInfinite or Finite sample space\n\n\nVariability comes from the sampling\nVariability comes from randomness in the model\n\n\nProbability as frequencies\nModel-based probability"
+  },
+  {
     "objectID": "schedule/slides/prob-distributions.html#discrete-vs-continuous-random-variables",
     "href": "schedule/slides/prob-distributions.html#discrete-vs-continuous-random-variables",
     "title": "UBC DSCI 200",

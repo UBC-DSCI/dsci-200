@@ -196,6 +196,21 @@ The **distribution of a random variable**: is a function that describes the vari
 - Some distributions have have special names (e.g., Bernoulli, Normal)
 :::
 
+## Finite vs Model-Based 
+
+In Statistics and Data Science:
+
+- rows of data can be thought as realizations of outcomes
+
+- columns of data can be thought as realizations of random variables
+
+| Finite Population         | Model-Based Approach                           |
+|-------------------------------------------|------------------------------------------------|
+| Finite population    | Data generated from a probability model         |
+| Outcomes are a subset of actual units         | Outcomes are generated from a distribution         |
+| Finite sample space         | Infinite or Finite sample space         |
+| Variability comes from the sampling | Variability comes from randomness in the model  |
+| Probability as frequencies | Model-based probability |
 
 ## Discrete vs Continuous Random Variables
 
