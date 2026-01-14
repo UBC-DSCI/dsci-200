@@ -134,7 +134,7 @@
 <h2>Random Variables and Distributions</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
-<p>Last modified – 05 January 2026</p>
+<p>Last modified – 14 January 2026</p>
 <p><span class="math display">\[
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -168,7 +168,11 @@
 <section id="attribution" class="slide level2">
 <h2>Attribution</h2>
 <p><br><br></p>
-<p><em>This material is adapted from</em> <a href="https://homerhanumat.github.io/elemStats/"><em>Chapters 5 of Elementary Statistics with R</em></a>.</p>
+<p><em>This material is based on content adapted from</em></p>
+<ul>
+<li><p><a href="https://homerhanumat.github.io/elemStats/"><em>Chapter 5 of Elementary Statistics with R</em></a></p></li>
+<li><p><a href="https://bookdown.org/kevin_davisross/probsim-book/"><em>Chapters 1, 2.1-2.3, and 4.1-4.3 of An Introduction to Probability and Simulation</em></a></p></li>
+</ul>
 <p><br><br></p>
 </section>
 <section id="learning-objectives" class="slide level2">
@@ -183,88 +187,135 @@
 </section>
 <section id="last-time-sampling-from-a-finite-population" class="slide level2">
 <h2>Last time: Sampling from a finite population</h2>
-<p><br><br></p>
+<p><br></p>
 <ul>
 <li>We sampled from some finite population (e.g., all students in a university)</li>
 <li>Our sample is a subset of actual individuals or observations</li>
-<li>Variation occurs because each sample can be different</li>
+<li>Variation occurred because each sample was selected <em>at random</em>
+<ul>
+<li>different samples yield different results.</li>
+</ul></li>
+<li>This random selection generates a random sample.</li>
 </ul>
-</section>
-<section id="model-based-approach" class="slide level2">
-<h2>Model-based approach</h2>
 <p><br></p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 47%">
-<col style="width: 52%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Sampling from a Finite Population</th>
-<th>Model-Based Approach</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Finite population</td>
-<td>Data generated from a probability model</td>
-</tr>
-<tr class="even">
-<td>Sample is a subset of actual units</td>
-<td>Values are outcomes from a distribution</td>
-</tr>
-<tr class="odd">
-<td>Sampling variability comes from the sample</td>
-<td>Variability comes from randomness in the model</td>
-</tr>
-</tbody>
-</table>
+<h3 id="today-well-focus-on-defining-and-characterizing-random-phenomena-more-broadly-beyond-random-selection">Today, we’ll focus on defining and characterizing random phenomena more broadly, beyond random selection</h3>
 </section>
-<section id="sample-space" class="slide level2">
-<h2>Sample Space</h2>
+<section id="randomness-beyond-sampling" class="slide level2">
+<h2>Randomness beyond sampling</h2>
+<p>Words like <strong>probability, chance, and odds</strong> are commonly used to express uncertainty:</p>
+<div>
 <ul>
-<li><p>The <strong>sample space</strong> is the set of all possible outcomes of an experiment.</p>
-<ul>
-<li>Example: Tossing a fair coin</li>
-</ul></li>
-<li><p>The sample space is: <code>{H, T}</code></p></li>
-<li><p>Each outcome represents a possible result of the experiment</p></li>
+<li class="fragment"><p>‘Very high’ probability that Canada will see coronavirus, says Toronto respirologist, <a href="https://www.cbc.ca/player/play/video/1.5435801">(CBC News, Jan, 2020)</a></p></li>
+<li class="fragment"><p>CDC says flu activity probably has not peaked amid record-breaking season <a href="https://www.cnn.com/2026/01/09/health/flu-illness-2026-peak">(CNN, Jan 2026)</a></p></li>
+<li class="fragment"><p>The riskiest asteroid on record now has near-zero chance of hitting Earth <a href="https://www.cnn.com/2025/02/24/science/asteroid-2024-yr4-impact-risk-decrease">(CNN, Feb 2025)</a></p></li>
+<li class="fragment"><p>The probability of a recession has fallen to 40%, <a href="https://www.jpmorgan.com/insights/global-research/economy/recession-probability">(JP Morgan, May 2025)</a></p></li>
+<li class="fragment"><p>2025-26 Stanley Cup odds: Avalanche, Hurricanes, Lightning lead favorites <a href="https://www.espn.com/nfl/story/_/id/47600644/sources-mike-tomlin-step-steelers-head-coach">(ESPN, Jan 2026)</a></p></li>
+<li class="fragment"><p>The odds of winning the Powerball lottery with single ticket is about 1 in 300 million.</p></li>
 </ul>
-<p>We denote the sample space using a capital <strong>S</strong> or curly braces.</p>
-
-<img data-src="https://images.unsplash.com/photo-1574641820089-d431bff40336?q=80&amp;w=1740&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="r-stretch"></section>
-<section id="event" class="slide level2">
-<h2>Event</h2>
-<ul>
-<li>An <strong>event</strong> is a subset of the sample space, and it’s a collection of one or more outcomes.</li>
-<li>Events can include:
-<ul>
-<li>A single outcome (e.g., <code>{H}</code>)</li>
-<li>Multiple outcomes (e.g., <code>{H, T}</code>)</li>
-<li>No outcomes (the empty set)</li>
-</ul></li>
-</ul>
-<p>If all outcomes are equally likely, then the probability of that event, <span class="math inline">\(P(\text{event})\)</span>, is computed as:</p>
-<p><span class="math display">\[P(\text{event}) = \frac{(\text{number of outcomes in the event})} {(\text{total number of outcomes in the sample space})}\]</span></p>
+</div>
+<div style="font-size: 13px; margin-top: -30px; color: grey;">
+<p>More stories in <a href="https://bookdown.org/kevin_davisross/probsim-book/prob-literacy.html">eBook by K. Ross</a></p>
+</div>
+<h4 id="each-story-reflects-a-case-where-the-outcome-is-uncertain-capturing-randomness.">Each story reflects a case where the outcome is uncertain, capturing randomness.</h4>
 </section>
-<section id="example-tossing-a-coin" class="slide level2">
-<h2>Example: Tossing a Coin</h2>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><strong>Randomness</strong> can come from:</p>
 <ul>
-<li>Sample space: <code>{H, T}</code></li>
+<li>physical events (e.g, flipping a coin)</li>
+<li>selection mechanisms (e.g., selecting individuals from a population)</li>
+<li>experimental designs (random assignment in a randomized experiment)</li>
+<li>complex systems (e.g., stock market fluctuations)</li>
+<li>simulations or algorithms (e.g., random number generator in software)</li>
+<li>biological processes (e.g., random assortment of chromosomes)</li>
+</ul>
+<p><br></p>
+<h4 id="in-a-random-phenomenon-there-is-uncertainty-about-which-of-several-potential-outcomes-will-take-place.-outcomes-or-events-may-not-be-equally-likely.">In a <strong>random</strong> phenomenon there is <strong>uncertainty</strong> about which of several <strong>potential outcomes</strong> will take place. Outcomes or events may not be equally likely.</h4>
+</section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
+<p><br></p>
+<ul>
+<li><p><strong>Outcomes</strong>: possible results of the random phenomenon, not necessarily numeric (e.g, side of a coin, students selected for a survey)</p></li>
+<li><p><strong>Events</strong>: a collection of outcomes (e.g, winning all games of the season)</p></li>
+<li><p><strong>Probability of events</strong>: a number between 0 and 1 that measures the uncertainty of an event, how likely an event is to occur.</p></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>In many situations, we won’t be focus on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-of-random-phenomenom" class="slide level2">
+<h2>Example of random phenomenom:</h2>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:65%;">
+<h3 id="tossing-a-coin">Tossing a Coin</h3>
+<ul>
+<li>All possible outcomes (aka sample space): <code>{H, T}</code></li>
 <li>Event: Toss a head = <code>{H}</code></li>
-<li>Since the coin is fair, both outcomes are equally likely</li>
 </ul>
-<p><span class="math display">\[P(H) = 1 / 2 = 0.5\]</span></p>
+</div><div class="column" style="width:35%;">
+<p><img data-src="https://images.unsplash.com/photo-1574641820089-d431bff40336?q=80&amp;w=1740&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width:60.0%"></p>
+</div></div>
+<p>Since the coin is fair, both outcomes are equally likely</p>
+<p><span class="math display">\[P(H) = P(\text{event}) = \frac{(\text{number of outcomes in the event})} {(\text{total number of possible outcomes})} = \frac{1}{2} = 0.5\]</span></p>
+<h4 id="the-interpretation-of-probability-as-frequency-applies-to-many-real-examples.">The interpretation of probability as <em>frequency</em> applies to many real examples.</h4>
+<blockquote>
+<p>For example, probability of high temperature in wildfires randomly selected from all fires in Alberta</p>
+</blockquote>
+</section>
+<section id="a-different-example-of-a-random-phenomenom" class="slide level2">
+<h2>A different example of a random phenomenom</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<h3 id="student-arrival-to-class">Student arrival to class</h3>
+<p>The exact arrival time is uncertain and depends on many unpredictable factors (traffic, delays, decisions).</p>
+<ul>
+<li><p>All possible outcomes: any time of the day</p></li>
+<li><p>Event: times in the interval [8:55, 9:05]</p></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><img data-src="https://images.unsplash.com/photo-1736086501687-6666b5b742bb?q=80&amp;w=2938&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width:80.0%"></p>
+<div style="font-size: 13px; margin-top: -30px; color: grey;">
+<p>Photo by Dominic Kurniawan Suryaputra, Unsplash</p>
+</div>
+</div></div>
+<p><br></p>
+<p>We can’t compute the probability of the event using frequencies.</p>
+<h4 id="instead-we-rely-on-a-model-based-approach-assume-a-distribution-to-reflect-uncertainty-about-the-arrival-time.">Instead, we rely on a model-based approach: assume a distribution to reflect uncertainty about the arrival time.</h4>
 </section>
 <section id="random-variables" class="slide level2">
 <h2>Random variables</h2>
-<div>
 <ul>
-<li class="fragment">A <strong>random variable</strong> is a function whose value is the outcome of a chance experiment.</li>
-<li class="fragment">It’s actually a function on the sample space that assigns a number to each possible outcome.</li>
-<li class="fragment">It can take on multiple possible values, some potentially more likely than others.</li>
-<li class="fragment">Before we observe it, the value is unknown. After observation, it is fixed.</li>
+<li><p><strong>Random variables</strong>: a number assigned to each outcome, representing a quantity of interest (e.g., age of students selected, temperature the day of a fire)</p></li>
+<li><p>It can take on multiple possible values, some potentially more likely than others.</p></li>
+<li><p>Before we observe it, the value is unknown. After observation, it is fixed.</p></li>
 </ul>
+<p><br></p>
+<div title="Why is it called a *random variable*?">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Why is it called a <em>random variable</em>?</strong></p>
+</div>
+<div class="callout-content">
+<p>Technically, random variables are functions that assign numbers to outcomes. The name reflects two ideas: the value can change (it’s a variable), and it’s uncertain which value it will take (it’s <em>random</em>).</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="random-variable-notation" class="slide level2">
@@ -273,9 +324,9 @@
 <li>Random variables are usually represented by <strong>uppercase letters</strong> (e.g., ( X ), ( Y ), ( Z ))</li>
 <li>The values they take are represented by <strong>lowercase letters</strong> (e.g., ( x ), ( y ), ( z ))</li>
 </ul>
-<p>Example:</p>
+<p>Example: tossing a coin</p>
 <ul>
-<li>Let <span class="math inline">\(X\)</span> represent the outcome of a coin toss</li>
+<li>Let <span class="math inline">\(X\)</span> represent the number of “heads”</li>
 <li>Possible values:
 <ul>
 <li><span class="math inline">\(x = 1\)</span> → outcome is “heads”</li>
@@ -283,14 +334,19 @@
 </ul></li>
 </ul>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
+<section id="distribution" class="slide level2">
+<h2>Distribution</h2>
 <p><br></p>
+<p>The <strong>distribution of a random variable</strong>: is a function that describes the variability of the random variable.</p>
+<div>
 <ul>
-<li>A random variable <span class="math inline">\(X\)</span> is said to <em>follow</em> a certain distribution.</li>
-<li>We write this as: <span class="math display">\[X \sim \text{Distribution}(\text{parameters})\]</span></li>
-<li>Just like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible outcomes.</li>
+<li class="fragment"><p>We write this as: <span class="math display">\[X \sim \text{Distribution}(\text{parameters})\]</span></p></li>
+<li class="fragment"><p>Just like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible values</p></li>
+<li class="fragment"><p>Distributions can be used to calculate probabilities associated with random variables.</p></li>
+<li class="fragment"><p>In some cases, but not always, the distribution is defined by a specific formula.</p></li>
+<li class="fragment"><p>Some distributions have have special names (e.g., Bernoulli, Normal)</p></li>
 </ul>
+</div>
 </section>
 <section id="discrete-vs-continuous-random-variables" class="slide level2">
 <h2>Discrete vs Continuous Random Variables</h2>
@@ -307,18 +363,6 @@
 </ul></li>
 </ul>
 </section>
-<section id="scenario" class="slide level2">
-<h2>Scenario</h2>
-<p>A game involves rolling a fair six-sided die. Let <span class="math inline">\(X\)</span> represent the number of dots showing on the top face after the roll.</p>
-<p>Questions:</p>
-<ol type="1">
-<li>What is the sample space?</li>
-<li>Define one event of interest.</li>
-<li>Describe the random variable <span class="math inline">\(X\)</span>. What values can it take?</li>
-<li>Is <span class="math inline">\(X\)</span> discrete or continuous?</li>
-</ol>
-<p>Take 1-2 minutes to discuss with a partner.</p>
-</section>
 <section id="discrete-random-variables" class="slide level2">
 <h2>Discrete Random Variables</h2>
 <p><br></p>
@@ -332,84 +376,52 @@
 <section id="bernoulli" class="slide level2">
 <h2>Bernoulli</h2>
 <ul>
-<li>A Bernoulli random variable represents a <strong>single trial</strong> with two possible outcomes:
+<li><p>A Bernoulli random variable assigns a numeric value to the outcome of a single trial with two possible results:</p>
 <ul>
 <li>The event of interest <strong>occurs</strong> → we call this a <strong>success</strong></li>
 <li>The event of interest <strong>does not occur</strong> → we call this a <strong>failure</strong></li>
 </ul></li>
-<li>Notation: <span class="math display">\[X \sim \text{Bernoulli}(p)\]</span></li>
+<li><p>Notation: <span class="math display">\[X \sim \text{Bernoulli}(p)\]</span></p></li>
 </ul>
-<p>where <span class="math inline">\(p\)</span> is the probability of success (so <span class="math inline">\(1 - p\)</span> is failure).</p>
-</section>
-<section id="bernoulli-1" class="slide level2">
-<h2>Bernoulli</h2>
-<p><br></p>
-<ul>
-<li>Possible values:
-<ul>
-<li>1 = success<br>
-</li>
-<li>0 = failure</li>
-</ul></li>
-<li>Examples:
-<ul>
-<li>Did a user click on an ad? (yes = 1, no = 0)<br>
-</li>
-<li>Did a lightbulb work when tested? (works = 1, doesn’t work = 0)</li>
-</ul></li>
-</ul>
+<p>where <span class="math inline">\(p\)</span> is the probability of success fixed in advance (so <span class="math inline">\(1 - p\)</span> is failure).</p>
+<p><span class="math display">\[x = \left\{ \begin{array}{ll}
+         1 &amp; \text{if oucome = success};\\
+         0 &amp; \text{if oucome = failure}\end{array} \right.\]</span></p>
+<blockquote>
+<p>for example: did a user click on an ad? (yes = 1, no = 0)</p>
+</blockquote>
 </section>
 <section id="binomial" class="slide level2">
 <h2>Binomial</h2>
 <ul>
-<li>The Binomial random variable builds on the Bernoulli trial.</li>
-<li>Instead of just one trial, we repeat the experiment a fixed number of times.</li>
-<li>Each trial:
-<ul>
-<li>Has only two possible outcomes: success or failure</li>
-<li>Is independent of the others</li>
-</ul></li>
-<li>Notation: <span class="math display">\[X \sim \text{Binomial}(n, p)\]</span></li>
+<li><p>A binomial random variable represents the <strong>number of successes</strong> in a fixed number of independent Bernoulli trials.</p></li>
+<li><p>Notation:</p></li>
 </ul>
+<p><span class="math display">\[X \sim \text{Binomial}(n, p)\]</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(n\)</span> - number of trials<br>
-</li>
-<li><span class="math inline">\(p\)</span> - probability of success on each trial</li>
+<li><p><span class="math inline">\(n\)</span> - number of trials<br>
+</p></li>
+<li><p><span class="math inline">\(p\)</span> - probability of success on each trial fixed in advance</p></li>
+<li><p><span class="math inline">\(X\)</span> can take values in <span class="math inline">\(\{0, 1, \ldots, n\}\)</span></p></li>
 </ul>
-</section>
-<section id="binomial-continued" class="slide level2">
-<h2>Binomial (continued)</h2>
-<ul>
-<li>A binomial random variable represents the <strong>number of successes</strong> in a fixed number of independent trials.</li>
-<li>The probability of success is the same each time and the number of trials is fixed in advance.</li>
-<li>Examples:
-<ul>
-<li>Number of people who vote in favour of a proposal out of 100 surveyed</li>
-<li>Number of lightbulbs that pass a test out of 10 tested</li>
-<li>Number of correct answers on a multiple-choice quiz with 5 questions</li>
-</ul></li>
-</ul>
+<blockquote>
+<p>for example: number of people who vote in favour of a proposal out of 100 surveyed</p>
+</blockquote>
 </section>
 <section id="poisson" class="slide level2">
 <h2>Poisson</h2>
 <ul>
-<li>A poisson random variable counts the number of times an event occurs in a fixed interval of time or space.</li>
-<li>Events happen independently of one another and occur at a constant average rate.</li>
-<li>There’s no upper limit to the number of occurrences, but large counts become increasingly rare</li>
-<li>Notation:<br>
-<span class="math display">\[X \sim \text{Poisson}(\lambda)\]</span></li>
+<li><p>A Poisson random variable counts the number of times an event occurs in a fixed interval of time or space.</p></li>
+<li><p>Events happen independently of one another and occur at a constant average rate.</p></li>
+<li><p>There’s no upper limit to the number of occurrences, but large counts become increasingly rare</p></li>
+<li><p>Notation:</p></li>
 </ul>
+<p><span class="math display">\[X \sim \text{Poisson}(\lambda)\]</span></p>
 <p>where <span class="math inline">\(\lambda\)</span> is the <strong>expected number of events</strong> in the interval.</p>
-</section>
-<section id="example-of-a-poisson-random-variable" class="slide level2">
-<h2>Example of a Poisson Random Variable</h2>
-<p><br></p>
-<ul>
-<li>Number of customers arriving at a store in an hour</li>
-<li>Number of emails received per day</li>
-<li>Number of typos on a printed page</li>
-</ul>
+<blockquote>
+<p>for example: the number of customers arriving at a store in an hour</p>
+</blockquote>
 </section>
 <section id="summary-discrete-random-variables" class="slide level2">
 <h2>Summary: Discrete Random Variables</h2>
@@ -469,8 +481,7 @@
 <ul>
 <li><p>All values in a given interval are <strong>equally likely</strong></p></li>
 <li><p>The graph of the distribution is a flat horizontal line</p></li>
-<li><p>Notation:<br>
-<span class="math display">\[X \sim \text{Uniform}(a, b)\]</span></p></li>
+<li><p>Notation: <span class="math display">\[X \sim \text{Uniform}(a, b)\]</span></p></li>
 </ul>
 <p>where:</p>
 <ul>
@@ -490,8 +501,6 @@
 <p><br></p>
 <ul>
 <li>Randomly picking a number between 0 and 1<br>
-</li>
-<li>Generating a random number to assign users to A/B test groups<br>
 </li>
 <li>Simulating noise or jitter in synthetic datasets<br>
 </li>
@@ -661,12 +670,29 @@ E. Normal</p>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
+<div>
 <ul>
-<li>Sample space is the set of all possible outcomes; an event is a subset of that space.</li>
-<li>A random variable assigns numbers to outcomes of a random process.</li>
-<li>Random variables can be discrete (countable values) or continuous (range of values).</li>
-<li>Different types of random variables are modeled by different distributions (e.g., Bernoulli, Binomial, Poisson, Uniform).</li>
+<li class="fragment"><p>Outcomes of random phenomena are uncertain.</p></li>
+<li class="fragment"><p>Randomness may be the result of physical events, selection, assignment, or complex processes, among others.</p></li>
+<li class="fragment"><p>Outcomes or events may not be equally likely.</p></li>
+<li class="fragment"><p>Sample space is the set of all possible outcomes; an event is a subset of that space.</p></li>
+<li class="fragment"><p>A random variable assigns numbers to outcomes of a random process.</p></li>
+<li class="fragment"><p>Random variables can be discrete (countable values) or continuous (range of values).</p></li>
+<li class="fragment"><p>Different types of random variables are modeled by different distributions (e.g., Bernoulli, Binomial, Poisson, Uniform).</p></li>
 </ul>
+</div>
+<!--
+> Note
+
+Model-based approach 
+<br>
+
+| Sampling from a Finite Population         | Model-Based Approach                           |
+|-------------------------------------------|------------------------------------------------|
+| Finite population    | Data generated from a probability model         |
+| Sample is a subset of actual units         | Values are outcomes from a distribution         |
+| Sampling variability comes from the sample | Variability comes from randomness in the model  |
+-->
 
 
 </section>
