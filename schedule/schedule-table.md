@@ -4,7 +4,7 @@
 |07 Jan 26 | Exploratory Data Analysis |[Slides](slides/eda-2.qmd)   |          |
 |12 Jan 26 | Fundamentals of Sampling and Variability |[Slides](slides/sampling-fundamentals.qmd)  |          |
 |14 Jan 26 | Random Variables and Distributions |[Slides](slides/prob-distributions.qmd)   |  EDA Worksheet Due at 11:59pm |
-|19 Jan 26 | Simulation I  |[Slides]()   |          |
+|19 Jan 26 | Simulation I  |[Slides](slides/simulation-1.qmd)   |          |
 |21 Jan 26 | Simulation I |[Slides]()   |    Sampling Worksheet Due at 11:59pm      |
 |26 Jan 26 | Sampling Design  |[Slides]()   |          |
 |28 Jan 26 | Study Design  |[Slides]()   |   Simulation I Worksheet Due at 11:59pm        |
