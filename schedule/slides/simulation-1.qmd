@@ -1,0 +1,473 @@
+---
+lecture: "Simulations - part I"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+*This material is based on content adapted from* 
+
+- [*Chapters 1, 2.1-2.3, and 4.1-4.3 of An Introduction to Probability and Simulation*](https://bookdown.org/kevin_davisross/probsim-book/)
+
+<br><br>
+
+## Learning Objectives 
+<br><br>
+
+- Understand the mechanisms for generating and simulating data.
+- Contrast empirical and theoretical distributions.
+- Use simulations to approximate probability of events or distribution functions.
+- Use simulations to assess theoretical properties of random variables.
+- Explore the Central Limit Theorem (CLT) and Law of Large Numbers (LLN).
+- Write reproducible simulation code.
+- Interpret and reflect on simulation results using plots and summary statistics. 
+
+## Last time: Randomness and distributions
+
+- In a **random** phenomenon there is **uncertainty** about which of several potential outcomes will take place. 
+  - Outcomes or events may not be equally likely.
+  - Randomness may be the result of physical events, selection, assignment, or complex processes, among others. 
+
+- **Probability of events**: a number in $[0, 1]$ that measures the uncertainty of an event.
+
+- A **random variable** assigns numbers to outcomes of a random process
+  - discrete (countable values) or continuous (range of values)
+
+- The **distribution** of a random variable is a function that describes its variability
+  - some of them have formulas and special names  (e.g., Binomial, Uniform, Normal).
+
+#### Today, we’ll use computer code to **simulate randomness** and recreate random processes, under our full control, many times!!
+
+
+## Recall...
+
+
+**Randomness** can come from:
+
+- physical events (e.g, flipping a coin)
+- selection mechanisms (e.g., selecting individuals from a population)
+- experimental designs (random assignment in a controlled experiment)
+- complex systems (e.g., stock market fluctuations)
+
+::: {style="color: grey;"}
+- simulations or algorithms (e.g., random number generator in software)
+:::
+
+- biological processes (e.g., random assortment of chromosomes)
+
+Which of these random processes can we easily repeat thousands of times? difficult or impossible to reproduce in practice?
+
+#### Simulation lets us recreate random processes in a controlled and repeatable way.
+
+## Simulations
+
+:::callout-important
+## Definition
+
+**Simulation** is a way of recreating a random process with code so that we can repeatedly observe its outcomes and reproduce the same process under identical conditions.
+:::
+
+- Each simulation run randomly results in one possible outcome of the process.
+
+- Many runs reveal patterns of variability in the outcomes of the process.
+
+However, 
+
+- a real process may be difficult to recreate with code! 
+
+- we may need to make many (and some unrealistic) assumptions to recreate a process.
+
+- even when a process is easy to describe, simulating it many times may be computationally costly.
+
+#### Simulation trades analytical difficulty or lack of feasibility for computational effort
+
+## What do we use simulation for?
+
+<br>
+
+We often use simulation to:
+
+- approximate a probability that it's hard to compute analytically
+
+- approximate a distribution that is unknown or difficult to derive
+
+- understand variability (e.g., a standard error)
+
+- study properties of estimators 
+
+#### Simulation answers questions that cannot be answered from a single realization of a random process.
+
+## How do we build a simulation?
+
+To simulate a process, we follow a clear set of steps.
+
+<br>
+
+::: {.columns}
+
+::: {.column width="65%"}
+
+- 1. Define **the process** we want to simulate
+
+- 2. Specify how **randomness** enters the process
+
+- 3. Decide **what to record** from each run
+
+- 4. **Repeat** the process many times
+
+- 5. **Summarize** the results across runs
+
+:::
+
+::: {.column width="35%"}
+
+![](https://images.unsplash.com/photo-1589152144820-692b189e0b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+::: {style="font-size: 13px; margin-top: -30px; color: grey;"}
+Photo by <a href="https://unsplash.com/@picsbyjameslee?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">James Lee</a> on <a href="https://unsplash.com/photos/text-Mfjq1hi-lVg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+:::
+
+:::
+:::
+
+<br>
+
+#### Simulation is structured repetition, not trial and error.
+
+## 1. Define the process
+
+<br>
+
+A simulation always starts with a clearly defined process.
+
+- What is the real or hypothetical process we want to mimic?
+- What assumptions are needed to describe this process?
+- What aspects of the process are held fixed across repetitions?
+
+<br>
+
+#### We simulate the mechanism that generates data, not a single observed outcome.
+
+## Example: approximating a probability by simulation
+
+<br>
+
+One of the oldest documented problems in probability asks the following question:
+
+> If three fair six-sided dice are rolled, what is more likely: a sum of 9 or a sum of 10?
+
+- use [**this link**](https://www.calculator.net/dice-roller.html) to virtually roll 3 dice
+- record if you get a sum of 9, of 10, or neither
+- repeat 15 times
+- use [**this link**](https://app.sli.do/event/3G8jxQbKQDv3UAZactXrZ2) to share what you found
+
+<br>
+
+::: {style="font-size: 20px; margin-top: -30px; color: grey;"}
+From [Probability and Simulation](https://bookdown.org/kevin_davisross/probsim-book/interpretations.html)
+:::
+
+## iCliker 1: define the random process
+
+<br>
+
+What is the random process we would repeat many times using code?
+
+- A) Rolling three physical dice in the classroom
+- B) Generating three independent outcomes from 
+$\{1, \ldots, 6\}$ with equal probability
+- C) Counting how often sums of 9 and 10 appear in our observed rolls
+- D) Computing the probabilities using a formula
+
+## iCliker 2: add randomness
+
+<br>
+
+In the three-dice problem, how does randomness enter the process?
+
+- A) The probabilities of each sum are random
+
+- B) The simulation randomly decides whether the sum is 9 or 10
+
+- C) Each die outcome is random, but the chances of each outcome stay the same run to run
+
+- D) The probability of each outcome changes run to run
+
+
+## in R
+
+```{r}
+#| context: global
+#| include: false
+library(tidyverse)
+library(infer)
+library(ggplot2)
+```
+
+```{r}
+three_dice <- sample(1:6, size = 3, replace = TRUE)
+
+three_dice
+sum(three_dice)
+```
+
+
+Every time we run this code, we’re simulating one roll of three fair dice! the outcome varies randomly but the probability model is fixed.
+
+#### The code defines the random process by specifying:
+:::incremental
+- what varies
+- what is fixed
+- which function generates the random outcomes (e.g., `sample()`)
+:::
+
+## Record from each run
+
+Every time we run this code, we’re simulating one roll of three fair dice! What we record from each run??
+
+<br>
+
+#### Back to the 3-dice example
+
+> If three fair six-sided dice are rolled, what is more likely: a sum of 9 or a sum of 10?
+
+You played with the random generator app and already made a decision of what to record. **What did you record from each run?**
+
+Enter your answer [**here**](https://app.sli.do/event/3G8jxQbKQDv3UAZactXrZ2)
+
+#### All choices are valid, but some are more efficient for the question we want to answer.
+
+## Choice of what to record
+
+We may record different results from the same random process! 
+
+#### What we record from each simulation run depends on the question we are trying to answer.
+
+:::incremental
+- If the goal is to study dice behavior → record all dice
+
+- If the goal is to compare sums → record the sum
+
+- If the goal is a probability → record an indicator
+:::
+
+We may also record results in anticipation of future questions. 
+
+Later, we’ll see how we can make simulations reproducible by controlling the random number generator.
+
+## in R
+
+Write code to record the following outcomes from one run
+
+- individual outcomes of the 3 dice
+- the sum of the 3 dice
+- indicator variables to record whether the sum is 9 or whether it is 10
+
+```{r}
+# One run of the process (3 fair dice)
+sample(1:6, size = 3, replace = TRUE)
+```
+
+
+## Repeat
+
+Compare the result you obtained with others. Did you get the same result?
+
+:::incremental
+- Everyone simulated the same process
+
+- Everyone followed the same instructions
+
+- Everyone most probably got different answers
+:::
+
+> So… which answer is correct?
+
+All results are correct, but a single run tells us almost nothing about a probability.
+
+#### To approximate probabilities we need the proportion of times events occur across **many runs**.
+
+## in R
+
+You already repeated the process a few times by hand. Code lets us repeat it thousands of times, consistently!
+
+Let's repeat it $10000$ times!
+
+```{r}
+
+#sums <- ...(10000, ...(sample(1:6, ..., replace = TRUE)))
+
+#head(sums)
+
+```
+
+## Summarize
+
+Once we have many runs, we summarize the results to answer our question.
+
+> We approximate each probability by the proportion of runs in which each sum occur.
+
+#### But what we compute depends on what we recorded.
+
+We can compute the proportion of sums equal to 9 using:
+
+- `mean()` 
+
+- `sum()` 
+
+- `table()`
+
+## in R
+
+```{r}
+sums <- replicate(10000,
+  sum(sample(1:6, size = 3, replace = TRUE))
+)
+
+c( prob_9_hat = mean(sums==9),
+prob_10_hat = mean(sums==10))
+```
+
+<br>
+
+#### According to our approximation, it seems that the probability of getting a sum of 10 is higher than that of getting 9!
+
+:::callout-caution
+Can you reproduce your result?? Run the code again!
+:::
+
+## Reproducibility
+
+- R generates random outcomes using a random number generator.
+
+- If we fix the starting point of that generator, R can reproduce the same random outcomes! 
+
+#### To make a simulation reproducible, we set the seed at any value!
+
+```{r}
+
+set.seed(200)
+
+sums <- replicate(10000,
+  sum(sample(1:6, size = 3, replace = TRUE))
+)
+
+c(prob_9_hat = mean(sums==9),
+prob_10_hat = mean(sums==10))
+```
+
+
+##
+
+```{r}
+library(ggplot2)
+library(tidyr)
+
+three_dice_df <- data.frame(
+  runs = seq_along(sums),
+  `prob_9_hat`  = cumsum(sums == 9)  / seq_along(sums),
+  `prob_10_hat` = cumsum(sums == 10) / seq_along(sums)
+)
+
+three_dice_long <- tidyr::pivot_longer(
+  three_dice_df,
+  -runs,
+  names_to = "event",
+  values_to = "estimate"
+)
+
+p_long_run <- ggplot(three_dice_long, aes(x = runs, y = estimate, color = event)) +
+  geom_line() +
+  geom_hline(yintercept = c(25, 27)/216,
+             linetype = "dashed",
+             color = c("#1b9e77", "#d95f02")) +
+  labs(
+    x = "Number of simulation runs",
+    y = "Estimated probability",
+    color = "",
+    title = "Approximating probabilities by simulation"
+  ) +
+  theme(
+  text = element_text(size = 10),
+  axis.title = element_text(size = 10),
+  axis.text  = element_text(size = 9),
+  legend.title = element_text(size = 9),
+  legend.text  = element_text(size = 9),
+  plot.title = element_text(size = 11)
+)
+```
+
+In this example, the probabilities are not that difficult to compute analytically (horizontal lines).
+
+##
+
+```{r}
+p_long_run
+```
+
+## iClicker 3: reproducibility
+
+Consider the following 2 codes:
+
+```{r eval=FALSE}
+
+answer1 <- replicate(10, sum(sample(1:6, size = 3, replace = TRUE)))
+
+set.seed(200) 
+
+replicate(1000, sum(sample(1:6, size = 3, replace = TRUE))) 
+
+replicate(100, sum(sample(1:6, size = 3, replace = TRUE)))
+
+replicate(10, sum(sample(1:6, size = 3, replace = TRUE)))
+```
+
+and
+
+```{r eval=FALSE}
+answer1 <- replicate(10, sum(sample(1:6, size = 3, replace = TRUE)))
+
+set.seed(200)  
+
+replicate(1000, sum(sample(1:6, size = 3, replace = TRUE))) 
+
+replicate(100, sum(sample(1:6, size = 3, replace = TRUE))) 
+
+answer1
+```
+
+#### Both codes give the same result. **A: TRUE** or **B: FALSE**
+
+## iClicker 4
+
+A population mean can be estimated with a sample mean. But is this a good estimator?
+
+Next class, we will use the wildfire data as an example of a population to answer this question. What is the random process we would simulate?
+
+- A) Calculating the mean temperature from the full wildfire dataset
+- B) Randomly sampling wildfire observations and computing their mean temperature
+- C) Generating temperatures from a theoretical distribution
+- D) Repeating the same wildfire observation many times
+
+## Key takeaways
+
+:::incremental
+- A simulation starts by defining a random process
+  - We must define what can vary, what is fixed, and how randomness is generated.
+
+- What we record from each run depends on the question
+  - The same random process can produce many valid results 
+  - Choosing what to record is part of the modeling decision.
+
+- A single run is not informative about probability
+  - Probabilities are approximated using frequencies across many runs, not individual outcomes.
+
+- Repeating the same process many times is needed to study patterns.
+
+- Setting the seed to generate randomness allows reproducibility. 
+:::
