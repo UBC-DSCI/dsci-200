@@ -1,0 +1,334 @@
+---
+lecture: "Simulations-II"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+*Some of the material is based on content adapted from* 
+
+- [*Chapter 20 of R Programming for Data Science, by R. Peng*](https://bookdown.org/rdpeng/rprogdatascience/simulation.html#generating-random-numbers)
+
+<br><br>
+
+## Learning Objectives 
+<br><br>
+
+- Understand the mechanisms for generating and simulating data.
+- Contrast empirical and theoretical distributions.
+- Use simulations to approximate probability of events or distribution functions.
+- Use simulations to assess theoretical properties of random variables.
+- Explore the Central Limit Theorem (CLT) and Law of Large Numbers (LLN).
+- Write reproducible simulation code.
+- Interpret and reflect on simulation results using plots and summary statistics. 
+
+## Last time: Simulations
+
+Define the main steps of a simulation:
+
+- 1. Define **the process** we want to simulate
+
+- 2. Specify how **randomness** enters the process
+
+- 3. Decide **what to record** from each run
+
+- 4. **Repeat** the process many times
+
+- 5. **Summarize** the results across runs
+
+We used simulation to approximate two probabilities when randomness came from a physical event
+
+#### Today, we’ll use simulations to study properties of estimators and generate randomness from sampling and using distributions!!
+
+
+## Sampling from a finite population
+
+In lecture 3, we sampled from the `wildfire` population and compared population parameters with sample estimators.
+
+- Population parameters are unknown but fixed
+
+- Sample estimators are random since they are based on a random sample.
+
+#### Every time we select a new random sample we get a different estimate.
+
+## The Wildfire Population
+
+```{r}
+library(tidyverse)
+library(infer)
+library(readr)
+
+wildfire <- read_csv("data/wildfire.csv")
+
+head(wildfire)
+dim(wildfire)
+```
+
+#### We'll focus on the numerical variable `temperature`
+
+## Population parameters for `temperature`
+
+```{r}
+wildfire |>
+  summarise(
+    mean_temp = mean(temperature, na.rm = TRUE),
+    med_temp = median(temperature, na.rm = TRUE),
+    var_temp = var(temperature, na.rm = TRUE),
+    sd_temp = sd(temperature, na.rm = TRUE),
+    min_temp = min(temperature, na.rm = TRUE),
+    max_temp = max(temperature, na.rm = TRUE)
+  )
+
+```
+
+## A random sample and sample estimates
+
+```{r}
+set.seed(200)
+
+wildfire_sample <- wildfire |> rep_sample_n(size = 100)
+
+temperature_rv <- wildfire_sample$temperature
+  
+c(x_bar = mean(temperature_rv, na.rm = TRUE), 
+  s = sd(temperature_rv, na.rm = TRUE))  
+```
+
+## Temperature as a random variable
+
+Every time we take a new sample, the values of `temperature` change.
+
+> `temperature` is a random variable and randomness comes from sampling!
+
+Any statistic of `temperature` becomes a random variable as well. 
+
+> for example, the mean temperature ($\bar{x}$) is a random variable
+
+#### The changes in point estimates across samples is called **sampling variability**
+
+## Standard errors
+
+The standard error of an estimator measures how much the sample estimate (like the mean) is expected to vary across different random samples.
+
+In lecture 3 we said that the standard error of the sample mean is given by:  
+
+$$SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}$$
+and the population parameter $\sigma$ can be estimated with the sample standard deviation $s$.
+
+## Let's build a simulation
+
+<br>
+
+Let's use simulation to study the variability of the sample mean (standard error) when sampling from a finite population.
+
+- 1. Define **the process** we want to simulate
+
+- 2. Specify how **randomness** enters the process
+
+- 3. Decide **what to record** from each run
+
+- 4. **Repeat** the process many times
+
+- 5. **Summarize** the results across runs
+
+## iClicker 1: simulation design
+
+Which of the following options best describes a simulation study?
+
+- A. Drawing a single sample from the population and computing the mean of temperature in the sample
+
+- B. Drawing many samples from the population and computing the mean of temperature in each sample 
+
+- C. Computing the mean of temperature from the full population
+
+- D. Generating temperature values from a Normal distribution and computing its mean
+
+## in R
+
+1. Take a random sample of size $n = 7000$
+2. Compute the sample mean temperature
+3. Repeat this 1000 times
+
+```{r}
+set.seed(200)
+
+pop_temp_complete <- wildfire |>
+ select(temperature)  |>
+ drop_na()  
+
+n <- 7000
+N <- length(pop_temp_complete)
+
+# sample_mean_reps <- pop_temp_complete |>
+# ...(size = ..., reps = ...) |> 
+#	group_by(...) |> 
+#	summarise(temp_mean = ...(..., na.rm=TRUE))
+```
+
+
+#### We now have a list of 1000 sample mean temperatures!
+
+
+## Summarize
+
+We can use the list of sample estimates to study the
+sampling variability.
+
+> Let's approximate the SE computing the standard deviation of the sample estimates
+
+
+```{r}
+# se_simulation <- ...(sampling_dist$sample_mean)
+# se_formula <- ...(pop_temp_complete$...)/...
+```
+
+#### Something seems off ....
+
+## Sampling from a finite population
+
+- When sampling without replacement from a finite population observations are not independent.
+
+- The variability of the sample mean is smaller than in model-based sampling.
+
+- This reduction in variability is captured by the finite population correction (FPC):
+
+$$ SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}*\sqrt{1-\frac{n}{N}}
+$$
+
+where $N$ and $n$ are the population and the sample sizes, respectively.
+
+##
+
+```{r eval = FALSE}
+library(ggplot2)
+library(tidyr)
+
+cum_sd <- sapply(
+  seq_along(sample_mean_reps$temp_mean),
+  function(k) sd(sample_mean_reps$temp_mean[1:k])
+)
+
+mean_temp_df <- data.frame(
+  runs = seq_along(sample_mean_reps$temp_mean),
+  se_mean_temp  = cum_sd
+)
+
+mean_temp_long <- tidyr::pivot_longer(
+  mean_temp_df,
+  -runs,
+  names_to = "event",
+  values_to = "estimate"
+)
+
+fcp <- sqrt(1 - (n / N))
+se_corrected_fpc <- se_formula *fcp
+
+ref_lines <- data.frame(
+  se = c(se_simulation, se_corrected_fpc, se_formula),
+  method = c("Simulation SD", "FPC-corrected formula", "Uncorrected formula")
+)
+
+t_long_run <- ggplot(mean_temp_long, aes(x = runs, y = estimate, color = event)) +
+  geom_line() +
+  geom_hline(
+    data = ref_lines,
+    aes(yintercept = se, color = method),
+    linetype = "dashed"
+  ) +
+  scale_color_manual(
+    values = c(
+      "Simulation SD" = "#F8766D",        
+      "FPC-corrected formula" = "#00BA38", 
+      "Uncorrected formula" = "#619CFF" 
+    )
+  ) +
+  labs(
+    x = "Number of simulation runs",
+    y = "Estimated SE",
+    color = "",
+    title = "Estimated SE of mean temperature"
+  )
+```
+
+## Generating values from a distribution
+
+Another way of generating randon numbers is using  well-known probability distributions like the Normal, Poisson, and binomial. 
+
+### in R
+
+- `rnorm`: generate random Normal variates 
+  - arguments: `n` (sample size), `mean` and `sd`
+
+- `rpois`: generate random Poisson variates 
+  - arguments: `n`, `lambda` (rate)
+  
+- `runif`: generate random Uniform variates 
+  - arguments: `n`, `min`, `max` (interval)
+
+- `rbinom`: generate random binomial variates 
+  - arguments: `n`, `size`, `prob`
+
+## Example
+
+```{r}
+x <- runif(10, 2, 5) 
+x
+summary(x)
+```
+
+#### Everytime we run this code, it generates new values
+
+## Setting the seed
+
+```{r}
+set.seed(200)
+
+runif(5, 2, 5) 
+rnorm(2, 0, 2)
+rbinom(3, 1, 0.5)
+
+# changing the sequence
+
+set.seed(200)
+
+runif(5, 2, 5)
+rnorm(2, 0, 2)
+rpois(4,10)
+rbinom(3, 1, 0.5)
+```
+
+## Simulate a simple linear regression (SLR)
+
+- 1) Simulate a dataset from the following model:
+
+$$y = \beta_0 + \beta_1 \times x + \varepsilon$$
+where $\varepsilon \sim \mathcal{N}(0,1)$ and $x \sim \text{Unif}(1,3)$. 
+
+In your simulation, set the population coefficients $\beta_0 = 1$ and $\beta_1 = 2$. In real data, these are unknown and you use a sample to estimate them.
+
+- 2. Plot the data 
+
+- 3. Use the function `lm()` to estimate the parameters of the model using least squares estimation
+
+> Check [this application](https://setosa.io/ev/ordinary-least-squares-regression/) to recall LS estimation
+
+## Key takeaways
+
+:::incremental
+
+- Simulations can be used to: 
+  - approximate probabilities, 
+  - study properties of estimators, 
+  - approximate distributions
+
+- Randomness can be introduced using code that: 
+  - mimics physical processes
+  - randomly select outcomes from a finite population
+  - generates random values from a distribution
+  
+:::
