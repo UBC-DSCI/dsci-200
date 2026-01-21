@@ -197,8 +197,7 @@ sampling variability.
 
 - This reduction in variability is captured by the finite population correction (FPC):
 
-$$ SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}*\sqrt{1-\frac{n}{N}}
-$$
+$$ SE(\bar{x})= \frac{\sigma}{\sqrt{n}}*\sqrt{1-\frac{n}{N}} $$
 
 where $N$ and $n$ are the population and the sample sizes, respectively.
 

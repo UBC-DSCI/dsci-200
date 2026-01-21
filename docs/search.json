@@ -102,7 +102,7 @@
     "href": "schedule/slides/simulation-2.html#sampling-from-a-finite-population-1",
     "title": "UBC DSCI 200",
     "section": "Sampling from a finite population",
-    "text": "Sampling from a finite population\n\nWhen sampling without replacement from a finite population observations are not independent.\nThe variability of the sample mean is smaller than in model-based sampling.\nThis reduction in variability is captured by the finite population correction (FPC):\n\n\\[ SE(\\bar{x}) = \\frac{\\sigma}{\\sqrt{n}}*\\sqrt{1-\\frac{n}{N}}\n\\]\nwhere \\(N\\) and \\(n\\) are the population and the sample sizes, respectively."
+    "text": "Sampling from a finite population\n\nWhen sampling without replacement from a finite population observations are not independent.\nThe variability of the sample mean is smaller than in model-based sampling.\nThis reduction in variability is captured by the finite population correction (FPC):\n\n\\[ SE(\\bar{x})= \\frac{\\sigma}{\\sqrt{n}}*\\sqrt{1-\\frac{n}{N}} \\]\nwhere \\(N\\) and \\(n\\) are the population and the sample sizes, respectively."
   },
   {
     "objectID": "schedule/slides/simulation-2.html#section-1",
