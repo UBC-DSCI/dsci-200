@@ -1,15 +1,8 @@
 ---
 lecture: "Sampling Design"
-format: 
-  live-revealjs:
-    slide-number: true
-    theme: [default, themer.scss]
-    embed-resources: true
+format: revealjs
 metadata-files: 
   - _metadata.yml
-execute:
-  echo: true
-  warning: false
 ---
 
 {{< include _titleslide.qmd >}}
@@ -115,7 +108,7 @@ has the same chance to be the sample that is actually selected.
 
 ## Load packages
 
-```{webr}
+```{r}
 #| warning: false
 
 library(tidyverse)
@@ -126,7 +119,7 @@ library(dplyr)
 
 Let's revisit this example in R
 
-```{webr}
+```{r}
 # Simulate student population data
 set.seed(200)
 
@@ -142,7 +135,7 @@ head(student_data)
 
 Use the [`slice_sample`](https://dplyr.tidyverse.org/reference/slice_sample.html) function from `dplyr` to draw a sample of size 100:
 
-```{webr}
+```{r}
 srs_student <- student_data |> slice_sample(n = 100)
 dim(srs_student)
 head(srs_student)
@@ -155,7 +148,7 @@ srs_student |>
 
 Alternative solution using dplyr's `sample_frac()` function:
 
-```{webr}
+```{r}
 student_data |> sample_frac(size = 0.1)
 ```
 
@@ -191,7 +184,7 @@ Cons:
 - Again, suppose you want to survey UBC students. 
 - You stand outside of the bookstore and randomly select every 10th person.
 - Let's look at our `student_data` again and perform a 1-in-10 systematic sample: 
-```{webr}
+```{r}
 set.seed(200)
 
 start <- sample(1:10,1) # randomly define a student to start with
@@ -271,7 +264,7 @@ Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" targ
 
 ## Stratified Sampling Example
 - Suppose we consider student major as a strata:
-```{webr}
+```{r}
 set.seed(200)
 
 majors <- c("CS", "Math", "Stat", "Bio", "Data Science", "Phys", "Chem")
@@ -334,7 +327,7 @@ Source: <a href="https://www.scribbr.com/methodology/population-vs-sample/" targ
 ## Cluster Sampling Example
 Suppose each the student data had 30 class secions and we consider each `ClassSection` to be a cluster:
 
-```{webr}
+```{r}
 set.seed(200)
 
 # Add simulated class sections (clusters)
