@@ -1,0 +1,309 @@
+---
+lecture: "Study Design"
+format: 
+  live-revealjs:
+    slide-number: true
+    theme: [default, themer.scss]
+    embed-resources: true
+metadata-files: 
+  - _metadata.yml
+execute:
+  echo: true
+  warning: false
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+*This material is adapted from Chapter 6 of* [*Elementary Statistics with R*](https://homerhanumat.github.io/elemStats/) *and Chapter 1 of* [*Significant Statistics: An Introduction to Statistics*](https://ecampusontario.pressbooks.pub/significantstats/).
+
+<br><br>
+
+## Observational Studies 
+<br><br>
+
+:::incremental
+- Observational studies are a research method in which the researcher does not apply any treatments or alter any variables.
+- Behaviours or outcomes are simply observed and recorded as they naturally occur.
+- Observational data appears in scenarios such as:
+	- Medical records
+	- Historical data 
+	- Social media engagement metrics
+	- Market trends
+:::
+
+## Why Observational Studies?
+
+*Take 1-2 minutes to brainstorm reasons why you might use an observational study.*
+
+:::incremental
+- Ethical considerations
+	- For example, it would be unethical to randomly assign individuals to smoke or not smoke to study the effects of smoking on health.
+- Cost-effective and efficient
+	- Observational studies often use existing data, making them less expensive and quicker to conduct. 
+- Studying rare conditions
+	- Observational studies are often the only way to study rare diseases or outcomes because collecting enough data through experiments could be impractical (or impossible).
+::: 
+
+## Types of Observational Studies
+
+:::incremental 
+
+- Retrospective studies 
+	- Events have already taken place and data is collected afterwards or historical data is used
+	- Example: Economists analyze historical data from the past 50 years to see how major global events influenced the economic growth of different countries.
+- Prospective studies
+	- Individuals/observations are first identified and data is collected as time progresses
+	- Example: A group of 1000 healthy adults is followed over 10 years to study how physical activity affects the development of heart disease. 
+
+
+- Note that you may encounter more specific types of observational studies such as cohort, case-control and cross-sectional studies which are beyond the scope of this course. You can read more about them [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC2998589/) if you are interested!
+
+:::
+
+## iClicker Question 1 
+<br></br>
+
+A retrospective observational study would MOST likely be used in which of the following scenarios?
+<br></br>
+
+- A) Analyzing the impact of a new drug on cancer survival rates.
+- B) Studying how physical activity influences heart disease over the next decade.
+- C) Investigating the relationship between smoking and lung disease using historical data.
+- D) Testing the effects of a new exercise regimen on stress levels.
+
+## Causality and Observational Studies
+<br><br>
+
+- While we have listed some motivating reasons for the usage of observational studies, there are also some downsides.
+- A major disadvantage is that *causal conclusions* generally cannot be established from observational data using simple methods.
+- Causality refers to the notion that one variable or event directly causes or influences another (implies a direct cause-and-effect relationship).
+- We cannot make a statment like "variable $X$ causes a change in variable $Y$" using observational data. 
+
+
+## Correlation vs. Causation
+
+- In observational studies, we *can* investigate associations or relationships between variables (e.g., correlation analysis).
+
+- However, correlation does NOT imply causation! Just because two variables are correlated, does not imply that one variable causes a change in another. 
+
+<img src="https://miro.medium.com/v2/resize:fit:1248/format:webp/1*TVUsTgLqn2hkIF-cRuanpQ.png" width="600" />
+
+<div style="font-size: 0.6em; text-align: left; color: gray;">
+Source: <a href="https://medium.com/analytics-vidhya/correlation-doesnt-imply-causation-8b393fc82835" target="_blank"> https://spot.pcc.edu/~evega/section-4.htmle</a>
+</div>
+
+
+## Scenario
+
+An observational study found that individuals who used more sunscreen were more likely to develop skin cancer. 
+
+- Does this imply that sunscreen causes skin cancer? 
+- What might be happening here?
+<br><br>
+
+![](https://spot.pcc.edu/~evega/images/data_collection/sunCausesCancer.png)
+<div style="font-size: 0.6em; text-align: left; color: gray;">
+Source: <a href="https://spot.pcc.edu/~evega/section-4.html" target="_blank"> https://spot.pcc.edu/~evega/section-4.html</a>
+</div>
+
+## Confounding Variables
+<br><br>
+
+- In the previous scenario, sun exposure is an example of a so-called **confounding** variable.
+- A confounding (or "lurking") variable is one that has an effect on a study, but is not included as an explanatory variable in the analysis. 
+  - Usually confounders are unobserved and thus cannot be included in the model.
+- Unfortunately, in observational studies we can't control for confounders the way we might want to. 
+
+## Experiments
+<br><br>
+
+:::incremental
+- Ideally, we are able to perform an *experiment*. 
+- In an experiment, researchers manipulate something (e.g., impose a treatment) and observe the effects on a response variable.
+- Although they can be difficult and more expensive to perform, there are several advantages to experiments over observational studies: 
+	- Reproducibility
+	- Causality
+	- Randomization
+	- Control over variables
+:::
+
+## Experiment Terminology
+
+:::incremental
+- **Experimental units**: the subjects or individuals in an experiment.
+- **Treatment groups**: the group(s) in an experiment that receives the intervention or treatment being tested. 
+- **Control group**: The group in an experiment that does not receive the intervention or treatment for comparative purposes.
+:::
+
+<img src="https://causal-wizard-app.s3.amazonaws.com/static/images/separate-cohorts.png" width="450" height="300" style="display: block; margin-left: auto; margin-right: auto;">
+
+
+
+<div style="font-size: 0.6em; text-align: center; color: gray;">
+Source: <a href="https://causalwizard.app/inference/article/control-and-treated" target="_blank"> https://causalwizard.app/inference/article/control-and-treated</a>
+</div>
+
+
+## 
+<br><br>
+
+Blinding is an important way to reduce bias in an experiment! 
+
+:::incremental
+- **Single-blind experiment**: an experiment in which the subjects do not know which treatment group they are in. 
+- **Double-blind experiment**: an experiment in which neither the subjects nor the researchers know the group assignments of the subjects.
+- **Placebo**: an inert substance given to subjects in the control group so that the experiment can be single-blind.
+
+:::
+
+## Activity
+
+Researchers are testing a new online tutoring service to improve math grades. They randomly assign 100 students to two groups. One group uses the new service for 6 weeks, and the other group continues with the regular service. The researchers know which students are in which group, but the students do not. At the end of the study, their grades are compared.
+<br><br>
+
+Identify the following parts of the experiment:
+
+- Experimental units
+- Treatment group
+- Control group
+- Type of experiment (single-blind, double-blind, or neither)
+- Placebo (if any)
+
+## Completely Randomized Designs
+<br><br>
+
+:::incremental
+- A completely randomized design assigns subjects to treatment groups purely by randomization.
+- Randomization helps to create similar groups by balancing out variables that might affect the outcome, ensuring that each subject has an equal chance of being assigned to any group.
+- This design is ideal when there are a large number of subjects.
+- Randomization helps mitigate the impact of confounding variables (like sex or income) by  equally distributing them across groups.
+:::
+
+## Replication
+<br><br>
+
+- Replication refers to including multiple subjects in each treatment group.
+- Larger sample sizes help ensure that treatment groups are more comparable.
+- Smaller sample sizes are more prone to chance imbalances between treatment groups despite randomization.
+- More subjects in the groups means stronger and more reliable conclusions.
+
+> Note: This definition of replication (multiple subjects per treatment group) is different from the idea of reproducibility, which involves independently repeating the entire study or analysis to verify results and ensure reliability.
+
+## Practical Example
+<br><br>
+
+- A pharmaceutical company is testing a new drug for lowering blood pressure. 
+- They randomly assign 1,000 patients to two groups: 
+	- one group takes the drug
+	- the other receives a placebo 
+- The patients are randomly assigned, ensuring that any differences in blood pressure outcomes are due to the drug and not other factors.
+
+
+## Randomized Block Designs
+<br><br>
+
+:::incremental
+- A randomized block design is used when there are only a small number of subjects, and randomization alone may lead to imbalanced groups.
+- Subjects are grouped into *blocks* based on potential confounders.
+- Within each block, subjects are randomly assigned to treatment groups.
+- This helps to ensure that each treatment group is similar with respect to the confounders.
+- The goal is to reduce variability within each block and improve the accuracy of the experiment's results.
+:::
+
+## Practical Example
+<br><br>
+
+- A study is comparing two data science bootcamps (Bootcamp A and Bootcamp B) to determine which one better prepares participants for data science roles. 
+- The researcher blocks participants based on their highest degree attained (High School, Bachelor's, or Graduate degree).
+- Within each block, participants are randomly assigned to either Bootcamp A or Bootcamp B.
+- This ensures that both bootcamps are tested across a balanced mix of educational backgrounds, controlling for the influence of prior education on the effectiveness of the bootcamps.
+
+## Matched Pair Designs
+<br><br>
+
+:::incremental
+- A matched pair design is an extreme form of blocking where subjects are paired based on similarities.
+- Each pair of subjects is randomly assigned to different treatment groups.
+- An example of matched pairs could be comparing left vs. right feet in a shoe wear test (pairs  of feet on the same person).
+- This design minimizes the effect of confounding variables by ensuring pairs are as similar as possible before randomization.
+:::
+
+
+## Repeated-Measure Designs
+<br><br>
+
+:::incremental
+- In a repeated-measures design, subjects are measured multiple times under different conditions.
+- This design is ideal for studying changes over time or responses to different treatments.
+- The challenge in repeated-measures designs is to manage potential carryover effects between measurements (i.e., dependence).
+- Randomizing the order of measurements is important to avoid bias in the results.
+:::
+
+## Practical Example
+<br><br>
+
+- A psychologist conducts an experiment on memory retention where each participant is shown a list of words. 
+- The same participants are tested on memory recall in two different conditions: one after a short delay and one after a long delay. 
+- The same group of people undergoes both conditions, and the order of conditions is randomized to prevent the sequence from influencing the results.
+
+## Reproducibility
+<br><br>
+
+:::incremental
+- Reproducibility is a core principle of scientific work and in the field of data science. 
+- It ensures that others can independently verify your results and understand how they were obtained.
+- To achieve reproducibility in experiments, randomization should be performed in a way that others can replicate! 
+- In `R`, this is done by setting a seed for random number generation using the `set.seed()` function.
+- This ensures that the randomization produces the same result every time it is run, making the experiment reproducible.
+:::
+
+
+## Consent in Experiments
+<br><br>
+
+:::incremental
+- Consent is crucial when conducting experiments involving human subjects. 
+- Participants must voluntarily agree to participate and be be fully informed about potential risks and benefits of the experiment. 
+- The group of volunteers *may* differ from the general population, potentially leading to biased results.
+- Researchers must be cautious when generalizing the results of such experiments to the larger population.
+:::
+
+## iClicker Question 2
+<br></br>
+
+Which of the following is the main purpose of blocking in an experiment?
+<br><br>
+
+- A) Minimizing random error
+- B) Controlling for confounding variables that may affect the outcome
+- C) Addressing ethical concerns related to human subjects
+- D) Eliminating the need for a control group
+
+## iClicker Question 3
+<br></br>
+
+Why is randomization particularly important in experimental design?
+<br><br>
+
+- A) It allows the researcher to select subjects who are most likely to benefit from the treatment.
+- B) It helps to ensure that both the treatment and control groups are similar at the start of the experiment.
+- C) It reduces the need for a control group.
+- D) It ensures that the experiment can be reproduced exactly by other researchers.
+
+## Key takeaways
+
+- Observational studies reveal associations, but causal effects typically cannot be identified without additional assumptions or methods.
+
+- Experiments enable causal inference through randomization and control.
+
+- There are different experimental designs, e.g., completely randomized, randomized block, matched pairs
+
+- The choice of experimental design depends on the research question, available resources, and practical constraints.
+
+- Reproducibility is essential so that others can replicate results!
+
+- Ethical research requires informed consent in both experiments and observational studies, but how it is obtained and what it covers can differ. 
+
