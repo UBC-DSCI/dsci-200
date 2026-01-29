@@ -43,7 +43,6 @@ Each submission will be made on Gradescope (accessible via Canvas) and require t
 
 1.  Jupyter notebook (`.ipynb` file)
 2.  Rendered final document (`.html` or `.pdf` file)
-3.  A **link to your GitHub repository** for the case study included in the notebook
 
 ### Rubrics
 
