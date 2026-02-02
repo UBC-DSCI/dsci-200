@@ -1,15 +1,8 @@
 ---
-lecture: "Study Design"
-format: 
-  live-revealjs:
-    slide-number: true
-    theme: [default, themer.scss]
-    embed-resources: true
+lecture: "Data Privacy II"
+format: revealjs
 metadata-files: 
   - _metadata.yml
-execute:
-  echo: true
-  warning: false
 ---
 
 {{< include _titleslide.qmd >}}
