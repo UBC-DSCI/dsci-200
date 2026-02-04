@@ -1,0 +1,513 @@
+---
+lecture: "Missing Data"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+This material is based on content from the following sources:
+
+- [*Chapter 4 of Advanced modeling and data challenges (Vol.3)*](https://link.springer.com/book/9783032017185) 
+- [*The Missing Book*](https://tmb.njtierney.com).
+
+<br><br>
+
+## Learning Objectives 
+<br><br>
+
+:::incremental
+- Determine potential reasons why data are missing.
+- Define data missing mechanisms.
+- Detect instances of missing observations in a data set using a computer script and visualization.
+- Reflect on the consequences with regards to different ways of handling missing data.
+- Recognize the importance of utilizing domain knowledge when handling missing data.
+:::
+
+## The Mystery of Missing Data
+
+<div style="height:30px;"></div>
+
+::: {style="font-size:1.3em;"}
+::: {.columns}
+
+::: {.column width="55%"}
+![](https://static.wikia.nocookie.net/narnia/images/4/4b/NarniaWardrobe.jpg){width=100%}
+:::
+
+::: {.column width="45%" .v-center}
+
+<div style="height:70px;"></div>
+
+- Is any data missing?  
+- If so, is there a reason some observations are missing?  
+- How serious is the problem?
+- What can we do about it?
+:::
+:::
+:::
+
+## Examples 
+<br>
+
+Missing data is common in many fields, for example,  
+
+- **Business**: missing values may appear in customer surveys, customer profiles, sales records, and inventories.
+
+- **Healthcare**: missing data is common in patient history records, demographics, and clinical variables.
+
+- **Social Sciences**: missing data usually appears in large-scale surveys and administrative records.
+
+- **Environmental Sciences**: missing data frequently occurs in weather station records, air and water quality datasets.
+
+### the underlying reasons can differ substantially ...
+
+#
+
+![](https://www.statnews.com/wp-content/uploads/2023/01/MissingDataCountyMap.jpg)
+
+# 
+
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1007%2Fs11357-021-00489-w/MediaObjects/11357_2021_489_Fig2_HTML.png?as=webp)
+
+::: {style="font-size: 13px; margin-top: -30px; color: grey;"}
+NHANES Data: personal fitness questionnaire (PFQ), number of prescription drugs taken (RXD), vision questionnaire (VIQ), blood pressure measurement (BPX), lab measurements (LB) and miscellaneous (Misc). From Pridham et al., GeroScience 2022.
+:::
+
+#
+
+![](img/time_sme_water.png)
+
+::: {style="font-size: 13px; margin-top: -30px; color: grey;"}
+[A Survey of Time Series Analysis Methods and Approaches. SME Water blog](https://sme-water.co.uk/a-survey-of-time-series-analysis-methods-and-approaches/).
+:::
+
+## Not Engaging with Missing Data
+
+::: {.columns}
+
+::: {.column width="45%"}
+
+![](https://static.wikia.nocookie.net/narnia/images/6/6e/Wardrobe.jpg){width=85%}
+
+:::
+
+::: {.column width="55%" .v-center}
+
+<div style="height:40px;"></div>
+
+**Complete-case analysis** drops observations with missing values and uses only complete observations, which can result in 
+
+- substantial bias in estimation
+- misrepresentation of the population
+- distort the relation between variables
+- loss of important information
+- misleading conclusions
+:::
+:::
+
+::: {.callout-warning}
+Many functions in R uses complete data as a default with `na.omit = TRUE` or `na.rm = TRUE`
+:::
+
+
+# Can Missing Data Tell Us Something?
+
+## iClicker 1: exploring missingness
+
+<br>
+Looking at the COVID-19 map showing percentages of reported cases with missing race/ethnicity data per county. **Which statement best describes the missingness?**
+
+<br>
+
+::: {.columns}
+
+::: {.column width="45%"}
+
+![](https://www.statnews.com/wp-content/uploads/2023/01/MissingDataCountyMap.jpg){width=100%}
+
+:::
+
+::: {.column width="55%" .v-center}
+
+<div style="height:50px;"></div>
+
+A. The missing values look randomly scattered
+
+B. The missing values show geographic patterns
+
+C. The missing values are too small to matter
+
+D. There is not enough information to tell
+
+:::
+:::
+
+## iClicker 2: is missingness informative?
+
+<br>
+Based on the COVID-19 map, **which is the most plausible explanation** for why race/ethnicity data are missing in some counties?
+
+<br>
+
+A. Random data entry errors
+
+B. Differences in reporting practices or infrastructure
+
+C. The disease affects some races less
+
+D. Pure chance
+
+## iClicker 3: consequences of excluding missing data
+
+<br>
+Suppose we exclude all observations with missing lab measurements (LB) in the NHANES data. **What is the most likely consequence?**
+
+
+::: {.columns}
+
+::: {.column width="55%"}
+
+<br>
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1007%2Fs11357-021-00489-w/MediaObjects/11357_2021_489_Fig2_HTML.png?as=webp){width=100%}
+
+:::
+
+::: {.column width="45%" .v-center}
+
+<div style="height:40px;"></div>
+
+A. The sample will better represent the population
+
+B. Older adults will be under-represented
+
+C. Estimates of health outcomes will be unbiased
+
+D. Nothing important will change
+
+:::
+:::
+
+# Why Are Data Missing?
+
+## Missing Data Mechanisms
+
+The choice of methods to handle missing data and the validity of subsequent statistical analyses depends strongly on why the data are missing.
+
+
+- **Missing Completely at Random** (MCAR): as the name suggests, missingness is unrelated to any values, either observed in the dataset or unobserved.
+
+- **Missing at Random** (MAR): missingness is related to observed data, making it easier to explain and handle.
+
+- **Missing Not at Random** (MNAR): missingness is related to unobserved data or the missing values themselves, thus extremely challenging to address.
+
+
+::: {.callout-important title="Key takeaway"}
+Missing data doesn’t just hide information, it can shape who we see and the relationships we infer!
+
+#### Understanding why data are missing is essential
+:::
+
+
+##
+
+| Mechanism | Depends on | Implications | Example |
+|----------|-------------|---------------------|-------------|
+| **MCAR** | Neither observed nor missing values | Simplest to handle; complete-case analysis reduces sample size but does not add bias | Random sensor failure |
+| **MAR**  | Observed variables only | Complete-case analysis is usually biased; modelling missingness using observed data retains information and attenuates bias | NHANES lab tests missing due to age-based sampling |
+| **MNAR** | Unobserved variables or the missing values | Missingness must be modeled explicitly; high risk of bias if ignored | Income not reported by high earners |
+
+
+Table adapted from [Advanced modeling and data challenges (Vol.3)](https://link.springer.com/book/9783032017185)
+
+
+## Implications of Ignoring the Missingness Mechanism
+<br>
+
+Understanding why the data are missing is essential to choose an appropriate method to handle it and draw valid conclusions from data:
+
+- complete-case analysis can fail when missingness is not truly random
+
+- MNAR cases are often associated with sensitive or personal data
+
+- ignoring or misshandling MNAR can introduce serious biases, such as underestimating poverty or mischaracterizing population health needs
+
+- misdiagnosing missingness can lead to misguided policy or resource allocation decisions
+
+## iClicker 4: Identifying MNAR
+<br>
+
+Which of the following is an example of a context of missing not at random (**MNAR**)?
+
+<br>
+
+A. Income is recorded only for a random subsample of respondents, selected independently of all characteristics.
+
+B. Individuals with lower education levels may omit their education information.
+
+C. Air-quality measurements from ground monitors are missing more often in winter months due to weather-related access issues.
+
+D. Income is missing more often for individuals with temporary or informal employment, which is recorded in the data.
+
+# Visualising and Diagnosing Missingness
+
+## 
+<br>
+
+```{r, echo=FALSE}
+library(NHANES)
+library(naniar)
+library(visdat)
+```
+
+```{r}
+data("NHANES")
+head(NHANES)
+```
+
+<br>
+
+### Even the first lines show that there are some missing values!
+
+#
+
+```{r}
+str(NHANES)
+```
+
+### The `str()` function gives additional information about the variables, but not about missingness
+
+#
+
+```{r}
+summary(NHANES)
+```
+
+
+### The `summary()` function gives only a count of missing values per variable, but not how missingness relates across variables
+
+#
+
+Plots can be especially useful for visualizing patterns and relationships in missingness
+
+
+- **Variable-wise summaries** (`gg_miss_var`): show missingness in each variable
+  - helping identify which variables are most affected
+  
+
+- **Heatmaps** (`vis_miss`): show where values are missing across observations and variables
+  - useful for spotting structure, clustering, or blocks of missingness
+  
+
+- **UpSet plots** (`gg_miss_upset`): show which combinations of variables tend to be missing together
+  - revealing joint or structural missingness patterns.
+  
+
+- **Missingness vs Covariates** (`gg_miss_fct`, `geom_miss_point`): show how missingness relates to observed variables
+  - helping assess whether missingness may depend on observed data (MAR)
+
+#
+
+```{r, echo=TRUE, fig.align="center", fig.width=10, fig.height=5}
+
+vis_dat(NHANES)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 6), legend.position = "bottom")
+```
+
+`vis_dat()` functions is useful to visualize the structure of the data and missingness
+
+#
+
+```{r, echo=TRUE, fig.align="center", fig.width=5, fig.height=5}
+#Variable-wise summary
+NHANES %>%
+  gg_miss_var()+
+  theme(axis.text.y = element_text(size = 4))
+```
+
+#
+
+- the dataset has too many variables for these visualizations
+  - variable names become difficult to read
+
+- the plot is still useful to have an overall idea of the amount of missingness per variables
+
+::: {.columns}
+
+
+::: {.column width="55%"}
+![](https://naniar.njtierney.com/articles/missingness-data-structures.png)
+:::
+
+::: {.column width="45%"  .v-center}
+
+<div style="height:40px;"></div>
+
+- `naniar` creates a "shadow" matrix to store the missing data structure in a tidy format
+  - useful to create visualizations and wrangle data
+
+:::
+:::
+
+#
+
+```{r, echo=TRUE, fig.align="center", fig.width=10, fig.height=5}
+#Heatmap
+vis_miss(NHANES) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 6))
+```
+
+#
+
+```{r, echo=FALSE, fig.align="center", fig.width=10, fig.height=5}
+#Heatmap for subset of variables
+vis_miss(NHANES %>% select(Age, AgeDecade, AgeMonths, Race1, Race3, 
+  Testosterone, TVHrsDay, CompHrsDay, TVHrsDayChild, CompHrsDayChild))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 8))
+```
+
+Look at subset of variables to understand missingness patterns
+
+- Some variables are mutually exclusive by design
+
+
+#
+
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+NHANES %>%
+  select(BMI, Age, Weight, Height, Pulse, BPSysAve, BPDiaAve) %>%
+  vis_miss() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 8))
+
+```
+
+- Some variables are jointly missing, can be because of the design of the study too
+
+## When blood pressure is missing, what else is missing?
+
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+
+bp_miss <- NHANES %>%
+  filter(is.na(BPSysAve), is.na(BPDiaAve))
+
+vis_miss(bp_miss) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 6))
+
+```
+
+## Diagnosing the Missingness Mechanism for BP
+
+- BP missingness appears to be part of a larger missingness module
+  - some participants are missing an entire exam/measurements
+  - likely not MCAR
+  - can be MAR if the chance of being in that “missing block” is explainable by observed variables (e.g., age group, survey year, type of examination)
+  - can be MNAR if missingness depends on unobserved health status
+  - we can’t diagnose MNAR from this plot alone
+
+#
+
+```{r, echo=FALSE, fig.align="center", fig.width=10, fig.height=5}
+
+gg_miss_var(NHANES, facet = SurveyYr) +
+  theme(axis.text.y = element_text(size = 4))
+
+```
+
+#### `SurveyYr` doesn't seem to explain the block missingness observed
+
+#
+
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+bp_block <- NHANES %>%
+  select(AgeDecade, BMI, Weight, Height, Pulse, starts_with("BP"))
+
+gg_miss_var(bp_block, facet = AgeDecade) +
+  theme(axis.text.y = element_text(size = 4))
+
+```
+
+
+#### Some variables are jointly missing but differing per age groups, suggesting MAR
+
+
+
+#
+
+```{r, echo=TRUE, fig.align="center", fig.width=6, fig.height=3}
+
+nhanes_shadow <- bind_shadow(NHANES)
+ggplot(nhanes_shadow,
+       aes(x = Age,
+           colour = BPSysAve_NA)) + 
+  geom_density()
+```
+
+Missingness in blood pressure is mostly related to age, suggesting MAR
+
+
+#
+
+```{r, echo=TRUE, fig.align="center", fig.width=6, fig.height=3}
+#UpSet plot
+gg_miss_upset(bp_block,nsets=6)
+```
+
+#
+
+```{r, echo=TRUE, fig.align="center", fig.width=6, fig.height=3}
+NHANES %>%
+  select(BMI, Age, Weight, Height, Pulse, BPSysAve, BPDiaAve) %>%
+  gg_miss_upset(nsets=6)
+```
+
+#
+
+```{r, echo=TRUE, fig.align="center", fig.width=10, fig.height=5}
+
+ggplot(
+  data = NHANES,
+  mapping = aes(x = Weight, y = BMI)) +     
+  geom_miss_point() +
+  theme(legend.position = "bottom")
+```
+
+Missing values of one variable in relation to the non-missing values of the other (red dots)
+
+## Summaries of missingness 
+
+#### per variable
+
+```{r, echo=TRUE}
+NHANES %>%
+  select(AgeDecade, BMI, Weight, Height, Pulse,   starts_with("BP")) %>% 
+  miss_var_summary()
+```
+
+#### per cases (rows) 
+
+```{r, echo=TRUE}
+# Percent of rows with at least one missing value
+pct_miss_case(NHANES)   
+```
+
+## Key Takeaways
+
+- Missing data do more than reduce sample size, they can distort who is represented and how variables are related
+
+- Diagnosing why data are missing is essential before choosing how to handle them
+
+- Complete-case analysis is a simple way to handle missingness but is unbiased only under MCAR and often fails otherwise  
+
+- MNAR poses the greatest risk of bias when handled incorrectly
+
+- Visualization and diagnostics are critical tools for identifying missingness mechanisms
+
+- `naniar` integrates missing-data summaries and visualizations into the tidyverse workflow using tidy data principles
+
+#### Check additional functions in the [Missing Book](https://tmb.njtierney.com/representing-missings)
+
+
