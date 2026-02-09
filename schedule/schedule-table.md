@@ -10,7 +10,7 @@
 |28 Jan 26 | Study Design  |[Slides](slides/study-design.qmd)   |   Simulation I Worksheet (deadline extended to Feb 6 at 11:59pm)        |
 |02 Feb 26 | Case Study 1 Work Period  |[Slides]()   |          |
 |04 Feb 26 | Missing Data  |[Slides](slides/missing-1.qmd)   |  Case Study I Due at 11:59pm        |
-|09 Feb 26 | Missing Data   |[Slides]()   |          |
+|09 Feb 26 | Missing Data   |[Slides](slides/missing-2.qmd)   |          |
 |11 Feb 26 | Midterm Review     |[Slides]()   | Missing Data Worksheet Due at 11:59pm    |
 |16 Feb 26 |      |READING WEEK |          |
 |18 Feb 26 |     |READING WEEK |          |
