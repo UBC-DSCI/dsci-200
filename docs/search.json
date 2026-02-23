@@ -644,207 +644,249 @@
     "text": "Key Takeaways\n\n\nDifferent random sampling methods each balance practicality and representativeness in different ways.\nWe covered four random sampling methods (simple random, systematic, stratified, and cluster), each with its own strengths and limitations.\nSelecting an appropriate sampling method can minimize bias, but no method completely eliminates it. Being aware of various types of bias is crucial."
   },
   {
-    "objectID": "schedule/slides/missing-2.html#section",
-    "href": "schedule/slides/missing-2.html#section",
+    "objectID": "schedule/slides/outliers-1.html#section",
+    "href": "schedule/slides/outliers-1.html#section",
     "title": "UBC DSCI 200",
-    "section": "Missing Data II",
-    "text": "Missing Data II\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 09 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+    "section": "Outliers I",
+    "text": "Outliers I\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 23 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#attribution",
-    "href": "schedule/slides/missing-2.html#attribution",
+    "objectID": "schedule/slides/outliers-1.html#attribution",
+    "href": "schedule/slides/outliers-1.html#attribution",
     "title": "UBC DSCI 200",
     "section": "Attribution",
-    "text": "Attribution\n\nThis material is based on content from the following sources:\n\nChapter 4 of Advanced modeling and data challenges (Vol.3)\nThe Missing Book\n*Flexible Imputation of Missing Data"
+    "text": "Attribution\n\n\nSome examples and references are from Challenges of cellwise outliers, by Raymaekers and Rousseeuw\nRobust Statistics, by Maronna, Martin, Yohai, Salibian-Barrera\n\n\nIn memory of my mentor and friend\nProfessor Ruben Zamar (1949-2023)\nwho contributed greatly to Robust Statistics and beyond …"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#learning-objectives",
-    "href": "schedule/slides/missing-2.html#learning-objectives",
+    "objectID": "schedule/slides/outliers-1.html#learning-objectives",
+    "href": "schedule/slides/outliers-1.html#learning-objectives",
     "title": "UBC DSCI 200",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n By the end of this lesson, you will be able to:\n\n\nDetermine potential reasons why data are missing.\nDetect instances of missing observations in a data set using a computer script and visualization.\nJustify and apply strategies for managing the missing data.\nWrite a computer script to impute missing values when appropriate\nWrite a computer script to evaluate the impact that missing data can have on subsequent analyses through simulation.\nReflect on the consequences with regards to the conclusions of the chosen method.\nRecognize the importance of utilizing domain knowledge when handling missing data."
+    "text": "Learning Objectives\n By the end of this lesson, you will be able to:\n\n\nDetermine potential reasons why data contain outliers.\nCompare outliers with extreme values generated from heavy-tailed distributions.\nRecognize different types of outliers in a data set (e.g., casewise versus cellwise outliers).\nUse different methods to detect outliers in a data set and understand differences in the results.\nJustify and apply strategies for managing outliers in the data, including transformations and data imputation.\nWrite a computer script to evaluate the impact that outliers can have on subsequent analyses through simulation.\nReflect on the consequences with regards to the conclusions of the chosen method.\nRecognize the importance of utilizing domain knowledge when handling outliers."
   },
   {
-    "objectID": "schedule/slides/missing-2.html#review",
-    "href": "schedule/slides/missing-2.html#review",
+    "objectID": "schedule/slides/outliers-1.html#what-is-an-outlier",
+    "href": "schedule/slides/outliers-1.html#what-is-an-outlier",
     "title": "UBC DSCI 200",
-    "section": "Review",
-    "text": "Review\nLast class we introduced the problem of missing data and learned that\n\n\nmissing data can reduce the sample size if only complete-cases are considered\nmissing data can distort who is represented and how variables are related if not handled appropiately\ndifferent missing data mechanisms need to be addressed differently\ndiagnosing visualizations and summary statistics are critical tools for making assumptions about missingness mechanisms\nnaniar package provides useful R functions which nicely integrate into the tidyverse workflow"
+    "section": "What is an outlier?",
+    "text": "What is an outlier?"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#review-1",
-    "href": "schedule/slides/missing-2.html#review-1",
+    "objectID": "schedule/slides/outliers-1.html#outliers",
+    "href": "schedule/slides/outliers-1.html#outliers",
     "title": "UBC DSCI 200",
-    "section": "Review",
-    "text": "Review\nLast class we introduced the problem of missing data and learned that\n\nmissing data can reduce the sample size if only complete-cases are considered\nmissing data can distort who is represented and how variables are related if not handled appropiately\ndifferent missing data mechanisms need to be addressed differently\ndiagnosing visualizations and summary statistics are critical tools for making assumptions about missingness mechanisms\nnaniar package provides useful R functions which nicely integrate into the tidyverse workflow\n\nToday, we’ll focus on how to analyze data with missing values"
+    "section": "Outliers",
+    "text": "Outliers\n\n\n\n\n\n\n\nDefinition: Outlier\n\n\nAn outlier is an observation that deviates from the bulk of the data, an atypical observation.\n\n\n\n\nOutliers may arise from:\n\nerrors when collecting or processing data\nvalues generated from a different distribution\nrare cases which may carry valuable information\n\n\nAs with missing values, outliers require careful diagnosis and appropriate handling before analysis."
   },
   {
-    "objectID": "schedule/slides/missing-2.html#missing-values-in-r",
-    "href": "schedule/slides/missing-2.html#missing-values-in-r",
+    "objectID": "schedule/slides/outliers-1.html#casewise-vs-cellwise",
+    "href": "schedule/slides/outliers-1.html#casewise-vs-cellwise",
     "title": "UBC DSCI 200",
-    "section": "Missing values in R",
-    "text": "Missing values in R\n\nMissingness can appear in different ways:\n\nNA\nNaN\nNULL\n99, 9999, 888, or a similar out-of-range number\n“Missing”, “Unknown” or another character string\n“” empty cell, or ” ” blank space\n\nAlthough all correspond to missing information, each have different effects on subsequent analyses.\nYou can convert these to NA at import or data wrangling stages"
+    "section": "Casewise vs Cellwise",
+    "text": "Casewise vs Cellwise"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#missing-missing-values",
-    "href": "schedule/slides/missing-2.html#missing-missing-values",
+    "objectID": "schedule/slides/outliers-1.html#casewise",
+    "href": "schedule/slides/outliers-1.html#casewise",
     "title": "UBC DSCI 200",
-    "section": "Missing missing values",
-    "text": "Missing missing values\nIf you fail to account for missing values, some functions will return NA. For example,\n\nx &lt;- c(-1, 0, 4, NA, 2)\nmean(x)\n\n[1] NA\n\n\nThe base R function na.omit() or the tidyr function drop_na() remove rows from data with any missing values\n\nna.omit(x)\n\n[1] -1  0  4  2\nattr(,\"na.action\")\n[1] 4\nattr(,\"class\")\n[1] \"omit\"\n\n\nThe boolean argument na.rm can be used in many functions to handle missing values\n\nmean(x, na.rm = TRUE)\n\n[1] 1.25"
+    "section": "Casewise",
+    "text": "Casewise\n\n\n\n\n In the 1960s Tukey and Huber introduced the casewise (aka rowwise) contamination model\n\nTreats entire rows as contaminated and coming from a different distribution, even if only values of some variables are unusual\nAssumes that less than 50% of the cases (objects) are contaminated"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#simulating-data-with-missing-values",
-    "href": "schedule/slides/missing-2.html#simulating-data-with-missing-values",
+    "objectID": "schedule/slides/outliers-1.html#cellwise",
+    "href": "schedule/slides/outliers-1.html#cellwise",
     "title": "UBC DSCI 200",
-    "section": "Simulating data with missing values",
-    "text": "Simulating data with missing values\n\nlibrary(naniar)\nlibrary(visdat)\nlibrary(ggplot2)\n\nset.seed(123)\n\nn &lt;- 100 #sample size\nx1 &lt;- rnorm(n) \nx2 &lt;- rnorm(n) + x1\ny &lt;- 2 * x1 + 1.5 * x2 + rnorm(n)"
+    "section": "Cellwise",
+    "text": "Cellwise\n\n\n\n\n\nIn 2009, Alqallaf, Van Aelst, Yohai and Zamar introduced the cellwise contamination model\n\nOnly individual cells are contaminated, with values coming from a different distribution\nAny case (row) may contain some contaminated cells\nMore realistic for high-dimensional data"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#the-simulated-data",
-    "href": "schedule/slides/missing-2.html#the-simulated-data",
+    "objectID": "schedule/slides/outliers-1.html#glass-data",
+    "href": "schedule/slides/outliers-1.html#glass-data",
     "title": "UBC DSCI 200",
-    "section": "The simulated data",
-    "text": "The simulated data"
+    "section": "Glass data",
+    "text": "Glass data\n\nData: n = 180 archeological glass spectra with d = 750 wavelengths (Detecting Deviating Data Cells, Rousseeuw & Van Den Bossche, Technometrics 2018)"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#adding-missingness-at-random-mar",
-    "href": "schedule/slides/missing-2.html#adding-missingness-at-random-mar",
+    "objectID": "schedule/slides/outliers-1.html#univariate-estimators",
+    "href": "schedule/slides/outliers-1.html#univariate-estimators",
     "title": "UBC DSCI 200",
-    "section": "Adding missingness at random (MAR)",
-    "text": "Adding missingness at random (MAR)\n\nm &lt;- sum(x1 &gt; 0)\n\nset.seed(123)\nmissing_idx &lt;- sample(seq_len(m), size = round(0.5 * m))  # 50% missing\n\n# introduce missingness\nx2[x1 &gt; 0][missing_idx] &lt;- NA\n\n#not in worksheet\nx1[x1 &gt; 0][head(missing_idx)] &lt;- NA\n\nsimulated_data &lt;- data.frame(x1, x2, y)"
+    "section": "Univariate estimators",
+    "text": "Univariate estimators\nBefore analyzing multivariate datasets, we first need to learn how to identify and handle outlying values in a single variable.\nLet’s look at the values of the wavelength V169 in this data"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#identifying-and-quantifying",
-    "href": "schedule/slides/missing-2.html#identifying-and-quantifying",
+    "objectID": "schedule/slides/outliers-1.html#robust-estimators",
+    "href": "schedule/slides/outliers-1.html#robust-estimators",
     "title": "UBC DSCI 200",
-    "section": "Identifying and quantifying",
-    "text": "Identifying and quantifying\n\n#percent of missing values in all data\npct_miss(simulated_data)\n\n[1] 10.66667\n\n# percent of rows with any value missing (`n_complete()` for counts)\npct_miss_case(simulated_data)   \n\n[1] 26\n\nsimulated_data %&gt;% \n  miss_var_summary()\n\n# A tibble: 3 × 3\n  variable n_miss pct_miss\n  &lt;chr&gt;     &lt;int&gt;    &lt;num&gt;\n1 x2           26       26\n2 x1            6        6\n3 y             0        0"
+    "section": "Robust estimators",
+    "text": "Robust estimators\n\nClassical estimators can be highly distorted by outliers\nRobust estimators are needed to capture the bulk of the data\nRobust estimators are also needed to flag outliers\n\n\n\n\n\nStatistic\nEstimate\n\n\n\n\nMean\n5260.72\n\n\nMedian\n4629\n\n\nSD\n1413.69\n\n\nMAD\n470.73\n\n\n\n\nThe mean and SD are very sensitive to the outliers in the data"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#a-quick-visualization",
-    "href": "schedule/slides/missing-2.html#a-quick-visualization",
+    "objectID": "schedule/slides/outliers-1.html#mean-barx-vs-median-tildex",
+    "href": "schedule/slides/outliers-1.html#mean-barx-vs-median-tildex",
     "title": "UBC DSCI 200",
-    "section": "A quick visualization",
-    "text": "A quick visualization\n\nsimulated_data %&gt;% gg_miss_var() \n\n\nWe can see the amount of missingness for each variable, but this summary does not show whether missing values occur together in the same observations."
+    "section": "Mean (\\(\\bar{X}\\)) vs Median (\\(\\tilde{X}\\))",
+    "text": "Mean (\\(\\bar{X}\\)) vs Median (\\(\\tilde{X}\\))\nIf the median is less affected by extreme values, why not using it as a default?\n\nif the data contain outliers, the median is more resistant\nbut if the data does not contain outliers, it is less efficient (larger standard error!)\n\nIf data is Normally distributed:\n\\[SE(\\bar{X}) = \\frac{\\sigma}{\\sqrt{n}}\\]\n\\[SE(\\tilde{X})= \\sqrt{\\frac{\\pi}{2}}\\frac{\\sigma}{\\sqrt{n}}\\]\nLet’s examine these two points by simulation!"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#joint-missigness",
-    "href": "schedule/slides/missing-2.html#joint-missigness",
+    "objectID": "schedule/slides/outliers-1.html#simulation-design",
+    "href": "schedule/slides/outliers-1.html#simulation-design",
     "title": "UBC DSCI 200",
-    "section": "Joint missigness",
-    "text": "Joint missigness\n\ngg_miss_upset(simulated_data)"
+    "section": "Simulation design",
+    "text": "Simulation design\nClean data\n\nGenerate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1\nCompute the mean and the median\nRepeat 10000 times\nSummarize their sampling distributions"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#section-1",
-    "href": "schedule/slides/missing-2.html#section-1",
-    "title": "UBC DSCI 200",
-    "section": "",
-    "text": "library(visdat)\nvis_miss(simulated_data)"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#missing-mechanism",
-    "href": "schedule/slides/missing-2.html#missing-mechanism",
-    "title": "UBC DSCI 200",
-    "section": "Missing Mechanism?",
-    "text": "Missing Mechanism?\n\n# data frame with shadow columns\nshadowed_sim &lt;- simulated_data %&gt;% bind_shadow()\n\nggplot(data = shadowed_sim, aes(x = x1, y = x2)) + \n       geom_miss_point() + theme(legend.position = \"bottom\")\n\n\nThe plot suggests that data is not missing completely at random! but …"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#iclicker-1-can-we-rule-out-mnar",
-    "href": "schedule/slides/missing-2.html#iclicker-1-can-we-rule-out-mnar",
-    "title": "UBC DSCI 200",
-    "section": "iClicker 1: can we rule out MNAR?",
-    "text": "iClicker 1: can we rule out MNAR?\n\nA. We can’t rule out MNAR\nB. The plot suggests MAR and thus we rule out MNAR\nC. We can rule out MAR\nD. We can’t rule out MCAR"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#section-2",
-    "href": "schedule/slides/missing-2.html#section-2",
+    "objectID": "schedule/slides/outliers-1.html#section-1",
+    "href": "schedule/slides/outliers-1.html#section-1",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "set.seed(123)\n\nn &lt;- 100\nx1 &lt;- rnorm(n)\nx2 &lt;- rnorm(n) + x1\ny  &lt;- 2 * x1 + 1.5 * x2 + rnorm(n)\n\nset.seed(123)\n\n# introduce missingness to top values in x2\ncut &lt;- quantile(x2, 0.9, na.rm = TRUE)\n\nidx &lt;- which(x2 &gt;= cut)\nx2[sample(idx, size = 10)] &lt;- NA\n\nsimulated_data &lt;- data.frame(x1, x2, y)"
+    "text": "set.seed(200)\n\nsim_stats &lt;- replicate(10000, {\n  x &lt;- rnorm(100)\n  c(mean = mean(x),\n    median = median(x))\n})\n\nsim_stats &lt;- t(sim_stats) |&gt; as.data.frame()\n\nsd(sim_stats$mean)\n\n[1] 0.1006556\n\n1/sqrt(1000)\n\n[1] 0.03162278\n\nsd(sim_stats$median)\n\n[1] 0.1255247\n\nsqrt(pi/2)*0.001\n\n[1] 0.001253314"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#mar-vs-mnar",
-    "href": "schedule/slides/missing-2.html#mar-vs-mnar",
+    "objectID": "schedule/slides/outliers-1.html#simulation-design-1",
+    "href": "schedule/slides/outliers-1.html#simulation-design-1",
     "title": "UBC DSCI 200",
-    "section": "MAR vs MNAR",
-    "text": "MAR vs MNAR\n\nshadowed_sim &lt;- simulated_data %&gt;% bind_shadow()\n\nggplot(data = shadowed_sim, aes(x = x1, y = x2)) + \n       geom_miss_point() + theme(legend.position = \"bottom\")\n\n\nBecause x1 and x2 are correlated, the missingness can appear to be related to x1. However, the missingness mechanism depends on the value of x2 itself, which makes it MNAR.\n\n\n\n\n\n\nCaution\n\n\nVisualizations can help rule out MCAR, but they cannot reliably distinguish MAR from MNAR.\nWhen variables are correlated, an MNAR mechanism may look like MAR in plots."
+    "section": "Simulation design",
+    "text": "Simulation design\nContaminated data\n\nGenerate a sample of size 100, with 90% from \\(\\mathcal{N}(0,1)\\) and 10% from \\(\\mathcal{N}(0,10)\\)\nCompute the mean and the median\nRepeat 10000 times\nSummarize their sampling distributions\n\n\\[\\text{Var}(\\bar{X}) = \\frac{(1-\\varepsilon)\\sigma^2_1 + \\varepsilon \\sigma_2^2}{n}\\]\n\\[\\mathrm{Var}(\\tilde{X}) \\approx \\frac{\\pi}{2n}\\;\n\\frac{1}{\\left(\\frac{1-\\varepsilon}{\\sigma_1}+\\frac{\\varepsilon}{\\sigma_2}\\right)^2}\\]"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#can-we-complete-missing-data",
-    "href": "schedule/slides/missing-2.html#can-we-complete-missing-data",
-    "title": "UBC DSCI 200",
-    "section": "Can we complete missing data?",
-    "text": "Can we complete missing data?\n\n\nImputation is not always the solution to missing data\nImputation can reinforce existing biases.\n\nFor example, imputing variables like, age, race, gender may introduce biases to the analysis, particularly if missingness is related to social factors.\n\nIn other cases, imputation may mask trends in the data over time.\nThe percentage of missing data matters: less than 5% is generally considered safe to impute; 5%–20% is often acceptable but requires careful diagnostics; 20%–40% calls for caution; and more than 40% are typically unreliable.\nWhen missing data cannot be recovered, it is important to understand why the data are missing and to analyze them accordingly."
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#types-of-imputation",
-    "href": "schedule/slides/missing-2.html#types-of-imputation",
-    "title": "UBC DSCI 200",
-    "section": "Types of imputation",
-    "text": "Types of imputation\n\nListwise Deletion: retain only complete observations\n\nSimple and widely used\nUnbiased under MCAR\nBiased under MAR in many cases\nInefficient (larger standard errors due to smaller sample size)\nDiscards potentially useful data"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#section-3",
-    "href": "schedule/slides/missing-2.html#section-3",
+    "objectID": "schedule/slides/outliers-1.html#section-3",
+    "href": "schedule/slides/outliers-1.html#section-3",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "Deterministic Methods: Mean, Median, Mode Imputation\n\nReplaces missing values with the mean, median, or mode of the observed data\nSimple and fast to apply\nReduces variance\nIntroduces bias in relationships among variables\nIgnores imputation uncertainty"
+    "text": "rcont_norm &lt;- function(n, eps = 0.10, mu0 = 0, \n                       sigma0 = 1, sigma1 = 10) {\n  x &lt;- rnorm(n, mean = mu0, sd = sigma0)\n  \n  k &lt;- ceiling(eps * n)              \n  if (k &gt; 0) {\n    idx &lt;- sample(1:n, k)\n    x[idx] &lt;- rnorm(k, mean = mu0, sd = sigma1)\n  }\n  x\n}\n\nset.seed(200)\n\nsim_stats &lt;- replicate(10000, {\n  x &lt;- rcont_norm(100)\n  c(mean = mean(x),\n    median = median(x))\n})\n\nsim_stats &lt;- t(sim_stats) |&gt; as.data.frame()\n\nsd(sim_stats$mean)\n\n[1] 0.3307419\n\nsd(sim_stats$median)\n\n[1] 0.1374634\n\ndd &lt;- (.9/1 + .1/10)^2\nsqrt(pi/(2*100*dd))\n\n[1] 0.1377268"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#section-4",
-    "href": "schedule/slides/missing-2.html#section-4",
-    "title": "UBC DSCI 200",
-    "section": "",
-    "text": "Deterministic Methods: Statistical Prediction Models\n\nReplaces missing values with predictions from an estimated model (e.g., linear regression) using observed values of other variables.\nPreserves relationships between variables\nAssumes relationships that may not be valid\nIgnores imputation uncertainty."
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#multiple-imputation-mi",
-    "href": "schedule/slides/missing-2.html#multiple-imputation-mi",
-    "title": "UBC DSCI 200",
-    "section": "Multiple imputation (MI)",
-    "text": "Multiple imputation (MI)\n\n\nFigure from *Flexible Imputation of Missing Data"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#mi",
-    "href": "schedule/slides/missing-2.html#mi",
-    "title": "UBC DSCI 200",
-    "section": "MI",
-    "text": "MI\n\nAssumes that missing data is either Missing Completely at Random (MCAR) or Missing at Random (MAR).\nReflects the uncertainty inherent in the missing data by introducing many randomly imputed values.\nGives unbiased parameter estimates\nRetain the statistical relationships present in the data"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#mice-multivariate-imputation-via-chained-equations",
-    "href": "schedule/slides/missing-2.html#mice-multivariate-imputation-via-chained-equations",
-    "title": "UBC DSCI 200",
-    "section": "MICE: Multivariate Imputation via Chained Equations",
-    "text": "MICE: Multivariate Imputation via Chained Equations\nInitialization: Replace missing values with simple initial guesses (e.g., mean or median of observed values).\nImputation: For each variable with missing values, impute it using the other variables as predictors, based on a specified method (e.g., PMM, regression, tree-based methods), including random variation.\nIteration (maxit): Cycle through all variables multiple times to update the imputations.\nMultiple Imputations: Repeat to create m complete datasets."
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#section-5",
-    "href": "schedule/slides/missing-2.html#section-5",
-    "title": "UBC DSCI 200",
-    "section": "",
-    "text": "library(mice)\nmice_imp &lt;- simulated_data %&gt;%\n    mice(m = 5, maxit = 10, seed = 123, printFlag =  FALSE)\n\n#one dataset\ncomp_case &lt;- complete(mice_imp, action = 1)\n\nmodel_mice1 &lt;- lm(y ~ x1 + x2, data = comp_case)\nanswer14 &lt;- summary(model_mice1)\nanswer14\n\n\nCall:\nlm(formula = y ~ x1 + x2, data = comp_case)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-2.031 -0.769 -0.219  0.771  3.842 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   0.2910     0.1193   2.439   0.0165 *  \nx1            2.0251     0.1688  11.999   &lt;2e-16 ***\nx2            1.5405     0.1354  11.376   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.155 on 97 degrees of freedom\nMultiple R-squared:  0.8915,    Adjusted R-squared:  0.8893 \nF-statistic: 398.6 on 2 and 97 DF,  p-value: &lt; 2.2e-16"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#visualizing-imputation",
-    "href": "schedule/slides/missing-2.html#visualizing-imputation",
-    "title": "UBC DSCI 200",
-    "section": "Visualizing imputation",
-    "text": "Visualizing imputation"
-  },
-  {
-    "objectID": "schedule/slides/missing-2.html#key-takeaways",
-    "href": "schedule/slides/missing-2.html#key-takeaways",
+    "objectID": "schedule/slides/outliers-1.html#key-takeaways",
+    "href": "schedule/slides/outliers-1.html#key-takeaways",
     "title": "UBC DSCI 200",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nMissing data do more than reduce sample size, they can distort who is represented and how variables are related\nDiagnosing why data are missing is essential before choosing how to handle them\nComplete-case analysis is a simple way to handle missingness but is unbiased only under MCAR and often fails otherwise\nMNAR poses the greatest risk of bias when handled incorrectly\nVisualization and diagnostics are critical tools for identifying missingness mechanisms\nnaniar integrates missing-data summaries and visualizations into the tidyverse workflow using tidy data principles"
+    "text": "Key Takeaways\n\n\nOutliers can occur in all variables of an observation or only in certain variables\nCellwise paradigm is better is more flexible for high-dimensional data\nClassical estimators can be optimal but very sensitive to outliers\nMedian is less efficient (≈ 1.57× variance) but more stable under contamination\nRobustness = trade-off with efficiency"
   },
   {
-    "objectID": "schedule/slides/missing-2.html#section-6",
-    "href": "schedule/slides/missing-2.html#section-6",
+    "objectID": "schedule/slides/missing-1.html#section",
+    "href": "schedule/slides/missing-1.html#section",
+    "title": "UBC DSCI 200",
+    "section": "Missing Data",
+    "text": "Missing Data\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 04 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#attribution",
+    "href": "schedule/slides/missing-1.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\nThis material is based on content from the following sources:\n\nChapter 4 of Advanced modeling and data challenges (Vol.3)\nThe Missing Book."
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#learning-objectives",
+    "href": "schedule/slides/missing-1.html#learning-objectives",
+    "title": "UBC DSCI 200",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\n\n\nDetermine potential reasons why data are missing.\nDefine data missing mechanisms.\nDetect instances of missing observations in a data set using a computer script and visualization.\nReflect on the consequences with regards to different ways of handling missing data.\nRecognize the importance of utilizing domain knowledge when handling missing data."
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#the-mystery-of-missing-data",
+    "href": "schedule/slides/missing-1.html#the-mystery-of-missing-data",
+    "title": "UBC DSCI 200",
+    "section": "The Mystery of Missing Data",
+    "text": "The Mystery of Missing Data\n\n\n\n\n\n\n\n\n\n\n\n\nIs any data missing?\n\nIf so, is there a reason some observations are missing?\n\nHow serious is the problem?\nWhat can we do about it?"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#examples",
+    "href": "schedule/slides/missing-1.html#examples",
+    "title": "UBC DSCI 200",
+    "section": "Examples",
+    "text": "Examples\n\nMissing data is common in many fields, for example,\n\nBusiness: missing values may appear in customer surveys, customer profiles, sales records, and inventories.\nHealthcare: missing data is common in patient history records, demographics, and clinical variables.\nSocial Sciences: missing data usually appears in large-scale surveys and administrative records.\nEnvironmental Sciences: missing data frequently occurs in weather station records, air and water quality datasets.\n\nthe underlying reasons can differ substantially …"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#not-engaging-with-missing-data",
+    "href": "schedule/slides/missing-1.html#not-engaging-with-missing-data",
+    "title": "UBC DSCI 200",
+    "section": "Not Engaging with Missing Data",
+    "text": "Not Engaging with Missing Data\n\n\n\n\n\n\n\nComplete-case analysis drops observations with missing values and uses only complete observations, which can result in\n\nsubstantial bias in estimation\nmisrepresentation of the population\ndistort the relation between variables\nloss of important information\nmisleading conclusions\n\n\n\n\n\n\n\n\nWarning\n\n\nMany functions in R uses complete data as a default with na.omit = TRUE or na.rm = TRUE"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#iclicker-1-exploring-missingness",
+    "href": "schedule/slides/missing-1.html#iclicker-1-exploring-missingness",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 1: exploring missingness",
+    "text": "iClicker 1: exploring missingness\n Looking at the COVID-19 map showing percentages of reported cases with missing race/ethnicity data per county. Which statement best describes the missingness?\n\n\n\n\n\n\n\n\nA. The missing values look randomly scattered\nB. The missing values show geographic patterns\nC. The missing values are too small to matter\nD. There is not enough information to tell"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#iclicker-2-is-missingness-informative",
+    "href": "schedule/slides/missing-1.html#iclicker-2-is-missingness-informative",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 2: is missingness informative?",
+    "text": "iClicker 2: is missingness informative?\n Based on the COVID-19 map, which is the most plausible explanation for why race/ethnicity data are missing in some counties?\n\nA. Random data entry errors\nB. Differences in reporting practices or infrastructure\nC. The disease affects some races less\nD. Pure chance"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#iclicker-3-consequences-of-excluding-missing-data",
+    "href": "schedule/slides/missing-1.html#iclicker-3-consequences-of-excluding-missing-data",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 3: consequences of excluding missing data",
+    "text": "iClicker 3: consequences of excluding missing data\n Suppose we exclude all observations with missing lab measurements (LB) in the NHANES data. What is the most likely consequence?\n\n\n \n\n\n\n\nA. The sample will better represent the population\nB. Older adults will be under-represented\nC. Estimates of health outcomes will be unbiased\nD. Nothing important will change"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#missing-data-mechanisms",
+    "href": "schedule/slides/missing-1.html#missing-data-mechanisms",
+    "title": "UBC DSCI 200",
+    "section": "Missing Data Mechanisms",
+    "text": "Missing Data Mechanisms\nThe choice of methods to handle missing data and the validity of subsequent statistical analyses depends strongly on why the data are missing.\n\nMissing Completely at Random (MCAR): as the name suggests, missingness is unrelated to any values, either observed in the dataset or unobserved.\nMissing at Random (MAR): missingness is related to observed data, making it easier to explain and handle.\nMissing Not at Random (MNAR): missingness is related to unobserved data or the missing values themselves, thus extremely challenging to address.\n\n\n\n\n\n\n\n\nKey takeaway\n\n\nMissing data doesn’t just hide information, it can shape who we see and the relationships we infer!\nUnderstanding why data are missing is essential"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#section-4",
+    "href": "schedule/slides/missing-1.html#section-4",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "Many imputation methods exist but it is important to understand the risk of imputing!\nTransparent reporting of imputation decisions is essential for reproducibility and ethical integrity.\n\nCheck additional functions in the Missing Book"
+    "text": "Mechanism\nDepends on\nImplications\nExample\n\n\n\n\nMCAR\nNeither observed nor missing values\nSimplest to handle; complete-case analysis reduces sample size but does not add bias\nRandom sensor failure\n\n\nMAR\nObserved variables only\nComplete-case analysis is usually biased; modelling missingness using observed data retains information and attenuates bias\nNHANES lab tests missing due to age-based sampling\n\n\nMNAR\nUnobserved variables or the missing values\nMissingness must be modeled explicitly; high risk of bias if ignored\nIncome not reported by high earners\n\n\n\nTable adapted from Advanced modeling and data challenges (Vol.3)"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#implications-of-ignoring-the-missingness-mechanism",
+    "href": "schedule/slides/missing-1.html#implications-of-ignoring-the-missingness-mechanism",
+    "title": "UBC DSCI 200",
+    "section": "Implications of Ignoring the Missingness Mechanism",
+    "text": "Implications of Ignoring the Missingness Mechanism\n\nUnderstanding why the data are missing is essential to choose an appropriate method to handle it and draw valid conclusions from data:\n\ncomplete-case analysis can fail when missingness is not truly random\nMNAR cases are often associated with sensitive or personal data\nignoring or misshandling MNAR can introduce serious biases, such as underestimating poverty or mischaracterizing population health needs\nmisdiagnosing missingness can lead to misguided policy or resource allocation decisions"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#iclicker-4-identifying-mnar",
+    "href": "schedule/slides/missing-1.html#iclicker-4-identifying-mnar",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 4: Identifying MNAR",
+    "text": "iClicker 4: Identifying MNAR\n\nWhich of the following is an example of a context of missing not at random (MNAR)?\n\nA. Income is recorded only for a random subsample of respondents, selected independently of all characteristics.\nB. Individuals with lower education levels may omit their education information.\nC. Air-quality measurements from ground monitors are missing more often in winter months due to weather-related access issues.\nD. Income is missing more often for individuals with temporary or informal employment, which is recorded in the data."
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#section-5",
+    "href": "schedule/slides/missing-1.html#section-5",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "data(\"NHANES\")\nhead(NHANES)\n\n# A tibble: 6 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education   \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;       \n1 51624 2009_10  male      34 \" 30-39\"        409 White &lt;NA&gt;  High School \n2 51624 2009_10  male      34 \" 30-39\"        409 White &lt;NA&gt;  High School \n3 51624 2009_10  male      34 \" 30-39\"        409 White &lt;NA&gt;  High School \n4 51625 2009_10  male       4 \" 0-9\"           49 Other &lt;NA&gt;  &lt;NA&gt;        \n5 51630 2009_10  female    49 \" 40-49\"        596 White &lt;NA&gt;  Some College\n6 51638 2009_10  male       9 \" 0-9\"          115 White &lt;NA&gt;  &lt;NA&gt;        \n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\n\nEven the first lines show that there are some missing values!"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#when-blood-pressure-is-missing-what-else-is-missing",
+    "href": "schedule/slides/missing-1.html#when-blood-pressure-is-missing-what-else-is-missing",
+    "title": "UBC DSCI 200",
+    "section": "When blood pressure is missing, what else is missing?",
+    "text": "When blood pressure is missing, what else is missing?"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#diagnosing-the-missingness-mechanism-for-bp",
+    "href": "schedule/slides/missing-1.html#diagnosing-the-missingness-mechanism-for-bp",
+    "title": "UBC DSCI 200",
+    "section": "Diagnosing the Missingness Mechanism for BP",
+    "text": "Diagnosing the Missingness Mechanism for BP\n\nBP missingness appears to be part of a larger missingness module\n\nsome participants are missing an entire exam/measurements\nlikely not MCAR\ncan be MAR if the chance of being in that “missing block” is explainable by observed variables (e.g., age group, survey year, type of examination)\ncan be MNAR if missingness depends on unobserved health status\nwe can’t diagnose MNAR from this plot alone"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#summaries-of-missingness",
+    "href": "schedule/slides/missing-1.html#summaries-of-missingness",
+    "title": "UBC DSCI 200",
+    "section": "Summaries of missingness",
+    "text": "Summaries of missingness\nper variable\n\nNHANES %&gt;%\n  select(AgeDecade, BMI, Weight, Height, Pulse,   starts_with(\"BP\")) %&gt;% \n  miss_var_summary()\n\n# A tibble: 13 × 3\n   variable  n_miss pct_miss\n   &lt;chr&gt;      &lt;int&gt;    &lt;num&gt;\n 1 BPSys1      1763    17.6 \n 2 BPDia1      1763    17.6 \n 3 BPSys2      1647    16.5 \n 4 BPDia2      1647    16.5 \n 5 BPSys3      1635    16.4 \n 6 BPDia3      1635    16.4 \n 7 BPSysAve    1449    14.5 \n 8 BPDiaAve    1449    14.5 \n 9 Pulse       1437    14.4 \n10 BMI          366     3.66\n11 Height       353     3.53\n12 AgeDecade    333     3.33\n13 Weight        78     0.78\n\n\nper cases (rows)\n\n# Percent of rows with at least one missing value\npct_miss_case(NHANES)   \n\n[1] 100"
+  },
+  {
+    "objectID": "schedule/slides/missing-1.html#key-takeaways",
+    "href": "schedule/slides/missing-1.html#key-takeaways",
+    "title": "UBC DSCI 200",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nMissing data do more than reduce sample size, they can distort who is represented and how variables are related\nDiagnosing why data are missing is essential before choosing how to handle them\nComplete-case analysis is a simple way to handle missingness but is unbiased only under MCAR and often fails otherwise\nMNAR poses the greatest risk of bias when handled incorrectly\nVisualization and diagnostics are critical tools for identifying missingness mechanisms\nnaniar integrates missing-data summaries and visualizations into the tidyverse workflow using tidy data principles\n\nCheck additional functions in the Missing Book"
   },
   {
     "objectID": "schedule/slides/eda-2.html#section",
@@ -1673,130 +1715,347 @@
     "text": "Key Takeaways\n\nEDA is a flexible, question-driven process to understand your data before modelling\nVisualization helps reveal patterns, outliers and relationships\nChoose appropriate plots based on variable types and what you’re trying to show\nUse the right summary based on data shape and presence of outliers"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#section",
-    "href": "schedule/slides/missing-1.html#section",
+    "objectID": "schedule/slides/imputation.html#section",
+    "href": "schedule/slides/imputation.html#section",
     "title": "UBC DSCI 200",
-    "section": "Missing Data",
-    "text": "Missing Data\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 04 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+    "section": "Imputation",
+    "text": "Imputation\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 23 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#attribution",
-    "href": "schedule/slides/missing-1.html#attribution",
+    "objectID": "schedule/slides/imputation.html#attribution",
+    "href": "schedule/slides/imputation.html#attribution",
     "title": "UBC DSCI 200",
     "section": "Attribution",
-    "text": "Attribution\n\nThis material is based on content from the following sources:\n\nChapter 4 of Advanced modeling and data challenges (Vol.3)\nThe Missing Book."
+    "text": "Attribution\n\nThis material is based on content from the following sources:\n\nThe Missing Book\nFlexible Imputation of Missing Data"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#learning-objectives",
-    "href": "schedule/slides/missing-1.html#learning-objectives",
+    "objectID": "schedule/slides/imputation.html#learning-objectives",
+    "href": "schedule/slides/imputation.html#learning-objectives",
     "title": "UBC DSCI 200",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\n\n\nDetermine potential reasons why data are missing.\nDefine data missing mechanisms.\nDetect instances of missing observations in a data set using a computer script and visualization.\nReflect on the consequences with regards to different ways of handling missing data.\nRecognize the importance of utilizing domain knowledge when handling missing data."
+    "text": "Learning Objectives\n By the end of this lesson, you will be able to:\n\n\nJustify and apply strategies for managing the missing data.\nWrite a computer script to impute missing values when appropriate\nWrite a computer script to evaluate the impact that missing data can have on subsequent analyses through simulation.\nReflect on the consequences with regards to the conclusions of the chosen method.\nRecognize the importance of utilizing domain knowledge when handling missing data."
   },
   {
-    "objectID": "schedule/slides/missing-1.html#the-mystery-of-missing-data",
-    "href": "schedule/slides/missing-1.html#the-mystery-of-missing-data",
+    "objectID": "schedule/slides/imputation.html#review",
+    "href": "schedule/slides/imputation.html#review",
     "title": "UBC DSCI 200",
-    "section": "The Mystery of Missing Data",
-    "text": "The Mystery of Missing Data\n\n\n\n\n\n\n\n\n\n\n\n\nIs any data missing?\n\nIf so, is there a reason some observations are missing?\n\nHow serious is the problem?\nWhat can we do about it?"
+    "section": "Review",
+    "text": "Review\nBefore the midterm we\n\n\nintroduced the problem of missing data\nlearned different ways to diagnose missingness\ndefined different missing data mechanisms\nused R functions from naniar package, integrated with tidyverse workflow, to analyzed data\nintroduced some imputation methods"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#examples",
-    "href": "schedule/slides/missing-1.html#examples",
+    "objectID": "schedule/slides/imputation.html#some-more-details-about-imputation",
+    "href": "schedule/slides/imputation.html#some-more-details-about-imputation",
     "title": "UBC DSCI 200",
-    "section": "Examples",
-    "text": "Examples\n\nMissing data is common in many fields, for example,\n\nBusiness: missing values may appear in customer surveys, customer profiles, sales records, and inventories.\nHealthcare: missing data is common in patient history records, demographics, and clinical variables.\nSocial Sciences: missing data usually appears in large-scale surveys and administrative records.\nEnvironmental Sciences: missing data frequently occurs in weather station records, air and water quality datasets.\n\nthe underlying reasons can differ substantially …"
+    "section": "Some more details about imputation",
+    "text": "Some more details about imputation\n\n\nImputation is not always the solution to missing data\nImputation can reinforce existing biases.\n\nFor example, imputing variables like, age, race, gender may introduce biases to the analysis, particularly if missingness is related to social factors.\n\nIn other cases, imputation may mask trends in the data over time.\nThe percentage of missing data matters: less than 5% is generally considered safe to impute; 5%–20% is often acceptable but requires careful diagnostics; 20%–40% calls for caution; and more than 40% are typically unreliable.\nWhen missing data cannot be recovered, it is important to understand why the data are missing and to analyze them accordingly."
   },
   {
-    "objectID": "schedule/slides/missing-1.html#not-engaging-with-missing-data",
-    "href": "schedule/slides/missing-1.html#not-engaging-with-missing-data",
+    "objectID": "schedule/slides/imputation.html#types-of-imputation",
+    "href": "schedule/slides/imputation.html#types-of-imputation",
     "title": "UBC DSCI 200",
-    "section": "Not Engaging with Missing Data",
-    "text": "Not Engaging with Missing Data\n\n\n\n\n\n\n\nComplete-case analysis drops observations with missing values and uses only complete observations, which can result in\n\nsubstantial bias in estimation\nmisrepresentation of the population\ndistort the relation between variables\nloss of important information\nmisleading conclusions\n\n\n\n\n\n\n\n\nWarning\n\n\nMany functions in R uses complete data as a default with na.omit = TRUE or na.rm = TRUE"
+    "section": "Types of imputation",
+    "text": "Types of imputation"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#iclicker-1-exploring-missingness",
-    "href": "schedule/slides/missing-1.html#iclicker-1-exploring-missingness",
+    "objectID": "schedule/slides/imputation.html#listwise-deletion",
+    "href": "schedule/slides/imputation.html#listwise-deletion",
     "title": "UBC DSCI 200",
-    "section": "iClicker 1: exploring missingness",
-    "text": "iClicker 1: exploring missingness\n Looking at the COVID-19 map showing percentages of reported cases with missing race/ethnicity data per county. Which statement best describes the missingness?\n\n\n\n\n\n\n\n\nA. The missing values look randomly scattered\nB. The missing values show geographic patterns\nC. The missing values are too small to matter\nD. There is not enough information to tell"
+    "section": "Listwise Deletion",
+    "text": "Listwise Deletion\nRetain only complete observations\n\nSimple and widely used\nUnbiased under MCAR\nBiased under MAR in many cases\nInefficient (larger standard errors due to smaller sample size)\nDiscards potentially useful data"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#iclicker-2-is-missingness-informative",
-    "href": "schedule/slides/missing-1.html#iclicker-2-is-missingness-informative",
+    "objectID": "schedule/slides/imputation.html#deterministic-methods---i",
+    "href": "schedule/slides/imputation.html#deterministic-methods---i",
     "title": "UBC DSCI 200",
-    "section": "iClicker 2: is missingness informative?",
-    "text": "iClicker 2: is missingness informative?\n Based on the COVID-19 map, which is the most plausible explanation for why race/ethnicity data are missing in some counties?\n\nA. Random data entry errors\nB. Differences in reporting practices or infrastructure\nC. The disease affects some races less\nD. Pure chance"
+    "section": "Deterministic Methods - I",
+    "text": "Deterministic Methods - I\nImputation using a fix value (e.g., the mean, median, or mode of each variable)\n\nReplaces missing values using the observed data\nSimple and fast to apply\nReduces variance\nIntroduces bias in relationships among variables\nIgnores imputation uncertainty"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#iclicker-3-consequences-of-excluding-missing-data",
-    "href": "schedule/slides/missing-1.html#iclicker-3-consequences-of-excluding-missing-data",
-    "title": "UBC DSCI 200",
-    "section": "iClicker 3: consequences of excluding missing data",
-    "text": "iClicker 3: consequences of excluding missing data\n Suppose we exclude all observations with missing lab measurements (LB) in the NHANES data. What is the most likely consequence?\n\n\n \n\n\n\n\nA. The sample will better represent the population\nB. Older adults will be under-represented\nC. Estimates of health outcomes will be unbiased\nD. Nothing important will change"
-  },
-  {
-    "objectID": "schedule/slides/missing-1.html#missing-data-mechanisms",
-    "href": "schedule/slides/missing-1.html#missing-data-mechanisms",
-    "title": "UBC DSCI 200",
-    "section": "Missing Data Mechanisms",
-    "text": "Missing Data Mechanisms\nThe choice of methods to handle missing data and the validity of subsequent statistical analyses depends strongly on why the data are missing.\n\nMissing Completely at Random (MCAR): as the name suggests, missingness is unrelated to any values, either observed in the dataset or unobserved.\nMissing at Random (MAR): missingness is related to observed data, making it easier to explain and handle.\nMissing Not at Random (MNAR): missingness is related to unobserved data or the missing values themselves, thus extremely challenging to address.\n\n\n\n\n\n\n\n\nKey takeaway\n\n\nMissing data doesn’t just hide information, it can shape who we see and the relationships we infer!\nUnderstanding why data are missing is essential"
-  },
-  {
-    "objectID": "schedule/slides/missing-1.html#section-4",
-    "href": "schedule/slides/missing-1.html#section-4",
+    "objectID": "schedule/slides/imputation.html#section-1",
+    "href": "schedule/slides/imputation.html#section-1",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "Mechanism\nDepends on\nImplications\nExample\n\n\n\n\nMCAR\nNeither observed nor missing values\nSimplest to handle; complete-case analysis reduces sample size but does not add bias\nRandom sensor failure\n\n\nMAR\nObserved variables only\nComplete-case analysis is usually biased; modelling missingness using observed data retains information and attenuates bias\nNHANES lab tests missing due to age-based sampling\n\n\nMNAR\nUnobserved variables or the missing values\nMissingness must be modeled explicitly; high risk of bias if ignored\nIncome not reported by high earners\n\n\n\nTable adapted from Advanced modeling and data challenges (Vol.3)"
+    "text": "library(simputation)\nlibrary(naniar)\nlibrary(visdat)\nlibrary(ggplot2)\nlibrary(tidyverse)\n\nset.seed(123)\n\nn &lt;- 100\nx1 &lt;- rnorm(n)\nx2 &lt;- rnorm(n) + x1\ny  &lt;- 2 * x1 + 1.5 * x2 + rnorm(n)\n\nm &lt;- sum(x1 &gt; 0)\n\nset.seed(123)\nmissing_idx2 &lt;- sample(seq_len(m), size = round(0.5 * m))  # 50% missing\nmissing_idx1 &lt;- sample(seq_len(m), size = round(0.3 * m))\n\n# introduce MAR\nx2[x1 &gt; 0][missing_idx2] &lt;- NA\n\n# introduce MNAR\nx1[x1 &gt; 0][head(missing_idx1)] &lt;- NA\n\nsimulated_data &lt;- data.frame(x1, x2, y)"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#implications-of-ignoring-the-missingness-mechanism",
-    "href": "schedule/slides/missing-1.html#implications-of-ignoring-the-missingness-mechanism",
-    "title": "UBC DSCI 200",
-    "section": "Implications of Ignoring the Missingness Mechanism",
-    "text": "Implications of Ignoring the Missingness Mechanism\n\nUnderstanding why the data are missing is essential to choose an appropriate method to handle it and draw valid conclusions from data:\n\ncomplete-case analysis can fail when missingness is not truly random\nMNAR cases are often associated with sensitive or personal data\nignoring or misshandling MNAR can introduce serious biases, such as underestimating poverty or mischaracterizing population health needs\nmisdiagnosing missingness can lead to misguided policy or resource allocation decisions"
-  },
-  {
-    "objectID": "schedule/slides/missing-1.html#iclicker-4-identifying-mnar",
-    "href": "schedule/slides/missing-1.html#iclicker-4-identifying-mnar",
-    "title": "UBC DSCI 200",
-    "section": "iClicker 4: Identifying MNAR",
-    "text": "iClicker 4: Identifying MNAR\n\nWhich of the following is an example of a context of missing not at random (MNAR)?\n\nA. Income is recorded only for a random subsample of respondents, selected independently of all characteristics.\nB. Individuals with lower education levels may omit their education information.\nC. Air-quality measurements from ground monitors are missing more often in winter months due to weather-related access issues.\nD. Income is missing more often for individuals with temporary or informal employment, which is recorded in the data."
-  },
-  {
-    "objectID": "schedule/slides/missing-1.html#section-5",
-    "href": "schedule/slides/missing-1.html#section-5",
+    "objectID": "schedule/slides/imputation.html#section-2",
+    "href": "schedule/slides/imputation.html#section-2",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "data(\"NHANES\")\nhead(NHANES)\n\n# A tibble: 6 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education   \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;       \n1 51624 2009_10  male      34 \" 30-39\"        409 White &lt;NA&gt;  High School \n2 51624 2009_10  male      34 \" 30-39\"        409 White &lt;NA&gt;  High School \n3 51624 2009_10  male      34 \" 30-39\"        409 White &lt;NA&gt;  High School \n4 51625 2009_10  male       4 \" 0-9\"           49 Other &lt;NA&gt;  &lt;NA&gt;        \n5 51630 2009_10  female    49 \" 40-49\"        596 White &lt;NA&gt;  Some College\n6 51638 2009_10  male       9 \" 0-9\"          115 White &lt;NA&gt;  &lt;NA&gt;        \n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\n\nEven the first lines show that there are some missing values!"
+    "text": "simulated_data |&gt;\n  nabular() |&gt;\n  add_label_shadow() |&gt;\n  mutate(across(where(is.numeric), impute_mean)) |&gt; \n  ggplot(aes(x = x1,\n             y = x2,\n             colour = any_missing)) + geom_point()"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#when-blood-pressure-is-missing-what-else-is-missing",
-    "href": "schedule/slides/missing-1.html#when-blood-pressure-is-missing-what-else-is-missing",
+    "objectID": "schedule/slides/imputation.html#deterministic-methods---ii",
+    "href": "schedule/slides/imputation.html#deterministic-methods---ii",
     "title": "UBC DSCI 200",
-    "section": "When blood pressure is missing, what else is missing?",
-    "text": "When blood pressure is missing, what else is missing?"
+    "section": "Deterministic Methods - II",
+    "text": "Deterministic Methods - II\nStatistical Prediction Models\nReplaces missing values with predictions from an estimated model (e.g., linear regression) using observed values of other variables\n\nPreserves relationships between variables\nAssumes relationships that may not be valid\nIgnores imputation uncertainty"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#diagnosing-the-missingness-mechanism-for-bp",
-    "href": "schedule/slides/missing-1.html#diagnosing-the-missingness-mechanism-for-bp",
+    "objectID": "schedule/slides/imputation.html#section-3",
+    "href": "schedule/slides/imputation.html#section-3",
     "title": "UBC DSCI 200",
-    "section": "Diagnosing the Missingness Mechanism for BP",
-    "text": "Diagnosing the Missingness Mechanism for BP\n\nBP missingness appears to be part of a larger missingness module\n\nsome participants are missing an entire exam/measurements\nlikely not MCAR\ncan be MAR if the chance of being in that “missing block” is explainable by observed variables (e.g., age group, survey year, type of examination)\ncan be MNAR if missingness depends on unobserved health status\nwe can’t diagnose MNAR from this plot alone"
+    "section": "",
+    "text": "simulated_imp_lm &lt;- simulated_data |&gt;\n  nabular() |&gt;\n  add_label_shadow() |&gt;\n  impute_lm(x2 ~ x1 + y)\n\nggplot(simulated_imp_lm,\n       aes(x = x2,\n           y = x1,\n           colour = any_missing)) +\n  geom_point()"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#summaries-of-missingness",
-    "href": "schedule/slides/missing-1.html#summaries-of-missingness",
+    "objectID": "schedule/slides/imputation.html#multiple-imputation-mi",
+    "href": "schedule/slides/imputation.html#multiple-imputation-mi",
     "title": "UBC DSCI 200",
-    "section": "Summaries of missingness",
-    "text": "Summaries of missingness\nper variable\n\nNHANES %&gt;%\n  select(AgeDecade, BMI, Weight, Height, Pulse,   starts_with(\"BP\")) %&gt;% \n  miss_var_summary()\n\n# A tibble: 13 × 3\n   variable  n_miss pct_miss\n   &lt;chr&gt;      &lt;int&gt;    &lt;num&gt;\n 1 BPSys1      1763    17.6 \n 2 BPDia1      1763    17.6 \n 3 BPSys2      1647    16.5 \n 4 BPDia2      1647    16.5 \n 5 BPSys3      1635    16.4 \n 6 BPDia3      1635    16.4 \n 7 BPSysAve    1449    14.5 \n 8 BPDiaAve    1449    14.5 \n 9 Pulse       1437    14.4 \n10 BMI          366     3.66\n11 Height       353     3.53\n12 AgeDecade    333     3.33\n13 Weight        78     0.78\n\n\nper cases (rows)\n\n# Percent of rows with at least one missing value\npct_miss_case(NHANES)   \n\n[1] 100"
+    "section": "Multiple imputation (MI)",
+    "text": "Multiple imputation (MI)\n\n\nFigure from *Flexible Imputation of Missing Data"
   },
   {
-    "objectID": "schedule/slides/missing-1.html#key-takeaways",
-    "href": "schedule/slides/missing-1.html#key-takeaways",
+    "objectID": "schedule/slides/imputation.html#mi",
+    "href": "schedule/slides/imputation.html#mi",
+    "title": "UBC DSCI 200",
+    "section": "MI",
+    "text": "MI\n\nAssumes that missing data is either Missing Completely at Random (MCAR) or Missing at Random (MAR).\nReflects the uncertainty inherent in the missing data by introducing many randomly imputed values.\nGives unbiased parameter estimates\nRetain the statistical relationships present in the data"
+  },
+  {
+    "objectID": "schedule/slides/imputation.html#mice-multivariate-imputation-via-chained-equations",
+    "href": "schedule/slides/imputation.html#mice-multivariate-imputation-via-chained-equations",
+    "title": "UBC DSCI 200",
+    "section": "MICE: Multivariate Imputation via Chained Equations",
+    "text": "MICE: Multivariate Imputation via Chained Equations\nInitialization: Replace missing values with simple initial guesses (e.g., mean or median of observed values).\nImputation: For each variable with missing values, impute it using the other variables as predictors, based on a specified method (e.g., PMM, regression, tree-based methods), including random variation.\nIteration (maxit): Cycle through all variables multiple times to update the imputations.\nMultiple Imputations: Repeat to create m complete datasets."
+  },
+  {
+    "objectID": "schedule/slides/imputation.html#section-4",
+    "href": "schedule/slides/imputation.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "library(mice)\nmice_imp &lt;- simulated_data |&gt;\n    mice(m = 5, maxit = 10, seed = 123, printFlag =  FALSE)\n\n#one dataset\ncomp_case &lt;- complete(mice_imp, action = 1)\n\nmodel_mice1 &lt;- lm(y ~ x1 + x2, data = comp_case)\nanswer14 &lt;- summary(model_mice1)\nanswer14\n\n\nCall:\nlm(formula = y ~ x1 + x2, data = comp_case)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.27913 -0.61408 -0.09257  0.51997  2.34976 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  0.05243    0.09369    0.56    0.577    \nx1           1.82647    0.13584   13.45   &lt;2e-16 ***\nx2           1.44413    0.09194   15.71   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9278 on 97 degrees of freedom\nMultiple R-squared:   0.93, Adjusted R-squared:  0.9286 \nF-statistic: 644.6 on 2 and 97 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "schedule/slides/imputation.html#visualizing-imputation",
+    "href": "schedule/slides/imputation.html#visualizing-imputation",
+    "title": "UBC DSCI 200",
+    "section": "Visualizing imputation",
+    "text": "Visualizing imputation\n\nlibrary(dplyr)\nlibrary(mice)\n\nsim_with_flag &lt;- simulated_data |&gt;\n  mutate(any_missing = if_any(everything(), is.na))\n\nmice_imp &lt;- mice(sim_with_flag, m = 5, maxit = 10,\n                 seed = 123, printFlag = FALSE)\n\ncomp_case &lt;- complete(mice_imp, action = 1)\n\nggplot(comp_case,\n       aes(x = x2, y = x1, colour = any_missing)) +\n  geom_point()"
+  },
+  {
+    "objectID": "schedule/slides/imputation.html#mice",
+    "href": "schedule/slides/imputation.html#mice",
+    "title": "UBC DSCI 200",
+    "section": "MICE",
+    "text": "MICE\nPredictive Mean Matching (PMM)\nAmong many methods implemented in mice, pmm is a popular and default option for imputation of continuous variables\n\nFor each variable with missing values, it fits a regression model using all other variables as predictors\nComputes predicted values for each missing case using the estimated model\nFinds donor candidates among observed cases with matching (close) predicted values\nRandomly selects a donor from the nearest neighbors\nImputes with the observed value from the chosen donor\n\nKeeps imputed values realistic and within range"
+  },
+  {
+    "objectID": "schedule/slides/imputation.html#key-takeaways",
+    "href": "schedule/slides/imputation.html#key-takeaways",
     "title": "UBC DSCI 200",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nMissing data do more than reduce sample size, they can distort who is represented and how variables are related\nDiagnosing why data are missing is essential before choosing how to handle them\nComplete-case analysis is a simple way to handle missingness but is unbiased only under MCAR and often fails otherwise\nMNAR poses the greatest risk of bias when handled incorrectly\nVisualization and diagnostics are critical tools for identifying missingness mechanisms\nnaniar integrates missing-data summaries and visualizations into the tidyverse workflow using tidy data principles\n\nCheck additional functions in the Missing Book"
+    "text": "Key Takeaways\n\nMissing data do more than reduce sample size, they can distort who is represented and how variables are related\nDiagnosing why data are missing is essential before choosing how to handle them\nComplete-case analysis is a simple way to handle missingness but is unbiased only under MCAR and often fails otherwise\nMNAR poses the greatest risk of bias when handled incorrectly\nVisualization and diagnostics are critical tools for identifying missingness mechanisms\nnaniar integrates missing-data summaries and visualizations into the tidyverse workflow using tidy data principles"
+  },
+  {
+    "objectID": "schedule/slides/imputation.html#section-5",
+    "href": "schedule/slides/imputation.html#section-5",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Many imputation methods exist but it is important to understand the risk of imputing!\nTransparent reporting of imputation decisions is essential for reproducibility and ethical integrity.\n\nCheck additional functions in the Missing Book"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#section",
+    "href": "schedule/slides/missing-2.html#section",
+    "title": "UBC DSCI 200",
+    "section": "Missing Data II",
+    "text": "Missing Data II\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 09 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#attribution",
+    "href": "schedule/slides/missing-2.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\nThis material is based on content from the following sources:\n\nChapter 4 of Advanced modeling and data challenges (Vol.3)\nThe Missing Book\n*Flexible Imputation of Missing Data"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#learning-objectives",
+    "href": "schedule/slides/missing-2.html#learning-objectives",
+    "title": "UBC DSCI 200",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n By the end of this lesson, you will be able to:\n\n\nDetermine potential reasons why data are missing.\nDetect instances of missing observations in a data set using a computer script and visualization.\nJustify and apply strategies for managing the missing data.\nWrite a computer script to impute missing values when appropriate\nWrite a computer script to evaluate the impact that missing data can have on subsequent analyses through simulation.\nReflect on the consequences with regards to the conclusions of the chosen method.\nRecognize the importance of utilizing domain knowledge when handling missing data."
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#review",
+    "href": "schedule/slides/missing-2.html#review",
+    "title": "UBC DSCI 200",
+    "section": "Review",
+    "text": "Review\nLast class we introduced the problem of missing data and learned that\n\n\nmissing data can reduce the sample size if only complete-cases are considered\nmissing data can distort who is represented and how variables are related if not handled appropiately\ndifferent missing data mechanisms need to be addressed differently\ndiagnosing visualizations and summary statistics are critical tools for making assumptions about missingness mechanisms\nnaniar package provides useful R functions which nicely integrate into the tidyverse workflow"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#review-1",
+    "href": "schedule/slides/missing-2.html#review-1",
+    "title": "UBC DSCI 200",
+    "section": "Review",
+    "text": "Review\nLast class we introduced the problem of missing data and learned that\n\nmissing data can reduce the sample size if only complete-cases are considered\nmissing data can distort who is represented and how variables are related if not handled appropiately\ndifferent missing data mechanisms need to be addressed differently\ndiagnosing visualizations and summary statistics are critical tools for making assumptions about missingness mechanisms\nnaniar package provides useful R functions which nicely integrate into the tidyverse workflow\n\nToday, we’ll focus on how to analyze data with missing values"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#missing-values-in-r",
+    "href": "schedule/slides/missing-2.html#missing-values-in-r",
+    "title": "UBC DSCI 200",
+    "section": "Missing values in R",
+    "text": "Missing values in R\n\nMissingness can appear in different ways:\n\nNA\nNaN\nNULL\n99, 9999, 888, or a similar out-of-range number\n“Missing”, “Unknown” or another character string\n“” empty cell, or ” ” blank space\n\nAlthough all correspond to missing information, each have different effects on subsequent analyses.\nYou can convert these to NA at import or data wrangling stages"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#missing-missing-values",
+    "href": "schedule/slides/missing-2.html#missing-missing-values",
+    "title": "UBC DSCI 200",
+    "section": "Missing missing values",
+    "text": "Missing missing values\nIf you fail to account for missing values, some functions will return NA. For example,\n\nx &lt;- c(-1, 0, 4, NA, 2)\nmean(x)\n\n[1] NA\n\n\nThe base R function na.omit() or the tidyr function drop_na() remove rows from data with any missing values\n\nna.omit(x)\n\n[1] -1  0  4  2\nattr(,\"na.action\")\n[1] 4\nattr(,\"class\")\n[1] \"omit\"\n\n\nThe boolean argument na.rm can be used in many functions to handle missing values\n\nmean(x, na.rm = TRUE)\n\n[1] 1.25"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#simulating-data-with-missing-values",
+    "href": "schedule/slides/missing-2.html#simulating-data-with-missing-values",
+    "title": "UBC DSCI 200",
+    "section": "Simulating data with missing values",
+    "text": "Simulating data with missing values\n\nlibrary(naniar)\nlibrary(visdat)\nlibrary(ggplot2)\n\nset.seed(123)\n\nn &lt;- 100 #sample size\nx1 &lt;- rnorm(n) \nx2 &lt;- rnorm(n) + x1\ny &lt;- 2 * x1 + 1.5 * x2 + rnorm(n)"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#the-simulated-data",
+    "href": "schedule/slides/missing-2.html#the-simulated-data",
+    "title": "UBC DSCI 200",
+    "section": "The simulated data",
+    "text": "The simulated data"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#adding-missingness-at-random-mar",
+    "href": "schedule/slides/missing-2.html#adding-missingness-at-random-mar",
+    "title": "UBC DSCI 200",
+    "section": "Adding missingness at random (MAR)",
+    "text": "Adding missingness at random (MAR)\n\nm &lt;- sum(x1 &gt; 0)\n\nset.seed(123)\nmissing_idx &lt;- sample(seq_len(m), size = round(0.5 * m))  # 50% missing\n\n# introduce missingness\nx2[x1 &gt; 0][missing_idx] &lt;- NA\n\n#not in worksheet\nx1[x1 &gt; 0][head(missing_idx)] &lt;- NA\n\nsimulated_data &lt;- data.frame(x1, x2, y)"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#identifying-and-quantifying",
+    "href": "schedule/slides/missing-2.html#identifying-and-quantifying",
+    "title": "UBC DSCI 200",
+    "section": "Identifying and quantifying",
+    "text": "Identifying and quantifying\n\n#percent of missing values in all data\npct_miss(simulated_data)\n\n[1] 10.66667\n\n# percent of rows with any value missing (`n_complete()` for counts)\npct_miss_case(simulated_data)   \n\n[1] 26\n\nsimulated_data %&gt;% \n  miss_var_summary()\n\n# A tibble: 3 × 3\n  variable n_miss pct_miss\n  &lt;chr&gt;     &lt;int&gt;    &lt;num&gt;\n1 x2           26       26\n2 x1            6        6\n3 y             0        0"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#a-quick-visualization",
+    "href": "schedule/slides/missing-2.html#a-quick-visualization",
+    "title": "UBC DSCI 200",
+    "section": "A quick visualization",
+    "text": "A quick visualization\n\nsimulated_data %&gt;% gg_miss_var() \n\n\nWe can see the amount of missingness for each variable, but this summary does not show whether missing values occur together in the same observations."
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#joint-missigness",
+    "href": "schedule/slides/missing-2.html#joint-missigness",
+    "title": "UBC DSCI 200",
+    "section": "Joint missigness",
+    "text": "Joint missigness\n\ngg_miss_upset(simulated_data)"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#section-1",
+    "href": "schedule/slides/missing-2.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "library(visdat)\nvis_miss(simulated_data)"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#missing-mechanism",
+    "href": "schedule/slides/missing-2.html#missing-mechanism",
+    "title": "UBC DSCI 200",
+    "section": "Missing Mechanism?",
+    "text": "Missing Mechanism?\n\n# data frame with shadow columns\nshadowed_sim &lt;- simulated_data %&gt;% bind_shadow()\n\nggplot(data = shadowed_sim, aes(x = x1, y = x2)) + \n       geom_miss_point() + theme(legend.position = \"bottom\")\n\n\nThe plot suggests that data is not missing completely at random! but …"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#iclicker-1-can-we-rule-out-mnar",
+    "href": "schedule/slides/missing-2.html#iclicker-1-can-we-rule-out-mnar",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 1: can we rule out MNAR?",
+    "text": "iClicker 1: can we rule out MNAR?\n\nA. We can’t rule out MNAR\nB. The plot suggests MAR and thus we rule out MNAR\nC. We can rule out MAR\nD. We can’t rule out MCAR"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#section-2",
+    "href": "schedule/slides/missing-2.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "set.seed(123)\n\nn &lt;- 100\nx1 &lt;- rnorm(n)\nx2 &lt;- rnorm(n) + x1\ny  &lt;- 2 * x1 + 1.5 * x2 + rnorm(n)\n\nset.seed(123)\n\n# introduce missingness to top values in x2\ncut &lt;- quantile(x2, 0.9, na.rm = TRUE)\n\nidx &lt;- which(x2 &gt;= cut)\nx2[sample(idx, size = 10)] &lt;- NA\n\nsimulated_data &lt;- data.frame(x1, x2, y)"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#mar-vs-mnar",
+    "href": "schedule/slides/missing-2.html#mar-vs-mnar",
+    "title": "UBC DSCI 200",
+    "section": "MAR vs MNAR",
+    "text": "MAR vs MNAR\n\nshadowed_sim &lt;- simulated_data %&gt;% bind_shadow()\n\nggplot(data = shadowed_sim, aes(x = x1, y = x2)) + \n       geom_miss_point() + theme(legend.position = \"bottom\")\n\n\nBecause x1 and x2 are correlated, the missingness can appear to be related to x1. However, the missingness mechanism depends on the value of x2 itself, which makes it MNAR.\n\n\n\n\n\n\nCaution\n\n\nVisualizations can help rule out MCAR, but they cannot reliably distinguish MAR from MNAR.\nWhen variables are correlated, an MNAR mechanism may look like MAR in plots."
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#can-we-complete-missing-data",
+    "href": "schedule/slides/missing-2.html#can-we-complete-missing-data",
+    "title": "UBC DSCI 200",
+    "section": "Can we complete missing data?",
+    "text": "Can we complete missing data?\n\n\nImputation is not always the solution to missing data\nImputation can reinforce existing biases.\n\nFor example, imputing variables like, age, race, gender may introduce biases to the analysis, particularly if missingness is related to social factors.\n\nIn other cases, imputation may mask trends in the data over time.\nThe percentage of missing data matters: less than 5% is generally considered safe to impute; 5%–20% is often acceptable but requires careful diagnostics; 20%–40% calls for caution; and more than 40% are typically unreliable.\nWhen missing data cannot be recovered, it is important to understand why the data are missing and to analyze them accordingly."
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#types-of-imputation",
+    "href": "schedule/slides/missing-2.html#types-of-imputation",
+    "title": "UBC DSCI 200",
+    "section": "Types of imputation",
+    "text": "Types of imputation\n\nListwise Deletion: retain only complete observations\n\nSimple and widely used\nUnbiased under MCAR\nBiased under MAR in many cases\nInefficient (larger standard errors due to smaller sample size)\nDiscards potentially useful data"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#section-3",
+    "href": "schedule/slides/missing-2.html#section-3",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Deterministic Methods: Mean, Median, Mode Imputation\n\nReplaces missing values with the mean, median, or mode of the observed data\nSimple and fast to apply\nReduces variance\nIntroduces bias in relationships among variables\nIgnores imputation uncertainty"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#section-4",
+    "href": "schedule/slides/missing-2.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Deterministic Methods: Statistical Prediction Models\n\nReplaces missing values with predictions from an estimated model (e.g., linear regression) using observed values of other variables.\nPreserves relationships between variables\nAssumes relationships that may not be valid\nIgnores imputation uncertainty."
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#multiple-imputation-mi",
+    "href": "schedule/slides/missing-2.html#multiple-imputation-mi",
+    "title": "UBC DSCI 200",
+    "section": "Multiple imputation (MI)",
+    "text": "Multiple imputation (MI)\n\n\nFigure from *Flexible Imputation of Missing Data"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#mi",
+    "href": "schedule/slides/missing-2.html#mi",
+    "title": "UBC DSCI 200",
+    "section": "MI",
+    "text": "MI\n\nAssumes that missing data is either Missing Completely at Random (MCAR) or Missing at Random (MAR).\nReflects the uncertainty inherent in the missing data by introducing many randomly imputed values.\nGives unbiased parameter estimates\nRetain the statistical relationships present in the data"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#mice-multivariate-imputation-via-chained-equations",
+    "href": "schedule/slides/missing-2.html#mice-multivariate-imputation-via-chained-equations",
+    "title": "UBC DSCI 200",
+    "section": "MICE: Multivariate Imputation via Chained Equations",
+    "text": "MICE: Multivariate Imputation via Chained Equations\nInitialization: Replace missing values with simple initial guesses (e.g., mean or median of observed values).\nImputation: For each variable with missing values, impute it using the other variables as predictors, based on a specified method (e.g., PMM, regression, tree-based methods), including random variation.\nIteration (maxit): Cycle through all variables multiple times to update the imputations.\nMultiple Imputations: Repeat to create m complete datasets."
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#section-5",
+    "href": "schedule/slides/missing-2.html#section-5",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "library(mice)\nmice_imp &lt;- simulated_data %&gt;%\n    mice(m = 5, maxit = 10, seed = 123, printFlag =  FALSE)\n\n#one dataset\ncomp_case &lt;- complete(mice_imp, action = 1)\n\nmodel_mice1 &lt;- lm(y ~ x1 + x2, data = comp_case)\nanswer14 &lt;- summary(model_mice1)\nanswer14\n\n\nCall:\nlm(formula = y ~ x1 + x2, data = comp_case)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-2.031 -0.769 -0.219  0.771  3.842 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   0.2910     0.1193   2.439   0.0165 *  \nx1            2.0251     0.1688  11.999   &lt;2e-16 ***\nx2            1.5405     0.1354  11.376   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.155 on 97 degrees of freedom\nMultiple R-squared:  0.8915,    Adjusted R-squared:  0.8893 \nF-statistic: 398.6 on 2 and 97 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#visualizing-imputation",
+    "href": "schedule/slides/missing-2.html#visualizing-imputation",
+    "title": "UBC DSCI 200",
+    "section": "Visualizing imputation",
+    "text": "Visualizing imputation"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#key-takeaways",
+    "href": "schedule/slides/missing-2.html#key-takeaways",
+    "title": "UBC DSCI 200",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nMissing data do more than reduce sample size, they can distort who is represented and how variables are related\nDiagnosing why data are missing is essential before choosing how to handle them\nComplete-case analysis is a simple way to handle missingness but is unbiased only under MCAR and often fails otherwise\nMNAR poses the greatest risk of bias when handled incorrectly\nVisualization and diagnostics are critical tools for identifying missingness mechanisms\nnaniar integrates missing-data summaries and visualizations into the tidyverse workflow using tidy data principles"
+  },
+  {
+    "objectID": "schedule/slides/missing-2.html#section-6",
+    "href": "schedule/slides/missing-2.html#section-6",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Many imputation methods exist but it is important to understand the risk of imputing!\nTransparent reporting of imputation decisions is essential for reproducibility and ethical integrity.\n\nCheck additional functions in the Missing Book"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#section",
