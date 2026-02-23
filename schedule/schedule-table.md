@@ -14,7 +14,7 @@
 |11 Feb 26 | Midterm Review     |[Slides]()   | Missing Data Worksheet Due at 11:59pm    |
 |16 Feb 26 |      |READING WEEK |          |
 |18 Feb 26 |     |READING WEEK |          |
-|23 Feb 26 | Outliers and Data Anomalies   |[Slides]()   |          |
+|23 Feb 26 | Outliers and Data Anomalies   |[Imputation](imputation.qmd);[Slides](outliers-1.qmd)   |          |
 |25 Feb 26 | Outliers and Data Anomalies |[Slides]()   |          |
 |02 Mar 26 | Outliers and Data Anomalies    |[Slides]()   |          |
 |04 Mar 26 | Simulation II    |[Slides]()   |  Outliers Worksheet Due at 11:59pm         |
