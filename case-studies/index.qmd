@@ -8,7 +8,7 @@ This page contains three case studies developed for DSCI 200. Each case study fo
 - [Case Study 1: From Exploration to Design](case-study-1.qmd)
   Investigates how to ask and refine questions with data, apply sampling strategies and assess study design choices to draw valid conclusions.
 
-- [Case Study 2: Simulation, Missing Data and Outliers](#)  
+- [Case Study 2: Simulation, Missing Data and Outliers](case-study-2.qmd)  
   Explores how simulation can inform analysis, how to detect and address missing data and how to evaluate the impact of outliers on results.
 
 - [Case Study 3: Data Acquisition, Ownership and Privacy](#)   

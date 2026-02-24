@@ -1,0 +1,726 @@
+---
+title: "Case Study II: Missing values, Outliers, and Simulation Studies"
+subtitle: "DSCI 200"
+format:
+  html
+editor: visual
+---
+
+## Intro
+
+Welcome to the second case study in DSCI 200! In this case study, you will explore and practice concepts related to missing values, outliers, and simulation studies. You will investigate how these issues arise in datasets, learn how to visualize and address them, and use simulations to understand their impact on data analysis and modelling.
+
+The case study is divided into two milestones, each with tasks designed to progressively reinforce skills and concepts learned in lectures. As in the first case study, each question will have a specific point value and rubric assigned to it. For more details about each rubric type please visit <https://github.com/UBC-MDS/public/tree/master/rubric>.
+
+### Setup
+
+Before you start working on the case study, let's make sure you load all the required packages. Run the cell below:
+
+```{r load libraries, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(naniar)
+library(mice)
+library(simputation)
+library(infer)
+library(matrixStats)
+library(cellWise)
+```
+
+### Submission Instructions
+
+As before, you will perform your analysis and answer to all the questions using a Jupyter notebook. You will then submit the final notebook and a rendered document on Gradescope (accessible via Canvas).
+
+Your submission must include:
+
+1.  Jupyter notebook (`.ipynb` file)
+2.  Rendered final document (`.html` or `.pdf` file)
+
+## 🏁 Milestone 1: Missing Values (40 points)
+
+> Real datasets often contain missing values that can influence conclusions if handled poorly. In this case study, you will apply what we learned in class to identify missing data mechanisms, visualize patterns of missingness, and evaluate how different imputation strategies affect analysis results in simulated and real datasets.
+
+### Task 1: Load and explore data (5 points)
+
+In this milestone we will be working with the `storms` dataset from the `dplyr` package. The package contains information about tropical storms and hurricanes in the Atlantic Ocean from 1975 onward. Each row represents a storm at a specific point in time, with variables such as storm name, year, month, day, time, latitude, longitude, wind speed, air pressure, and storm category. 
+
+Write your own code to load and examine the data and answer the following points.
+
+1.  Load this dataset into R. Copy the data into a new object called `storms_dat`. Set the seed at a value 123 before you start any analysis. (*Mechanics: 1 point*)
+
+2.  How many observations and variables are there in the dataset? (*Writing: 1 point*)
+
+3.  Use the `glimpse()` or `head()` function to examine your dataset. What type of variables are in the dataset? (i.e numerical vs. categorical). Explain briefly. (*Writing: 1 point*)
+
+4.  Use `glimpse()` or `summary()` for an initial scan of missing data. Which variables contain at least one missing value? (*Writing: 1 point*)
+
+5.  Give one advantage and one limitation of using `glimpse()` or `summary()` to assess missing values in a dataset. (*Reasoning: 1 point*)
+
+### Task 2: Summaries and Visualizations of Missing Values (15 points)
+
+Write your own code to examine the data and answer  the following points.
+
+6.  The `naniar` package provides several functions to summarize and explore missing values. Use one function in the package to investigate missingness in the dataset. Briefly describe what you learn about missingness in the dataset. (*Writing: 2 points*)
+
+> Note: Recall that you may combine `naniar` functions with `dplyr::group_by()` if helpful.
+
+7.  Visualizations allow us to see how missing values are distributed and to discover patterns that are difficult to detect from tables or summaries. Use the `gg_miss_var()` function from `naniar` to plot the number of missing values for each variable. Use the argument `show_pct` to display the percentage of missing values instead of counts. Does this visualization reveal any new insights about missingness? Briefly justify your answer. (*Writing: 1 point*)
+
+8.  The function `gg_miss_fct()` allows you to visualize missingness across the categories of another variable(s). Apply it to the dataset and briefly describe any patterns observed. (*Writing: 1 point*)
+
+9.  As you begin to better understand missingness in the dataset, you may be wondering whether missing values tend to occur in the same observations (storms) or independently across different ones. Use a `naniar` function to answer this question and produce a visualization. Briefly explain. (*Writing: 2 points*)
+
+10. Use `ggplot` to create a scatter plot to show the relationship between `hurricane_force_diameter` variable (which measures the diameter in nautical miles of the area experiencing strength winds of 64 knots or above) and `tropicalstorm_force_diameter` variable (which shows the diameter in nautical miles of the area experiencing tropical storm strength winds of 34 knots or above). What is the default behavior of `ggplot2` for handling missing values? (*Writing: 2 points*)
+
+11. Use `geom_miss_point()` function in `naniar` package to add a new layer to your plot that displays missing values. Is the pattern of missingness consistent with what you observed earlier? Briefly justify. (*Writing: 1 point*)
+
+12. Modify the plot by colouring points according to a variable you think may help explain the missingness pattern. If the colouring provides additional insight into the missingness pattern, briefly describe it; otherwise, explain what you tried. (*Writing: 2 points*)
+
+13. Based on your visualizations and exploration, what have you learned about the patterns of missingness in this dataset? Briefly describe how the missingness of different variables relates to other information provided in the dataset. (*Reasoning: 4 points*)
+
+### Task 3: To impute or not to impute? That is one question! (20 points)
+
+After diagnosing and understanding the missingness in the dataset, the next step is to decide how to handle it. One common approach is imputation, but should we always impute? That is our first question.
+
+*Imputation* is the process of replacing missing values with plausible estimates. The main challenge is often not how to impute, but whether imputation is appropriate and which method to use.
+
+In this task, you will determine which variables are suitable for imputation, compare different imputation strategies, and decide how to handle variables with remaining missing observations.
+
+**Pre-processing data**
+
+To simplify the analysis and focus on a smaller set of observations, we restrict attention to storms observed from 2003 onward (inclusive). In addition, some imputation methods require the variable being imputed to be numeric. 
+
+Remove \# from code lines and run the cell below to prepare the dataset for the next questions, including additional information to track missingness.
+
+```{r}
+# storms_03plus <- storms_dat |>
+#     filter(year > 2002) |>
+#     mutate(tropicalstorm_force_diameter = as.numeric(tropicalstorm_force_diameter)) |>
+#     nabular() |>
+#     add_label_shadow()
+```
+
+14. **Structural missing values** occur when a variable is not defined for certain observations (rather than simply unobserved). For example, tumor stage is not defined for individuals without cancer. These values should not be imputed.
+
+Based on your understanding of the dataset and previous exploration of missingness patterns, identify one variable whose missing values are structural (i.e., not applicable) and therefore should not be imputed. Briefly justify your answer. (*Reasoning: 2 points*)
+
+15. MICE uses all variables in the dataset and iteratively imputes all missing values, including those that are structural. To avoid imputing structural values, remove any variable identified in the previous question from `storms_03plus` before proceeding. Don't change the name of the dataset. (*Writing: 2 points*)
+
+> Note: Structural variables can also be retained by encoding the missing values as an explicit "not applicable" category. In this task, we exclude them for simplicity.
+
+16. Because storm size and intensity are closely related physical characteristics, understanding the relationship between `tropicalstorm_force_diameter` and `pressure` is of substantive interest. Create a scatter plot of `tropicalstorm_force_diameter` (y-axis) versus `pressure` (x-axis) for storms in `storms_03plus`. Add a layer that clearly displays observations where these variables have missing values. Briefly describe the relationship and the missingness pattern. (*Writing: 2 points*)
+
+> Tip: Use faceting to explore if missingness has changed across years.
+
+17. **Mean imputation** replaces missing values of a variable with the mean of the observed values of that variable.
+
+Impute the missing values of `tropicalstorm_force_diameter` using mean imputation and save the resulting dataset in an object called `storms_mean`. (*Writing: 2 points*)
+
+18. **Regression imputation** predicts missing values using a regression model based on other variables.
+
+Impute the missing values of `tropicalstorm_force_diameter` using linear regression with `pressure` as the predictor. Save the resulting dataset in an object called `storms_lm_small`. (*Writing: 2 points*)
+
+19. **Regression imputation** can incorporate multiple predictors to capture more structure in the data.
+
+Impute the missing values of `tropicalstorm_force_diameter` using linear regression with additional covariates. Use `pressure + wind + lat + long + status` as the the right-hand side of the `impute_lm()` to impute with a linear model estimated using all these predictors. Save the resulting dataset in an object called `storms_lm_large`. (*Writing: 2 points*)
+
+20. **Multiple imputation** iteratively imputes missing values using all variables in the dataset and generates multiple completed datasets to reflect imputation uncertainty. In this task, we use one completed dataset for visualization.
+
+Complete the code below to impute the missing values of `tropicalstorm_force_diameter` using `mice`. Remove \# from code lines and run the cell. (*Writing: 2 points*)
+
+```{r}
+# storms_mice <- ...(..., m = 5, maxit = 10, seed = 123, printFlag = FALSE)
+
+## Pick one completed dataset for visualization
+
+# storms_mice1 <- ...(..., action = 1)
+```
+
+21. **Bound and plot**. Run the code below to combine all the imputed datasets and plot the resulting completed datasets. Briefly describe how the distribution of imputed values differs across the four methods. (*Writing: 2 points*)
+
+```{r}
+# # each row is a dataset
+# # .id is used to identify each imputed dataset
+# 
+# bound_models <- bind_rows(
+#   mean = storms_mean,
+#   small = storms_lm_small,
+#   large = storms_lm_large,
+#   mice = storms_mice1,
+#   .id = "imp_model") |>
+#   as_tibble()
+# 
+# bound_models |>
+#        arrange(tropicalstorm_force_diameter_NA) |> 
+#        ggplot(aes(x = pressure,
+#            y = tropicalstorm_force_diameter,
+#            colour = tropicalstorm_force_diameter_NA)) +
+#   geom_point() + 
+#   facet_wrap(~imp_model)
+```
+
+22. **Limitations:** Choose two imputation methods and describe one limitation of each, based on what you observe in the plots. (*Reasoning: 4 points*)
+
+> Tip: You may revisit this question after Milestone 2, where we compare these methods using simulation.
+
+
+## 🏁 Milestone 2: Imputation Assessment by Simulation (30 points)
+
+In the previous question, you compared different imputation methods and commented on potential limitations. However, such limitations are not always obvious when analyzing a single dataset. Simulation studies are a powerful tool for examining and comparing the performance of statistical methods under controlled conditions.
+
+In this milestone, we use simulation to investigate how different imputation approaches perform in recovering the relationship between variables under missingness. Instead of simulating data from a theoretical distribution, as in the last worksheet, we generate random samples from the real dataset `storms`.
+
+To create a baseline not affected by imputation, we first remove observations with missing values and treat the remaining complete cases as our reference population. Sampling from this dataset can be viewed as sampling from its empirical distribution. In other words, we assume that the complete observed data represent the underlying population.
+
+> Note that this may not be a realistic assumption in practice, but we use it here only as a baseline to compare imputation methods under simulated missingness.
+
+Let's first pre-process the data to create a simplified population dataset with more balanced groups. Remove \# from code lines and run the cell.
+
+```{r}
+# storms_complete <- storms |>
+#     filter(year > 2002) |>
+#     select(-category) |>
+#     drop_na()
+# 
+# # re-group storms and change variable type for later imputation
+# storms_pop <- storms_complete |>
+#   mutate(type = case_when(
+#     status == "hurricane" ~ "hurricane",
+# 
+#     status %in% c("tropical storm",
+#                   "tropical depression") ~ "tropical",
+# 
+#     status %in% c("subtropical storm",
+#                   "subtropical depression",
+#                   "tropical wave",
+#                   "disturbance",
+#                   "other low") ~ "subtropical_disturbance",
+# 
+#     status == "extratropical" ~ "extratropical"
+#   ),
+#     tropicalstorm_force_diameter = as.numeric(tropicalstorm_force_diameter)) 
+```
+
+The new dataset `storms_pop` represents our reference population. We use it to characterize the relationship among the variables by fitting a multiple linear regression, which serves as the population (reference) model against which sampling and imputation results will be compared. 
+
+Remove \# from code lines and run the cell below.
+
+```{r}
+# tidy(lm(tropicalstorm_force_diameter~pressure + lat + type, storms_pop))
+```
+
+**Simulation Outline**
+
+We now conduct a simulation study based on the reference population `storms_pop`. In each simulation replicate, we:
+
+-   **Step 1**: Draw a random sample of size 1000 from the population `storms_pop`.
+
+-   **Step 2**: Introduce missingness in the outcome variable according to a MCAR mechanism.
+
+-   **Step 3**: Apply different imputation methods to handle the missing values.
+
+-   **Step 4**: Use least squares estimation to fit a linear regression to each completed dataset and store the coefficient estimates and standard errors.
+
+-   **Step 5**: Repeat 500 times
+
+-   **Step 6**: Summarize the results by computing the median of the estimated coefficients and standard errors across simulation runs.
+
+> **Note**: Some choices above are arbitrary and are part of the simulation design.
+
+### Task 1: Simulating data with MCAR (10 points)
+
+1.  **Helper functions** Complete the code below to create helper functions that will be used to implement the simulation study. Then remove \# from code lines and run the cell. (*Writing: 5 points*)
+
+> Tip: Similar functions were used in the last worksheet.
+
+A key argument in many of the helper functions is the dataset (`dat`). Although some of the helper functions are written with a general data argument, they assume that the dataset passed to these functions contains the specific variables needed for the analysis (e.g., `tropicalstorm_force_diameter`).
+
+```{r}
+
+## Helper functions
+
+## Generate data
+# get_sample <- function(dat, n_size){
+#   storms_sample <- ... |>
+#   slice_sample(n = ..., replace = FALSE)|>
+#   ungroup()  
+# storms_sample 
+#     }
+
+
+## Generate missingness MCAR
+# generate_mcar <- function(dat, p) {
+#   missing_y <- sample(1:nrow(...), size = round(p * nrow(dat)))
+#   dat$tropicalstorm_force_diameter[...] <- NA
+#   dat
+# }
+
+## Linear regression estimation by least squares (LS)
+# fit_lm <- function(dat) {
+#   lm(tropicalstorm_force_diameter~pressure + lat + type, data = dat) |>
+#     tidy() |>
+#     select(term, estimate, std.error)
+# }
+
+## Mean imputation, then LS estimation
+# est_mean_imp <- function(dat) {
+#   dat |>
+#     mutate(tropicalstorm_force_diameter = ... (...)) |>
+#     fit_lm()
+# }
+
+## Regression imputation, then LS estimation
+# est_lm_imp <- function(dat) {
+#   dat |>
+#     impute_lm(... ~ pressure) |>
+#     ...
+# }
+
+## mice imputation, then LS estimation and POOLED 
+# est_mice_imp <- function(dat, m = 5, maxit = 10, seed = 123) {
+#   imp <- ...(..., m = m, maxit = maxit, seed = seed, printFlag = FALSE)
+
+## pooled across m imputations
+# pooled <- ...(with(..., data = lm(tropicalstorm_force_diameter~pressure + lat + type))) |>
+#     summary() |>
+#     select(term, estimate, std.error) 
+#   pooled  
+# }
+
+```
+
+2.  **Simulate MCAR in one random sample** Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove \# from code lines and run the cell. 
+
+Visualize the resulting dataset adding a layer with missing values below data values. (*Writing: 5 points*)
+
+> To make results reproducible, set the seed at a value 123.
+
+```{r}
+
+# set.seed(...)
+
+## Use a helper function to take a sample of size 1000
+
+#storms_sample <- ...(..., 1000) 
+
+## add 30% of MCAR missing values to `storms_sample`
+
+# storms_mcar <- ...(...,...) |>
+#     nabular() |>
+#     add_label_shadow()
+
+## scatter plot
+# ggplot(..., aes(y = tropicalstorm_force_diameter,
+#                 x = pressure)) +
+#      ...(alpha = 0.4) +
+#      ...() +
+#      theme_minimal()
+```
+
+### Task 2: Imputation and Estimation (5 points)
+
+**Imputation and Estimation** The following code uses the helper functions to impute the simulated dataset with the following methods (step 3) and then estimate a linear regression (step 4):
+
+-   mean imputation
+-   regression imputation (using `pressure` as a covariate)
+-   mice imputation
+
+Remove \# from code lines and run the cell below. 
+
+```{r}
+# # mean imputation
+# storms_mean <- est_mean_imp(storms_mcar)
+# 
+# # regression imputation
+# storms_lm <- est_lm_imp(storms_mcar)
+# 
+# # mice imputation
+# storms_mice <- est_mice_imp(storms_mcar)
+```
+
+3.  **Comparison** Remove \# from code lines and run the cell below to compare the estimated coefficients using the original sample, the listwise deletion method (complete case), and the imputed samples.
+
+Compare the results obtained. What do they suggest about the methods? Are these results sufficient to draw general conclusions about the relative performance of the methods? Justify your answer. (*Reasoning: 5 points*)
+
+```{r}
+# cbind(fit_lm(storms_sample)[,1:2],
+#         complete_estimate = fit_lm(storms_mcar)$estimate,
+#         mean_estimate = storms_mean$estimate,
+#         regression_estimate = storms_lm$estimate,
+#         mice_estimate = storms_mice$estimate)
+```
+
+### Task 3: Full simulation (15 points)
+
+4.  **It's time to repeat** Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove \# from code lines and run the cell. 
+
+What are the dimensions of the object `datasets`? Explain how they relate to the simulation design. (*Writing: 5 points*)
+
+> Note that MICE is doing multiple imputations per run so it takes a while to run. Stretch, get some coffee or water while waiting ;) !
+
+> Tip: You have done this in the last worksheet but we give you a template to guide you!
+
+```{r}
+# set.seed(123)
+# 
+# datasets <- ...(
+#   500,
+#   {#simulate each dataset
+#     simulated_data <- ...(...,...)
+#     #add missing values  
+#     ...(..., p = ...)
+#   },
+#   simplify = FALSE
+# )
+# 
+# complete_coeff <- ... |>
+#   ...(fit_lm, .id = "rep")
+# 
+# mean_imp_coeff <- ... |>
+#   ...(..., .id = "rep")
+# 
+# lm_imp_coeff <- ... |>
+#   ...(..., .id = ...)
+# 
+# suppressWarnings(mice_imp_coeff <- ... |>
+#   ...(..., ...))
+
+```
+
+5.  **Summarize**. Last step: summarize the results of the simulation study. Let's first combine the estimated coefficient of the variable `pressure` derived from all datasets, original, complete and imputed. What are the dimensions of the object `coeffs_pressure`? Explain how they relate to the simulation design. (*Writing: 2 points*)
+
+Remove \# from code lines and run the cell. 
+
+```{r}
+# coeffs_pressure <- bind_rows(
+#   complete_coeff  |> mutate(method = "Complete case"),
+#   mean_imp_coeff  |> mutate(method = "Mean imputation"),
+#   lm_imp_coeff  |> mutate(method = "Regression imputation"),
+#   mice_imp_coeff |> mutate(method = "MICE imputation")
+# ) |>
+#   filter(term == "pressure")
+```
+
+6.  **Comparison and conclusions**. Let's start by illustrating the distribution of the estimated coefficients for `pressure` using histograms, with one facet per method used to treat the missing values in the data. Include a vertical line at the value of the coefficient of `pressure` when using all the data (`storm_pop`).
+
+> Tip: We've computed this value before outlining the simulation plan.
+
+Complete the code, remove \# from code lines and run the cell. (*Writing: 3 points*)
+
+```{r}
+# ggplot(..., aes(x = estimate, fill = method)) +
+#   ...(
+#     bins = 20,
+#     alpha = 0.5,
+#     position = "identity"
+#   ) +
+#   ...(xintercept = ..., linetype = "dashed") +
+#   ...(~ ..., scales = "free_y") +
+#   labs(
+#     title = "Sampling Distribution of `pressure` Coefficient Estimator",
+#     x = "Estimated coefficient",
+#     y = "Count"
+#   ) +
+#   theme(legend.position = "none")
+```
+
+7.  **Bias and variability**. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods. Run the cell below.
+
+Compare the median estimated coefficients and median estimated standard errors across simulation runs for each imputation method. What do these summaries suggest about the bias and variability of the coefficient estimates under different imputation methods? (*Reasoning: 5 points*)
+
+Remove \# from code lines and run the cell.
+
+```{r}
+# pressure_summaries <- coeffs_pressure |>
+#   group_by(method) |>
+#   summarize(
+#     median_beta_hat = median(estimate, na.rm = TRUE),
+#     median_SE       = median(std.error, na.rm = TRUE),
+#     .groups = "drop"
+#   ) |>
+#   mutate_if(is.numeric, round, 3)
+# 
+# pressure_summaries
+```
+
+## 🏁 Milestone 3: Robust Methods in Motion Recognition (25 points)
+
+In this milestone, we illustrate how robust statistical methods can improve movement recognition in video survillance tasks. We analyze a short video, filmed by a static camera, of a man walking a dog, available in the `cellWise` package.
+
+The video consists of 54 frames. Each frame is a color image represented by three 144 $\times$ 180 grids of pixels corresponding to the Red, Green, and Blue (RGB) channels, respectively. A common way to analyze video data is to "flatten" each frame into a long vector containing all its pixel values. Thus, the data can be represented in a dataset with 54 rows (one per frame) and 77,760 columns (144 $\times$ 180 $\times$ 3) for each pixel value. In this activity we'll flatten and reshape the data multiple times depending on the task using some helper functions.
+
+**Dimensionality reduction** Although each frame has thousands of pixel values, the fixed camera results in most pixels belonging to a stable background that changes very little across frames. When rows in a dataset do not differ much, a useful technique to reduce the dimensionality is Principal Component Analysis (PCA). Intuitively, PCA captures the common background pattern shared across frames and expresses each frame as a slight variation of this baseline.
+
+To do that, PCA creates new variables called *principal components* that summarize the main patterns of variation across observations in the data. The first component captures the dominant pattern. The second captures the next most important pattern in the remaining (residual) variation not explained by the first component, and so on. In many applications, only a few components are needed to represent most of the structure in high-dimensional data such as images.
+
+Since PCA may be new to many of you, we first illustrate this idea with a simple example using flower measurements in the `iris` data set, and then return to the video frames.
+
+::: callout-note
+PCA is not a learning objective in this course and we don't expect you to know its details. However, it is a widely used technique in Data Science, which we use here to illustrate key concepts in robust statistics.
+:::
+
+### Task 1: Classical PCA in `R` (5 points)
+
+In this short activity, we use the `iris` dataset in `R` to build intuition for why highly similar rows can often be summarized by very few principal components. This dataset contains measurements for 150 flowers on four continuous variables describing the shape of the flower, well as a categorical variable indicating species.
+
+1.  **Toy Data:** Let's use `iris` to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.
+
+-   **True:** Use the original `iris_numeric` data, containing real variation across flowers, but keeping only the numerical variables.
+
+-   **Proportional:** Keep the flower in the first row of `iris_numeric` as a “template” and create a dataset where every row is just a scaled version of that template (multiply all the row by different factors). This is an extreme case where all flowers share the same pattern and differ only in overall magnitude.
+
+-   **Similar:** Start from the same template flower but this time create a dataset adding a very small amount of noise generated from a Normal distribution with mean 0 and standard deviation 0.02. In this case, flowers are almost identical but vary slightly in multiple ways, not only in overall magnitude.
+
+-   **Different:** Create a synthetic dataset where the measurements vary more substantially across flowers with much less shared structure. Use a Normal distribution with mean 0 and standard deviation 1.
+
+Complete the code below to create these datasets, remove \# from code lines and run the cell. (*Writing: 2 points*)
+
+```{r}
+# set.seed(1)
+# 
+# # 1) iris dataset
+# iris_numeric <- iris |> 
+#             ...(-Species)
+# 
+# # 2) Proportional to first flower, different magnitude 
+# base <- as.numeric(iris_numeric[...,])
+# factors <- seq(0.5, 2, length.out = 150) 
+# iris_prop <- ... %*% t(base) 
+# 
+# # 3) Similar flowers (`dir` keeps dependency among original variables)
+# dir  <- c(1, 0.8, 1.2, 1.1)
+# z    <- ...(150, sd = ...)
+# 
+# iris_similar <- ... + z %*% t(dir)
+# 
+# # 4) Very different flowers (random, same dimensions)
+# iris_varied <- matrix(...(150*4), ncol = ...)
+```
+
+2.  **Computing PCA:** You can now apply PCA to the four datasets using the function `prcomp()` from the `stats` package. We will use `scale = TRUE`, which standardizes each variable to have mean 0 and variance 1 before performing PCA. This ensures that all variables contribute equally to the analysis and that PCA focuses on patterns of variation rather than differences in measurement scale.
+
+PCA creates new variables called principal components (PCs). With four original variables, PCA produces four PCs, but they are ordered so that the first few typically capture most of the variation in the data. The principal component scores are stored in the element `$x` of the PCA object (e.g., `pca_iris$x`).
+
+Complete the code below to create these datasets, remove \# from code lines and run the cell. (*Writing: 1 points*)
+
+```{r}
+# # Compute PCA
+# 
+# pca_prop  <- ...(..., ...)
+# pca_similar <- ...(..., ...)
+# pca_varied  <- ...(..., ...)
+# pca_iris  <- ...(..., ...)
+
+# head(pca_iris$x)
+```
+
+3.  **Variation and PCs:** The following code creates a data frame summarizing the proportion of variation explained by each principal component (PC) for the four datasets. Remove \# from code lines and run the cell.
+
+In the Proportional rows dataset, PC1 explains almost all the variation. This occurs because the flowers differ only in overall magnitude: each flower is simply a scaled version of the same template, so all variation happens in one direction.
+
+-   In which other dataset does PC1 explain a large proportion of the variation? Based on how the flowers differ in that dataset, explain why.
+
+-   Which dataset needs multiple PCs to summarize the data? Why? (*Reasoning: 2 points*)
+
+```{r}
+# ve_df <- data.frame(
+#   PC = rep(paste0("PC", 1:4), times = 4),
+#   dataset = rep(
+#     c("Proportional rows", "Similar rows", "True data", "Varied rows"),
+#     each = 4
+#   ),
+#   prop_var = c(
+#     (pca_prop$sdev^2)    / sum(pca_prop$sdev^2),
+#     (pca_similar$sdev^2) / sum(pca_similar$sdev^2),
+#     (pca_iris$sdev^2)    / sum(pca_iris$sdev^2),
+#     (pca_varied$sdev^2)  / sum(pca_varied$sdev^2)
+#   )
+# )
+
+# ggplot(ve_df, aes(x = PC, y = prop_var, fill = dataset)) +
+#   geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+#   scale_y_continuous(labels = scales::percent_format(accuracy = 1),
+#                      limits = c(0, 1)) +
+#   labs(
+#     x = NULL,
+#     y = "Proportion of variance explained",
+#     fill = NULL
+#   ) +
+#   theme_minimal(base_size = 12) +
+#   theme(
+#     legend.position = "top",
+#     panel.grid.minor = element_blank()
+#   )
+```
+
+### Task 2: Back to the video dataset! (10 points)
+
+In the previous task, you saw that only a few principal components (PCs) can be sufficient to capture most of the important variation in a dataset. Let's load and examine the video dataset.
+
+> Some of the tools used in this analysis are beyond the scope of the course. Thus, we wrote some helper functions to implement those difficult steps.
+
+**Video data** Run the code below to load the `data_dogWalker` data from the `cellWise` package. Use the helper function called `show_frame()` to display a frame of this video. Remember that there are 54 frames so try passing different numbers to `frame_number` to "watch" the video in `R`!
+
+> As an example, we are showing the 10th frame
+
+Remove \# from code lines and run the cell.
+
+```{r}
+# source("case-study-2-functions.R")
+# data(data_dogWalker)
+# 
+# # save data
+# dogWalker_dat <- data_dogWalker
+# class(dogWalker_dat)
+# 
+# show_frame(dogWalker_dat, frame_number = 10)
+```
+
+4.  **Reshape:** Save the dimensions of the array in an object called `dims`. Use `dims` to reshape (flatten) the array into a dataframe with one row per frame and one column per pixel intensity (the product of the height, width, and RGB channels as previously explained). 
+
+Complete the code below, remove \# from code lines and run the cell. (*Writing: 2 points*)
+
+```{r}
+# dims <- ...
+# dims
+
+## flatten into a dataframe
+#dim(dogWalker_dat) <- c(dims[...], prod(dims[...:...]))
+```
+
+5.  **Dimensionality:** The resulting dataset has too many variables. Can we use PCA to reduce the dimensionality without losing important information?? Note that the background is largely stable since the camera is static, thus it does not vary in many independent ways across frames.
+
+Based on your previous examination of PCA, do you expect that much of the information in the frames can be represented using only a few PCs? Explain your response. (*Reasoning: 2 points*)
+
+The man and the dog in the video move across the road and appear in different locations in each frame. Can you think of them as outliers? If so, what kind of outliers do you think they are and why? (*Reasoning: 2 points*)
+
+6.  **Computing classical PCA:** The code below computes the first PC and its loadings. Each principal component is a weighted combination of the original variables (pixels). The loadings show how much each pixel contributes to the component. When displayed as an image, they reveal which regions PCA treats as background variation. 
+
+Let's look at the loadings of the first principal component. Is there any trace of moving man and dog? If so, it means some motion has leaked into the background estimate. 
+
+Remove \# from code lines, run the code below and briefly comment what you observe.
+
+```{r}
+# # Compute PCA
+
+# The following lines adds small variation where scale is zero to avoid division by 0
+
+# Xscales <- colSds(dogWalker_dat)
+# fix <- scale_filler_c(dogWalker_dat, Xscales, dims)
+# 
+# # Start with fixed data
+# dogWalker_dat <- fix[[1]]
+# 
+# dogWalker_pca <- prcomp(dogWalker_dat,  scale = FALSE)
+
+# # get the loadings and visualize those of PC1
+# cloadings <- dogWalker_pca$rotation
+# cloadings_PC1 <- cloadings[, 1]
+# 
+## prepare loading for image 
+# load1_img <- prepLoading(loadings_PC1, dims[2:4])
+# 
+# # visualization of the loadings of PC1
+# Pal <- colorRampPalette(c("blue", "white","red"))(100)
+#
+# image(t(apply(load1_img$loading, 2, rev)),
+#       zlim = 2*load1_img$maxab * c(-1, 1),
+#       col = Pal)
+```
+
+Does the image of the loadings of classical PCA corroborate your previous hypothesis about reproducing the background without the man and the dog? Briefly justify your response. (*Reasoning: 2 points*)
+
+7. **Robust PCA:** PCA is based estimates of the mean and covariance matrix of the variables. Using classical sample estimates can make PCA extremely sensitive to outliers as well. 
+
+In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we sue robust estimators? 
+
+To implement robust PCA, we start by using the function `estLocScale()` to obtain a robust location and scale estimates of the data. We then wrap the data and compute PCA. 
+
+> This time we use the helper function `scale_filler_r()` to avoid scale estimates equal to 0.
+
+Complete the code below, remove \# from code lines and run the cell. What differences you observed compared to the non-robust PCA analysis? Explain briefly. (*Writing: 2 points*)
+
+> Tip: follow the previous steps but now on wrapped data
+
+```{r}
+# locScaleX <- ...(dogWalker_dat, precScale = 1e-12)
+# 
+# # add minimum variation to the data if scale is close to 0 and re-estimate scale
+
+# fix <- scale_filler_r(dogWalker_dat, locScaleX$scale, dims)
+# 
+# data_filled <- fix[[1]]
+# scale_fix <- fix[[2]]
+# 
+# # wrap `data_filled` using estimate of location and reviewed scale
+# Xw  <- ...(data_filled, ...$loc, ...)$Xw
+# 
+# # center wrapped data
+# XwC <- sweep(..., 2, colMeans(Xw))
+# 
+# # robust PCA: compute PCA on centered-wrapped data
+# dogWalker_rpca <- ...(..., center = FALSE, scale. = FALSE)
+# 
+# # get the loadings of the robust PC1 
+# rloadings <- ...$rotation
+# rloadings_PC1 <- ...
+# 
+# # prepare loadings of PC1 for image 
+# rload1_img <- prepLoading(..., dims[2:4])
+# 
+# # visualization of the loadings of robust PC1 
+# ...(t(apply(..., 2, rev)),
+#        zlim = 2*rload1_img$maxab * c(-1, 1),
+#        col = Pal)
+```
+
+### Task 3: Isolating moving objects (10 points)
+
+**Residuals:** If we think the moving objects as outliers, we should be able to identify them using the **residuals**, what is left over after the PCA reconstruction. Let's take a look at each residual image. If a robust analysis is performed:
+
+-   Large residuals indicate unusual or moving regions. In this case, the people walking in the video.
+
+-   By standardizing and plotting these residuals, we can highlight outlier pixels that represent meaningful motion or anomalies.
+
+8. **Residuals of classical PCA:** Use the helper function `compute_residuals()` to compute the residuals of the classical PCA. Use `show_frame_residuals()` to visualize side-by-side an original frame, together with the residual image.
+
+Remove \# from code lines and run the cell below.
+
+```{r}
+# # Compute the fitted frames and residuals:
+# aveX <- colMeans(dogWalker_dat)
+# X.residual <- compute_residuals(dogWalker_dat, cloadings, aveX, k = 3)
+
+# # residuals as images
+#
+# locs <- colMeans(Xresidual)
+# scales <- colSds(Xresidual)
+# show_frame_residual(20, dogWalker_dat, Xresidual, locs, scales, 20)
+```
+
+What do you observe? was the classical PCA effective at isolating the moving objects from the background? Briefly explain your findings. (*Reasoning: 3 points*)
+
+9. **Residuals of robust PCA:** Use the same helper functions but this time to compute the residuals of the robust PCA. Visualize the original and the residuals frames side-by-side.
+
+Complete the code, remove \# from code lines and run the cell below. (*Writing: 3 points*)
+
+```{r}
+# aveXw <- colMeans(...)
+# Xrresidual <- compute_residuals(..., ..., aveXw, k = 3)
+# 
+# locScale_res <- ...(Xrresidual)
+# show_frame_residual(20, dogWalker_dat, ..., ..., locScale_res$scale, 200)
+```
+
+10. **Conclusions:** Which method best isolate the "outliers". Explain briefly the observed results. (*Reasoning: 4 points*)
+
+>Feel free to change frame value to check other parts of the video. You can also change the cutoff values in the `show_frame_residual()` to filter more or less noise.
+
+## Reproducibility and Organization Checklist (5 points)
+
+Here are the criteria we're looking for:
+
+The document should read sensibly from top to bottom, with no major continuity errors. All output is recent and relevant. All required files are present in the submission and viewable without errors. Examples of errors: Missing plots, "Sorry about that, but we can't show files that are this big right now" messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.
+
+## Reference
+
+The material in this case study are adopted from ROBUST`@`Leuven, the research group on Robust Statistics at the University of Leuven, Department of Mathematics, Section of Statistics and Data Science. You can read more [here](https://wis.kuleuven.be/statdatascience/robust/software)

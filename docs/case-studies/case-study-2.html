@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Case Study II: Missing values, Outliers, and Simulation Studies – UBC DSCI 200</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a25c5a8e6fe91aec282bb37f979c10f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title"><i class="fa-solid fa-chart-column" aria-label="chart-column"></i> UBC DSCI 200</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule/index.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../computing/index.html"> 
+<span class="menu-text">Computing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../case-studies/index.html"> 
+<span class="menu-text">Case Studies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../faq.html"> 
+<span class="menu-text">FAQ</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/UBC-DSCI/dsci-200"> 
+<span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i> Github</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#submission-instructions" id="toc-submission-instructions" class="nav-link" data-scroll-target="#submission-instructions">Submission Instructions</a></li>
+  </ul></li>
+  <li><a href="#milestone-1-missing-values-40-points" id="toc-milestone-1-missing-values-40-points" class="nav-link" data-scroll-target="#milestone-1-missing-values-40-points">🏁 Milestone 1: Missing Values (40 points)</a>
+  <ul class="collapse">
+  <li><a href="#task-1-load-and-explore-data-5-points" id="toc-task-1-load-and-explore-data-5-points" class="nav-link" data-scroll-target="#task-1-load-and-explore-data-5-points">Task 1: Load and explore data (5 points)</a></li>
+  <li><a href="#task-2-summaries-and-visualizations-of-missing-values-15-points" id="toc-task-2-summaries-and-visualizations-of-missing-values-15-points" class="nav-link" data-scroll-target="#task-2-summaries-and-visualizations-of-missing-values-15-points">Task 2: Summaries and Visualizations of Missing Values (15 points)</a></li>
+  <li><a href="#task-3-to-impute-or-not-to-impute-that-is-one-question-20-points" id="toc-task-3-to-impute-or-not-to-impute-that-is-one-question-20-points" class="nav-link" data-scroll-target="#task-3-to-impute-or-not-to-impute-that-is-one-question-20-points">Task 3: To impute or not to impute? That is one question! (20 points)</a></li>
+  </ul></li>
+  <li><a href="#milestone-2-imputation-assessment-by-simulation-30-points" id="toc-milestone-2-imputation-assessment-by-simulation-30-points" class="nav-link" data-scroll-target="#milestone-2-imputation-assessment-by-simulation-30-points">🏁 Milestone 2: Imputation Assessment by Simulation (30 points)</a>
+  <ul class="collapse">
+  <li><a href="#task-1-simulating-data-with-mcar-10-points" id="toc-task-1-simulating-data-with-mcar-10-points" class="nav-link" data-scroll-target="#task-1-simulating-data-with-mcar-10-points">Task 1: Simulating data with MCAR (10 points)</a></li>
+  <li><a href="#task-2-imputation-and-estimation-5-points" id="toc-task-2-imputation-and-estimation-5-points" class="nav-link" data-scroll-target="#task-2-imputation-and-estimation-5-points">Task 2: Imputation and Estimation (5 points)</a></li>
+  <li><a href="#task-3-full-simulation-15-points" id="toc-task-3-full-simulation-15-points" class="nav-link" data-scroll-target="#task-3-full-simulation-15-points">Task 3: Full simulation (15 points)</a></li>
+  </ul></li>
+  <li><a href="#milestone-3-robust-methods-in-motion-recognition-25-points" id="toc-milestone-3-robust-methods-in-motion-recognition-25-points" class="nav-link" data-scroll-target="#milestone-3-robust-methods-in-motion-recognition-25-points">🏁 Milestone 3: Robust Methods in Motion Recognition (25 points)</a>
+  <ul class="collapse">
+  <li><a href="#task-1-classical-pca-in-r-5-points" id="toc-task-1-classical-pca-in-r-5-points" class="nav-link" data-scroll-target="#task-1-classical-pca-in-r-5-points">Task 1: Classical PCA in <code>R</code> (5 points)</a></li>
+  <li><a href="#task-2-back-to-the-video-dataset-10-points" id="toc-task-2-back-to-the-video-dataset-10-points" class="nav-link" data-scroll-target="#task-2-back-to-the-video-dataset-10-points">Task 2: Back to the video dataset! (10 points)</a></li>
+  <li><a href="#task-3-isolating-moving-objects-10-points" id="toc-task-3-isolating-moving-objects-10-points" class="nav-link" data-scroll-target="#task-3-isolating-moving-objects-10-points">Task 3: Isolating moving objects (10 points)</a></li>
+  </ul></li>
+  <li><a href="#reproducibility-and-organization-checklist-5-points" id="toc-reproducibility-and-organization-checklist-5-points" class="nav-link" data-scroll-target="#reproducibility-and-organization-checklist-5-points">Reproducibility and Organization Checklist (5 points)</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Case Study II: Missing values, Outliers, and Simulation Studies</h1>
+<p class="subtitle lead">DSCI 200</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>Welcome to the second case study in DSCI 200! In this case study, you will explore and practice concepts related to missing values, outliers, and simulation studies. You will investigate how these issues arise in datasets, learn how to visualize and address them, and use simulations to understand their impact on data analysis and modelling.</p>
+<p>The case study is divided into two milestones, each with tasks designed to progressively reinforce skills and concepts learned in lectures. As in the first case study, each question will have a specific point value and rubric assigned to it. For more details about each rubric type please visit&nbsp;<a href="https://github.com/UBC-MDS/public/tree/master/rubric" class="uri">https://github.com/UBC-MDS/public/tree/master/rubric</a>.</p>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<p>Before you start working on the case study, let’s make sure you load all the required packages. Run the cell below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simputation)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(matrixStats)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cellWise)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="submission-instructions" class="level3">
+<h3 class="anchored" data-anchor-id="submission-instructions">Submission Instructions</h3>
+<p>As before, you will perform your analysis and answer to all the questions using a Jupyter notebook. You will then submit the final notebook and a rendered document on Gradescope (accessible via Canvas).</p>
+<p>Your submission must include:</p>
+<ol type="1">
+<li>Jupyter notebook (<code>.ipynb</code> file)</li>
+<li>Rendered final document (<code>.html</code> or <code>.pdf</code> file)</li>
+</ol>
+</section>
+</section>
+<section id="milestone-1-missing-values-40-points" class="level2">
+<h2 class="anchored" data-anchor-id="milestone-1-missing-values-40-points">🏁 Milestone 1: Missing Values (40 points)</h2>
+<blockquote class="blockquote">
+<p>Real datasets often contain missing values that can influence conclusions if handled poorly. In this case study, you will apply what we learned in class to identify missing data mechanisms, visualize patterns of missingness, and evaluate how different imputation strategies affect analysis results in simulated and real datasets.</p>
+</blockquote>
+<section id="task-1-load-and-explore-data-5-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-load-and-explore-data-5-points">Task 1: Load and explore data (5 points)</h3>
+<p>In this milestone we will be working with the <code>storms</code> dataset from the <code>dplyr</code> package. The package contains information about tropical storms and hurricanes in the Atlantic Ocean from 1975 onward. Each row represents a storm at a specific point in time, with variables such as storm name, year, month, day, time, latitude, longitude, wind speed, air pressure, and storm category.</p>
+<p>Write your own code to load and examine the data and answer the following points.</p>
+<ol type="1">
+<li><p>Load this dataset into R. Copy the data into a new object called <code>storms_dat</code>. Set the seed at a value 123 before you start any analysis. (<em>Mechanics: 1 point</em>)</p></li>
+<li><p>How many observations and variables are there in the dataset? (<em>Writing: 1 point</em>)</p></li>
+<li><p>Use the <code>glimpse()</code> or <code>head()</code> function to examine your dataset. What type of variables are in the dataset? (i.e numerical vs.&nbsp;categorical). Explain briefly. (<em>Writing: 1 point</em>)</p></li>
+<li><p>Use <code>glimpse()</code> or <code>summary()</code> for an initial scan of missing data. Which variables contain at least one missing value? (<em>Writing: 1 point</em>)</p></li>
+<li><p>Give one advantage and one limitation of using <code>glimpse()</code> or <code>summary()</code> to assess missing values in a dataset. (<em>Reasoning: 1 point</em>)</p></li>
+</ol>
+</section>
+<section id="task-2-summaries-and-visualizations-of-missing-values-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-summaries-and-visualizations-of-missing-values-15-points">Task 2: Summaries and Visualizations of Missing Values (15 points)</h3>
+<p>Write your own code to examine the data and answer the following points.</p>
+<ol start="6" type="1">
+<li>The <code>naniar</code> package provides several functions to summarize and explore missing values. Use one function in the package to investigate missingness in the dataset. Briefly describe what you learn about missingness in the dataset. (<em>Writing: 2 points</em>)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Note: Recall that you may combine <code>naniar</code> functions with <code>dplyr::group_by()</code> if helpful.</p>
+</blockquote>
+<ol start="7" type="1">
+<li><p>Visualizations allow us to see how missing values are distributed and to discover patterns that are difficult to detect from tables or summaries. Use the <code>gg_miss_var()</code> function from <code>naniar</code> to plot the number of missing values for each variable. Use the argument <code>show_pct</code> to display the percentage of missing values instead of counts. Does this visualization reveal any new insights about missingness? Briefly justify your answer. (<em>Writing: 1 point</em>)</p></li>
+<li><p>The function <code>gg_miss_fct()</code> allows you to visualize missingness across the categories of another variable(s). Apply it to the dataset and briefly describe any patterns observed. (<em>Writing: 1 point</em>)</p></li>
+<li><p>As you begin to better understand missingness in the dataset, you may be wondering whether missing values tend to occur in the same observations (storms) or independently across different ones. Use a <code>naniar</code> function to answer this question and produce a visualization. Briefly explain. (<em>Writing: 2 points</em>)</p></li>
+<li><p>Use <code>ggplot</code> to create a scatter plot to show the relationship between <code>hurricane_force_diameter</code> variable (which measures the diameter in nautical miles of the area experiencing strength winds of 64 knots or above) and <code>tropicalstorm_force_diameter</code> variable (which shows the diameter in nautical miles of the area experiencing tropical storm strength winds of 34 knots or above). What is the default behavior of <code>ggplot2</code> for handling missing values? (<em>Writing: 2 points</em>)</p></li>
+<li><p>Use <code>geom_miss_point()</code> function in <code>naniar</code> package to add a new layer to your plot that displays missing values. Is the pattern of missingness consistent with what you observed earlier? Briefly justify. (<em>Writing: 1 point</em>)</p></li>
+<li><p>Modify the plot by colouring points according to a variable you think may help explain the missingness pattern. If the colouring provides additional insight into the missingness pattern, briefly describe it; otherwise, explain what you tried. (<em>Writing: 2 points</em>)</p></li>
+<li><p>Based on your visualizations and exploration, what have you learned about the patterns of missingness in this dataset? Briefly describe how the missingness of different variables relates to other information provided in the dataset. (<em>Reasoning: 4 points</em>)</p></li>
+</ol>
+</section>
+<section id="task-3-to-impute-or-not-to-impute-that-is-one-question-20-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-to-impute-or-not-to-impute-that-is-one-question-20-points">Task 3: To impute or not to impute? That is one question! (20 points)</h3>
+<p>After diagnosing and understanding the missingness in the dataset, the next step is to decide how to handle it. One common approach is imputation, but should we always impute? That is our first question.</p>
+<p><em>Imputation</em> is the process of replacing missing values with plausible estimates. The main challenge is often not how to impute, but whether imputation is appropriate and which method to use.</p>
+<p>In this task, you will determine which variables are suitable for imputation, compare different imputation strategies, and decide how to handle variables with remaining missing observations.</p>
+<p><strong>Pre-processing data</strong></p>
+<p>To simplify the analysis and focus on a smaller set of observations, we restrict attention to storms observed from 2003 onward (inclusive). In addition, some imputation methods require the variable being imputed to be numeric.</p>
+<p>Remove # from code lines and run the cell below to prepare the dataset for the next questions, including additional information to track missingness.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_03plus &lt;- storms_dat |&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     filter(year &gt; 2002) |&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     mutate(tropicalstorm_force_diameter = as.numeric(tropicalstorm_force_diameter)) |&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     nabular() |&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     add_label_shadow()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="14" type="1">
+<li><strong>Structural missing values</strong> occur when a variable is not defined for certain observations (rather than simply unobserved). For example, tumor stage is not defined for individuals without cancer. These values should not be imputed.</li>
+</ol>
+<p>Based on your understanding of the dataset and previous exploration of missingness patterns, identify one variable whose missing values are structural (i.e., not applicable) and therefore should not be imputed. Briefly justify your answer. (<em>Reasoning: 2 points</em>)</p>
+<ol start="15" type="1">
+<li>MICE uses all variables in the dataset and iteratively imputes all missing values, including those that are structural. To avoid imputing structural values, remove any variable identified in the previous question from <code>storms_03plus</code> before proceeding. Don’t change the name of the dataset. (<em>Writing: 2 points</em>)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Note: Structural variables can also be retained by encoding the missing values as an explicit “not applicable” category. In this task, we exclude them for simplicity.</p>
+</blockquote>
+<ol start="16" type="1">
+<li>Because storm size and intensity are closely related physical characteristics, understanding the relationship between <code>tropicalstorm_force_diameter</code> and <code>pressure</code> is of substantive interest. Create a scatter plot of <code>tropicalstorm_force_diameter</code> (y-axis) versus <code>pressure</code> (x-axis) for storms in <code>storms_03plus</code>. Add a layer that clearly displays observations where these variables have missing values. Briefly describe the relationship and the missingness pattern. (<em>Writing: 2 points</em>)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Tip: Use faceting to explore if missingness has changed across years.</p>
+</blockquote>
+<ol start="17" type="1">
+<li><strong>Mean imputation</strong> replaces missing values of a variable with the mean of the observed values of that variable.</li>
+</ol>
+<p>Impute the missing values of <code>tropicalstorm_force_diameter</code> using mean imputation and save the resulting dataset in an object called <code>storms_mean</code>. (<em>Writing: 2 points</em>)</p>
+<ol start="18" type="1">
+<li><strong>Regression imputation</strong> predicts missing values using a regression model based on other variables.</li>
+</ol>
+<p>Impute the missing values of <code>tropicalstorm_force_diameter</code> using linear regression with <code>pressure</code> as the predictor. Save the resulting dataset in an object called <code>storms_lm_small</code>. (<em>Writing: 2 points</em>)</p>
+<ol start="19" type="1">
+<li><strong>Regression imputation</strong> can incorporate multiple predictors to capture more structure in the data.</li>
+</ol>
+<p>Impute the missing values of <code>tropicalstorm_force_diameter</code> using linear regression with additional covariates. Use <code>pressure + wind + lat + long + status</code> as the the right-hand side of the <code>impute_lm()</code> to impute with a linear model estimated using all these predictors. Save the resulting dataset in an object called <code>storms_lm_large</code>. (<em>Writing: 2 points</em>)</p>
+<ol start="20" type="1">
+<li><strong>Multiple imputation</strong> iteratively imputes missing values using all variables in the dataset and generates multiple completed datasets to reflect imputation uncertainty. In this task, we use one completed dataset for visualization.</li>
+</ol>
+<p>Complete the code below to impute the missing values of <code>tropicalstorm_force_diameter</code> using <code>mice</code>. Remove # from code lines and run the cell. (<em>Writing: 2 points</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_mice &lt;- ...(..., m = 5, maxit = 10, seed = 123, printFlag = FALSE)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Pick one completed dataset for visualization</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_mice1 &lt;- ...(..., action = 1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="21" type="1">
+<li><strong>Bound and plot</strong>. Run the code below to combine all the imputed datasets and plot the resulting completed datasets. Briefly describe how the distribution of imputed values differs across the four methods. (<em>Writing: 2 points</em>)</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # each row is a dataset</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # .id is used to identify each imputed dataset</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bound_models &lt;- bind_rows(</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   mean = storms_mean,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   small = storms_lm_small,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   large = storms_lm_large,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   mice = storms_mice1,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   .id = "imp_model") |&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   as_tibble()</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># bound_models |&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#        arrange(tropicalstorm_force_diameter_NA) |&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#        ggplot(aes(x = pressure,</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#            y = tropicalstorm_force_diameter,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#            colour = tropicalstorm_force_diameter_NA)) +</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point() + </span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   facet_wrap(~imp_model)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="22" type="1">
+<li><strong>Limitations:</strong> Choose two imputation methods and describe one limitation of each, based on what you observe in the plots. (<em>Reasoning: 4 points</em>)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Tip: You may revisit this question after Milestone 2, where we compare these methods using simulation.</p>
+</blockquote>
+</section>
+</section>
+<section id="milestone-2-imputation-assessment-by-simulation-30-points" class="level2">
+<h2 class="anchored" data-anchor-id="milestone-2-imputation-assessment-by-simulation-30-points">🏁 Milestone 2: Imputation Assessment by Simulation (30 points)</h2>
+<p>In the previous question, you compared different imputation methods and commented on potential limitations. However, such limitations are not always obvious when analyzing a single dataset. Simulation studies are a powerful tool for examining and comparing the performance of statistical methods under controlled conditions.</p>
+<p>In this milestone, we use simulation to investigate how different imputation approaches perform in recovering the relationship between variables under missingness. Instead of simulating data from a theoretical distribution, as in the last worksheet, we generate random samples from the real dataset <code>storms</code>.</p>
+<p>To create a baseline not affected by imputation, we first remove observations with missing values and treat the remaining complete cases as our reference population. Sampling from this dataset can be viewed as sampling from its empirical distribution. In other words, we assume that the complete observed data represent the underlying population.</p>
+<blockquote class="blockquote">
+<p>Note that this may not be a realistic assumption in practice, but we use it here only as a baseline to compare imputation methods under simulated missingness.</p>
+</blockquote>
+<p>Let’s first pre-process the data to create a simplified population dataset with more balanced groups. Remove # from code lines and run the cell.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_complete &lt;- storms |&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     filter(year &gt; 2002) |&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     select(-category) |&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     drop_na()</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># # re-group storms and change variable type for later imputation</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_pop &lt;- storms_complete |&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(type = case_when(</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     status == "hurricane" ~ "hurricane",</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     status %in% c("tropical storm",</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                   "tropical depression") ~ "tropical",</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     status %in% c("subtropical storm",</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#                   "subtropical depression",</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#                   "tropical wave",</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#                   "disturbance",</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                   "other low") ~ "subtropical_disturbance",</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     status == "extratropical" ~ "extratropical"</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   ),</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     tropicalstorm_force_diameter = as.numeric(tropicalstorm_force_diameter)) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The new dataset <code>storms_pop</code> represents our reference population. We use it to characterize the relationship among the variables by fitting a multiple linear regression, which serves as the population (reference) model against which sampling and imputation results will be compared.</p>
+<p>Remove # from code lines and run the cell below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidy(lm(tropicalstorm_force_diameter~pressure + lat + type, storms_pop))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Simulation Outline</strong></p>
+<p>We now conduct a simulation study based on the reference population <code>storms_pop</code>. In each simulation replicate, we:</p>
+<ul>
+<li><p><strong>Step 1</strong>: Draw a random sample of size 1000 from the population <code>storms_pop</code>.</p></li>
+<li><p><strong>Step 2</strong>: Introduce missingness in the outcome variable according to a MCAR mechanism.</p></li>
+<li><p><strong>Step 3</strong>: Apply different imputation methods to handle the missing values.</p></li>
+<li><p><strong>Step 4</strong>: Use least squares estimation to fit a linear regression to each completed dataset and store the coefficient estimates and standard errors.</p></li>
+<li><p><strong>Step 5</strong>: Repeat 500 times</p></li>
+<li><p><strong>Step 6</strong>: Summarize the results by computing the median of the estimated coefficients and standard errors across simulation runs.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Note</strong>: Some choices above are arbitrary and are part of the simulation design.</p>
+</blockquote>
+<section id="task-1-simulating-data-with-mcar-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-simulating-data-with-mcar-10-points">Task 1: Simulating data with MCAR (10 points)</h3>
+<ol type="1">
+<li><strong>Helper functions</strong> Complete the code below to create helper functions that will be used to implement the simulation study. Then remove # from code lines and run the cell. (<em>Writing: 5 points</em>)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Tip: Similar functions were used in the last worksheet.</p>
+</blockquote>
+<p>A key argument in many of the helper functions is the dataset (<code>dat</code>). Although some of the helper functions are written with a general data argument, they assume that the dataset passed to these functions contains the specific variables needed for the analysis (e.g., <code>tropicalstorm_force_diameter</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Helper functions</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Generate data</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># get_sample &lt;- function(dat, n_size){</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   storms_sample &lt;- ... |&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   slice_sample(n = ..., replace = FALSE)|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   ungroup()  </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_sample </span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     }</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Generate missingness MCAR</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># generate_mcar &lt;- function(dat, p) {</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   missing_y &lt;- sample(1:nrow(...), size = round(p * nrow(dat)))</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   dat$tropicalstorm_force_diameter[...] &lt;- NA</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   dat</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Linear regression estimation by least squares (LS)</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># fit_lm &lt;- function(dat) {</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   lm(tropicalstorm_force_diameter~pressure + lat + type, data = dat) |&gt;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     tidy() |&gt;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     select(term, estimate, std.error)</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean imputation, then LS estimation</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># est_mean_imp &lt;- function(dat) {</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   dat |&gt;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     mutate(tropicalstorm_force_diameter = ... (...)) |&gt;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     fit_lm()</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Regression imputation, then LS estimation</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co"># est_lm_imp &lt;- function(dat) {</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co">#   dat |&gt;</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     impute_lm(... ~ pressure) |&gt;</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     ...</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="do">## mice imputation, then LS estimation and POOLED </span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co"># est_mice_imp &lt;- function(dat, m = 5, maxit = 10, seed = 123) {</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co">#   imp &lt;- ...(..., m = m, maxit = maxit, seed = seed, printFlag = FALSE)</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="do">## pooled across m imputations</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co"># pooled &lt;- ...(with(..., data = lm(tropicalstorm_force_diameter~pressure + lat + type))) |&gt;</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">#     summary() |&gt;</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">#     select(term, estimate, std.error) </span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="co">#   pooled  </span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Simulate MCAR in one random sample</strong> Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove # from code lines and run the cell.</li>
+</ol>
+<p>Visualize the resulting dataset adding a layer with missing values below data values. (<em>Writing: 5 points</em>)</p>
+<blockquote class="blockquote">
+<p>To make results reproducible, set the seed at a value 123.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(...)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Use a helper function to take a sample of size 1000</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#storms_sample &lt;- ...(..., 1000) </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## add 30% of MCAR missing values to `storms_sample`</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_mcar &lt;- ...(...,...) |&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     nabular() |&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     add_label_shadow()</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="do">## scatter plot</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(..., aes(y = tropicalstorm_force_diameter,</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#                 x = pressure)) +</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#      ...(alpha = 0.4) +</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#      ...() +</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#      theme_minimal()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-2-imputation-and-estimation-5-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-imputation-and-estimation-5-points">Task 2: Imputation and Estimation (5 points)</h3>
+<p><strong>Imputation and Estimation</strong> The following code uses the helper functions to impute the simulated dataset with the following methods (step 3) and then estimate a linear regression (step 4):</p>
+<ul>
+<li>mean imputation</li>
+<li>regression imputation (using <code>pressure</code> as a covariate)</li>
+<li>mice imputation</li>
+</ul>
+<p>Remove # from code lines and run the cell below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # mean imputation</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_mean &lt;- est_mean_imp(storms_mcar)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # regression imputation</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_lm &lt;- est_lm_imp(storms_mcar)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # mice imputation</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_mice &lt;- est_mice_imp(storms_mcar)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Comparison</strong> Remove # from code lines and run the cell below to compare the estimated coefficients using the original sample, the listwise deletion method (complete case), and the imputed samples.</li>
+</ol>
+<p>Compare the results obtained. What do they suggest about the methods? Are these results sufficient to draw general conclusions about the relative performance of the methods? Justify your answer. (<em>Reasoning: 5 points</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cbind(fit_lm(storms_sample)[,1:2],</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#         complete_estimate = fit_lm(storms_mcar)$estimate,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         mean_estimate = storms_mean$estimate,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#         regression_estimate = storms_lm$estimate,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#         mice_estimate = storms_mice$estimate)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-3-full-simulation-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-full-simulation-15-points">Task 3: Full simulation (15 points)</h3>
+<ol start="4" type="1">
+<li><strong>It’s time to repeat</strong> Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove # from code lines and run the cell.</li>
+</ol>
+<p>What are the dimensions of the object <code>datasets</code>? Explain how they relate to the simulation design. (<em>Writing: 5 points</em>)</p>
+<blockquote class="blockquote">
+<p>Note that MICE is doing multiple imputations per run so it takes a while to run. Stretch, get some coffee or water while waiting ;) !</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Tip: You have done this in the last worksheet but we give you a template to guide you!</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(123)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># datasets &lt;- ...(</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   500,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   {#simulate each dataset</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     simulated_data &lt;- ...(...,...)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     #add missing values  </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     ...(..., p = ...)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   },</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   simplify = FALSE</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># complete_coeff &lt;- ... |&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(fit_lm, .id = "rep")</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_imp_coeff &lt;- ... |&gt;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(..., .id = "rep")</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># lm_imp_coeff &lt;- ... |&gt;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(..., .id = ...)</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressWarnings(mice_imp_coeff &lt;- ... |&gt;</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(..., ...))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="1">
+<li><strong>Summarize</strong>. Last step: summarize the results of the simulation study. Let’s first combine the estimated coefficient of the variable <code>pressure</code> derived from all datasets, original, complete and imputed. What are the dimensions of the object <code>coeffs_pressure</code>? Explain how they relate to the simulation design. (<em>Writing: 2 points</em>)</li>
+</ol>
+<p>Remove # from code lines and run the cell.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># coeffs_pressure &lt;- bind_rows(</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   complete_coeff  |&gt; mutate(method = "Complete case"),</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   mean_imp_coeff  |&gt; mutate(method = "Mean imputation"),</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   lm_imp_coeff  |&gt; mutate(method = "Regression imputation"),</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   mice_imp_coeff |&gt; mutate(method = "MICE imputation")</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ) |&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(term == "pressure")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="6" type="1">
+<li><strong>Comparison and conclusions</strong>. Let’s start by illustrating the distribution of the estimated coefficients for <code>pressure</code> using histograms, with one facet per method used to treat the missing values in the data. Include a vertical line at the value of the coefficient of <code>pressure</code> when using all the data (<code>storm_pop</code>).</li>
+</ol>
+<blockquote class="blockquote">
+<p>Tip: We’ve computed this value before outlining the simulation plan.</p>
+</blockquote>
+<p>Complete the code, remove # from code lines and run the cell. (<em>Writing: 3 points</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(..., aes(x = estimate, fill = method)) +</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     bins = 20,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     alpha = 0.5,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     position = "identity"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(xintercept = ..., linetype = "dashed") +</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(~ ..., scales = "free_y") +</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     title = "Sampling Distribution of `pressure` Coefficient Estimator",</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = "Estimated coefficient",</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     y = "Count"</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(legend.position = "none")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="7" type="1">
+<li><strong>Bias and variability</strong>. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods. Run the cell below.</li>
+</ol>
+<p>Compare the median estimated coefficients and median estimated standard errors across simulation runs for each imputation method. What do these summaries suggest about the bias and variability of the coefficient estimates under different imputation methods? (<em>Reasoning: 5 points</em>)</p>
+<p>Remove # from code lines and run the cell.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pressure_summaries &lt;- coeffs_pressure |&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(method) |&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarize(</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     median_beta_hat = median(estimate, na.rm = TRUE),</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     median_SE       = median(std.error, na.rm = TRUE),</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     .groups = "drop"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) |&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate_if(is.numeric, round, 3)</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># pressure_summaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="milestone-3-robust-methods-in-motion-recognition-25-points" class="level2">
+<h2 class="anchored" data-anchor-id="milestone-3-robust-methods-in-motion-recognition-25-points">🏁 Milestone 3: Robust Methods in Motion Recognition (25 points)</h2>
+<p>In this milestone, we illustrate how robust statistical methods can improve movement recognition in video survillance tasks. We analyze a short video, filmed by a static camera, of a man walking a dog, available in the <code>cellWise</code> package.</p>
+<p>The video consists of 54 frames. Each frame is a color image represented by three 144 <span class="math inline">\(\times\)</span> 180 grids of pixels corresponding to the Red, Green, and Blue (RGB) channels, respectively. A common way to analyze video data is to “flatten” each frame into a long vector containing all its pixel values. Thus, the data can be represented in a dataset with 54 rows (one per frame) and 77,760 columns (144 <span class="math inline">\(\times\)</span> 180 <span class="math inline">\(\times\)</span> 3) for each pixel value. In this activity we’ll flatten and reshape the data multiple times depending on the task using some helper functions.</p>
+<p><strong>Dimensionality reduction</strong> Although each frame has thousands of pixel values, the fixed camera results in most pixels belonging to a stable background that changes very little across frames. When rows in a dataset do not differ much, a useful technique to reduce the dimensionality is Principal Component Analysis (PCA). Intuitively, PCA captures the common background pattern shared across frames and expresses each frame as a slight variation of this baseline.</p>
+<p>To do that, PCA creates new variables called <em>principal components</em> that summarize the main patterns of variation across observations in the data. The first component captures the dominant pattern. The second captures the next most important pattern in the remaining (residual) variation not explained by the first component, and so on. In many applications, only a few components are needed to represent most of the structure in high-dimensional data such as images.</p>
+<p>Since PCA may be new to many of you, we first illustrate this idea with a simple example using flower measurements in the <code>iris</code> data set, and then return to the video frames.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>PCA is not a learning objective in this course and we don’t expect you to know its details. However, it is a widely used technique in Data Science, which we use here to illustrate key concepts in robust statistics.</p>
+</div>
+</div>
+<section id="task-1-classical-pca-in-r-5-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-classical-pca-in-r-5-points">Task 1: Classical PCA in <code>R</code> (5 points)</h3>
+<p>In this short activity, we use the <code>iris</code> dataset in <code>R</code> to build intuition for why highly similar rows can often be summarized by very few principal components. This dataset contains measurements for 150 flowers on four continuous variables describing the shape of the flower, well as a categorical variable indicating species.</p>
+<ol type="1">
+<li><strong>Toy Data:</strong> Let’s use <code>iris</code> to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.</li>
+</ol>
+<ul>
+<li><p><strong>True:</strong> Use the original <code>iris_numeric</code> data, containing real variation across flowers, but keeping only the numerical variables.</p></li>
+<li><p><strong>Proportional:</strong> Keep the flower in the first row of <code>iris_numeric</code> as a “template” and create a dataset where every row is just a scaled version of that template (multiply all the row by different factors). This is an extreme case where all flowers share the same pattern and differ only in overall magnitude.</p></li>
+<li><p><strong>Similar:</strong> Start from the same template flower but this time create a dataset adding a very small amount of noise generated from a Normal distribution with mean 0 and standard deviation 0.02. In this case, flowers are almost identical but vary slightly in multiple ways, not only in overall magnitude.</p></li>
+<li><p><strong>Different:</strong> Create a synthetic dataset where the measurements vary more substantially across flowers with much less shared structure. Use a Normal distribution with mean 0 and standard deviation 1.</p></li>
+</ul>
+<p>Complete the code below to create these datasets, remove # from code lines and run the cell. (<em>Writing: 2 points</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(1)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># # 1) iris dataset</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># iris_numeric &lt;- iris |&gt; </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#             ...(-Species)</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # 2) Proportional to first flower, different magnitude </span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># base &lt;- as.numeric(iris_numeric[...,])</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># factors &lt;- seq(0.5, 2, length.out = 150) </span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># iris_prop &lt;- ... %*% t(base) </span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># # 3) Similar flowers (`dir` keeps dependency among original variables)</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># dir  &lt;- c(1, 0.8, 1.2, 1.1)</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># z    &lt;- ...(150, sd = ...)</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># iris_similar &lt;- ... + z %*% t(dir)</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># # 4) Very different flowers (random, same dimensions)</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co"># iris_varied &lt;- matrix(...(150*4), ncol = ...)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Computing PCA:</strong> You can now apply PCA to the four datasets using the function <code>prcomp()</code> from the <code>stats</code> package. We will use <code>scale = TRUE</code>, which standardizes each variable to have mean 0 and variance 1 before performing PCA. This ensures that all variables contribute equally to the analysis and that PCA focuses on patterns of variation rather than differences in measurement scale.</li>
+</ol>
+<p>PCA creates new variables called principal components (PCs). With four original variables, PCA produces four PCs, but they are ordered so that the first few typically capture most of the variation in the data. The principal component scores are stored in the element <code>$x</code> of the PCA object (e.g., <code>pca_iris$x</code>).</p>
+<p>Complete the code below to create these datasets, remove # from code lines and run the cell. (<em>Writing: 1 points</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Compute PCA</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pca_prop  &lt;- ...(..., ...)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pca_similar &lt;- ...(..., ...)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pca_varied  &lt;- ...(..., ...)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pca_iris  &lt;- ...(..., ...)</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># head(pca_iris$x)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Variation and PCs:</strong> The following code creates a data frame summarizing the proportion of variation explained by each principal component (PC) for the four datasets. Remove # from code lines and run the cell.</li>
+</ol>
+<p>In the Proportional rows dataset, PC1 explains almost all the variation. This occurs because the flowers differ only in overall magnitude: each flower is simply a scaled version of the same template, so all variation happens in one direction.</p>
+<ul>
+<li><p>In which other dataset does PC1 explain a large proportion of the variation? Based on how the flowers differ in that dataset, explain why.</p></li>
+<li><p>Which dataset needs multiple PCs to summarize the data? Why? (<em>Reasoning: 2 points</em>)</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ve_df &lt;- data.frame(</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   PC = rep(paste0("PC", 1:4), times = 4),</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   dataset = rep(</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     c("Proportional rows", "Similar rows", "True data", "Varied rows"),</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     each = 4</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   ),</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   prop_var = c(</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     (pca_prop$sdev^2)    / sum(pca_prop$sdev^2),</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     (pca_similar$sdev^2) / sum(pca_similar$sdev^2),</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     (pca_iris$sdev^2)    / sum(pca_iris$sdev^2),</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     (pca_varied$sdev^2)  / sum(pca_varied$sdev^2)</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(ve_df, aes(x = PC, y = prop_var, fill = dataset)) +</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_col(position = position_dodge(width = 0.8), width = 0.7) +</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_y_continuous(labels = scales::percent_format(accuracy = 1),</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                      limits = c(0, 1)) +</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = NULL,</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">#     y = "Proportion of variance explained",</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     fill = NULL</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_minimal(base_size = 12) +</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     legend.position = "top",</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     panel.grid.minor = element_blank()</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-2-back-to-the-video-dataset-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-back-to-the-video-dataset-10-points">Task 2: Back to the video dataset! (10 points)</h3>
+<p>In the previous task, you saw that only a few principal components (PCs) can be sufficient to capture most of the important variation in a dataset. Let’s load and examine the video dataset.</p>
+<blockquote class="blockquote">
+<p>Some of the tools used in this analysis are beyond the scope of the course. Thus, we wrote some helper functions to implement those difficult steps.</p>
+</blockquote>
+<p><strong>Video data</strong> Run the code below to load the <code>data_dogWalker</code> data from the <code>cellWise</code> package. Use the helper function called <code>show_frame()</code> to display a frame of this video. Remember that there are 54 frames so try passing different numbers to <code>frame_number</code> to “watch” the video in <code>R</code>!</p>
+<blockquote class="blockquote">
+<p>As an example, we are showing the 10th frame</p>
+</blockquote>
+<p>Remove # from code lines and run the cell.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># source("case-study-2-functions.R")</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># data(data_dogWalker)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # save data</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># dogWalker_dat &lt;- data_dogWalker</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># class(dogWalker_dat)</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># show_frame(dogWalker_dat, frame_number = 10)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li><strong>Reshape:</strong> Save the dimensions of the array in an object called <code>dims</code>. Use <code>dims</code> to reshape (flatten) the array into a dataframe with one row per frame and one column per pixel intensity (the product of the height, width, and RGB channels as previously explained).</li>
+</ol>
+<p>Complete the code below, remove # from code lines and run the cell. (<em>Writing: 2 points</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dims &lt;- ...</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dims</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="do">## flatten into a dataframe</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#dim(dogWalker_dat) &lt;- c(dims[...], prod(dims[...:...]))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="1">
+<li><strong>Dimensionality:</strong> The resulting dataset has too many variables. Can we use PCA to reduce the dimensionality without losing important information?? Note that the background is largely stable since the camera is static, thus it does not vary in many independent ways across frames.</li>
+</ol>
+<p>Based on your previous examination of PCA, do you expect that much of the information in the frames can be represented using only a few PCs? Explain your response. (<em>Reasoning: 2 points</em>)</p>
+<p>The man and the dog in the video move across the road and appear in different locations in each frame. Can you think of them as outliers? If so, what kind of outliers do you think they are and why? (<em>Reasoning: 2 points</em>)</p>
+<ol start="6" type="1">
+<li><strong>Computing classical PCA:</strong> The code below computes the first PC and its loadings. Each principal component is a weighted combination of the original variables (pixels). The loadings show how much each pixel contributes to the component. When displayed as an image, they reveal which regions PCA treats as background variation.</li>
+</ol>
+<p>Let’s look at the loadings of the first principal component. Is there any trace of moving man and dog? If so, it means some motion has leaked into the background estimate.</p>
+<p>Remove # from code lines, run the code below and briefly comment what you observe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Compute PCA</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The following lines adds small variation where scale is zero to avoid division by 0</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Xscales &lt;- colSds(dogWalker_dat)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fix &lt;- scale_filler_c(dogWalker_dat, Xscales, dims)</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># # Start with fixed data</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># dogWalker_dat &lt;- fix[[1]]</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># dogWalker_pca &lt;- prcomp(dogWalker_dat,  scale = FALSE)</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># # get the loadings and visualize those of PC1</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># cloadings &lt;- dogWalker_pca$rotation</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># cloadings_PC1 &lt;- cloadings[, 1]</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="do">## prepare loading for image </span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># load1_img &lt;- prepLoading(loadings_PC1, dims[2:4])</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># # visualization of the loadings of PC1</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Pal &lt;- colorRampPalette(c("blue", "white","red"))(100)</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co"># image(t(apply(load1_img$loading, 2, rev)),</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#       zlim = 2*load1_img$maxab * c(-1, 1),</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">#       col = Pal)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Does the image of the loadings of classical PCA corroborate your previous hypothesis about reproducing the background without the man and the dog? Briefly justify your response. (<em>Reasoning: 2 points</em>)</p>
+<ol start="7" type="1">
+<li><strong>Robust PCA:</strong> PCA is based estimates of the mean and covariance matrix of the variables. Using classical sample estimates can make PCA extremely sensitive to outliers as well.</li>
+</ol>
+<p>In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we sue robust estimators?</p>
+<p>To implement robust PCA, we start by using the function <code>estLocScale()</code> to obtain a robust location and scale estimates of the data. We then wrap the data and compute PCA.</p>
+<blockquote class="blockquote">
+<p>This time we use the helper function <code>scale_filler_r()</code> to avoid scale estimates equal to 0.</p>
+</blockquote>
+<p>Complete the code below, remove # from code lines and run the cell. What differences you observed compared to the non-robust PCA analysis? Explain briefly. (<em>Writing: 2 points</em>)</p>
+<blockquote class="blockquote">
+<p>Tip: follow the previous steps but now on wrapped data</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># locScaleX &lt;- ...(dogWalker_dat, precScale = 1e-12)</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># # add minimum variation to the data if scale is close to 0 and re-estimate scale</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fix &lt;- scale_filler_r(dogWalker_dat, locScaleX$scale, dims)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># data_filled &lt;- fix[[1]]</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># scale_fix &lt;- fix[[2]]</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># # wrap `data_filled` using estimate of location and reviewed scale</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Xw  &lt;- ...(data_filled, ...$loc, ...)$Xw</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># # center wrapped data</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># XwC &lt;- sweep(..., 2, colMeans(Xw))</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># # robust PCA: compute PCA on centered-wrapped data</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># dogWalker_rpca &lt;- ...(..., center = FALSE, scale. = FALSE)</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co"># # get the loadings of the robust PC1 </span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co"># rloadings &lt;- ...$rotation</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co"># rloadings_PC1 &lt;- ...</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="co"># # prepare loadings of PC1 for image </span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="co"># rload1_img &lt;- prepLoading(..., dims[2:4])</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="co"># # visualization of the loadings of robust PC1 </span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ...(t(apply(..., 2, rev)),</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="co">#        zlim = 2*rload1_img$maxab * c(-1, 1),</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="co">#        col = Pal)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-3-isolating-moving-objects-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-isolating-moving-objects-10-points">Task 3: Isolating moving objects (10 points)</h3>
+<p><strong>Residuals:</strong> If we think the moving objects as outliers, we should be able to identify them using the <strong>residuals</strong>, what is left over after the PCA reconstruction. Let’s take a look at each residual image. If a robust analysis is performed:</p>
+<ul>
+<li><p>Large residuals indicate unusual or moving regions. In this case, the people walking in the video.</p></li>
+<li><p>By standardizing and plotting these residuals, we can highlight outlier pixels that represent meaningful motion or anomalies.</p></li>
+</ul>
+<ol start="8" type="1">
+<li><strong>Residuals of classical PCA:</strong> Use the helper function <code>compute_residuals()</code> to compute the residuals of the classical PCA. Use <code>show_frame_residuals()</code> to visualize side-by-side an original frame, together with the residual image.</li>
+</ol>
+<p>Remove # from code lines and run the cell below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Compute the fitted frames and residuals:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># aveX &lt;- colMeans(dogWalker_dat)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># X.residual &lt;- compute_residuals(dogWalker_dat, cloadings, aveX, k = 3)</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># # residuals as images</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># locs &lt;- colMeans(Xresidual)</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># scales &lt;- colSds(Xresidual)</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># show_frame_residual(20, dogWalker_dat, Xresidual, locs, scales, 20)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What do you observe? was the classical PCA effective at isolating the moving objects from the background? Briefly explain your findings. (<em>Reasoning: 3 points</em>)</p>
+<ol start="9" type="1">
+<li><strong>Residuals of robust PCA:</strong> Use the same helper functions but this time to compute the residuals of the robust PCA. Visualize the original and the residuals frames side-by-side.</li>
+</ol>
+<p>Complete the code, remove # from code lines and run the cell below. (<em>Writing: 3 points</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># aveXw &lt;- colMeans(...)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Xrresidual &lt;- compute_residuals(..., ..., aveXw, k = 3)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># locScale_res &lt;- ...(Xrresidual)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># show_frame_residual(20, dogWalker_dat, ..., ..., locScale_res$scale, 200)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="10" type="1">
+<li><strong>Conclusions:</strong> Which method best isolate the “outliers”. Explain briefly the observed results. (<em>Reasoning: 4 points</em>)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Feel free to change frame value to check other parts of the video. You can also change the cutoff values in the <code>show_frame_residual()</code> to filter more or less noise.</p>
+</blockquote>
+</section>
+</section>
+<section id="reproducibility-and-organization-checklist-5-points" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-and-organization-checklist-5-points">Reproducibility and Organization Checklist (5 points)</h2>
+<p>Here are the criteria we’re looking for:</p>
+<p>The document should read sensibly from top to bottom, with no major continuity errors. All output is recent and relevant. All required files are present in the submission and viewable without errors. Examples of errors: Missing plots, “Sorry about that, but we can’t show files that are this big right now” messages, error messages from broken R code. All of these output files are up-to-date and there should be no relic output files. For example, if you were exporting a notebook to html, but then changed the output to be only a pdf file, then the html file is a relic and should be deleted.</p>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p>The material in this case study are adopted from ROBUST<code>@</code>Leuven, the research group on Robust Statistics at the University of Leuven, Department of Mathematics, Section of Statistics and Data Science. You can read more <a href="https://wis.kuleuven.be/statdatascience/robust/software">here</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
