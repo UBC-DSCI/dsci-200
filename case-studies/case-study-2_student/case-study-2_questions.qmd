@@ -33,7 +33,7 @@ As before, you will perform your analysis and answer to all the questions using 
 Your submission must include:
 
 1.  Jupyter notebook (`.ipynb` file)
-2.  Rendered final document (`.html` or `.pdf` file)
+2.  Rendered final document as a `.pdf` file (not `html` as it doesn't work in Gradescope)
 
 ## 🏁 Milestone 1: Missing Values (40 points)
 
@@ -41,7 +41,7 @@ Real datasets often contain missing values that can influence conclusions if han
 
 ### Task 1: Load and explore data (5 points)
 
-In this milestone we will be working with the `storms` dataset from the `dplyr` package. The package contains information about tropical storms and hurricanes in the Atlantic Ocean from 1975 onward. Each row represents a storm at a specific point in time, with variables such as storm name, year, month, day, time, latitude, longitude, wind speed, air pressure, and storm category. 
+In this milestone we will be working with the `storms` dataset from the `dplyr` package. The package contains information about tropical storms and hurricanes in the Atlantic Ocean from 1975 onward. Each row represents a storm at a specific point in time, with variables such as storm name, year, month, day, time, latitude, longitude, wind speed, air pressure, and storm category.
 
 Write your own code to load and examine the data and answer the following points.
 
@@ -57,7 +57,7 @@ Write your own code to load and examine the data and answer the following points
 
 ### Task 2: Summaries and Visualizations of Missing Values (15 points)
 
-Write your own code to examine the data and answer  the following points.
+Write your own code to examine the data and answer the following points.
 
 6.  The `naniar` package provides several functions to summarize and explore missing values. Use one function in the package to investigate missingness in the dataset. Briefly describe what you learn about missingness in the dataset. (*Writing: 2 points*)
 
@@ -87,7 +87,7 @@ In this task, you will determine which variables are suitable for imputation, co
 
 **Pre-processing data**
 
-To simplify the analysis and focus on a smaller set of observations, we restrict attention to storms observed from 2003 onward (inclusive). In addition, some imputation methods require the variable being imputed to be numeric. 
+To simplify the analysis and focus on a smaller set of observations, we restrict attention to storms observed from 2003 onward (inclusive). In addition, some imputation methods require the variable being imputed to be numeric.
 
 Remove \# from code lines and run the cell below to prepare the dataset for the next questions, including additional information to track missingness.
 
@@ -162,7 +162,6 @@ Complete the code below to impute the missing values of `tropicalstorm_force_dia
 
 > Tip: You may revisit this question after Milestone 2, where we compare these methods using simulation.
 
-
 ## 🏁 Milestone 2: Imputation Assessment by Simulation (30 points)
 
 In the previous question, you compared different imputation methods and commented on potential limitations. However, such limitations are not always obvious when analyzing a single dataset. Simulation studies are a powerful tool for examining and comparing the performance of statistical methods under controlled conditions.
@@ -200,7 +199,7 @@ Let's first pre-process the data to create a simplified population dataset with 
 #     tropicalstorm_force_diameter = as.numeric(tropicalstorm_force_diameter)) 
 ```
 
-The new dataset `storms_pop` represents our reference population. We use it to characterize the relationship among the variables by fitting a multiple linear regression, which serves as the population (reference) model against which sampling and imputation results will be compared. 
+The new dataset `storms_pop` represents our reference population. We use it to characterize the relationship among the variables by fitting a multiple linear regression, which serves as the population (reference) model against which sampling and imputation results will be compared.
 
 Remove \# from code lines and run the cell below.
 
@@ -288,7 +287,7 @@ A key argument in many of the helper functions is the dataset (`dat`). Although 
 
 ```
 
-2.  **Simulate MCAR in one random sample:** Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove \# from code lines and run the cell. 
+2.  **Simulate MCAR in one random sample:** Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove \# from code lines and run the cell.
 
 Visualize the resulting dataset adding a layer with missing values below data values. (*Writing: 5 points*)
 
@@ -324,7 +323,7 @@ Visualize the resulting dataset adding a layer with missing values below data va
 -   regression imputation (using `pressure` as a covariate)
 -   mice imputation
 
-Remove \# from code lines and run the cell below. 
+Remove \# from code lines and run the cell below.
 
 ```{r}
 # # mean imputation
@@ -351,7 +350,7 @@ Compare the results obtained. What do they suggest about the methods? Are these 
 
 ### Task 3: Full simulation (15 points)
 
-4.  **It's time to repeat:** Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove \# from code lines and run the cell. 
+4.  **It's time to repeat:** Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove \# from code lines and run the cell.
 
 What are the dimensions of the object `datasets`? Explain how they relate to the simulation design. (*Writing: 5 points*)
 
@@ -388,7 +387,7 @@ What are the dimensions of the object `datasets`? Explain how they relate to the
 
 5.  **Summarize** the results of the simulation study (last step). Let's first combine the estimated coefficient of the variable `pressure` derived from all datasets, original, complete and imputed. What are the dimensions of the object `coeffs_pressure`? Explain how they relate to the simulation design. (*Writing: 2 points*)
 
-Remove \# from code lines and run the cell. 
+Remove \# from code lines and run the cell.
 
 ```{r}
 # coeffs_pressure <- bind_rows(
@@ -423,7 +422,7 @@ Complete the code, remove \# from code lines and run the cell. (*Writing: 3 poin
 #   theme(legend.position = "none")
 ```
 
-7.  **Bias and variability**. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods. 
+7.  **Bias and variability**. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods.
 
 Compare the median estimated coefficients and median estimated standard errors across simulation runs for each imputation method. What do these summaries suggest about the bias and variability of the coefficient estimates under different imputation methods? (*Reasoning: 5 points*)
 
@@ -448,7 +447,7 @@ In this milestone, we illustrate how robust statistical methods can improve move
 
 The video consists of 54 frames. Each frame is a color image represented by three 144 $\times$ 180 grids of pixels corresponding to the Red, Green, and Blue (RGB) channels, respectively. A common way to analyze video data is to "flatten" each frame into a long vector containing all its pixel values. Thus, the data can be represented in a dataset with 54 rows (one per frame) and 77,760 columns (144 $\times$ 180 $\times$ 3) for each pixel value. In this activity we'll flatten and reshape the data multiple times depending on the task using some helper functions.
 
-**Dimensionality reduction** 
+**Dimensionality reduction**
 
 Although each frame has thousands of pixel values, the fixed camera results in most pixels belonging to a stable background that changes very little across frames. When rows in a dataset do not differ much, a useful technique to reduce the dimensionality is Principal Component Analysis (PCA). Intuitively, PCA captures the common background pattern shared across frames and expresses each frame as a slight variation of this baseline.
 
@@ -464,7 +463,7 @@ PCA is not a learning objective in this course and we don't expect you to know i
 
 In this short activity, we use the `iris` dataset in `R` to build intuition for why highly similar rows can often be summarized by very few principal components. This dataset contains measurements for 150 flowers on four continuous variables describing the shape of the flower, as well as a categorical variable indicating species.
 
-1. **Datasets:** Let's use `iris` to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.
+1.  **Datasets:** Let's use `iris` to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.
 
 -   **True:** Use the original `iris_numeric` data, containing real variation across flowers, but keeping only the numerical variables.
 
@@ -577,7 +576,7 @@ Remove \# from code lines and run the cell.
 # show_frame(dogWalker_dat, frame_number = 10)
 ```
 
-4.  **Reshape:** Save the dimensions of the array in an object called `dims`. Use `dims` to reshape (flatten) the array into a dataframe with one row per frame and one column per pixel intensity (the product of the height, width, and RGB channels as previously explained). 
+4.  **Reshape:** Save the dimensions of the array in an object called `dims`. Use `dims` to reshape (flatten) the array into a dataframe with one row per frame and one column per pixel intensity (the product of the height, width, and RGB channels as previously explained).
 
 Complete the code below, remove \# from code lines and run the cell. (*Writing: 2 points*)
 
@@ -595,9 +594,9 @@ Based on your previous examination of PCA, do you expect that much of the inform
 
 The man and the dog in the video move across the road and appear in different locations in each frame. Can you think of them as outliers? If so, what kind of outliers do you think they are and why? (*Reasoning: 2 points*)
 
-6.  **Computing classical PCA:** The code below computes the first PC and its loadings. Each principal component is a weighted combination of the original variables (pixels). The loadings show how much each pixel contributes to the component. When displayed as an image, they reveal which regions PCA treats as background variation. 
+6.  **Computing classical PCA:** The code below computes the first PC and its loadings. Each principal component is a weighted combination of the original variables (pixels). The loadings show how much each pixel contributes to the component. When displayed as an image, they reveal which regions PCA treats as background variation.
 
-Let's look at the loadings of the first principal component. Is there any trace of moving man and dog? If so, it means some motion has leaked into the background estimate. 
+Let's look at the loadings of the first principal component. Is there any trace of moving man and dog? If so, it means some motion has leaked into the background estimate.
 
 Remove \# from code lines, run the code below and briefly comment what you observe.
 
@@ -631,11 +630,11 @@ Remove \# from code lines, run the code below and briefly comment what you obser
 
 Does the image of the loadings of classical PCA corroborate your previous hypothesis about reproducing the background without the man and the dog? Briefly justify your response. (*Reasoning: 2 points*)
 
-7. **Robust PCA:** PCA is based estimates of the mean and covariance matrix of the variables. Using classical sample estimates can make PCA extremely sensitive to outliers as well. 
+7.  **Robust PCA:** PCA is based estimates of the mean and covariance matrix of the variables. Using classical sample estimates can make PCA extremely sensitive to outliers as well.
 
-In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we use robust estimators? 
+In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we use robust estimators?
 
-To implement robust PCA, we start by using the function `estLocScale()` to obtain a robust location and scale estimates of the data. We then wrap the data and compute PCA. 
+To implement robust PCA, we start by using the function `estLocScale()` to obtain a robust location and scale estimates of the data. We then wrap the data and compute PCA.
 
 > This time we use the helper function `scale_filler_r()` to avoid scale estimates equal to 0.
 
@@ -683,7 +682,7 @@ Complete the code below, remove \# from code lines and run the cell. What differ
 
 -   By standardizing and plotting these residuals, we can highlight outlier pixels that represent meaningful motion or anomalies.
 
-8. **Residuals of classical PCA:** Use the helper function `compute_residuals()` to compute the residuals of the classical PCA. Use `show_frame_residuals()` to visualize side-by-side an original frame, together with the residual image.
+8.  **Residuals of classical PCA:** Use the helper function `compute_residuals()` to compute the residuals of the classical PCA. Use `show_frame_residuals()` to visualize side-by-side an original frame, together with the residual image.
 
 Remove \# from code lines and run the cell below.
 
@@ -701,7 +700,7 @@ Remove \# from code lines and run the cell below.
 
 What do you observe? Was the classical PCA effective at isolating the moving objects from the background? Briefly explain your findings. (*Reasoning: 3 points*)
 
-9. **Residuals of robust PCA:** Use the same helper functions but this time to compute the residuals of the robust PCA. Visualize the original and the residuals frames side-by-side.
+9.  **Residuals of robust PCA:** Use the same helper functions but this time to compute the residuals of the robust PCA. Visualize the original and the residuals frames side-by-side.
 
 Complete the code, remove \# from code lines and run the cell below. (*Writing: 3 points*)
 
@@ -715,7 +714,7 @@ Complete the code, remove \# from code lines and run the cell below. (*Writing: 
 
 10. **Conclusions:** Which method best isolate the "outliers". Explain briefly the observed results. (*Reasoning: 4 points*)
 
->Feel free to change frame value to check other parts of the video. You can also change the cutoff values in the `show_frame_residual()` to filter more or less noise.
+> Feel free to change frame value to check other parts of the video. You can also change the cutoff values in the `show_frame_residual()` to filter more or less noise.
 
 ## Reproducibility and Organization Checklist (5 points)
 
