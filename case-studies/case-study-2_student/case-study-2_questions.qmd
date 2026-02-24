@@ -37,7 +37,7 @@ Your submission must include:
 
 ## 🏁 Milestone 1: Missing Values (40 points)
 
-> Real datasets often contain missing values that can influence conclusions if handled poorly. In this case study, you will apply what we learned in class to identify missing data mechanisms, visualize patterns of missingness, and evaluate how different imputation strategies affect analysis results in simulated and real datasets.
+Real datasets often contain missing values that can influence conclusions if handled poorly. In this case study, you will apply what we learned in class to identify missing data mechanisms, visualize patterns of missingness, and evaluate how different imputation strategies affect analysis results in simulated and real datasets.
 
 ### Task 1: Load and explore data (5 points)
 
@@ -210,7 +210,7 @@ Remove \# from code lines and run the cell below.
 
 **Simulation Outline**
 
-We now conduct a simulation study based on the reference population `storms_pop`. In each simulation replicate, we:
+We now conduct a simulation study based on the reference population `storms_pop`, according to the following steps:
 
 -   **Step 1**: Draw a random sample of size 1000 from the population `storms_pop`.
 
@@ -228,7 +228,7 @@ We now conduct a simulation study based on the reference population `storms_pop`
 
 ### Task 1: Simulating data with MCAR (10 points)
 
-1.  **Helper functions** Complete the code below to create helper functions that will be used to implement the simulation study. Then remove \# from code lines and run the cell. (*Writing: 5 points*)
+1.  **Helper functions:** Complete the code below to create helper functions that will be used to implement the simulation study. Then remove \# from code lines and run the cell. (*Writing: 5 points*)
 
 > Tip: Similar functions were used in the last worksheet.
 
@@ -288,7 +288,7 @@ A key argument in many of the helper functions is the dataset (`dat`). Although 
 
 ```
 
-2.  **Simulate MCAR in one random sample** Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove \# from code lines and run the cell. 
+2.  **Simulate MCAR in one random sample:** Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove \# from code lines and run the cell. 
 
 Visualize the resulting dataset adding a layer with missing values below data values. (*Writing: 5 points*)
 
@@ -318,7 +318,7 @@ Visualize the resulting dataset adding a layer with missing values below data va
 
 ### Task 2: Imputation and Estimation (5 points)
 
-**Imputation and Estimation** The following code uses the helper functions to impute the simulated dataset with the following methods (step 3) and then estimate a linear regression (step 4):
+**Imputation and Estimation:** The following code uses the helper functions to impute the simulated dataset with the following methods (step 3) and to estimate a linear regression (step 4):
 
 -   mean imputation
 -   regression imputation (using `pressure` as a covariate)
@@ -337,7 +337,7 @@ Remove \# from code lines and run the cell below.
 # storms_mice <- est_mice_imp(storms_mcar)
 ```
 
-3.  **Comparison** Remove \# from code lines and run the cell below to compare the estimated coefficients using the original sample, the listwise deletion method (complete case), and the imputed samples.
+3.  **Comparison:** Remove \# from code lines and run the cell below to compare the estimated coefficients using the original sample, the listwise deletion method (complete case), and the imputed samples.
 
 Compare the results obtained. What do they suggest about the methods? Are these results sufficient to draw general conclusions about the relative performance of the methods? Justify your answer. (*Reasoning: 5 points*)
 
@@ -351,7 +351,7 @@ Compare the results obtained. What do they suggest about the methods? Are these 
 
 ### Task 3: Full simulation (15 points)
 
-4.  **It's time to repeat** Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove \# from code lines and run the cell. 
+4.  **It's time to repeat:** Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove \# from code lines and run the cell. 
 
 What are the dimensions of the object `datasets`? Explain how they relate to the simulation design. (*Writing: 5 points*)
 
@@ -386,7 +386,7 @@ What are the dimensions of the object `datasets`? Explain how they relate to the
 
 ```
 
-5.  **Summarize**. Last step: summarize the results of the simulation study. Let's first combine the estimated coefficient of the variable `pressure` derived from all datasets, original, complete and imputed. What are the dimensions of the object `coeffs_pressure`? Explain how they relate to the simulation design. (*Writing: 2 points*)
+5.  **Summarize** the results of the simulation study (last step). Let's first combine the estimated coefficient of the variable `pressure` derived from all datasets, original, complete and imputed. What are the dimensions of the object `coeffs_pressure`? Explain how they relate to the simulation design. (*Writing: 2 points*)
 
 Remove \# from code lines and run the cell. 
 
@@ -423,7 +423,7 @@ Complete the code, remove \# from code lines and run the cell. (*Writing: 3 poin
 #   theme(legend.position = "none")
 ```
 
-7.  **Bias and variability**. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods. Run the cell below.
+7.  **Bias and variability**. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods. 
 
 Compare the median estimated coefficients and median estimated standard errors across simulation runs for each imputation method. What do these summaries suggest about the bias and variability of the coefficient estimates under different imputation methods? (*Reasoning: 5 points*)
 
@@ -448,7 +448,9 @@ In this milestone, we illustrate how robust statistical methods can improve move
 
 The video consists of 54 frames. Each frame is a color image represented by three 144 $\times$ 180 grids of pixels corresponding to the Red, Green, and Blue (RGB) channels, respectively. A common way to analyze video data is to "flatten" each frame into a long vector containing all its pixel values. Thus, the data can be represented in a dataset with 54 rows (one per frame) and 77,760 columns (144 $\times$ 180 $\times$ 3) for each pixel value. In this activity we'll flatten and reshape the data multiple times depending on the task using some helper functions.
 
-**Dimensionality reduction** Although each frame has thousands of pixel values, the fixed camera results in most pixels belonging to a stable background that changes very little across frames. When rows in a dataset do not differ much, a useful technique to reduce the dimensionality is Principal Component Analysis (PCA). Intuitively, PCA captures the common background pattern shared across frames and expresses each frame as a slight variation of this baseline.
+**Dimensionality reduction** 
+
+Although each frame has thousands of pixel values, the fixed camera results in most pixels belonging to a stable background that changes very little across frames. When rows in a dataset do not differ much, a useful technique to reduce the dimensionality is Principal Component Analysis (PCA). Intuitively, PCA captures the common background pattern shared across frames and expresses each frame as a slight variation of this baseline.
 
 To do that, PCA creates new variables called *principal components* that summarize the main patterns of variation across observations in the data. The first component captures the dominant pattern. The second captures the next most important pattern in the remaining (residual) variation not explained by the first component, and so on. In many applications, only a few components are needed to represent most of the structure in high-dimensional data such as images.
 
@@ -460,9 +462,9 @@ PCA is not a learning objective in this course and we don't expect you to know i
 
 ### Task 1: Classical PCA in `R` (5 points)
 
-In this short activity, we use the `iris` dataset in `R` to build intuition for why highly similar rows can often be summarized by very few principal components. This dataset contains measurements for 150 flowers on four continuous variables describing the shape of the flower, well as a categorical variable indicating species.
+In this short activity, we use the `iris` dataset in `R` to build intuition for why highly similar rows can often be summarized by very few principal components. This dataset contains measurements for 150 flowers on four continuous variables describing the shape of the flower, as well as a categorical variable indicating species.
 
-1.  **Toy Data:** Let's use `iris` to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.
+1. **Datasets:** Let's use `iris` to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.
 
 -   **True:** Use the original `iris_numeric` data, containing real variation across flowers, but keeping only the numerical variables.
 
@@ -498,7 +500,7 @@ Complete the code below to create these datasets, remove \# from code lines and 
 
 2.  **Computing PCA:** You can now apply PCA to the four datasets using the function `prcomp()` from the `stats` package. We will use `scale = TRUE`, which standardizes each variable to have mean 0 and variance 1 before performing PCA. This ensures that all variables contribute equally to the analysis and that PCA focuses on patterns of variation rather than differences in measurement scale.
 
-PCA creates new variables called principal components (PCs). With four original variables, PCA produces four PCs, but they are ordered so that the first few typically capture most of the variation in the data. The principal component scores are stored in the element `$x` of the PCA object (e.g., `pca_iris$x`).
+PCA creates new variables called principal components (PCs). With four original variables, PCA produces four PCs, but they are ordered so that the first few typically capture most of the variation in the data. The principal component values (aka "scores") are stored in the element `$x` of the PCA object (e.g., `pca_iris$x`).
 
 Complete the code below to create these datasets, remove \# from code lines and run the cell. (*Writing: 1 points*)
 
@@ -513,7 +515,7 @@ Complete the code below to create these datasets, remove \# from code lines and 
 # head(pca_iris$x)
 ```
 
-3.  **Variation and PCs:** The following code creates a data frame summarizing the proportion of variation explained by each principal component (PC) for the four datasets. Remove \# from code lines and run the cell.
+3.  **Variation and PCs:** The following code creates a dataframe summarizing the proportion of variation explained by each principal component (PC) for the four datasets. Remove \# from code lines and run the cell.
 
 In the Proportional rows dataset, PC1 explains almost all the variation. This occurs because the flowers differ only in overall magnitude: each flower is simply a scaled version of the same template, so all variation happens in one direction.
 
@@ -554,11 +556,11 @@ In the Proportional rows dataset, PC1 explains almost all the variation. This oc
 
 ### Task 2: Back to the video dataset! (10 points)
 
-In the previous task, you saw that only a few principal components (PCs) can be sufficient to capture most of the important variation in a dataset. Let's load and examine the video dataset.
+In the previous task, you saw that in same cases only a few principal components (PCs) can be sufficient to capture most of the important variation in a dataset. Let's load and examine the video dataset.
 
-> Some of the tools used in this analysis are beyond the scope of the course. Thus, we wrote some helper functions to implement those difficult steps.
+> Some of the tools used in this analysis are beyond the scope of the course. Thus, we wrote some helper functions to implement those difficult steps: `source("case-study-2-functions.R")`
 
-**Video data** Run the code below to load the `data_dogWalker` data from the `cellWise` package. Use the helper function called `show_frame()` to display a frame of this video. Remember that there are 54 frames so try passing different numbers to `frame_number` to "watch" the video in `R`!
+**Video data:** Run the code below to load the `data_dogWalker` data from the `cellWise` package. Use the helper function called `show_frame()` to display a frame of this video. Remember that there are 54 frames so try passing different numbers to `frame_number` to "watch" the video in `R`!
 
 > As an example, we are showing the 10th frame
 
@@ -587,7 +589,7 @@ Complete the code below, remove \# from code lines and run the cell. (*Writing: 
 #dim(dogWalker_dat) <- c(dims[...], prod(dims[...:...]))
 ```
 
-5.  **Dimensionality:** The resulting dataset has too many variables. Can we use PCA to reduce the dimensionality without losing important information?? Note that the background is largely stable since the camera is static, thus it does not vary in many independent ways across frames.
+5.  **Dimensionality:** The resulting dataset has too many variables. Can we use PCA to reduce the dimensionality without losing important information? Note that the background is largely stable since the camera is static, thus it does not vary in many independent ways across frames.
 
 Based on your previous examination of PCA, do you expect that much of the information in the frames can be represented using only a few PCs? Explain your response. (*Reasoning: 2 points*)
 
@@ -631,7 +633,7 @@ Does the image of the loadings of classical PCA corroborate your previous hypoth
 
 7. **Robust PCA:** PCA is based estimates of the mean and covariance matrix of the variables. Using classical sample estimates can make PCA extremely sensitive to outliers as well. 
 
-In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we sue robust estimators? 
+In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we use robust estimators? 
 
 To implement robust PCA, we start by using the function `estLocScale()` to obtain a robust location and scale estimates of the data. We then wrap the data and compute PCA. 
 
@@ -688,7 +690,7 @@ Remove \# from code lines and run the cell below.
 ```{r}
 # # Compute the fitted frames and residuals:
 # aveX <- colMeans(dogWalker_dat)
-# X.residual <- compute_residuals(dogWalker_dat, cloadings, aveX, k = 3)
+# Xresidual <- compute_residuals(dogWalker_dat, cloadings, aveX, k = 3)
 
 # # residuals as images
 #
@@ -697,7 +699,7 @@ Remove \# from code lines and run the cell below.
 # show_frame_residual(20, dogWalker_dat, Xresidual, locs, scales, 20)
 ```
 
-What do you observe? was the classical PCA effective at isolating the moving objects from the background? Briefly explain your findings. (*Reasoning: 3 points*)
+What do you observe? Was the classical PCA effective at isolating the moving objects from the background? Briefly explain your findings. (*Reasoning: 3 points*)
 
 9. **Residuals of robust PCA:** Use the same helper functions but this time to compute the residuals of the robust PCA. Visualize the original and the residuals frames side-by-side.
 

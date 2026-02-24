@@ -271,9 +271,7 @@ window.Quarto = {
 </section>
 <section id="milestone-1-missing-values-40-points" class="level2">
 <h2 class="anchored" data-anchor-id="milestone-1-missing-values-40-points">🏁 Milestone 1: Missing Values (40 points)</h2>
-<blockquote class="blockquote">
 <p>Real datasets often contain missing values that can influence conclusions if handled poorly. In this case study, you will apply what we learned in class to identify missing data mechanisms, visualize patterns of missingness, and evaluate how different imputation strategies affect analysis results in simulated and real datasets.</p>
-</blockquote>
 <section id="task-1-load-and-explore-data-5-points" class="level3">
 <h3 class="anchored" data-anchor-id="task-1-load-and-explore-data-5-points">Task 1: Load and explore data (5 points)</h3>
 <p>In this milestone we will be working with the <code>storms</code> dataset from the <code>dplyr</code> package. The package contains information about tropical storms and hurricanes in the Atlantic Ocean from 1975 onward. Each row represents a storm at a specific point in time, with variables such as storm name, year, month, day, time, latitude, longitude, wind speed, air pressure, and storm category.</p>
@@ -429,7 +427,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidy(lm(tropicalstorm_force_diameter~pressure + lat + type, storms_pop))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Simulation Outline</strong></p>
-<p>We now conduct a simulation study based on the reference population <code>storms_pop</code>. In each simulation replicate, we:</p>
+<p>We now conduct a simulation study based on the reference population <code>storms_pop</code>, according to the following steps:</p>
 <ul>
 <li><p><strong>Step 1</strong>: Draw a random sample of size 1000 from the population <code>storms_pop</code>.</p></li>
 <li><p><strong>Step 2</strong>: Introduce missingness in the outcome variable according to a MCAR mechanism.</p></li>
@@ -444,7 +442,7 @@ window.Quarto = {
 <section id="task-1-simulating-data-with-mcar-10-points" class="level3">
 <h3 class="anchored" data-anchor-id="task-1-simulating-data-with-mcar-10-points">Task 1: Simulating data with MCAR (10 points)</h3>
 <ol type="1">
-<li><strong>Helper functions</strong> Complete the code below to create helper functions that will be used to implement the simulation study. Then remove # from code lines and run the cell. (<em>Writing: 5 points</em>)</li>
+<li><strong>Helper functions:</strong> Complete the code below to create helper functions that will be used to implement the simulation study. Then remove # from code lines and run the cell. (<em>Writing: 5 points</em>)</li>
 </ol>
 <blockquote class="blockquote">
 <p>Tip: Similar functions were used in the last worksheet.</p>
@@ -502,7 +500,7 @@ window.Quarto = {
 <span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li><strong>Simulate MCAR in one random sample</strong> Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove # from code lines and run the cell.</li>
+<li><strong>Simulate MCAR in one random sample:</strong> Use the helper functions to complete the code below, which implements one simulation run (steps 1-2 of the simulation outline above). Remove # from code lines and run the cell.</li>
 </ol>
 <p>Visualize the resulting dataset adding a layer with missing values below data values. (<em>Writing: 5 points</em>)</p>
 <blockquote class="blockquote">
@@ -531,7 +529,7 @@ window.Quarto = {
 </section>
 <section id="task-2-imputation-and-estimation-5-points" class="level3">
 <h3 class="anchored" data-anchor-id="task-2-imputation-and-estimation-5-points">Task 2: Imputation and Estimation (5 points)</h3>
-<p><strong>Imputation and Estimation</strong> The following code uses the helper functions to impute the simulated dataset with the following methods (step 3) and then estimate a linear regression (step 4):</p>
+<p><strong>Imputation and Estimation:</strong> The following code uses the helper functions to impute the simulated dataset with the following methods (step 3) and to estimate a linear regression (step 4):</p>
 <ul>
 <li>mean imputation</li>
 <li>regression imputation (using <code>pressure</code> as a covariate)</li>
@@ -549,7 +547,7 @@ window.Quarto = {
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># storms_mice &lt;- est_mice_imp(storms_mcar)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
-<li><strong>Comparison</strong> Remove # from code lines and run the cell below to compare the estimated coefficients using the original sample, the listwise deletion method (complete case), and the imputed samples.</li>
+<li><strong>Comparison:</strong> Remove # from code lines and run the cell below to compare the estimated coefficients using the original sample, the listwise deletion method (complete case), and the imputed samples.</li>
 </ol>
 <p>Compare the results obtained. What do they suggest about the methods? Are these results sufficient to draw general conclusions about the relative performance of the methods? Justify your answer. (<em>Reasoning: 5 points</em>)</p>
 <div class="cell">
@@ -563,7 +561,7 @@ window.Quarto = {
 <section id="task-3-full-simulation-15-points" class="level3">
 <h3 class="anchored" data-anchor-id="task-3-full-simulation-15-points">Task 3: Full simulation (15 points)</h3>
 <ol start="4" type="1">
-<li><strong>It’s time to repeat</strong> Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove # from code lines and run the cell.</li>
+<li><strong>It’s time to repeat:</strong> Use the helper function for 500 simulation runs (steps 1-5). Complete the code, remove # from code lines and run the cell.</li>
 </ol>
 <p>What are the dimensions of the object <code>datasets</code>? Explain how they relate to the simulation design. (<em>Writing: 5 points</em>)</p>
 <blockquote class="blockquote">
@@ -598,7 +596,7 @@ window.Quarto = {
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...(..., ...))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
-<li><strong>Summarize</strong>. Last step: summarize the results of the simulation study. Let’s first combine the estimated coefficient of the variable <code>pressure</code> derived from all datasets, original, complete and imputed. What are the dimensions of the object <code>coeffs_pressure</code>? Explain how they relate to the simulation design. (<em>Writing: 2 points</em>)</li>
+<li><strong>Summarize</strong> the results of the simulation study (last step). Let’s first combine the estimated coefficient of the variable <code>pressure</code> derived from all datasets, original, complete and imputed. What are the dimensions of the object <code>coeffs_pressure</code>? Explain how they relate to the simulation design. (<em>Writing: 2 points</em>)</li>
 </ol>
 <p>Remove # from code lines and run the cell.</p>
 <div class="cell">
@@ -634,7 +632,7 @@ window.Quarto = {
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(legend.position = "none")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="7" type="1">
-<li><strong>Bias and variability</strong>. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods. Run the cell below.</li>
+<li><strong>Bias and variability</strong>. While histograms are useful for visualizing the distributions of the estimates, summary statistics provide a concise comparison across methods.</li>
 </ol>
 <p>Compare the median estimated coefficients and median estimated standard errors across simulation runs for each imputation method. What do these summaries suggest about the bias and variability of the coefficient estimates under different imputation methods? (<em>Reasoning: 5 points</em>)</p>
 <p>Remove # from code lines and run the cell.</p>
@@ -656,7 +654,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="milestone-3-robust-methods-in-motion-recognition-25-points">🏁 Milestone 3: Robust Methods in Motion Recognition (25 points)</h2>
 <p>In this milestone, we illustrate how robust statistical methods can improve movement recognition in video survillance tasks. We analyze a short video, filmed by a static camera, of a man walking a dog, available in the <code>cellWise</code> package.</p>
 <p>The video consists of 54 frames. Each frame is a color image represented by three 144 <span class="math inline">\(\times\)</span> 180 grids of pixels corresponding to the Red, Green, and Blue (RGB) channels, respectively. A common way to analyze video data is to “flatten” each frame into a long vector containing all its pixel values. Thus, the data can be represented in a dataset with 54 rows (one per frame) and 77,760 columns (144 <span class="math inline">\(\times\)</span> 180 <span class="math inline">\(\times\)</span> 3) for each pixel value. In this activity we’ll flatten and reshape the data multiple times depending on the task using some helper functions.</p>
-<p><strong>Dimensionality reduction</strong> Although each frame has thousands of pixel values, the fixed camera results in most pixels belonging to a stable background that changes very little across frames. When rows in a dataset do not differ much, a useful technique to reduce the dimensionality is Principal Component Analysis (PCA). Intuitively, PCA captures the common background pattern shared across frames and expresses each frame as a slight variation of this baseline.</p>
+<p><strong>Dimensionality reduction</strong></p>
+<p>Although each frame has thousands of pixel values, the fixed camera results in most pixels belonging to a stable background that changes very little across frames. When rows in a dataset do not differ much, a useful technique to reduce the dimensionality is Principal Component Analysis (PCA). Intuitively, PCA captures the common background pattern shared across frames and expresses each frame as a slight variation of this baseline.</p>
 <p>To do that, PCA creates new variables called <em>principal components</em> that summarize the main patterns of variation across observations in the data. The first component captures the dominant pattern. The second captures the next most important pattern in the remaining (residual) variation not explained by the first component, and so on. In many applications, only a few components are needed to represent most of the structure in high-dimensional data such as images.</p>
 <p>Since PCA may be new to many of you, we first illustrate this idea with a simple example using flower measurements in the <code>iris</code> data set, and then return to the video frames.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -674,9 +673,9 @@ Note
 </div>
 <section id="task-1-classical-pca-in-r-5-points" class="level3">
 <h3 class="anchored" data-anchor-id="task-1-classical-pca-in-r-5-points">Task 1: Classical PCA in <code>R</code> (5 points)</h3>
-<p>In this short activity, we use the <code>iris</code> dataset in <code>R</code> to build intuition for why highly similar rows can often be summarized by very few principal components. This dataset contains measurements for 150 flowers on four continuous variables describing the shape of the flower, well as a categorical variable indicating species.</p>
+<p>In this short activity, we use the <code>iris</code> dataset in <code>R</code> to build intuition for why highly similar rows can often be summarized by very few principal components. This dataset contains measurements for 150 flowers on four continuous variables describing the shape of the flower, as well as a categorical variable indicating species.</p>
 <ol type="1">
-<li><strong>Toy Data:</strong> Let’s use <code>iris</code> to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.</li>
+<li><strong>Datasets:</strong> Let’s use <code>iris</code> to create four datasets, each with the same 4 numerical columns, but different “row similarity” structures.</li>
 </ol>
 <ul>
 <li><p><strong>True:</strong> Use the original <code>iris_numeric</code> data, containing real variation across flowers, but keeping only the numerical variables.</p></li>
@@ -709,7 +708,7 @@ Note
 <ol start="2" type="1">
 <li><strong>Computing PCA:</strong> You can now apply PCA to the four datasets using the function <code>prcomp()</code> from the <code>stats</code> package. We will use <code>scale = TRUE</code>, which standardizes each variable to have mean 0 and variance 1 before performing PCA. This ensures that all variables contribute equally to the analysis and that PCA focuses on patterns of variation rather than differences in measurement scale.</li>
 </ol>
-<p>PCA creates new variables called principal components (PCs). With four original variables, PCA produces four PCs, but they are ordered so that the first few typically capture most of the variation in the data. The principal component scores are stored in the element <code>$x</code> of the PCA object (e.g., <code>pca_iris$x</code>).</p>
+<p>PCA creates new variables called principal components (PCs). With four original variables, PCA produces four PCs, but they are ordered so that the first few typically capture most of the variation in the data. The principal component values (aka “scores”) are stored in the element <code>$x</code> of the PCA object (e.g., <code>pca_iris$x</code>).</p>
 <p>Complete the code below to create these datasets, remove # from code lines and run the cell. (<em>Writing: 1 points</em>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Compute PCA</span></span>
@@ -722,7 +721,7 @@ Note
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># head(pca_iris$x)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
-<li><strong>Variation and PCs:</strong> The following code creates a data frame summarizing the proportion of variation explained by each principal component (PC) for the four datasets. Remove # from code lines and run the cell.</li>
+<li><strong>Variation and PCs:</strong> The following code creates a dataframe summarizing the proportion of variation explained by each principal component (PC) for the four datasets. Remove # from code lines and run the cell.</li>
 </ol>
 <p>In the Proportional rows dataset, PC1 explains almost all the variation. This occurs because the flowers differ only in overall magnitude: each flower is simply a scaled version of the same template, so all variation happens in one direction.</p>
 <ul>
@@ -762,11 +761,11 @@ Note
 </section>
 <section id="task-2-back-to-the-video-dataset-10-points" class="level3">
 <h3 class="anchored" data-anchor-id="task-2-back-to-the-video-dataset-10-points">Task 2: Back to the video dataset! (10 points)</h3>
-<p>In the previous task, you saw that only a few principal components (PCs) can be sufficient to capture most of the important variation in a dataset. Let’s load and examine the video dataset.</p>
+<p>In the previous task, you saw that in same cases only a few principal components (PCs) can be sufficient to capture most of the important variation in a dataset. Let’s load and examine the video dataset.</p>
 <blockquote class="blockquote">
-<p>Some of the tools used in this analysis are beyond the scope of the course. Thus, we wrote some helper functions to implement those difficult steps.</p>
+<p>Some of the tools used in this analysis are beyond the scope of the course. Thus, we wrote some helper functions to implement those difficult steps: <code>source("case-study-2-functions.R")</code></p>
 </blockquote>
-<p><strong>Video data</strong> Run the code below to load the <code>data_dogWalker</code> data from the <code>cellWise</code> package. Use the helper function called <code>show_frame()</code> to display a frame of this video. Remember that there are 54 frames so try passing different numbers to <code>frame_number</code> to “watch” the video in <code>R</code>!</p>
+<p><strong>Video data:</strong> Run the code below to load the <code>data_dogWalker</code> data from the <code>cellWise</code> package. Use the helper function called <code>show_frame()</code> to display a frame of this video. Remember that there are 54 frames so try passing different numbers to <code>frame_number</code> to “watch” the video in <code>R</code>!</p>
 <blockquote class="blockquote">
 <p>As an example, we are showing the 10th frame</p>
 </blockquote>
@@ -793,7 +792,7 @@ Note
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#dim(dogWalker_dat) &lt;- c(dims[...], prod(dims[...:...]))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
-<li><strong>Dimensionality:</strong> The resulting dataset has too many variables. Can we use PCA to reduce the dimensionality without losing important information?? Note that the background is largely stable since the camera is static, thus it does not vary in many independent ways across frames.</li>
+<li><strong>Dimensionality:</strong> The resulting dataset has too many variables. Can we use PCA to reduce the dimensionality without losing important information? Note that the background is largely stable since the camera is static, thus it does not vary in many independent ways across frames.</li>
 </ol>
 <p>Based on your previous examination of PCA, do you expect that much of the information in the frames can be represented using only a few PCs? Explain your response. (<em>Reasoning: 2 points</em>)</p>
 <p>The man and the dog in the video move across the road and appear in different locations in each frame. Can you think of them as outliers? If so, what kind of outliers do you think they are and why? (<em>Reasoning: 2 points</em>)</p>
@@ -833,7 +832,7 @@ Note
 <ol start="7" type="1">
 <li><strong>Robust PCA:</strong> PCA is based estimates of the mean and covariance matrix of the variables. Using classical sample estimates can make PCA extremely sensitive to outliers as well.</li>
 </ol>
-<p>In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we sue robust estimators?</p>
+<p>In the previous question you noticed that the pixels from the moving man and dog can “leak” into the PCA background estimate. Would this also happen if we use robust estimators?</p>
 <p>To implement robust PCA, we start by using the function <code>estLocScale()</code> to obtain a robust location and scale estimates of the data. We then wrap the data and compute PCA.</p>
 <blockquote class="blockquote">
 <p>This time we use the helper function <code>scale_filler_r()</code> to avoid scale estimates equal to 0.</p>
@@ -888,7 +887,7 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Compute the fitted frames and residuals:</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># aveX &lt;- colMeans(dogWalker_dat)</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># X.residual &lt;- compute_residuals(dogWalker_dat, cloadings, aveX, k = 3)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Xresidual &lt;- compute_residuals(dogWalker_dat, cloadings, aveX, k = 3)</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># # residuals as images</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
@@ -896,7 +895,7 @@ Note
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># scales &lt;- colSds(Xresidual)</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># show_frame_residual(20, dogWalker_dat, Xresidual, locs, scales, 20)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>What do you observe? was the classical PCA effective at isolating the moving objects from the background? Briefly explain your findings. (<em>Reasoning: 3 points</em>)</p>
+<p>What do you observe? Was the classical PCA effective at isolating the moving objects from the background? Briefly explain your findings. (<em>Reasoning: 3 points</em>)</p>
 <ol start="9" type="1">
 <li><strong>Residuals of robust PCA:</strong> Use the same helper functions but this time to compute the residuals of the robust PCA. Visualize the original and the residuals frames side-by-side.</li>
 </ol>
