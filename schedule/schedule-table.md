@@ -15,10 +15,10 @@
 |16 Feb 26 |      |READING WEEK |          |
 |18 Feb 26 |     |READING WEEK |          |
 |23 Feb 26 | Outliers and Data Anomalies   |[Imputation](slides/imputation.qmd);[Slides](slides/outliers-1.qmd)   |          |
-|25 Feb 26 | Outliers and Data Anomalies |[Slides]()   |          |
+|25 Feb 26 | Outliers and Data Anomalies and Case Study 2 Work Period |[Slides](slides/outliers-1.qmd)   |          |
 |02 Mar 26 | Outliers and Data Anomalies    |[Slides]()   |          |
-|04 Mar 26 | Simulation II    |[Slides]()   |          |
-|09 Mar 26 | Case Study 2 Work Period       |[Slides]()   |          |
+|04 Mar 26 | Outliers and Data Anomalies    |[Slides]()   |          |
+|09 Mar 26 | Simulation II and Case Study 2 Work Period       |[Slides]()   |          |
 |11 Mar 26 | Data Acquisition     |[Slides]()   | Outliers Worksheet Due at 11:59pm         |
 |16 Mar 26 | Data Acquisition     |[Slides]()   | Case Study 2 Due at 11:59pm          |
 |18 Mar 26 | Data Acquisition      |[Slides](); [Worksheet data](data/currency-data.html)  |      |
