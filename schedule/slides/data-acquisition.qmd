@@ -1,0 +1,563 @@
+---
+lecture: "Data Acquisition: APIs and Parquet"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+*This material is adapted from:* 
+
+- [*Technical Foundations of Informatics: Chapter 11 - Accessing Web Data*](https://info201.github.io/apis.html#accessing-web-apis)  
+- [https://www.dataquest.io/blog/r-api-tutorial/](https://www.dataquest.io/blog/r-api-tutorial/)
+- [*Chapter 22 of R for Data Science (2e)*](https://r4ds.hadley.nz/arrow.html#sec-parquet)
+- [*What is Parquet?*](https://www.databricks.com/glossary/what-is-parquet)
+
+<br><br>
+
+## Acquiring Data
+<br><br>
+Up until this point, we have been accessing data by
+<br><br>
+
+- Reading in data from locally-saved files via `read_csv()`, `read_delim()` etc.<br><br>
+- Using data available in `R` packages (e.g., `wildfire` data set from `diversedata`)
+
+
+
+## Scenario
+<br><br>
+Piper manages her company’s Instagram account and reviews performance metrics to guide her strategy. She typically works from a saved data file to create reports. During a live product launch, she needs to monitor engagement activity as it unfolds but finds her current data source doesn’t reflect ongoing interactions.
+<br><br>
+
+> With a partner or group, discuss: What challenges might arise from relying on static data in scenarios like Piper’s? How could accessing live data change her approach?
+
+
+## APIs
+<br><br>
+
+- API stands for **A**pplication **P**rogramming **I**nterface.
+- A web service may offer an API to make their data readily available.
+- Here are a list of some popular web services that offer public APIs: 
+  + GitHub
+  + Twitter (X)
+  + Spotify
+  + NASA
+  
+
+## RESTful APIs
+<br><br>
+
+- Web APIs define where and how certain data can be accessed
+- A popular style is called Representational State Transfer (REST)
+- We will be working with data from RESTful APIs
+
+## API Requests
+<br><br>
+There are two parts to making an API request: 
+<br><br>
+
+- The ***resource*** you want to request (i.e., the data)
+<br><br>
+- The ***verb*** specifying what you want to do with that resource (get it, update it, create one etc.)
+
+## API Requests
+
+- To access the resource of a web API, we will need a Uniform Resource Locator (URL). This is commonly known as a web address. 
+<br><br>
+- The base URL is the domain and part of the path that is included on all resources. It acts as the “root” for any particular resource. 
+  + For example, the GitHub API has a base URL of [https://api.github.com/](https://api.github.com/).
+  <br><br>
+- An endpoint specifies which resource on that domain you want to access. 
+  + For example, a specific user or organization on GitHub such as  [https://api.github.com/users/katieburak](https://api.github.com/users/katieburak).
+
+
+## Query Parameters
+- You might want to consider a subset of the data from a particular resource.
+- For example, only consdering certain users, pages or dates. 
+- We can include a set of ***query parameters*** listed after a question mark `?` in the URL in the following form:
+
+`?firstParam=firstValue&secondParam=secondValue`
+
+- In this example, `per_page=5` limits the number of repositories returned to be 5: 
+
+`https://api.github.com/users/katieburak/repos?per_page=5`
+
+> Note: you can't include spaces in a URL - you can include multiple query parameters separated by an ampersand (`&`)
+
+## HTTP Verbs
+  
+- Imagine now you want to make a request for a certain resource. Well, you will need to specify what you want to do with that resource! 
+
+- We can achieve this by specifying an ***HTTP Verb*** in the request.
+
+- When you load data from the web, you are typically sending a request to retrieve information.
+
+- This is called a `GET` request, since we are aiming to “get” (i.e., download) data from a web service. 
+
+- While this is perhaps the most popular verb choice, there are other options. 
+
+> In small groups, brainstorm other types of verbs that might be useful! 
+
+## HTTP Verbs
+  <br><br>
+  
+We will be using the `httr` package in `R`, which has functions for the following most important http verbs: 
+
+:::incremental
++ `GET()`: Return a representation of the current state of the resource
++ `HEAD()`: Return the header of the resource
++ `PATCH()`: Update a portion of the resource’s state
++ `PUT()`:  Update the resource to have a new state
++ `DELETE()`: Remove the resource
++ `POST()`: Add a new subresource 
+:::
+
+## Accessing Web APIs
+
+:::incremental
+- Now, how can you access a web API?
+- Just navigate to a particular web address (i.e., send an HTTP request to a URL)
+- Try it! Let's take a look at the web API for CitiBike NYC, a bike-sharing system in New York City, which provides the location, status and current availability for all stations:
+  <br><br>
+[https://gbfs.citibikenyc.com/gbfs/en/station_information.json](https://gbfs.citibikenyc.com/gbfs/en/station_information.json)
+- What we are doing here is getting the browser to send a GET request and display the resulting data.
+  <br><br>
+- *Attribution:* 
+  + [https://citibikenyc.com/system-data](https://citibikenyc.com/system-data)
+  + [https://cran.r-project.org/web/packages/jsonlite/vignettes/json-apis.html](https://cran.r-project.org/web/packages/jsonlite/vignettes/json-apis.html)
+:::
+
+## Accessing Web APIs in R
+  <br><br>
+To access a web API and send a GET request in `R`, we can use the `httr` package. 
+
+```{r}
+#| warning: false
+# install.packages("httr") 
+library(httr)
+library(tidyverse)
+```
+  <br><br>
+We can now use httr's `GET()` function to achieve this task: 
+
+```{r}
+GET("https://gbfs.citibikenyc.com/gbfs/en/station_information.json")
+```
+
+## The Response
+
+::: columns
+::: {.column width="50%"}
+
+![](img/letter.jpg)
+:::
+
+::: {.column width="50%"}
+
+ - Each response has two parts: the *header* and the *body*.
+ <br><br> 
+ - Think of the response as an envelope: the header contains meta-data like the address and postage date, while the body contains the actual contents of the letter (i.e., the data).
+
+:::
+:::
+
+## 
+
+If we print out the response, we can see some information about it stored in the **response header**.
+```{r}
+response <- GET("https://gbfs.citibikenyc.com/gbfs/en/station_information.json")
+
+print(response)
+```
+
+The response header is comprised of: 
+	
+- The response URL
+- The date and time when the server generated the response
+- The HTTP status code returned by the server (200 means the request was successful- make sure to check this!)
+- The content-type of the response (e.g, JSON format - more details to follow)
+- The size of the response body
+
+## Other status codes
+
+- If the status code returned by the server isn't 200, it can tell you a variety of information about the error.
+- Status codes of the form 4XX indicate a client error/problem with the request (e.g., 404 - not found).
+- Status codes of the form 5XX indicate a server error/problem (e.g., 500 - internal server error).
+
+> *https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status*
+
+## The Body
+	
+Let's take a look at the content of the response body using the `content` function: 
+
+```{r}
+response_body <- content(response, as = "raw")
+
+head(response_body)
+```
+
+It looks like a bit of a mess...
+
+> *Note: 	The `as` argument is the desired type of output: raw, text or parsed. `content` attempts to automatically figure out which one is most appropriate, based on the content-type.*
+
+## JSON Data
+
+- Right now, the body of the data isn't really usable (it is in raw Unicode).
+- First, we need to convert it into **J**ava**S**cript **O**bject **N**otation (JSON) format.
+- JSON format is a common way that APIs return data (recall the Content-Type in the response header).
+- JSON is formatted as a series of key-value pairs.
+- Certain words (i.e., keys) are associated with certain values. For example: 
+
+```json
+{
+    "name": "Ada Lovelace",
+    "university": "University of London"
+}
+```
+
+## JSON Data
+
+- Our first step is to convert the raw Unicode into a character vector using the `rawToChar()` function: 
+
+```{r}
+raw.character <- rawToChar(response_body)
+```
+  <br><br>
+It's still a bit messy, but at least now it is a bit more human-readable.
+  <br><br>
+```r
+[1] "{\"data\": {\"stations\": [{\"rental_uris\": {\"ios\": \"https://bkn.lft.to/lastmile_qr_scan\", \"android\": \"https://bkn.lft.to/lastmile_qr_scan\"}, \"capacity\": 45, \"short_name\": \"3460.06\", \"lon\": -74.00933, \"station_id\": \"1900660954723519204\", \"electric_bike_surcharge_waiver\": false, \"eightd_has_key_dispenser\": false
+```
+
+## 
+
+Next, we can convert it from a raw character vector into a list using the `fromJSON()` function from the `jsonlite` package.  
+
+```{r}
+#| warning: false
+# install.packages(jsonlite)
+library(jsonlite)
+
+data <- fromJSON(raw.character)
+data
+```
+
+## 
+
+- Right now, `data` is being stored as a list (actually, its a nested list that has lists within lists). We need to find the element in this list that contains the data we want!
+
+
+```{r}
+class(data)
+names(data)
+```
+
+
+```{r}
+class(data$data)
+names(data$data)
+```
+
+```{r}
+class(data$data$stations)
+names(data$data$stations)
+```
+
+## 
+
+```{r}
+stations <- data |>
+  pluck("data", "stations")
+
+stations
+```
+
+
+## API Keys
+
+- Web services often require that you register with them in order to access their API 
+- They may require that you use an API key (basically an access token that acts as a password) in order to send a request
+- Make sure to check the API's documentation to learn how to obtain an API key and how to insert it into your request
+
+> Note: API keys are like passwords and shouldn't be shared with others or in any files committed to GitHub! If you need to use an API key, you can create a separate script file in your repo (e.g., `api-keys.R`) which assigns the key to a variable. You can then include this script in a  `.gitignore` file in your repo to prevent it from being shared with the world. 
+
+## iClicker question
+
+Piper wants to see information on only the last 3 posts from a user’s Instagram account via an API. Which part of the request controls this?
+
+A) HTTP verb
+B) Endpoint
+C) Query parameters
+D) Response header
+
+## iClicker question 
+
+After parsing JSON from an API into R, you find the data is nested within multiple lists. What is your next step?
+
+A) Use `pluck()` or `$` to access the specific element you need
+B) Change the HTTP verb to `POST`
+C) Rewrite the base URL
+D) Convert the response to Unicode
+
+## 
+
+<p align="center">
+  <img src="https://i1.wp.com/www.jumpingrivers.com/blog/parquet-file-format-big-data-r/parquet-logo.png" style="max-width: 100%; height: auto;" />
+  <br/>
+  <span style="font-size: 12px;">
+    Source: <a href="https://i1.wp.com/www.jumpingrivers.com/blog/parquet-file-format-big-data-r/parquet-logo.png" class="text-secondary">https://i1.wp.com/www.jumpingrivers.com/blog/parquet-file-format-big-data-r/parquet-logo.png</a>
+  </span>
+</p>
+
+## Apache Parquet
+
+:::incremental
+- Apache Parquet is a free, open-source file format designed to store and process large amounts of data efficiently. 
+- It organizes data by column instead of by row, which can make storage smaller and speed up analysis.
+- Parquet works well across many programming languages (including R). 
+- It also supports complex and nested data types, making it a good fit for modern data applications.
+:::
+
+## Pros of Parquet
+
+:::incremental
+- Parquet is useful when you're working with large datasets, especially in situations where you're only interested in a few columns at a time.
+- Since the format stores data column by column, it can compress better and skip over unneeded data, reduing computational time needed. 
+- It also supports complex structures like lists and nested records, and works well with other tools like [Apache Arrow](https://arrow.apache.org/), making it a practical format for big data workflows.
+:::
+
+## CSV vs Parquet
+
+As an example, the table below shows the improvements in size, speed, and cost when converting data from CSV to Parquet format on Amazon S3.
+
+| Format           | Size on S3 | Query Time | Data Scanned | Cost    |
+|------------------|------------|------------|--------------|---------|
+| CSV              | 1 TB       | 236 sec    | 1.15 TB      | $5.75   |
+| Parquet          | 130 GB     | 6.78 sec   | 2.51 GB      | $0.01   |
+| Savings          | 87% less   | 34× faster | 99% less     | 99.7% lower |
+
+
+> Table from [https://www.databricks.com/glossary/what-is-parquet](https://www.databricks.com/glossary/what-is-parquet)
+
+## `arrow`
+
+::: columns
+::: column
+- We'll use the `arrow` package to work with Apache Parquet files in R.
+- It's designed to work with datasets that are larger than memory and is extremely fast for reading, filtering and aggregating data.
+- Plus, it provides a `dplyr` backend, so you can use familiar syntax for data manipulation!
+```{r}
+library(arrow)
+```
+
+:::
+
+::: column
+<div style="text-align: center;">
+  <img src="https://arrow.apache.org/img/arrow-logo_hex_black-txt_white-bg.png" width="300px" />
+</div>
+:::
+:::
+
+## Getting the Data
+
+- We will use the [Seattle public libraries checkout data](https://data.seattle.gov/Community-and-Culture/Checkouts-by-Title/tmmm-ytt6/about_data) 
+- The data is ~41 million rows (9GB CSV) so this step takes some time! 
+
+
+```{r,eval=FALSE}
+#| cache: true
+dir.create("data", showWarnings = FALSE) # create a data folder in your working directory
+
+curl::multi_download(
+  "https://r4ds.s3.us-west-2.amazonaws.com/seattle-library-checkouts.csv",
+  "data/seattle-library-checkouts.csv",
+  resume = TRUE
+)
+```
+
+
+- The `multi_download()` function from the `curl` package is useful for large file downloads or multiple file downloads (although we are only downloading one csv file here).
+
+> Example from [Chapter 22 of R for Data Science (2e)](https://r4ds.hadley.nz/arrow.html)
+
+
+## Opening the Data
+
+- Ok, so we have downloaded the data! How should we open it?
+- If we use `read_csv()` all of those 9GB of data will be loaded into memory (yikes!)
+- Instead we will use `arrow::open_dataset()`, which scans the structure of the data, records what it finds, then stops
+- Further rows will only be read if requested
+
+## 
+
+```{r}
+seattle_csv <- open_dataset(
+  sources = "data/seattle-library-checkouts.csv", 
+  col_types = schema(ISBN = string()),
+  format = "csv"
+)
+
+seattle_csv
+```
+
+
+> *The ISBN column is blank for about 80K rows, so we must set its type to guide Arrow.*
+
+## 
+
+```{r}
+#| cache: true
+
+seattle_csv |> glimpse()
+```
+
+
+## `compute()` vs. `collect()`
+
+- Now we can work with our data using `dplyr()` as we have done before. 
+- However, you will have to decide whether you want to store the results in a remote, temporary table (`compute()`) or bring the data into a local tibble in R (`collect()`).
+
+## 
+
+- Here is an example
+
+```{r}
+#| cache: true
+
+seattle_csv |> 
+  group_by(CheckoutYear) |> 
+  summarise(Checkouts = sum(Checkouts)) |> 
+  arrange(CheckoutYear) |> 
+  collect()
+```
+
+- This is a good start, but it still is a bit slow for some simple wrangling. Perhaps if we were to switch to a better format like parquet...
+
+## Partitioning
+
+:::incremental
+- Large datasets become inefficient to store in a single file  
+- Splitting data across multiple files can improve performance and many analyses only require a subset of files  
+- No strict rules; depends on data, access patterns, and systems  
+
+- Arrow recommendations:  
+  - Avoid files smaller than 20 MB or larger than 2 GB  
+  - Limit partitions to fewer than 10,000 files  
+  - Partition by variables used in filtering to optimize reads  
+:::
+
+## Partitioning the Seattle Library Data
+
+- Let's partition by `CheckoutYear` to create 18 manageable chunks  
+- Use `dplyr::group_by()` and `arrow::write_dataset()` to rewrite data  
+- Key args for `write_dataset()`:  
+  - `path`: directory to create files  
+  - `format`: file format (e.g., parquet)  
+  
+```{r}
+#| cache: true
+
+pq_path <- "data/seattle-library-checkouts"
+
+seattle_csv |>
+  group_by(CheckoutYear) |>
+  write_dataset(path = pq_path, format = "parquet")
+```
+
+## Results
+
+- Original single 9GB CSV rewritten into 18 parquet files
+- File sizes between 100 and 300 MB
+- Total parquet size ~4 GB (roughly half the original CSV size)
+
+```{r}
+tibble(
+  files = list.files(pq_path, recursive = TRUE),
+  size_MB = file.size(file.path(pq_path, files)) / 1024^2
+)
+```
+
+- `list.files(pq_path, recursive = TRUE)`: lists all files in subdirectories
+- `file.path(pq_path, files)`: constructs full file paths
+- `file.size(...) / 1024^2`: gets file sizes in megabytes
+- `tibble(...)`: creates a data frame with file names and sizes
+
+## Reading parquet data
+
+- Read parquet data using `open_dataset()` pointing to directory
+
+```{r}
+seattle_pq <- open_dataset(pq_path)
+```
+
+## 
+
+- Write dplyr queries on arrow datasets:
+
+```{r}
+query <- seattle_pq |> 
+  filter(CheckoutYear >= 2018, MaterialType == "BOOK") |>
+  group_by(CheckoutYear, CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(CheckoutYear, CheckoutMonth)
+
+query
+```
+
+##
+
+- Queries are lazily evaluated; actual computation happens on `collect()`:
+
+```{r}
+query |> collect()
+```
+
+## Performance Comparison: CSV vs Parquet
+
+- Timing checkouts per month in 2021 from original CSV
+```{r}
+#| cache: true
+  seattle_csv |> 
+    filter(CheckoutYear == 2021, MaterialType == "BOOK") |>
+    group_by(CheckoutMonth) |>
+    summarize(TotalCheckouts = sum(Checkouts)) |>
+    arrange(desc(CheckoutMonth)) |>
+    collect() |>
+	  system.time()
+```
+ 
+## 
+
+- Timing the same query on partitioned parquet files
+```{r}
+#| cache: true
+seattle_pq |> 
+  filter(CheckoutYear == 2021, MaterialType == "BOOK") |>
+  group_by(CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(desc(CheckoutMonth)) |>
+  collect() |>
+	system.time()
+```
+
+
+## 
+
+- About 100x speedup using partitioned parquet vs single CSV file!!! 
+- Partitioning allows reading only relevant parquet files (e.g., year 2021)
+- Parquet is a columnar binary format, reading only needed columns
+- Metadata allows skipping unnecessary data reads
+- This huge speedup highlights why converting large CSVs to parquet is beneficial!
+
+## Key Takeaways
+
+- APIs allow you to access live data using endpoints and functions like `GET()`, instead of relying on static files.  
+- API responses often need to be parsed into usable data structures.  
+- Parquet stores data in a compressed columnar format that is more efficient than csv for large or nested data sets.  
+- The `arrow` package enables lazy reading, partitioning and significantly faster operations on large data.

@@ -1,0 +1,578 @@
+---
+lecture: "Data Acquisition via Web Scraping"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+*This material is adapted from the following sources:* 
+
+- [*R for Data Science (2e): Chapter 24 - Web Scraping*](https://r4ds.hadley.nz/webscraping) 
+- [*STA 199: Introduction to Data Science and Statistical Thinking*](https://sta199-s24.github.io/), *Mine Çetinkaya-Rundel, Duke University.*
+- *Dogucu, M., & Çetinkaya-Rundel, M. (2020). Web Scraping in the Statistics and Data Science Curriculum: Challenges and Opportunities. Journal of Statistics and Data Science Education, 29(sup1), S112–S122.* [*https://doi.org/10.1080/10691898.2020.1787116*](https://doi.org/10.1080/10691898.2020.1787116)
+
+<br><br>
+
+
+## Web Scraping
+<br></br>
+
+:::incremental
+- Web scraping is a powerful tool for extracting data from web pages.
+- As we discussed previously, some websites provide APIs, in which case they should be used as the data obtained is likely more reliable.
+- However, web scraping is useful when no API is available.
+:::
+
+## Learning Objectives
+<br></br>
+
+By the end of today's lesson, you should be able to:
+
+:::incremental
+- Explain the ethics and legal considerations of web scraping.
+- Identify CSS selectors to locate specific elements on a web page.  
+- Utilize the `rvest`  package to extract data from text and HTML attributes into R.  
+- Determine and test the appropriate CSS selector needed for scraping a given web page.  
+:::
+
+## Packages
+
+
+- We’ll use the ` rvest` package, part of the `tidyverse` (but not core).
+- We will also use the `robotstxt` package to verify whether we *can* scrape data from a particular url. 
+
+<div style="text-align: center;">
+  <img src="https://rvest.tidyverse.org/logo.png" style="width: 20%;" />
+</div>
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+```
+## 
+<br></br>
+
+Many websites present their content (including data) using HyperText Markup Language (HTML).
+
+:::{.columns .justify-center}
+::: {.column width="45%"}
+![](img/lakelouise.png)
+:::
+
+::: {.column width="45%"}
+![](img/html.png)
+:::
+:::
+
+<div style="text-align: center; font-size: 0.9em; margin-top: 1em;">
+Source: <a href="https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise" target="_blank">https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise</a>
+</div>
+
+
+
+
+## Introduction to HTML
+
+- Web scraping requires a basic understanding of HTML, which structures web pages.
+- Example of a simple HTML structure:
+
+```html
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sample Webpage</title>
+  </head>
+  <body>
+    <h2 class="main-title">Welcome to My Site!</h2>
+    <p>Here is some sample text with <em>emphasis</em> included.</p>
+    <img src="sample-image.png" alt="A descriptive image" width="200">
+  </body>
+</html>
+```
+- While this course doesn't aim to teach HTML in depth, having a basic understanding is useful for getting started with web scraping.
+
+## HTML Structure
+<br></br>
+
+- HTML consists of **elements** with:
+  - **Start tag** (e.g., `<p>`) 
+  - **Content** (text or other elements)
+  - **End tag** (e.g., `</p>`)
+- Some tags can contain other elements, forming a **hierarchical structure**.
+
+---
+
+
+## Essential HTML Elements
+<br></br>
+
+:::: {.columns}
+
+::: {.column width="30%"}
+### **Document Structure**  
+- `<html>`: The root element.  
+- `<head>`: Metadata like title and styles.  
+- `<body>`: The visible content.  
+:::
+
+::: {.column width="30%"}
+### **Block Elements**  
+- `<h1>` - Headings  
+- `<p>` - Paragraphs  
+- `<section>` - Sections  
+- `<ol>` - Ordered lists  
+:::
+
+::: {.column width="30%"}
+### **Inline Elements**  
+- `<b>` - Bold  
+- `<i>` - Italics  
+- `<a>` - Links  
+:::
+
+:::: 
+
+---
+
+## Understanding HTML Elements
+<br></br>
+
+- Elements may contain **child elements**.
+- Example:
+
+```html
+<p>
+  Hello! My <b>name</b> is Katie.
+</p>
+```
+
+- Here, `<p>` is the parent, `<b>` is the child
+- Note that `<b>` has no children, but it has the content "name"
+
+---
+
+## HTML Attributes
+<br></br>
+
+- Attributes provide extra information about elements.
+- Example syntax:
+  ```html
+  <a href="https://ubc-stat.github.io/dsci-200/">Click here</a>
+  ```  
+- `<a>` is the tag (HTML element) for a link.
+- href is the attribute of the `<a>` tag, which specifies the URL the link points to.
+- "https://ubc-stat.github.io/dsci-200/" is the value of the href attribute, indicating the destination of the link.
+- [`Click here`](https://ubc-stat.github.io/dsci-200) is the content inside the tag, which the user will see and click.
+
+## Important attributes
+<br></br>
+
+  - **id**: Unique identifier (e.g., `id='header'`)
+  - **class**: Categorizes elements (e.g., `class='nav-item'`)
+  - **href**: Specifies link destinations (`<a href='example.com'>`)
+  - **src**: Image sources (`<img src='photo.jpg'>`)
+<br></br>
+
+> id and class are used with CSS (Cascading Style Sheets) to control the appearance of a page and are often useful when web scraping data!
+
+
+
+## Important `rvest` functions 
+
+:::incremental
+- `read_html()`: Loads HTML content from a webpage URL or a character string.
+
+- `html_element()`: Retrieve a single matching element based on a CSS selector.
+
+- `html_elements()`: Retrieves all matching elements using CSS selectors.
+
+- `html_table()`: Converts HTML tables into data frames.
+
+- `html_text()`/`html_text2()`: Gets the text content from within HTML tags.
+
+- `html_name()`: Returns the tag name(s) of HTML elements.
+
+- `html_attr()`: Retrieves a single attribute.
+
+- `html_attrs()`: Retrieves all attributes. 
+:::
+
+## Sample HTML  
+
+```{r}
+html <- 
+'<html>
+  <head>
+    <title>Sample Webpage</title>
+  </head>
+  <body>
+    <h2 class="sub-title">Welcome to My Site!</h2>
+    <p>Here is some sample text.</p>
+    <p> Some useful information... </p>
+    <img src="sample-image.png" alt="A descriptive image" width="200">
+  </body>
+</html>'
+
+read_html(html)
+```
+## Selecting elements
+
+
+- `html_element()` always returns the same number of outputs as inputs. If you apply it to a whole document it’ll give you the first match:
+
+```{r}
+read_html(html) |> html_element("head")
+```
+
+
+```{r}
+read_html(html) |> html_elements("p")
+```
+
+
+
+
+## Extracting Text & Attributes
+<br></br>
+
+- Use `html_text()` or `html_text2()` to get **text content**:
+```{r}
+read_html(html) |> html_element("head") |> html_text()
+```
+
+
+- You can use `html_attr()` to extract **attributes** like links:
+
+```{r}
+html <- minimal_html("
+  <p><a href='https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus'>UBC coffee map</a></p>
+")
+	
+html |> 
+  html_elements("p") |> 
+  html_element("a") |> 
+  html_attr("href")
+```
+
+
+## Nesting Selections
+<br></br>
+
+- In most cases, you'll use `html_elements()` and `html_element()` together.  
+- Typically, `html_elements()` identifies elements that will become **observations**, and `html_element()` extracts **variables** from those elements. Here’s an example using a simple HTML list of coffee shops around UBC:
+
+```{r}
+html <- read_html("
+  <ul>
+    <li><b>Loafe Cafe</b> serves <i>coffee and pastries</i> and has <span class='seating'>indoor & outdoor seating</span></li>
+    <li><b>Bean Around the World</b> serves <i>great coffee</i></li>
+    <li><b>JJ Bean</b> serves <i>strong espresso</i> and has <span class='seating'>cozy indoor seating</span></li>
+    <li><b>The Great Dane</b> has <span class='seating'>a dog-friendly patio</span></li>
+  </ul>
+  ")
+```
+
+## Extracting Coffee Shop Names
+<br></br>
+
+We use `html_elements("li")` to create a vector where each element represents a different coffee shop:
+
+```{r}
+shops <- html |> html_elements("li")
+shops
+```
+To extract the name of each shop, we use `html_element("b")`:
+
+```{r}
+shops |> html_element("b")
+```
+
+## Extracting Seating Information
+<br></br>
+
+Suppose we want one seating description for each shop, even if some don't have seating information.  
+
+```{r}
+shops |> html_element(".seating")
+```
+##
+<br></br>
+
+What if we used `html_elements(".seating")`?
+
+. . .
+```{r}
+shops |> html_elements(".seating")
+```
+
+## HTML Tables
+<br></br>
+
+HTML tables are often used to store tabular data on web pages and you can easily extract it. Key HTML table elements:
+
+- `<table>`: Defines the table.
+- `<tr>`: Table row.
+- `<th>`: Table heading.
+- `<td>`: Table data.
+
+## Example of an HTML Table
+<br></br>
+
+Here’s a simple HTML table with two columns and three rows:
+
+```{r}
+html <- read_html("
+  <table class='mytable'>
+    <tr><th>x</th>   <th>y</th></tr>
+    <tr><td>1.5</td> <td>2.7</td></tr>
+    <tr><td>4.9</td> <td>1.3</td></tr>
+    <tr><td>7.2</td> <td>8.1</td></tr>
+  </table>
+  ")
+```
+
+## Extracting Tables
+<br></br>
+
+- You can use the `rvest` package to extract tables from HTML pages:
+
+```{r}
+html |> 
+  html_element(".mytable") |> 
+  html_table()
+```
+
+- The `html_table()` function automatically converts values like "x" and "y" to numbers.
+
+- If you want to prevent this automatic conversion and handle it yourself, use the `convert = FALSE` argument.
+
+## CSS Selectors
+<br></br>
+
+CSS (Cascading Style Sheets) helps define page structure and styling.
+To extract elements efficiently, we use **selectors** such as:
+<br></br>
+
+- `p` → selects all `<p>` elements
+- `.title` → selects elements with class "title"
+- `#title` → selects element with ID "title"
+
+Finding the right CSS selector is typically the hardest part of web scraping. This is because you want a selector that is specific enough that you aren't capturing unnecessary information, but you also don't want your scope to be too narrow such that you miss important information.
+
+
+
+## SelectorGadget
+<br></br>
+
+
+- Instead of inspecting raw HTML code to find the right CSS selector, we are going to use a tool called [SelectorGadget](https://selectorgadget.com/).
+
+- SelectorGadget works best with Chrome browsers. If you haven't done so already, [install the Chrome extension here](https://chromewebstore.google.com/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en).
+
+- Once added, the icon should appear to the right of the search bar.
+
+![](img/selectorgadget.png)
+
+##
+
+::: {style="text-align: center; margin: 0; padding: 0;"}
+<img src="img/selector.gif" style="width: 75%; margin: 0; padding: 0;"/>
+:::
+
+## In-class Exercise
+
+- You're planning an adventurous getaway to the stunning wilderness of Lake Louise in Banff National Park, Alberta. To make the most of your trip, you want to gather up-to-date information on the best hiking trails in the area with details like trail distance and elevation gain. 
+
+- In this exercise, you'll explore a real-world data collection task by scraping hiking trail information from Parks Canada.
+
+
+## The Data
+<br></br>
+
+- Let's explore the Park's Canada website that contains information about day hikes in the Lake Louise area:
+
+[https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise](https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise)
+
+## 
+
+- We first need to verify that this website *can* be scraped (note this is very different than whether the website *should* be scraped from an ethical or legal perspective).
+- To do this, we can use the `paths_allowed()` function from the `robotstxt` package. This function checks if a bot has permissions to access page(s) and returns `TRUE` if allowed based on the site's `robots.txt` file. 
+
+<br></br>
+```{r}
+paths_allowed("https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise", warn=FALSE)
+```
+
+## Load and Read HTML Page
+
+- Let's use `rvest` to read HTML content from Parks Canada site  
+
+```{r}
+page <- read_html("https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise")
+
+page
+```
+
+## Extract Trail Information
+
+
+- Use SelectorGadget to obtain the CSS selectors to locate the trail names, the distance and elevation gain. 
+
+
+```{r}
+trails <- page |>
+  html_elements("td:nth-child(1)") |>
+  html_text()
+
+distances <- page |>
+  html_elements("td:nth-child(2)") |>
+  html_text()
+
+elevations <- page |>
+  html_elements("td:nth-child(4)") |>
+  html_text()
+```
+
+
+## Create a data frame
+
+```{r}
+hikes_raw <- tibble(
+  trail = trails,
+  distance = distances,
+  elevation = elevations
+)
+
+head(hikes_raw)
+```
+
+## Clean data
+
+:::incremental
+- GOALS: 
+	- Extract numeric values from text fields
+	- Handle values of "minimal" for elevation
+	- Convert distances to numeric (in km) in a consistent format
+
+- To achieve these goals, we need to do some string manipulation using the `stringr` package. This is not a specific learning objective of this course, but some string manipulation may be needed depending on the data. Please consult your instructor or a TA for any additional guidance on working with strings and regular expressions in R. 
+:::
+
+## 
+
+```{r}
+library(stringr)
+
+hikes_clean <- hikes_raw |>
+  mutate(
+    distance_km = str_extract(distance, "\\d+(\\.\\d+)?") |> as.numeric(),
+    elevation_m = case_when(
+      str_detect(elevation, "minimal") ~ 0,
+      TRUE ~ str_extract(elevation, "\\d+") |> as.numeric()
+    )
+  ) |>
+  select(-distance, -elevation)
+
+head(hikes_clean)
+```
+
+## 
+
+What are some of the longest day hikes in the Lake Louise area? Now that the data is in a tidy format, we are free to explore! 
+
+```{r}
+ggplot(hikes_clean, aes(x = reorder(trail, distance_km), y = distance_km)) +
+  geom_col(fill = "#0570b0") +
+  coord_flip() +
+  labs(
+    title = "Bar Chart of Distance by Trail",
+    x = "Trail",
+    y = "Distance (km)"
+  ) +
+  theme_minimal()
+```
+
+## A Note about Workflows
+
+:::incremental
+- When working in a Jupyter notebook, everytime we click "Restart and Run All Cells" our entire analysis is rerun. 
+- If we are web scraping, this means that each time we run our notebook we will be scraping new data, which isn't ideal since:
+	- a) the data could have changed since the first time we wrote our analysis (not good for reproducibility)
+	- b) it puts additional strain on the particular web server
+- A suggested workflow is to use a script to save your code, save your scraped data as a CSV using `write_csv()` and use the saved data in your analysis.
+:::
+
+
+## Scraping Ethics 
+<br></br>
+
+- Web scraping has both ethical and legal considerations, which can vary depending on your location. 
+
+- We will discuss data ownership in more detail later in the course, but for now we will discuss some general guidelines.
+<br></br>
+
+> *Note: While we are providing general guidelines and best practices for web scraping, please note that we are not lawyers. If you are unsure about the legal or ethical implications of a specific scraping project, you should consult a qualified legal professional. Always prioritize respecting website terms, data privacy, and intellectual property rights.*
+
+## Scraping Ethics 
+<br></br>
+**General Guidelines**: 
+
+:::incremental
+- Data should be public, non-personal, and factual to minimize legal risks.  
+- Avoid scraping to profit from the data unless legally cleared.  
+- Be respectful of server resources by pausing between requests. 
+- If unsure, consult a legal professional.
+:::
+
+## Terms of Service
+<br></br>
+
+:::incremental
+- Many websites have "Terms of Service" that often prohibit scraping.  
+- **Key points to consider**:  
+  - In the US, you are generally not bound by terms of service unless you explicitly agree (e.g., by creating an account or checking a box).  
+  - In Europe, terms of service may be enforceable even without explicit agreement.  
+  - Respect these terms where possible but know they may not always be legally binding.  
+:::
+
+## In-Class Exercise: Reviewing Terms of Service
+<br></br>
+
+In this exercise, we’ll explore the **Terms of Service** on a website. Your task:
+
+  - Visit a website of your choice (you could use the Parks Canada website).
+  - Look for the "Terms of Service" or "Terms and Conditions" link (often found in the footer).
+  - Check if there are any explicit mentions of scraping or data usage.
+  - Discuss the terms with the people around you. Try and answer the following questions:  
+    - Is web scraping prohibited?  
+    - Are there any clauses about data usage or copyright?
+    
+We will share our findings and discuss how these terms might affect web scraping.
+
+## In-Class Exercise: Reviewing Terms of Service
+<br></br>
+As a class, let's take a look at [Spotify's User Guidelines](https://www.spotify.com/ca-en/legal/user-guidelines/). 
+
+<img src=https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png width="300">
+
+## Personally Identifiable Information 
+<br></br>
+
+- Avoid scraping personally identifiable information such as names, emails, phone numbers, or birthdays.  
+- Releasing public but identifiable information can cause harm.
+- For example, you can read about the legal battle of [hiQ vs. LinkedIn](https://blog.apify.com/hiq-v-linkedin/), in which hiQ Labs used web scraping to collect public data from LinkedIn profiles.
+
+
+## Key Takeaways  
+<br></br>
+
+- Recognizing legal and ethical considerations are critical when scraping data from the web  
+- Implementing the `rvest` package for scraping and parsing HTML content  
+- Understanding the purpose of HTML and CSS selectors when extracting data from web pages  
+- Just because a website *can* be scraped, doesn't mean we should! 
+
