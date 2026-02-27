@@ -45,3 +45,4 @@ vignettes/*.pdf
 # R package: bookdown caching files
 /*_files/
 
+seattle-library-checkouts.csv
