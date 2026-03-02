@@ -204,10 +204,10 @@ sim_stats <- replicate(10000, {
 sim_stats <- t(sim_stats) |> as.data.frame()
 
 sd(sim_stats$mean)
-1/sqrt(1000)
+1/sqrt(100)
 
 sd(sim_stats$median)
-sqrt(pi/2)*0.001
+sqrt(pi/2)*0.1
 ```
 
 ##
