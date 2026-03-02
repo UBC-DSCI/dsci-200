@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en-CA"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
+  <title>UBC DSCI 200 – outliers-2</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-3faac352b6474bbecd2b121c3fec1fe3.css">
+  <link rel="stylesheet" href="tachyons-minimal.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
+<h2>Outliers II</h2>
+<p><span class="secondary">DSCI 200</span></p>
+<p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
+<p>Last modified – 02 March 2026</p>
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\maximize}{maximize}
+\DeclareMathOperator*{\find}{find}
+\DeclareMathOperator{\st}{subject\,\,to}
+\newcommand{\E}{E}
+\newcommand{\Expect}[1]{\E\left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left[ #1 \right]}
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[#1,\ #2\right]}
+\newcommand{\given}{\ \vert\ }
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\snorm}[1]{\lVert #1 \rVert}
+\newcommand{\tr}[1]{\mbox{tr}(#1)}
+\newcommand{\brt}{\widehat{\beta}^R_{s}}
+\newcommand{\brl}{\widehat{\beta}^R_{\lambda}}
+\newcommand{\bls}{\widehat{\beta}_{ols}}
+\newcommand{\blt}{\widehat{\beta}^L_{s}}
+\newcommand{\bll}{\widehat{\beta}^L_{\lambda}}
+\newcommand{\U}{\mathbf{U}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\V}{\mathbf{V}}
+\]</span></p>
+</section>
+<section id="attribution" class="slide level2">
+<h2>Attribution</h2>
+<p><br></p>
+<ul>
+<li><p>Some examples and references are from <a href="https://www.sciencedirect.com/science/article/pii/S2452306224000078"><em>Challenges of cellwise outliers</em>, by Raymaekers and Rousseeuw</a></p></li>
+<li><p><a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781119214656"><em>Robust Statistics</em>, by Maronna, Martin, Yohai, Salibian-Barrera</a></p></li>
+</ul>
+<p><br></p>
+<p><em>In memory of my mentor and friend</em></p>
+<p>Professor Ruben Zamar (1949-2023)</p>
+<p>who contributed greatly to Robust Statistics and beyond …</p>
+<p><br><br></p>
+</section>
+<section id="review" class="slide level2 scrollable">
+<h2>Review</h2>
+<ul>
+<li><p>An <strong>outlier</strong> is an observation that deviates from the bulk of the data, an atypical observation.</p></li>
+<li><p>As with missing values, outliers require careful diagnosis and appropriate handling before analysis.</p></li>
+<li><p>We defined both casewise and cellwise outliers</p></li>
+</ul>
+<p><img data-src="img/glass.png"> - We used simulations to examine 2 univariate estimators: the <strong>mean</strong> and the <strong>median</strong></p>
+</section>
+<section id="univariate-estimators" class="slide level2">
+<h2>Univariate estimators</h2>
+<p><strong>Data</strong>: n = 180 archeological glass spectra with d = 750 wavelengths (<a href="https://www.tandfonline.com/doi/figure/10.1080/00401706.2017.1340909?scroll=top&amp;needAccess=true">Detecting Deviating Data Cells</a>, Rousseeuw &amp; Van Den Bossche, <em>Technometrics</em> 2018)</p>
+<p>Looking at the values of the wavelength V169:</p>
+
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-1-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="robustness-vs-efficiency" class="slide level2">
+<h2>Robustness <em>vs</em> Efficiency</h2>
+<p><br></p>
+<p><img data-src="img/rob-eff.png"> <br></p>
+<h3 id="can-we-achieve-robustness-without-loss-of-efficiency">Can we achieve robustness without loss of efficiency?</h3>
+</section>
+<section id="which-distribution-generated-the-data" class="slide level2">
+<h2>Which distribution generated the data?</h2>
+
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center r-stretch"><p>Suppose that we know which distribution generated the data but we don’t know it’s center, how can we estimated?</p>
+</section>
+<section id="maximum-likelihood-estimator-mle" class="slide level2 scrollable">
+<h2>Maximum Likelihood Estimator (MLE)</h2>
+<ul>
+<li><p>MLE chooses the center <span class="math inline">\(\mu\)</span> that makes the observed data most probable under the assumed distribution</p></li>
+<li><p>The Normal distribution is given by:</p></li>
+</ul>
+<p><span class="math display">\[
+f(x;\mu,\sigma)
+=
+\frac{1}{\sqrt{2\pi}\,\sigma}
+\exp\!\left(
+-\frac{(x-\mu)^2}{2\sigma^2}
+\right)
+\]</span></p>
+<ul>
+<li>If we assume that the data is Normally distributed, with <span class="math inline">\(\sigma = 1\)</span> but <span class="math inline">\(\mu\)</span> unknown, and with some math, we can show that</li>
+</ul>
+<p><span class="math display">\[
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+\]</span></p>
+</section>
+<section id="the-mle" class="slide level2">
+<h2>The MLE</h2>
+<p><span class="math display">\[
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+\]</span></p>
+<div title="Definition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Definition</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\arg\min_{\mu}\)</span> denotes the value of <span class="math inline">\(\mu\)</span> that minimizes the sum of squared deviations.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Using Calculus, it is easy to show that</p>
+<p><span class="math display">\[\hat{\mu}_{\text{MLE}} = \bar{x}\]</span></p>
+<h4 id="when-the-data-is-normal-the-mle-is-the-sample-mean">when the data is Normal, the MLE is the sample mean</h4>
+<p>Similarly, we can show that</p>
+<h4 id="when-the-data-is-double-exponential-the-mle-is-the-sample-median">when the data is double exponential, the MLE is the sample median</h4>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>But in general, we don’t know the distribution. It may even be a mixture of distributions that generated contaminated data!</p>
+
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-3-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-m-estimators" class="slide level2">
+<h2>The M-estimators</h2>
+<p><span class="math display">\[
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+\]</span> From the MLE to the M-estimator:</p>
+<p><span class="math display">\[
+\hat{\mu}_M
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\rho(x_i-\mu)
+\]</span></p>
+<h4 id="instead-of-of-squaring-deviations-we-measure-them-with-a-differentiable-function-rho">Instead of of squaring deviations, we measure them with a differentiable function <span class="math inline">\(\rho\)</span></h4>
+</section>
+<section id="the-rho-function" class="slide level2">
+<h2>The <span class="math inline">\(\rho\)</span> function</h2>
+<p><br></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 15%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Robustness <em>vs</em> Efficiency</th>
+<th></th>
+<th><span class="math inline">\(\rho(r)\)</span></th>
+<th></th>
+<th>Estimator</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img data-src="img/mean.png" width="200"></td>
+<td></td>
+<td>square</td>
+<td></td>
+<td>Mean</td>
+</tr>
+<tr class="even">
+<td><img data-src="img/median.png" width="200"></td>
+<td></td>
+<td>absolute</td>
+<td></td>
+<td>Median</td>
+</tr>
+<tr class="odd">
+<td>&nbsp;<br> <img data-src="img/m-estimators.png" width="200"></td>
+<td></td>
+<td>&nbsp;<br><br> differenciable?</td>
+<td></td>
+<td>&nbsp;<br><br> M-estimator</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p>Different <span class="math inline">\(M\)</span>-estimators of location have been proposed:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># grid</span></span>
+<span id="cb1-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="at">length.out =</span> <span class="dv">400</span>)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-5"><a></a>  <span class="at">x =</span> x,</span>
+<span id="cb1-6"><a></a>  <span class="at">Mean     =</span> <span class="fl">0.5</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb1-7"><a></a>  <span class="at">Median   =</span> <span class="fu">abs</span>(x),</span>
+<span id="cb1-8"><a></a>  <span class="at">Huber    =</span> <span class="fu">Mpsi</span>(x, <span class="at">psi =</span> <span class="st">"huber"</span>,    <span class="at">cc =</span> <span class="fl">1.5</span>,   <span class="at">deriv =</span> <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb1-9"><a></a>  <span class="at">Bisquare =</span> <span class="fu">Mpsi</span>(x, <span class="at">psi =</span> <span class="st">"bisquare"</span>, <span class="at">cc =</span> <span class="fl">4.685</span>, <span class="at">deriv =</span> <span class="sc">-</span><span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>x, <span class="at">names_to =</span> <span class="st">"type"</span>, <span class="at">values_to =</span> <span class="st">"rho"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mean"</span>, <span class="st">"Huber"</span>, <span class="st">"Median"</span>, <span class="st">"Bisquare"</span>))</span>
+<span id="cb1-12"><a></a>  )</span>
+<span id="cb1-13"><a></a></span>
+<span id="cb1-14"><a></a>cc_lines <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-15"><a></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"Huber"</span>, <span class="st">"Huber"</span>, <span class="st">"Bisquare"</span>, <span class="st">"Bisquare"</span>),</span>
+<span id="cb1-16"><a></a>  <span class="at">xint =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">4.685</span>, <span class="fl">4.685</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> <span class="fu">levels</span>(df<span class="sc">$</span>type)))</span>
+<span id="cb1-18"><a></a></span>
+<span id="cb1-19"><a></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, rho)) <span class="sc">+</span></span>
+<span id="cb1-20"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-21"><a></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb1-22"><a></a>    <span class="at">data =</span> cc_lines,</span>
+<span id="cb1-23"><a></a>    <span class="fu">aes</span>(<span class="at">xintercept =</span> xint),</span>
+<span id="cb1-24"><a></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb1-25"><a></a>    <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb1-26"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb1-27"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">rho</span>(x))) <span class="sc">+</span></span>
+<span id="cb1-28"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-4-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="tuning-constants" class="slide level2">
+<h2>Tuning constants</h2>
+<ul>
+<li><p>The Huber M-estimator: quadratic near 0 and linear in the tails</p></li>
+<li><p>The tuning constant (c) marks the change and controls the robustness–efficiency trade-off.</p></li>
+</ul>
+<h4 id="table-shows-values-v-such-that-varest-v-n">Table shows values V, such that <code>Var(est) = V / n</code></h4>
+<table class="caption-top">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 28%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">c</th>
+<th style="text-align: right;">Estimator</th>
+<th>Efficiency</th>
+<th style="text-align: right;"><span class="math inline">\(\varepsilon=0\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\varepsilon=0.1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">Median</td>
+<td>0.64</td>
+<td style="text-align: right;">1.571</td>
+<td style="text-align: right;">1.897</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Huber M</td>
+<td>0.90</td>
+<td style="text-align: right;">1.107</td>
+<td style="text-align: right;">1.443</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><strong>1.345</strong></td>
+<td style="text-align: right;"><strong>Huber M</strong></td>
+<td><strong>0.95</strong></td>
+<td style="text-align: right;"><strong>1.047</strong></td>
+<td style="text-align: right;"><strong>1.439</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">Huber M</td>
+<td>0.99</td>
+<td style="text-align: right;">1.010</td>
+<td style="text-align: right;">1.549</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(\infty\)</span></td>
+<td style="text-align: right;">Mean</td>
+<td>1</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">10.900</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="for-sigma-unknown" class="slide level2">
+<h2>For <span class="math inline">\(\sigma\)</span> unknown</h2>
+<p>In practice, <span class="math inline">\(\sigma\)</span> (SD of data, aka scale) is usually unknown and must be estimated from the data.</p>
+<ul>
+<li><p>The SD is efficient but not robust to outliers</p></li>
+<li><p>The MAD (median absolute deviation) is highly robust:</p></li>
+</ul>
+<p><span class="math display">\[1.4826 \, \text{median}(|x_i - \text{median}|)\]</span></p>
+<ul>
+<li><p>We can define an M-estimator for the scale (M-scale)</p></li>
+<li><p>We can also estimate location and scale jointly via M-estimation</p></li>
+</ul>
+</section>
+<section id="in-r" class="slide level2">
+<h2>In R</h2>
+<ul>
+<li><p><code>mad(x)</code> computes the MAD</p></li>
+<li><p><code>locScaleM(x)</code> in <code>RobStatTM</code> computes Huber and bisquare M-estimators (jointly for location and scale) at various asymptiotic efficiency values</p></li>
+</ul>
+</section>
+<section id="simulation-design" class="slide level2">
+<h2>Simulation design</h2>
+<ul>
+<li><p>Clean data: Generate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1</p></li>
+<li><p>Contaminated data: Generate a sample of size 100, with 90% from <span class="math inline">\(\mathcal{N}(0,1)\)</span> and 10% from <span class="math inline">\(\mathcal{N}(0,10)\)</span></p></li>
+<li><p>Compute the mean and the median</p></li>
+<li><p>Repeat 10000 times</p></li>
+<li><p>Approximate the variance of the estimators</p></li>
+</ul>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>rcont_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">eps =</span> <span class="fl">0.10</span>, <span class="at">mu0 =</span> <span class="dv">0</span>, <span class="at">sigma0 =</span> <span class="dv">1</span>, <span class="at">sigma1 =</span> <span class="dv">10</span>) {</span>
+<span id="cb2-4"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma0)</span>
+<span id="cb2-5"><a></a>  </span>
+<span id="cb2-6"><a></a>  k <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(eps <span class="sc">*</span> n)              </span>
+<span id="cb2-7"><a></a>  <span class="cf">if</span> (k <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb2-8"><a></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, k)</span>
+<span id="cb2-9"><a></a>    x[idx] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma1)</span>
+<span id="cb2-10"><a></a>  }</span>
+<span id="cb2-11"><a></a>  x</span>
+<span id="cb2-12"><a></a>}</span>
+<span id="cb2-13"><a></a></span>
+<span id="cb2-14"><a></a><span class="co">#no contamination</span></span>
+<span id="cb2-15"><a></a></span>
+<span id="cb2-16"><a></a>eps <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb2-17"><a></a>sim <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
+<span id="cb2-18"><a></a>    x <span class="ot">&lt;-</span> <span class="fu">rcont_norm</span>(<span class="dv">100</span>, <span class="at">eps =</span> eps)</span>
+<span id="cb2-19"><a></a>    <span class="fu">c</span>(</span>
+<span id="cb2-20"><a></a>      <span class="at">Mean     =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb2-21"><a></a>      <span class="at">Median   =</span> <span class="fu">median</span>(x),</span>
+<span id="cb2-22"><a></a>      <span class="at">Bisquare_3.44 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.85</span>)<span class="sc">$</span>mu,</span>
+<span id="cb2-23"><a></a>      <span class="at">Bisquare_4.68 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.95</span>)<span class="sc">$</span>mu</span>
+<span id="cb2-24"><a></a>    )</span>
+<span id="cb2-25"><a></a>  })</span>
+<span id="cb2-26"><a></a></span>
+<span id="cb2-27"><a></a>  </span>
+<span id="cb2-28"><a></a>var0  <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">t</span>(sim), <span class="dv">2</span>, var)</span>
+<span id="cb2-29"><a></a></span>
+<span id="cb2-30"><a></a><span class="co">#with contamination</span></span>
+<span id="cb2-31"><a></a>eps <span class="ot">=</span> <span class="fl">0.20</span></span>
+<span id="cb2-32"><a></a>sim <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
+<span id="cb2-33"><a></a>    x <span class="ot">&lt;-</span> <span class="fu">rcont_norm</span>(<span class="dv">100</span>, <span class="at">eps =</span> eps)</span>
+<span id="cb2-34"><a></a>    <span class="fu">c</span>(</span>
+<span id="cb2-35"><a></a>      <span class="at">Mean     =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb2-36"><a></a>      <span class="at">Median   =</span> <span class="fu">median</span>(x),</span>
+<span id="cb2-37"><a></a>      <span class="at">Bisquare_3.44 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.85</span>)<span class="sc">$</span>mu,</span>
+<span id="cb2-38"><a></a>      <span class="at">Bisquare_4.68 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.95</span>)<span class="sc">$</span>mu</span>
+<span id="cb2-39"><a></a>    )</span>
+<span id="cb2-40"><a></a>  })</span>
+<span id="cb2-41"><a></a>  </span>
+<span id="cb2-42"><a></a>var20 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">t</span>(sim), <span class="dv">2</span>, var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="approximated-variance-of-the-bisquare-m-estimator" class="slide level2">
+<h2>Approximated Variance of the Bisquare M-estimator</h2>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Estimator</th>
+<th style="text-align: center;">Eff</th>
+<th style="text-align: center;">ε = 0</th>
+<th style="text-align: center;">ε = 0.20</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mean</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">0.010</td>
+<td style="text-align: center;">0.208</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Median</td>
+<td style="text-align: center;">0.64</td>
+<td style="text-align: center;">0.016</td>
+<td style="text-align: center;">0.023</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bisquare_3.44</td>
+<td style="text-align: center;">0.85</td>
+<td style="text-align: center;">0.012</td>
+<td style="text-align: center;">0.015</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bisquare_4.68</td>
+<td style="text-align: center;">0.95</td>
+<td style="text-align: center;">0.011</td>
+<td style="text-align: center;">0.016</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="detecting-outliers" class="slide level2">
+<h2>Detecting Outliers</h2>
+<p>How do we know if the data contains outliers?</p>
+<p><br></p>
+<h4 id="the-3-sigma-rule">The <strong>3-<span class="math inline">\(\sigma\)</span> rule</strong></h4>
+<ul>
+<li><p>Classical rule: observations far from the mean are considered outliers</p></li>
+<li><p>What is “far”? We can measure</p></li>
+</ul>
+<p><span class="math display">\[z_i = \frac{x_i-\bar x}{s}\]</span></p>
+<ul>
+<li>Flag as outlier if: <span class="math inline">\(|z_i| &gt; 3\)</span></li>
+</ul>
+</section>
+<section id="iclicker-1-interpretation-of-the-rule" class="slide level2">
+<h2>iClicker 1: interpretation of the rule</h2>
+<p><br></p>
+<p>With the 3-<span class="math inline">\(\sigma\)</span> rule:</p>
+<p><span class="math display">\[|z_i| = \left|\frac{x_i-\bar x}{s}\right| &gt; 3 \]</span></p>
+<p>an observation is flagged as an outlier if</p>
+<ul>
+<li><p>A. The observation is more than 3 standard deviations from the mean</p></li>
+<li><p>B. The observation is in the largest 3% of the data</p></li>
+<li><p>C. The observation is larger than 3 times the mean</p></li>
+<li><p>D. The observation is more than 3 units from the median</p></li>
+</ul>
+</section>
+<section id="iclicker-2-use-the-rule" class="slide level2">
+<h2>iClicker 2: use the rule</h2>
+<p><br></p>
+<p>Which points are flagged as outliers using the 3-<span class="math inline">\(\sigma\)</span> rule?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">13</span>,<span class="dv">20</span>)</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a><span class="fu">mean</span>(x); <span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.714286</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.40068</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>z  <span class="ot">&lt;-</span> (x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">/</span><span class="fu">sd</span>(x)</span>
+<span id="cb6-2"><a></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.7992550 -0.6802170 -0.5611790 -0.4421411 -0.3231031  0.9863147  1.8195805</code></pre>
+</div>
+</div>
+<ul>
+<li><p>A. Both <span class="math inline">\(x=13\)</span> and <span class="math inline">\(x=20\)</span> are flagged</p></li>
+<li><p>B. Only <span class="math inline">\(x=20\)</span> is flagged</p></li>
+<li><p>C. All points are flagged</p></li>
+<li><p>D. None of points are flagged</p></li>
+</ul>
+</section>
+<section id="masking" class="slide level2">
+<h2>Masking</h2>
+<p><br></p>
+<ul>
+<li><p>The mean and SD are sensitive to outliers</p></li>
+<li><p>Extreme observations pull the mean toward them and inflate the standard deviation, reducing their standardized distance</p></li>
+<li><p>Robust alternative: use median and MAD (or other robust loc-scale estimators)</p></li>
+</ul>
+<h4 id="robust-z-score">Robust z-score:</h4>
+<p><span class="math display">\[z_i^{rob} = \frac{x_i-\text{median}}{\text{MAD}}\]</span></p>
+<p><strong>Rule</strong>: <span class="math inline">\(|z_i^{rob}| &gt; 3\)</span></p>
+</section>
+<section id="iclicker-3-use-the-robust-rule" class="slide level2">
+<h2>iClicker 3: use the robust rule</h2>
+<p><br></p>
+<p>Which points are flagged as outliers using the 3-<span class="math inline">\(\sigma\)</span> rule?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">13</span>,<span class="dv">20</span>)</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a><span class="fu">median</span>(x); <span class="fu">mad</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.9652</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>z  <span class="ot">&lt;-</span> (x<span class="sc">-</span><span class="fu">median</span>(x))<span class="sc">/</span><span class="fu">mad</span>(x)</span>
+<span id="cb11-2"><a></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.0117361 -0.6744908 -0.3372454  0.0000000  0.3372454  4.0469446  6.4076622</code></pre>
+</div>
+</div>
+<ul>
+<li><p>A. Both <span class="math inline">\(x=13\)</span> and <span class="math inline">\(x=20\)</span> are flagged</p></li>
+<li><p>B. Only <span class="math inline">\(x=20\)</span> is flagged</p></li>
+<li><p>C. All points are flagged</p></li>
+<li><p>D. None of points are flagged</p></li>
+</ul>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<p><br></p>
+<ul>
+<li><p>Classical estimators (mean, SD) are highly sensitive to outliers</p></li>
+<li><p>Robust estimators reduce the influence of extreme observations</p></li>
+<li><p>M-estimators provide a flexible compromise between efficiency and robustness</p></li>
+<li><p>The tuning constant controls this trade-off</p></li>
+<li><p>Robust methods improve both estimation and outlier detection</p></li>
+</ul>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>UBC DSCI 200</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

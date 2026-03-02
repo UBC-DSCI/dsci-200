@@ -1,0 +1,562 @@
+---
+lecture: "Outliers II"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br>
+
+- Some examples and references are from [*Challenges of cellwise outliers*, by Raymaekers and Rousseeuw](https://www.sciencedirect.com/science/article/pii/S2452306224000078) 
+
+- [*Robust Statistics*, by Maronna, Martin, Yohai, Salibian-Barrera](https://onlinelibrary.wiley.com/doi/book/10.1002/9781119214656)
+
+<br>
+
+*In memory of my mentor and friend*
+
+Professor Ruben Zamar (1949-2023)
+
+who contributed greatly to Robust Statistics and beyond ...
+
+<br><br>
+
+
+## Review {.scrollable}
+
+- An **outlier** is an observation that deviates from the bulk of the data, an atypical observation. 
+
+- As with missing values, outliers require careful diagnosis and appropriate handling before analysis.
+
+- We defined both casewise and cellwise outliers
+
+![](img/glass.png)
+- We used simulations to examine 2 univariate estimators: the **mean** and the **median**
+
+## Univariate estimators
+
+**Data**: n = 180 archeological glass spectra with d = 750 wavelengths ([Detecting Deviating Data Cells](https://www.tandfonline.com/doi/figure/10.1080/00401706.2017.1340909?scroll=top&needAccess=true), Rousseeuw & Van Den Bossche, *Technometrics* 2018)
+
+Looking at the values of the wavelength V169:
+
+```{r echo=FALSE}
+library(cellWise)
+library(ggplot2)
+library(dplyr)
+library(robustbase)
+
+library(RobStatTM)
+
+data(data_glass)
+df <- data.frame(x = data_glass[,"V169"])
+
+ggplot(df, aes(x = x)) +
+  geom_histogram(bins = 40, fill = "grey80", color = "white") +
+  geom_vline(aes(xintercept = mean(x), color = "Mean"), linewidth = 1) +
+  geom_vline(aes(xintercept = median(x), color = "Median"), linewidth = 1) +
+  scale_color_manual(values = c(Mean = "red", Median = "blue")) +
+  labs(title = "Wavelet Glass Spectra",
+       x = "Coefficient value",
+       y = "Count",
+       color = NULL) +
+  theme_minimal()
+```
+
+## Robustness *vs* Efficiency
+<br>
+
+![](img/rob-eff.png)
+<br>
+
+### Can we achieve robustness without loss of efficiency?
+
+
+## Which distribution generated the data? 
+
+```{r echo=FALSE}
+set.seed(1)
+
+# True distribution
+mu_true <- 2
+sigma <- 1
+n <- 30
+
+x <- rnorm(n, mu_true, sigma)
+
+# Candidate means
+mus <- c(-1.0, 0, 2.0, 3.0,5.0)
+
+grid <- expand.grid(
+  x = seq(mu_true - 4*sigma, mu_true + 4*sigma, length.out = 400),
+  mu = mus
+) |>
+  mutate(d = dnorm(x, mean = mu, sd = sigma))
+
+dat <- tibble(x = x)
+
+ggplot() +
+  
+  # Normal densities
+  geom_line(
+    data = grid,
+    aes(x = x, y = d, color = factor(mu)),
+    linewidth = 1.2
+  ) +
+  
+  # data points under axis
+  geom_point(
+    data = dat,
+    aes(x = x, y = -0.02),
+    size = 2.5
+  ) +
+  
+  # vertical lines at candidate means
+  geom_vline(
+    xintercept = mus,
+    linetype = "dashed",
+    color = "grey40"
+  ) +
+  
+  scale_color_brewer(palette = "Dark2", name = expression(mu)) +
+  
+  labs(
+    x = "x",
+    y = "density",
+    title = ""
+  ) +
+  
+  coord_cartesian(ylim = c(-0.05, max(grid$d))) +
+  
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black")
+  )
+```
+
+Suppose that we know which distribution generated the data but we don't know it's center, how can we estimated?
+
+## Maximum Likelihood Estimator (MLE) {.scrollable}
+
+- MLE chooses the center $\mu$ that makes the observed data most probable under the assumed distribution
+
+- The Normal distribution is given by:
+
+$$
+f(x;\mu,\sigma)
+=
+\frac{1}{\sqrt{2\pi}\,\sigma}
+\exp\!\left(
+-\frac{(x-\mu)^2}{2\sigma^2}
+\right)
+$$
+
+- If we assume that the data is Normally distributed, with $\sigma = 1$ but $\mu$ unknown, and with some math, we can show that
+
+
+$$
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+$$
+
+## The MLE
+
+$$
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+$$
+
+::: {.callout-note title="Definition"}
+$\arg\min_{\mu}$ denotes the value of $\mu$ that minimizes the sum of squared deviations.
+:::
+
+Using Calculus, it is easy to show that 
+
+$$\hat{\mu}_{\text{MLE}} = \bar{x}$$
+
+#### when the data is Normal, the MLE is the sample mean
+
+Similarly, we can show that 
+
+#### when the data is double exponential, the MLE is the sample median
+
+## 
+
+But in general, we don't know the distribution. It may even be a mixture of distributions that generated contaminated data!
+
+```{r echo=FALSE}
+set.seed(1)
+
+# Mixture parameters
+w1 <- 0.9
+w2 <- 0.1
+mu1 <- 2
+mu2 <- 5
+sigma <- 1
+n <- 60
+
+# Sample from mixture
+z <- rbinom(n, 1, w2)
+x <- rnorm(n, mu1, sigma)
+x[z == 1] <- rnorm(sum(z == 1), mu2, sigma)
+dat <- tibble(x = x)
+
+# Density grid
+grid <- tibble(x = seq(-1, 8, length.out = 600)) |>
+  mutate(
+    comp1 = w1 * dnorm(x, mu1, sigma),
+    comp2 = w2 * dnorm(x, mu2, sigma),
+    mix   = comp1 + comp2
+  )
+
+grid_long <- grid |>
+  pivot_longer(cols = c(mix, comp1, comp2),
+               names_to = "curve",
+               values_to = "density") |>
+  mutate(curve = factor(
+    curve,
+    levels = c("mix", "comp1", "comp2"),
+    labels = c("Mixture", "0.9 × N(2,1)", "0.1 × N(5,1)")
+  ))
+
+ggplot() +
+  geom_line(
+    data = grid_long,
+    aes(x = x, y = density, color = curve, linewidth = curve)
+  ) +
+  scale_color_manual(
+    values = c(
+      "Mixture" = "black",
+      "0.9 × N(2,1)" = "#0072B2",  # blue
+      "0.1 × N(5,1)" = "#D55E00"   # vermillion
+    )
+  ) +
+  scale_linewidth_manual(
+    values = c("Mixture" = 1.3, "0.9 × N(2,1)" = 1, "0.1 × N(5,1)" = 1)
+  ) +
+  geom_point(
+    data = dat,
+    aes(x = x, y = -0.01),
+    size = 2.5,
+    color = "black"
+  ) +
+  coord_cartesian(ylim = c(-0.03, max(grid$mix))) +
+  labs(x = "x", y = "density") +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black"),
+    legend.title = element_blank()
+  )
+```
+
+## The M-estimators
+
+
+$$
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+$$
+From the MLE to the M-estimator:
+
+$$
+\hat{\mu}_M
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\rho(x_i-\mu)
+$$
+
+#### Instead of of squaring deviations, we measure them with a differentiable function $\rho$
+
+## The $\rho$ function
+
+<br>
+
+| Robustness *vs* Efficiency|  | $\rho(r)$  | | Estimator | 
+|---|--|---|--|---|
+| ![](img/mean.png){width=200} | |square | | Mean |
+| ![](img/median.png){width=200} | |absolute | |Median |
+| &nbsp;<br> ![](img/m-estimators.png){width=200} | | &nbsp;<br><br>  differenciable? | | &nbsp;<br><br>  M-estimator |
+
+## 
+
+Different $M$-estimators of location have been proposed:
+
+```{r}
+# grid
+x <- seq(-6, 6, length.out = 400)
+
+df <- tibble(
+  x = x,
+  Mean     = 0.5 * x^2,
+  Median   = abs(x),
+  Huber    = Mpsi(x, psi = "huber",    cc = 1.5,   deriv = -1),
+  Bisquare = Mpsi(x, psi = "bisquare", cc = 4.685, deriv = -1)) |>
+  pivot_longer(-x, names_to = "type", values_to = "rho") |>
+  mutate(type = factor(type, levels = c("Mean", "Huber", "Median", "Bisquare"))
+  )
+
+cc_lines <- tibble(
+  type = c("Huber", "Huber", "Bisquare", "Bisquare"),
+  xint = c(-1.5, 1.5, -4.685, 4.685)) |>
+  mutate(type = factor(type, levels = levels(df$type)))
+
+ggplot(df, aes(x, rho)) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    data = cc_lines,
+    aes(xintercept = xint),
+    linetype = "dashed",
+    linewidth = 0.6) +
+  facet_wrap(~ type, ncol = 2, scales = "free_y") +
+  labs(x = "x", y = expression(rho(x))) +
+  theme_minimal(base_size = 14)
+```
+
+## Tuning constants
+
+- The Huber M-estimator: quadratic near 0 and linear in the tails
+
+- The tuning constant \(c\) marks the change and controls the robustness–efficiency trade-off.
+
+#### Table shows values V, such that `Var(est) = V / n`
+
+| c | Estimator | Efficiency | $\varepsilon=0$ | $\varepsilon=0.1$ |
+|------:|-----------:|--------|------------------:|--------------------:|
+| 0 | Median | 0.64 | 1.571 | 1.897 |
+| 1.0 | Huber M | 0.90 | 1.107 | 1.443 |
+| **1.345** | **Huber M** | **0.95** | **1.047** | **1.439** |
+| 2.0 | Huber M | 0.99 | 1.010 | 1.549 |
+| $\infty$ | Mean | 1 | 1.000 | 10.900 |
+
+## For $\sigma$ unknown
+
+In practice, $\sigma$ (SD of data, aka scale) is usually unknown and must be estimated from the data.
+
+- The SD is efficient but not robust to outliers 
+
+- The MAD (median absolute deviation) is highly robust:
+
+$$1.4826 \, \text{median}(|x_i - \text{median}|)$$ 
+
+- We can define an M-estimator for the scale (M-scale)
+
+- We can also estimate location and scale jointly via M-estimation
+
+## In R
+
+- `mad(x)` computes the MAD
+
+- `locScaleM(x)` in `RobStatTM` computes Huber and bisquare M-estimators (jointly for location and scale) at various asymptiotic efficiency values
+
+## Simulation design
+
+- Clean data: Generate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1
+
+- Contaminated data: Generate a sample of size 100, with 90% from $\mathcal{N}(0,1)$ and 10% from $\mathcal{N}(0,10)$
+
+- Compute the mean and the median
+
+- Repeat 10000 times
+
+- Approximate the variance of the estimators
+
+
+##
+
+```{r}
+set.seed(200)
+
+rcont_norm <- function(n, eps = 0.10, mu0 = 0, sigma0 = 1, sigma1 = 10) {
+  x <- rnorm(n, mean = mu0, sd = sigma0)
+  
+  k <- ceiling(eps * n)              
+  if (k > 0) {
+    idx <- sample(1:n, k)
+    x[idx] <- rnorm(k, mean = mu0, sd = sigma1)
+  }
+  x
+}
+
+#no contamination
+
+eps = 0
+sim <- replicate(1000, {
+    x <- rcont_norm(100, eps = eps)
+    c(
+      Mean     = mean(x),
+      Median   = median(x),
+      Bisquare_3.44 = locScaleM(x, psi="bisquare", eff=0.85)$mu,
+      Bisquare_4.68 = locScaleM(x, psi="bisquare", eff=0.95)$mu
+    )
+  })
+
+  
+var0  <- apply(t(sim), 2, var)
+
+#with contamination
+eps = 0.20
+sim <- replicate(1000, {
+    x <- rcont_norm(100, eps = eps)
+    c(
+      Mean     = mean(x),
+      Median   = median(x),
+      Bisquare_3.44 = locScaleM(x, psi="bisquare", eff=0.85)$mu,
+      Bisquare_4.68 = locScaleM(x, psi="bisquare", eff=0.95)$mu
+    )
+  })
+  
+var20 <- apply(t(sim), 2, var)
+
+```
+
+## Approximated Variance of the Bisquare M-estimator
+
+<br>
+
+```{r echo = FALSE}
+library(knitr)
+
+eff <- c(
+  Mean = 1,
+  Median = 0.64,
+  Bisquare_3.44 = 0.85,
+  Bisquare_4.68 = 0.95
+)
+
+table_var <- tibble(
+  Estimator = names(var0),
+  Eff = unname(eff[Estimator]),
+  `ε = 0` = unname(var0),
+  `ε = 0.20` = unname(var20)
+) |>
+  mutate(
+    Eff = ifelse(is.na(Eff), "", sprintf("%.2f", Eff)),
+    across(c(`ε = 0`, `ε = 0.20`), ~ round(.x, 3))
+  )
+
+kable(table_var, align = "lccc",
+      col.names = c("Estimator", "Eff", "ε = 0", "ε = 0.20"))
+```
+
+## Detecting Outliers
+
+How do we know if the data contains outliers?
+
+<br>
+
+#### The **3-$\sigma$ rule**
+
+- Classical rule: observations far from the mean are considered outliers
+
+- What is "far"? We can measure
+
+$$z_i = \frac{x_i-\bar x}{s}$$
+
+- Flag as outlier if: $|z_i| > 3$
+
+## iClicker 1: interpretation of the rule
+
+<br>
+
+With the 3-$\sigma$ rule:
+
+$$|z_i| = \left|\frac{x_i-\bar x}{s}\right| > 3 $$
+
+an observation is flagged as an outlier if
+
+
+- A. The observation is more than 3 standard deviations from the mean
+
+- B. The observation is in the largest 3% of the data
+
+- C. The observation is larger than 3 times the mean
+
+- D. The observation is more than 3 units from the median
+
+## iClicker 2: use the rule
+<br>
+
+Which points are flagged as outliers using the 3-$\sigma$ rule?
+
+```{r}
+x <- c(-2,-1,0,1,2,13,20)
+
+mean(x); sd(x)
+
+z  <- (x-mean(x))/sd(x)
+z
+```
+
+- A. Both $x=13$ and $x=20$ are flagged
+
+- B. Only $x=20$ is flagged
+
+- C. All points are flagged
+
+- D. None of points are flagged
+
+## Masking
+<br>
+
+- The mean and SD are sensitive to outliers
+
+- Extreme observations pull the mean toward them and inflate the standard deviation, reducing their standardized distance
+
+- Robust alternative: use median and MAD (or other robust loc-scale estimators)
+
+#### Robust z-score:
+
+$$z_i^{rob} = \frac{x_i-\text{median}}{\text{MAD}}$$
+
+**Rule**: $|z_i^{rob}| > 3$
+
+## iClicker 3: use the robust rule
+
+<br>
+
+Which points are flagged as outliers using the 3-$\sigma$ rule?
+
+```{r}
+x <- c(-2,-1,0,1,2,13,20)
+
+median(x); mad(x)
+
+z  <- (x-median(x))/mad(x)
+z
+```
+
+- A. Both $x=13$ and $x=20$ are flagged
+
+- B. Only $x=20$ is flagged
+
+- C. All points are flagged
+
+- D. None of points are flagged
+
+## Key Takeaways
+
+<br>
+
+- Classical estimators (mean, SD) are highly sensitive to outliers
+
+- Robust estimators reduce the influence of extreme observations
+
+- M-estimators provide a flexible compromise between efficiency and robustness
+
+- The tuning constant controls this trade-off
+
+- Robust methods improve both estimation and outlier detection
