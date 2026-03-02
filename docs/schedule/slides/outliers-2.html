@@ -414,7 +414,7 @@ f(x;\mu,\sigma)
 <span id="cb1-16"><a></a>  <span class="at">xint =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">4.685</span>, <span class="fl">4.685</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb1-17"><a></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> <span class="fu">levels</span>(df<span class="sc">$</span>type)))</span>
 <span id="cb1-18"><a></a></span>
-<span id="cb1-19"><a></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, rho)) <span class="sc">+</span></span>
+<span id="cb1-19"><a></a>rho_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, rho)) <span class="sc">+</span></span>
 <span id="cb1-20"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb1-21"><a></a>  <span class="fu">geom_vline</span>(</span>
 <span id="cb1-22"><a></a>    <span class="at">data =</span> cc_lines,</span>
@@ -424,9 +424,12 @@ f(x;\mu,\sigma)
 <span id="cb1-26"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
 <span id="cb1-27"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">rho</span>(x))) <span class="sc">+</span></span>
 <span id="cb1-28"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
 </div>
-<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-4-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-5-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="tuning-constants" class="slide level2">
 <h2>Tuning constants</h2>
 <ul>
@@ -520,7 +523,7 @@ f(x;\mu,\sigma)
 <li><p>Approximate the variance of the estimators</p></li>
 </ul>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>

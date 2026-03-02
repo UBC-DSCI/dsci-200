@@ -725,7 +725,7 @@
     "href": "schedule/slides/outliers-2.html#section-2",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "Different \\(M\\)-estimators of location have been proposed:\n\n# grid\nx &lt;- seq(-6, 6, length.out = 400)\n\ndf &lt;- tibble(\n  x = x,\n  Mean     = 0.5 * x^2,\n  Median   = abs(x),\n  Huber    = Mpsi(x, psi = \"huber\",    cc = 1.5,   deriv = -1),\n  Bisquare = Mpsi(x, psi = \"bisquare\", cc = 4.685, deriv = -1)) |&gt;\n  pivot_longer(-x, names_to = \"type\", values_to = \"rho\") |&gt;\n  mutate(type = factor(type, levels = c(\"Mean\", \"Huber\", \"Median\", \"Bisquare\"))\n  )\n\ncc_lines &lt;- tibble(\n  type = c(\"Huber\", \"Huber\", \"Bisquare\", \"Bisquare\"),\n  xint = c(-1.5, 1.5, -4.685, 4.685)) |&gt;\n  mutate(type = factor(type, levels = levels(df$type)))\n\nggplot(df, aes(x, rho)) +\n  geom_line(linewidth = 1) +\n  geom_vline(\n    data = cc_lines,\n    aes(xintercept = xint),\n    linetype = \"dashed\",\n    linewidth = 0.6) +\n  facet_wrap(~ type, ncol = 2, scales = \"free_y\") +\n  labs(x = \"x\", y = expression(rho(x))) +\n  theme_minimal(base_size = 14)"
+    "text": "Different \\(M\\)-estimators of location have been proposed:\n\n# grid\nx &lt;- seq(-6, 6, length.out = 400)\n\ndf &lt;- tibble(\n  x = x,\n  Mean     = 0.5 * x^2,\n  Median   = abs(x),\n  Huber    = Mpsi(x, psi = \"huber\",    cc = 1.5,   deriv = -1),\n  Bisquare = Mpsi(x, psi = \"bisquare\", cc = 4.685, deriv = -1)) |&gt;\n  pivot_longer(-x, names_to = \"type\", values_to = \"rho\") |&gt;\n  mutate(type = factor(type, levels = c(\"Mean\", \"Huber\", \"Median\", \"Bisquare\"))\n  )\n\ncc_lines &lt;- tibble(\n  type = c(\"Huber\", \"Huber\", \"Bisquare\", \"Bisquare\"),\n  xint = c(-1.5, 1.5, -4.685, 4.685)) |&gt;\n  mutate(type = factor(type, levels = levels(df$type)))\n\nrho_plot &lt;- ggplot(df, aes(x, rho)) +\n  geom_line(linewidth = 1) +\n  geom_vline(\n    data = cc_lines,\n    aes(xintercept = xint),\n    linetype = \"dashed\",\n    linewidth = 0.6) +\n  facet_wrap(~ type, ncol = 2, scales = \"free_y\") +\n  labs(x = \"x\", y = expression(rho(x))) +\n  theme_minimal(base_size = 14)"
   },
   {
     "objectID": "schedule/slides/outliers-2.html#tuning-constants",
@@ -756,8 +756,8 @@
     "text": "Simulation design\n\nClean data: Generate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1\nContaminated data: Generate a sample of size 100, with 90% from \\(\\mathcal{N}(0,1)\\) and 10% from \\(\\mathcal{N}(0,10)\\)\nCompute the mean and the median\nRepeat 10000 times\nApproximate the variance of the estimators"
   },
   {
-    "objectID": "schedule/slides/outliers-2.html#section-3",
-    "href": "schedule/slides/outliers-2.html#section-3",
+    "objectID": "schedule/slides/outliers-2.html#section-4",
+    "href": "schedule/slides/outliers-2.html#section-4",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "set.seed(200)\n\nrcont_norm &lt;- function(n, eps = 0.10, mu0 = 0, sigma0 = 1, sigma1 = 10) {\n  x &lt;- rnorm(n, mean = mu0, sd = sigma0)\n  \n  k &lt;- ceiling(eps * n)              \n  if (k &gt; 0) {\n    idx &lt;- sample(1:n, k)\n    x[idx] &lt;- rnorm(k, mean = mu0, sd = sigma1)\n  }\n  x\n}\n\n#no contamination\n\neps = 0\nsim &lt;- replicate(1000, {\n    x &lt;- rcont_norm(100, eps = eps)\n    c(\n      Mean     = mean(x),\n      Median   = median(x),\n      Bisquare_3.44 = locScaleM(x, psi=\"bisquare\", eff=0.85)$mu,\n      Bisquare_4.68 = locScaleM(x, psi=\"bisquare\", eff=0.95)$mu\n    )\n  })\n\n  \nvar0  &lt;- apply(t(sim), 2, var)\n\n#with contamination\neps = 0.20\nsim &lt;- replicate(1000, {\n    x &lt;- rcont_norm(100, eps = eps)\n    c(\n      Mean     = mean(x),\n      Median   = median(x),\n      Bisquare_3.44 = locScaleM(x, psi=\"bisquare\", eff=0.85)$mu,\n      Bisquare_4.68 = locScaleM(x, psi=\"bisquare\", eff=0.95)$mu\n    )\n  })\n  \nvar20 &lt;- apply(t(sim), 2, var)"
