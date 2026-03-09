@@ -5,6 +5,8 @@ metadata-files:
   - _metadata.yml
 ---
 
+{{< include _titleslide.qmd >}}
+
 ## Attribution
 
 <br>

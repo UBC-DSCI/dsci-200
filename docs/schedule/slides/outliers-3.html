@@ -195,6 +195,41 @@
     <div class="slides">
 
 
+<section id="section" class="slide level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
+<h2>Outliers III</h2>
+<p><span class="secondary">DSCI 200</span></p>
+<p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
+<p>Last modified – 09 March 2026</p>
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\maximize}{maximize}
+\DeclareMathOperator*{\find}{find}
+\DeclareMathOperator{\st}{subject\,\,to}
+\newcommand{\E}{E}
+\newcommand{\Expect}[1]{\E\left[ #1 \right]}
+\newcommand{\Var}[1]{\mathrm{Var}\left[ #1 \right]}
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[#1,\ #2\right]}
+\newcommand{\given}{\ \vert\ }
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\snorm}[1]{\lVert #1 \rVert}
+\newcommand{\tr}[1]{\mbox{tr}(#1)}
+\newcommand{\brt}{\widehat{\beta}^R_{s}}
+\newcommand{\brl}{\widehat{\beta}^R_{\lambda}}
+\newcommand{\bls}{\widehat{\beta}_{ols}}
+\newcommand{\blt}{\widehat{\beta}^L_{s}}
+\newcommand{\bll}{\widehat{\beta}^L_{\lambda}}
+\newcommand{\U}{\mathbf{U}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\V}{\mathbf{V}}
+\]</span></p>
+</section>
 <section id="attribution" class="slide level2">
 <h2>Attribution</h2>
 <p><br></p>
@@ -219,7 +254,7 @@
 <li>We learned about the trade-off between robustness and efficiency.</li>
 </ul>
 </section>
-<section id="section" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <div title="Definition: Efficiency">
 <div class="callout callout-note callout-titled callout-style-default">
@@ -296,7 +331,7 @@
 <section id="correlation-matrix" class="slide level2">
 <h2>Correlation matrix</h2>
 
-<img data-src="outliers-3_files/figure-revealjs/corr-heatmap-1.png" class="r-stretch"><ul>
+<img data-src="outliers-3_files/figure-revealjs/corr-heatmap-1.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>Each entry measures pairwise linear association between variables</li>
 <li>Diagonal entries are 1</li>
 </ul>
@@ -305,7 +340,7 @@
 <h2>Multivariate estimators in R</h2>
 <p>Let’s start by visualizing pair-wise estimates for 4 variables</p>
 
-<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-1-1.svg" class="r-stretch"><ul>
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-1-1.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>Distribution of each variable in the diagonal</li>
 <li>Pairwise scatter plots and correlations off-diagonal</li>
 <li>Pairwise sample means shown as red crosses</li>
@@ -316,15 +351,15 @@
 <h1>Rowwise outliers</h1>
 
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 
-<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-2-1.svg" class="r-stretch"><h4 id="outliers-are-visible-in-the-marginal-distribution-of-v169-so-it-is-not-surprising-that-they-affect-pairwise-summaries-too.">Outliers are visible in the (marginal) distribution of V169, so it is not surprising that they affect pairwise summaries too.</h4>
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center r-stretch"><h4 id="outliers-are-visible-in-the-marginal-distribution-of-v169-so-it-is-not-surprising-that-they-affect-pairwise-summaries-too.">Outliers are visible in the (marginal) distribution of V169, so it is not surprising that they affect pairwise summaries too.</h4>
 </section>
 <section id="multivariate-outliers" class="slide level2">
 <h2>Multivariate outliers</h2>
 
-<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-3-1.svg" class="r-stretch"><h4 id="some-observations-deviate-from-the-overall-trend-while-others-reinforce-it.">Some observations deviate from the overall trend, while others reinforce it.</h4>
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-3-1.svg" class="quarto-figure quarto-figure-center r-stretch"><h4 id="some-observations-deviate-from-the-overall-trend-while-others-reinforce-it.">Some observations deviate from the overall trend, while others reinforce it.</h4>
 </section>
 <section id="robust-multivariate-estimators" class="slide level2">
 <h2>Robust multivariate estimators</h2>
@@ -341,11 +376,11 @@
 <p><br></p>
 <p>MCD tries to estimate the bulk of the data, rather than being influenced by extreme observations.</p>
 </div><div class="column" style="width:65%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-4-1.svg"></p>
+<p><img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-4-1.svg" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </div>
@@ -370,9 +405,9 @@ MD(\mathbf{x}_i) = \sqrt{(\mathbf{x}_i - \hat{\mathbf{\mu}})^T \hat{\Sigma}^{-1}
 <p>recall replacing mean/SD by median/MAD in the univariate case</p>
 </blockquote>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co">#MCD estimator</span></span>
 <span id="cb1-2"><a></a>mcd <span class="ot">&lt;-</span> <span class="fu">covMcd</span>(X)</span>
 <span id="cb1-3"><a></a>md <span class="ot">&lt;-</span> <span class="fu">mahalanobis</span>(X, mcd<span class="sc">$</span>center, mcd<span class="sc">$</span>cov)</span>
@@ -384,11 +419,11 @@ MD(\mathbf{x}_i) = \sqrt{(\mathbf{x}_i - \hat{\mathbf{\mu}})^T \hat{\Sigma}^{-1}
 <span id="cb1-9"><a></a>  <span class="at">flag =</span> md <span class="sc">&gt;</span> cutoff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-6-1.svg" class="r-stretch"><h4 id="points-rows-with-a-squared-md-exceeding-the-cutoff-are-flagged-as-rowwise-outliers">Points (rows) with a squared MD exceeding the cutoff are flagged as rowwise outliers</h4>
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-6-1.svg" class="quarto-figure quarto-figure-center r-stretch"><h4 id="points-rows-with-a-squared-md-exceeding-the-cutoff-are-flagged-as-rowwise-outliers">Points (rows) with a squared MD exceeding the cutoff are flagged as rowwise outliers</h4>
 </section>
 <section id="other-estimators" class="slide level2">
 <h2>Other estimators</h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># MM-estimator</span></span>
 <span id="cb2-2"><a></a>mm_multivariate <span class="ot">&lt;-</span> <span class="fu">covRob</span>(X)</span>
 <span id="cb2-3"><a></a>mm_multivariate<span class="sc">$</span>cov</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -404,7 +439,7 @@ V62 3.808414 3.312801 4.837979 7.359527</code></pre>
 <pre><code>[1] 3.3765584 1.2505738 0.5629201 1.2960335 4.6633382 4.3703017</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
@@ -433,10 +468,10 @@ V62 3.808414 3.312801 4.837979 7.359527</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MCD</td>
-<td style="text-align: right;">13.341</td>
-<td style="text-align: right;">12.598</td>
-<td style="text-align: right;">12.874</td>
-<td style="text-align: right;">12.795</td>
+<td style="text-align: right;">13.334</td>
+<td style="text-align: right;">12.603</td>
+<td style="text-align: right;">12.820</td>
+<td style="text-align: right;">12.739</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MM</td>
@@ -455,7 +490,7 @@ V62 3.808414 3.312801 4.837979 7.359527</code></pre>
 <h1>Cellwise outliers</h1>
 
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:55%;">
@@ -513,9 +548,9 @@ V62 3.808414 3.312801 4.837979 7.359527</code></pre>
 <p>from Raymaekers, J., and Rousseeuw, P.J, (Technometrics 2021)</p>
 </div>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co">#uses wrapping to estimate correlations</span></span>
 <span id="cb6-2"><a></a>fastDDCpars<span class="ot">=</span><span class="fu">list</span>(<span class="at">fastDDC=</span>T,<span class="at">silent=</span>F)</span>
 <span id="cb6-3"><a></a></span>
@@ -547,13 +582,13 @@ V62 3.808414 3.312801 4.837979 7.359527</code></pre>
 </div>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">plot</span>(ggpfastDDC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-10-1.svg" class="r-stretch"></section>
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-10-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key Takeaways</h2>
 <p><br></p>
@@ -567,7 +602,7 @@ V62 3.808414 3.312801 4.837979 7.359527</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <ul>
 <li><p><strong>Cellwise contamination</strong></p>

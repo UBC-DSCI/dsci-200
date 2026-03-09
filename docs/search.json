@@ -644,6 +644,13 @@
     "text": "Key Takeaways\n\n\nDifferent random sampling methods each balance practicality and representativeness in different ways.\nWe covered four random sampling methods (simple random, systematic, stratified, and cluster), each with its own strengths and limitations.\nSelecting an appropriate sampling method can minimize bias, but no method completely eliminates it. Being aware of various types of bias is crucial."
   },
   {
+    "objectID": "schedule/slides/outliers-3.html#section",
+    "href": "schedule/slides/outliers-3.html#section",
+    "title": "UBC DSCI 200",
+    "section": "Outliers III",
+    "text": "Outliers III\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 09 March 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
     "objectID": "schedule/slides/outliers-3.html#attribution",
     "href": "schedule/slides/outliers-3.html#attribution",
     "title": "UBC DSCI 200",
@@ -658,8 +665,8 @@
     "text": "Review\n\nAn outlier is an observation that deviates from the bulk of the data, an atypical observation.\nWe defined both casewise and cellwise outliers but focused on univarite outliers.\n\n We defined and examined by simulations three univariate estimators of location: the mean, the median, the M-estimators.\n\nWe learned about the trade-off between robustness and efficiency."
   },
   {
-    "objectID": "schedule/slides/outliers-3.html#section",
-    "href": "schedule/slides/outliers-3.html#section",
+    "objectID": "schedule/slides/outliers-3.html#section-1",
+    "href": "schedule/slides/outliers-3.html#section-1",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "Definition: Efficiency\n\n\nEfficiency measures how precise an estimator is, the more efficient the estimator, the less it varies across samples.\n\n\n\n\n\nRelative efficiency compares two unbiased estimators by the ratio of their variances.\nSince the sample mean is an optimal estimator (MLE) under the Normal distribution, we measured the efficiency of robust estimators in comparison to the sample mean, for example:\n\n\n\n\n\\[\\frac{\\text{Var}(\\text{sample median})}{\\text{Var}(\\text{sample mean})}\\]"
@@ -693,8 +700,8 @@
     "text": "Multivariate estimators in R\nLet’s start by visualizing pair-wise estimates for 4 variables\n\n\nDistribution of each variable in the diagonal\nPairwise scatter plots and correlations off-diagonal\nPairwise sample means shown as red crosses"
   },
   {
-    "objectID": "schedule/slides/outliers-3.html#section-1",
-    "href": "schedule/slides/outliers-3.html#section-1",
+    "objectID": "schedule/slides/outliers-3.html#section-2",
+    "href": "schedule/slides/outliers-3.html#section-2",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "Outliers are visible in the (marginal) distribution of V169, so it is not surprising that they affect pairwise summaries too."
@@ -721,8 +728,8 @@
     "text": "Detecting outliers\nWhen looking at each variable at a time, we used the 3-\\(\\sigma\\) rule:\n\\[\n|z_i| = \\left|\\frac{x_i - \\hat{\\mu}}{\\hat{\\sigma}}\\right| &gt; 3\n\\]\nWith several variables, the analogue is the Mahalanobis distance:\n\\[\nMD(\\mathbf{x}_i) = \\sqrt{(\\mathbf{x}_i - \\hat{\\mathbf{\\mu}})^T \\hat{\\Sigma}^{-1} (\\mathbf{x}_i - \\hat{\\mu})} &gt; \\text{cut-off}\n\\]\n\nIt measures the distance of each point \\(\\mathbf{x}_i\\) to the center \\(\\hat{\\mathbf{\\mu}}\\), taking the correlation between variables into account.\nUsing robust estimates \\(\\hat{\\mu}\\) and \\(\\hat{\\Sigma}\\), we can control masking and define a score to detect outliers.\n\n\nrecall replacing mean/SD by median/MAD in the univariate case"
   },
   {
-    "objectID": "schedule/slides/outliers-3.html#section-2",
-    "href": "schedule/slides/outliers-3.html#section-2",
+    "objectID": "schedule/slides/outliers-3.html#section-3",
+    "href": "schedule/slides/outliers-3.html#section-3",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "#MCD estimator\nmcd &lt;- covMcd(X)\nmd &lt;- mahalanobis(X, mcd$center, mcd$cov)\ncutoff &lt;- qchisq(0.975, ncol(X))\n\nmd_df &lt;- data.frame(\n  obs = seq_along(md),\n  RD2 = md,\n  flag = md &gt; cutoff)\n\n\nPoints (rows) with a squared MD exceeding the cutoff are flagged as rowwise outliers"
@@ -732,11 +739,11 @@
     "href": "schedule/slides/outliers-3.html#other-estimators",
     "title": "UBC DSCI 200",
     "section": "Other estimators",
-    "text": "Other estimators\n\n# MM-estimator\nmm_multivariate &lt;- covRob(X)\nmm_multivariate$cov\n\n         V29      V30      V61      V62\nV29 8.971398 5.684242 3.804613 3.808414\nV30 5.684242 7.089589 3.545454 3.312801\nV61 3.804613 3.545454 7.475114 4.837979\nV62 3.808414 3.312801 4.837979 7.359527\n\nhead(mm_multivariate$dist)\n\n[1] 3.3765584 1.2505738 0.5629201 1.2960335 4.6633382 4.3703017\n\n\n\n\n\n\n\n\nV29\nV30\nV61\nV62\n\n\n\n\nMean\n13.486\n12.624\n13.160\n13.029\n\n\nMedian\n13.600\n12.325\n12.600\n13.000\n\n\nMCD\n13.341\n12.598\n12.874\n12.795\n\n\nMM\n13.340\n12.508\n13.072\n12.951"
+    "text": "Other estimators\n\n# MM-estimator\nmm_multivariate &lt;- covRob(X)\nmm_multivariate$cov\n\n         V29      V30      V61      V62\nV29 8.971398 5.684242 3.804613 3.808414\nV30 5.684242 7.089589 3.545454 3.312801\nV61 3.804613 3.545454 7.475114 4.837979\nV62 3.808414 3.312801 4.837979 7.359527\n\nhead(mm_multivariate$dist)\n\n[1] 3.3765584 1.2505738 0.5629201 1.2960335 4.6633382 4.3703017\n\n\n\n\n\n\n\n\nV29\nV30\nV61\nV62\n\n\n\n\nMean\n13.486\n12.624\n13.160\n13.029\n\n\nMedian\n13.600\n12.325\n12.600\n13.000\n\n\nMCD\n13.334\n12.603\n12.820\n12.739\n\n\nMM\n13.340\n12.508\n13.072\n12.951"
   },
   {
-    "objectID": "schedule/slides/outliers-3.html#section-3",
-    "href": "schedule/slides/outliers-3.html#section-3",
+    "objectID": "schedule/slides/outliers-3.html#section-4",
+    "href": "schedule/slides/outliers-3.html#section-4",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "But what if only a few cells are contaminated in many rows?\n\nevery row may contain at least one bad entry\nrowwise methods can lose too much information\nwe need methods that work more coordinatewise\n\nThis motivates wrapping and DDC."
@@ -756,15 +763,15 @@
     "text": "Robust correlation by wrapping\nIn the spirit of Huber’s estimation, wrapping have been proposed to compute robust correlations (fast):\n\n\n\n\n\nrobustly standardize each variable\n\n\ntransform extreme values with a bounded function\n\n\ncompute ordinary correlations on the transformed data\n\n\n\n\n\nSo we keep the speed and matrix structure of classical correlation, but gain robustness.\n\n\nfrom Raymaekers, J., and Rousseeuw, P.J, (Technometrics 2021)"
   },
   {
-    "objectID": "schedule/slides/outliers-3.html#section-4",
-    "href": "schedule/slides/outliers-3.html#section-4",
+    "objectID": "schedule/slides/outliers-3.html#section-5",
+    "href": "schedule/slides/outliers-3.html#section-5",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "#uses wrapping to estimate correlations\nfastDDCpars=list(fastDDC=T,silent=F)\n\n#computes DDC algorithm\nfastDDCglass =  DDC(X,fastDDCpars)\n\n \n The input data has 180 rows and 4 columns.\n\n#removes variables without variation\nglass_clean = fastDDCglass$remX; dim(fastDDCglass$remX)\n\n[1] 180   4\n\nnrowsinblock &lt;- 5\nggpfastDDC &lt;- cellMap(\n  D = glass_clean,\n  R = fastDDCglass$stdResid,\n  indcells = fastDDCglass$indcells,\n  indrows = fastDDCglass$indrows,\n  mTitle = \"Cellwise Outlier Detection\",\n  nrowsinblock = nrowsinblock,\n  columnangle = 90,\n  sizetitles = 1.5,\n  autolabel = FALSE\n)\n\nNo rowblocklabels were given, so they are constructed automatically."
   },
   {
-    "objectID": "schedule/slides/outliers-3.html#section-5",
-    "href": "schedule/slides/outliers-3.html#section-5",
+    "objectID": "schedule/slides/outliers-3.html#section-6",
+    "href": "schedule/slides/outliers-3.html#section-6",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "plot(ggpfastDDC)"
@@ -777,8 +784,8 @@
     "text": "Key Takeaways\n\n\nIn both univariate and multivariate cases, classical estimators are highly sensitive to outliers\nRobust estimators reduce the influence of extreme observations\nRowwise contamination\n\nMethods such as M-estimators and MCD estimate robust multivariate center and scatter\nThese estimates can be used to compute robust Mahalanobis distances to detect outliers"
   },
   {
-    "objectID": "schedule/slides/outliers-3.html#section-6",
-    "href": "schedule/slides/outliers-3.html#section-6",
+    "objectID": "schedule/slides/outliers-3.html#section-7",
+    "href": "schedule/slides/outliers-3.html#section-7",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "Cellwise contamination\n\nMethods such as DDC and wrapping detect corrupted cells\nThey rely on relationships among variables and are used to compute robust multivariate estimates and flag outliers\n\nRobust methods improve both estimation and outlier detection\n\nBeyond Multivariate estimation\n\nSimilar ideas have been used to propose robust regression methods\n\ne.g., minimizing a robust function of the residuals instead of the sum of squares\n\nMultivariate estimators are essential in unsupervised methods\n\ne.g., principal component analysis (PCA)"
