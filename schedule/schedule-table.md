@@ -18,7 +18,7 @@
 |25 Feb 26 | Outliers and Data Anomalies and Case Study 2 Work Period |[Slides](slides/outliers-1.qmd)   |          |
 |02 Mar 26 | Outliers and Data Anomalies    |[Slides](slides/outliers-2.qmd)   |          |
 |04 Mar 26 | Simulation II and Case Study 2 Work Period   |[Slides]()   |          |
-|09 Mar 26 | Outliers and Data Anomalies       |[Slides]()   |          |
+|09 Mar 26 | Outliers and Data Anomalies       |[Slides](slides/outliers-3.qmd)   |          |
 |11 Mar 26 | Data Acquisition     |[Slides](slides/data-acquisition.qmd)   | Outliers Worksheet Due March 13th at 11:59pm         |
 |16 Mar 26 | Data Acquisition     |[Slides](slides/data-acquisition-web-scraping.qmd)   | Case Study 2 Due at 11:59pm          |
 |18 Mar 26 | Data Acquisition      |[Worksheet data](data/currency-data.html)  |      |
