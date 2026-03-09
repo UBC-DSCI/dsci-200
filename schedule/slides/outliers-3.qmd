@@ -209,7 +209,7 @@ ggpairs(
   lower = list(continuous = panel_mean),
   diag  = list(continuous = "densityDiag"),
   upper = list(continuous = wrap("cor", size = 4))
-)
+) + theme_bw(base_size = 9)
 ```
 
 #### Outliers are visible in the (marginal) distribution of V169, so it is not surprising that they affect pairwise summaries too.
