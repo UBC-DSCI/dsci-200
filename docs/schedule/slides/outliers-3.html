@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
-  <title>UBC DSCI 200 – outliers-1</title>
+  <title>UBC DSCI 200 – outliers-3</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,10 +196,10 @@
 
 
 <section id="section" class="slide level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
-<h2>Outliers I</h2>
+<h2>Outliers III</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
-<p>Last modified – 02 March 2026</p>
+<p>Last modified – 09 March 2026</p>
 <p><span class="math display">\[
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -243,255 +243,389 @@
 <p>who contributed greatly to Robust Statistics and beyond …</p>
 <p><br><br></p>
 </section>
-<section id="learning-objectives" class="slide level2 scrollable">
-<h2>Learning Objectives</h2>
-<p><br> By the end of this lesson, you will be able to:</p>
-<div>
+<section id="review" class="slide level2 scrollable">
+<h2>Review</h2>
 <ul>
-<li class="fragment">Determine potential reasons why data contain outliers.</li>
-<li class="fragment">Compare outliers with extreme values generated from heavy-tailed distributions.</li>
-<li class="fragment">Recognize different types of outliers in a data set (e.g., casewise versus cellwise outliers).</li>
-<li class="fragment">Use different methods to detect outliers in a data set and understand differences in the results.</li>
-<li class="fragment">Justify and apply strategies for managing outliers in the data, including transformations and data imputation.</li>
-<li class="fragment">Write a computer script to evaluate the impact that outliers can have on subsequent analyses through simulation.</li>
-<li class="fragment">Reflect on the consequences with regards to the conclusions of the chosen method.</li>
-<li class="fragment">Recognize the importance of utilizing domain knowledge when handling outliers.</li>
+<li><p>An <strong>outlier</strong> is an observation that deviates from the bulk of the data, an atypical observation.</p></li>
+<li><p>We defined both casewise and cellwise outliers but focused on <strong>univarite outliers</strong>.</p></li>
 </ul>
-</div>
+<p><img data-src="img/glass.png"> We defined and examined by simulations three univariate estimators of location: the <strong>mean</strong>, the <strong>median</strong>, the <strong>M-estimators</strong>.</p>
+<ul>
+<li>We learned about the trade-off between robustness and efficiency.</li>
+</ul>
 </section>
-<section id="what-is-an-outlier" class="slide level2">
-<h2>What is an outlier?</h2>
-
-<img data-src="img/pexels-outlier.png" class="r-stretch"></section>
-<section id="outliers" class="slide level2">
-<h2>Outliers</h2>
-<div title="Definition: Outlier">
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div title="Definition: Efficiency">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition: Outlier</strong></p>
+<p><strong>Definition: Efficiency</strong></p>
 </div>
 <div class="callout-content">
-<p>An <strong>outlier</strong> is an observation that deviates from the bulk of the data, an atypical observation.</p>
+<p>Efficiency measures how precise an estimator is, the more efficient the estimator, the less it varies across samples.</p>
 </div>
 </div>
 </div>
 </div>
-<h4 id="outliers-may-arise-from">Outliers may arise from:</h4>
 <ul>
-<li><p>errors when collecting or processing data</p></li>
-<li><p>values generated from a different distribution</p></li>
-<li><p>rare cases which may carry valuable information</p></li>
+<li><p><strong>Relative efficiency</strong> compares two unbiased estimators by the ratio of their variances.</p></li>
+<li><p>Since the <strong>sample mean</strong> is an optimal estimator (MLE) under the Normal distribution, we measured the <strong>efficiency</strong> of robust estimators in comparison to the sample mean, for example:</p></li>
 </ul>
 <p><br></p>
-<p>As with missing values, outliers require careful diagnosis and appropriate handling before analysis.</p>
-</section>
-<section id="casewise-vs-cellwise" class="slide level2">
-<h2>Casewise <em>vs</em> Cellwise</h2>
-
-<img data-src="img/Case_Cell.png" class="r-stretch"></section>
-<section id="casewise" class="slide level2">
-<h2>Casewise</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<p><img data-src="img/Case.png"></p>
-</div><div class="column v-center" style="width:55%;">
-<p><br><br> In the 1960s Tukey and Huber introduced the <em>casewise</em> (aka rowwise) contamination model</p>
-<ul>
-<li><p>Treats entire rows as contaminated and coming from a different distribution, even if only values of some variables are unusual</p></li>
-<li><p>Assumes that less than 50% of the cases (objects) are contaminated</p></li>
-</ul>
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\frac{\text{Var}(\text{sample median})}{\text{Var}(\text{sample mean})}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="img/rob-eff.png" width="400"></p>
 </div></div>
 </section>
-<section id="cellwise" class="slide level2">
-<h2>Cellwise</h2>
+<section id="from-one-variable-to-an-entire-dataset" class="slide level2">
+<h2>From one variable to an entire dataset</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<p><img data-src="img/Cell.png"></p>
-</div><div class="column v-center" style="width:55%;">
-<p><br><br></p>
-<p>In 2009, Alqallaf, Van Aelst, Yohai and Zamar introduced the <em>cellwise</em> contamination model</p>
+<div class="column" style="width:70%;">
+<p><img data-src="img/overview.png"></p>
+</div><div class="column" style="width:30%;">
+<p>Three core tasks:</p>
 <ul>
-<li><p>Only individual cells are contaminated, with values coming from a different distribution</p></li>
-<li><p>Any case (row) may contain some contaminated cells</p></li>
-<li><p>More realistic for high-dimensional data</p></li>
+<li><p><strong>Estimating multivariate paramters</strong> (e.g, location and covariance)</p></li>
+<li><p><strong>Modeling relationships</strong> (e.g., regression)</p></li>
+<li><p><strong>Discovering structure</strong> (e.g., unsupervised learning)</p></li>
 </ul>
 </div></div>
-</section>
-<section id="glass-data" class="slide level2">
-<h2>Glass data</h2>
-
-<img data-src="img/glass.png" class="r-stretch"><p>Data: n = 180 archeological glass spectra with d = 750 wavelengths (<a href="https://www.tandfonline.com/doi/figure/10.1080/00401706.2017.1340909?scroll=top&amp;needAccess=true">Detecting Deviating Data Cells</a>, Rousseeuw &amp; Van Den Bossche, <em>Technometrics</em> 2018)</p>
-</section>
-<section id="univariate-estimators" class="slide level2">
-<h2>Univariate estimators</h2>
-<p>Before analyzing multivariate datasets, we first need to learn how to identify and handle outlying values in a single variable.</p>
-<p>Let’s look at the values of the wavelength V169 in this data</p>
-
-<img data-src="outliers-1_files/figure-revealjs/unnamed-chunk-1-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="robust-estimators" class="slide level2">
-<h2>Robust estimators</h2>
+<h3 id="goal-for-today">Goal for today</h3>
 <ul>
-<li><p>Classical estimators can be highly distorted by outliers</p></li>
-<li><p>Robust estimators are needed to capture the bulk of the data</p></li>
-<li><p>Robust estimators are also needed to flag outliers</p></li>
+<li><ol type="1">
+<li>What is a multivariate parameter?</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>How do we estimate multivariate location and scatter robustly?</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li>How do we detect multivariate outliers?</li>
+</ol></li>
+<li><ol start="4" type="1">
+<li>Why do cellwise outliers need different tools?</li>
+</ol></li>
+</ul>
+</section>
+<section id="from-one-variable-to-many-variables" class="slide level2">
+<h2>From one variable to many variables</h2>
+<p><br></p>
+<p>For one variable, typical parameters are:</p>
+<ul>
+<li><strong>center</strong>: mean, median</li>
+<li><strong>spread</strong>: variance, SD, MAD</li>
 </ul>
 <p><br></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Statistic</th>
-<th>Estimate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Mean</td>
-<td>5260.72</td>
-</tr>
-<tr class="even">
-<td>Median</td>
-<td>4629</td>
-</tr>
-<tr class="odd">
-<td>SD</td>
-<td>1413.69</td>
-</tr>
-<tr class="even">
-<td>MAD</td>
-<td>470.73</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<h4 id="the-mean-and-sd-are-very-sensitive-to-the-outliers-in-the-data">The mean and SD are very sensitive to the outliers in the data</h4>
-</section>
-<section id="mean-barx-vs-median-tildex" class="slide level2">
-<h2>Mean (<span class="math inline">\(\bar{X}\)</span>) <em>vs</em> Median (<span class="math inline">\(\tilde{X}\)</span>)</h2>
-<p>If the median is less affected by extreme values, why not using it as a default?</p>
+<p>With several variables, we also estimate:</p>
 <ul>
-<li><p>if the data contain outliers, the median is more resistant</p></li>
-<li><p>but if the data does not contain outliers, it is less efficient (larger standard error!)</p></li>
-</ul>
-<h4 id="if-data-is-normally-distributed">If data is Normally distributed:</h4>
-<p><span class="math display">\[SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}\]</span></p>
-<p><span class="math display">\[SE(\tilde{X})= \sqrt{\frac{\pi}{2}}\frac{\sigma}{\sqrt{n}}\]</span></p>
-<p>Let’s examine these two points by simulation!</p>
-</section>
-<section id="simulation-design" class="slide level2">
-<h2>Simulation design</h2>
-<h3 id="clean-data">Clean data</h3>
-<ul>
-<li><p>Generate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1</p></li>
-<li><p>Compute the mean and the median</p></li>
-<li><p>Repeat 10000 times</p></li>
-<li><p>Summarize their sampling distributions</p></li>
+<li><p><strong>multivariate center</strong>: e.g., vector of means or medians</p></li>
+<li><p><strong>multivariate scatter</strong>: e.g., the sample covariance matrix</p></li>
+<li><p><strong>association</strong>: a matix of pairwise correlations</p></li>
 </ul>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, {</span>
-<span id="cb1-4"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb1-5"><a></a>  <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x),</span>
-<span id="cb1-6"><a></a>    <span class="at">median =</span> <span class="fu">median</span>(x))</span>
-<span id="cb1-7"><a></a>})</span>
-<span id="cb1-8"><a></a></span>
-<span id="cb1-9"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">t</span>(sim_stats) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb1-10"><a></a></span>
-<span id="cb1-11"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1006556</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1255247</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">sqrt</span>(pi<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fl">0.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1253314</code></pre>
-</div>
-</div>
+<section id="correlation-matrix" class="slide level2">
+<h2>Correlation matrix</h2>
+
+<img data-src="outliers-3_files/figure-revealjs/corr-heatmap-1.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>Each entry measures pairwise linear association between variables</li>
+<li>Diagonal entries are 1</li>
+</ul>
+</section>
+<section id="multivariate-estimators-in-r" class="slide level2">
+<h2>Multivariate estimators in R</h2>
+<p>Let’s start by visualizing pair-wise estimates for 4 variables</p>
+
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-1-1.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>Distribution of each variable in the diagonal</li>
+<li>Pairwise scatter plots and correlations off-diagonal</li>
+<li>Pairwise sample means shown as red crosses</li>
+</ul>
+</section>
+<section>
+<section id="rowwise-outliers" class="title-slide slide level1 center">
+<h1>Rowwise outliers</h1>
+
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
 
-<img data-src="outliers-1_files/figure-revealjs/unnamed-chunk-3-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="simulation-design-1" class="slide level2">
-<h2>Simulation design</h2>
-<h3 id="contaminated-data">Contaminated data</h3>
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center r-stretch"><h4 id="outliers-are-visible-in-the-marginal-distribution-of-v169-so-it-is-not-surprising-that-they-affect-pairwise-summaries-too.">Outliers are visible in the (marginal) distribution of V169, so it is not surprising that they affect pairwise summaries too.</h4>
+</section>
+<section id="multivariate-outliers" class="slide level2">
+<h2>Multivariate outliers</h2>
+
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-3-1.svg" class="quarto-figure quarto-figure-center r-stretch"><h4 id="some-observations-deviate-from-the-overall-trend-while-others-reinforce-it.">Some observations deviate from the overall trend, while others reinforce it.</h4>
+</section>
+<section id="robust-multivariate-estimators" class="slide level2">
+<h2>Robust multivariate estimators</h2>
 <ul>
-<li><p>Generate a sample of size 100, with 90% from <span class="math inline">\(\mathcal{N}(0,1)\)</span> and 10% from <span class="math inline">\(\mathcal{N}(0,10)\)</span></p></li>
-<li><p>Compute the mean and the median</p></li>
-<li><p>Repeat 10000 times</p></li>
-<li><p>Summarize their sampling distributions</p></li>
+<li><p><strong>M-estimators</strong> have also been proposed for the multivariate case.</p></li>
+<li><p>Estimators based on the idea of trimming observations are also widely used, for example the <strong>Minimum Covariance Determinant (MCD)</strong>.</p>
+<ul>
+<li><p>Among many possible groups of <span class="math inline">\(h\)</span> observations, choose the one that forms the tightest cluster of points</p></li>
+<li><p>Compute the center and the spread using only that group</p></li>
+</ul></li>
 </ul>
-<p><span class="math display">\[\text{Var}(\bar{X}) = \frac{(1-\varepsilon)\sigma^2_1 + \varepsilon \sigma_2^2}{n}\]</span></p>
-<p><span class="math display">\[\mathrm{Var}(\tilde{X}) \approx \frac{\pi}{2n}\;
-\frac{1}{\left(\frac{1-\varepsilon}{\sigma_1}+\frac{\varepsilon}{\sigma_2}\right)^2}\]</span></p>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><br></p>
+<p>MCD tries to estimate the bulk of the data, rather than being influenced by extreme observations.</p>
+</div><div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-4-1.svg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="detecting-outliers" class="slide level2">
+<h2>Detecting outliers</h2>
+<p>When looking at each variable at a time, we used the 3-<span class="math inline">\(\sigma\)</span> rule:</p>
+<p><span class="math display">\[
+|z_i| = \left|\frac{x_i - \hat{\mu}}{\hat{\sigma}}\right| &gt; 3
+\]</span></p>
+<p>With several variables, the analogue is the <strong>Mahalanobis distance</strong>:</p>
+<p><span class="math display">\[
+MD(\mathbf{x}_i) = \sqrt{(\mathbf{x}_i - \hat{\mathbf{\mu}})^T \hat{\Sigma}^{-1} (\mathbf{x}_i - \hat{\mu})} &gt; \text{cut-off}
+\]</span></p>
+<ul>
+<li><p>It measures the distance of each point <span class="math inline">\(\mathbf{x}_i\)</span> to the center <span class="math inline">\(\hat{\mathbf{\mu}}\)</span>, taking the correlation between variables into account.</p></li>
+<li><p>Using robust estimates <span class="math inline">\(\hat{\mu}\)</span> and <span class="math inline">\(\hat{\Sigma}\)</span>, we can control masking and define a score to detect outliers.</p></li>
+</ul>
+<blockquote>
+<p>recall replacing mean/SD by median/MAD in the univariate case</p>
+</blockquote>
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>rcont_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">eps =</span> <span class="fl">0.10</span>, <span class="at">mu0 =</span> <span class="dv">0</span>, </span>
-<span id="cb9-2"><a></a>                       <span class="at">sigma0 =</span> <span class="dv">1</span>, <span class="at">sigma1 =</span> <span class="dv">10</span>) {</span>
-<span id="cb9-3"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma0)</span>
-<span id="cb9-4"><a></a>  </span>
-<span id="cb9-5"><a></a>  k <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(eps <span class="sc">*</span> n)              </span>
-<span id="cb9-6"><a></a>  <span class="cf">if</span> (k <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb9-7"><a></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, k)</span>
-<span id="cb9-8"><a></a>    x[idx] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma1)</span>
-<span id="cb9-9"><a></a>  }</span>
-<span id="cb9-10"><a></a>  x</span>
-<span id="cb9-11"><a></a>}</span>
-<span id="cb9-12"><a></a></span>
-<span id="cb9-13"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb9-14"><a></a></span>
-<span id="cb9-15"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, {</span>
-<span id="cb9-16"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rcont_norm</span>(<span class="dv">100</span>)</span>
-<span id="cb9-17"><a></a>  <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x),</span>
-<span id="cb9-18"><a></a>    <span class="at">median =</span> <span class="fu">median</span>(x))</span>
-<span id="cb9-19"><a></a>})</span>
-<span id="cb9-20"><a></a></span>
-<span id="cb9-21"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">t</span>(sim_stats) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb9-22"><a></a></span>
-<span id="cb9-23"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3307419</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co">#MCD estimator</span></span>
+<span id="cb1-2"><a></a>mcd <span class="ot">&lt;-</span> <span class="fu">covMcd</span>(X)</span>
+<span id="cb1-3"><a></a>md <span class="ot">&lt;-</span> <span class="fu">mahalanobis</span>(X, mcd<span class="sc">$</span>center, mcd<span class="sc">$</span>cov)</span>
+<span id="cb1-4"><a></a>cutoff <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="fl">0.975</span>, <span class="fu">ncol</span>(X))</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>md_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-7"><a></a>  <span class="at">obs =</span> <span class="fu">seq_along</span>(md),</span>
+<span id="cb1-8"><a></a>  <span class="at">RD2 =</span> md,</span>
+<span id="cb1-9"><a></a>  <span class="at">flag =</span> md <span class="sc">&gt;</span> cutoff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-6-1.svg" class="quarto-figure quarto-figure-center r-stretch"><h4 id="points-rows-with-a-squared-md-exceeding-the-cutoff-are-flagged-as-rowwise-outliers">Points (rows) with a squared MD exceeding the cutoff are flagged as rowwise outliers</h4>
+</section>
+<section id="other-estimators" class="slide level2">
+<h2>Other estimators</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># MM-estimator</span></span>
+<span id="cb2-2"><a></a>mm_multivariate <span class="ot">&lt;-</span> <span class="fu">covRob</span>(X)</span>
+<span id="cb2-3"><a></a>mm_multivariate<span class="sc">$</span>cov</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1374634</code></pre>
+<pre><code>         V29      V30      V61      V62
+V29 8.971398 5.684242 3.804613 3.808414
+V30 5.684242 7.089589 3.545454 3.312801
+V61 3.804613 3.545454 7.475114 4.837979
+V62 3.808414 3.312801 4.837979 7.359527</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>dd <span class="ot">&lt;-</span> (.<span class="dv">9</span><span class="sc">/</span><span class="dv">1</span> <span class="sc">+</span> .<span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb13-2"><a></a><span class="fu">sqrt</span>(pi<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span>dd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">head</span>(mm_multivariate<span class="sc">$</span>dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1377268</code></pre>
+<pre><code>[1] 3.3765584 1.2505738 0.5629201 1.2960335 4.6633382 4.3703017</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">V29</th>
+<th style="text-align: right;">V30</th>
+<th style="text-align: right;">V61</th>
+<th style="text-align: right;">V62</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mean</td>
+<td style="text-align: right;">13.486</td>
+<td style="text-align: right;">12.624</td>
+<td style="text-align: right;">13.160</td>
+<td style="text-align: right;">13.029</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Median</td>
+<td style="text-align: right;">13.600</td>
+<td style="text-align: right;">12.325</td>
+<td style="text-align: right;">12.600</td>
+<td style="text-align: right;">13.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MCD</td>
+<td style="text-align: right;">13.334</td>
+<td style="text-align: right;">12.603</td>
+<td style="text-align: right;">12.820</td>
+<td style="text-align: right;">12.739</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MM</td>
+<td style="text-align: right;">13.340</td>
+<td style="text-align: right;">12.508</td>
+<td style="text-align: right;">13.072</td>
+<td style="text-align: right;">12.951</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section></section>
+<section>
+<section id="cellwise-outliers" class="title-slide slide level1 center">
+<h1>Cellwise outliers</h1>
+
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><br></p>
+<h3 id="but-what-if-only-a-few-cells-are-contaminated-in-many-rows">But what if only a few cells are contaminated in many rows?</h3>
+<ul>
+<li>every row may contain at least one bad entry</li>
+<li>rowwise methods can lose too much information</li>
+<li>we need methods that work more <strong>coordinatewise</strong></li>
+</ul>
+<h4 id="this-motivates-wrapping-and-ddc.">This motivates wrapping and DDC.</h4>
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/Cell.png"></p>
+</div></div>
+</section>
+<section id="ddc-detect-deviating-cells" class="slide level2">
+<h2>DDC: Detect Deviating Cells</h2>
+<p>DDC is aimed at <strong>cellwise</strong> outliers.</p>
+<ul>
+<li>use the relationships among variables</li>
+<li>predict what a cell should look like from the others</li>
+<li>flag cells that deviate strongly from that prediction</li>
+</ul>
+<h4 id="ddc-looks-for-suspicious-entries-not-just-suspicious-rows.">DDC looks for suspicious <strong>entries</strong>, not just suspicious rows.</h4>
+<ul>
+<li><p>DDC uses robust correlations to describe relationships among variables</p></li>
+<li><p>DDC can also detect missing or implausible values</p></li>
+<li><p>flagged cells can be imputed using predictions from other variables</p></li>
+</ul>
+<h4 id="in-high-dimensional-data-contamination-often-occurs-cell-by-cell-not-row-by-row.">In high-dimensional data, contamination often occurs cell by cell, not row by row.</h4>
+</section>
+<section id="robust-correlation-by-wrapping" class="slide level2 scrollable">
+<h2>Robust correlation by wrapping</h2>
+<p>In the spirit of Huber’s estimation, wrapping have been proposed to compute robust correlations (fast):</p>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li><ol type="1">
+<li>robustly standardize each variable</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>transform extreme values with a bounded function</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li>compute ordinary correlations on the transformed data</li>
+</ol></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/wrap.png"></p>
+</div></div>
+<p>So we keep the speed and matrix structure of classical correlation, but gain robustness.</p>
+<p><br></p>
+<div style="font-size: 13px; margin-top: -30px; color: grey;">
+<p>from Raymaekers, J., and Rousseeuw, P.J, (Technometrics 2021)</p>
+</div>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co">#uses wrapping to estimate correlations</span></span>
+<span id="cb6-2"><a></a>fastDDCpars<span class="ot">=</span><span class="fu">list</span>(<span class="at">fastDDC=</span>T,<span class="at">silent=</span>F)</span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a><span class="co">#computes DDC algorithm</span></span>
+<span id="cb6-5"><a></a>fastDDCglass <span class="ot">=</span>  <span class="fu">DDC</span>(X,fastDDCpars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 
+ The input data has 180 rows and 4 columns.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co">#removes variables without variation</span></span>
+<span id="cb8-2"><a></a>glass_clean <span class="ot">=</span> fastDDCglass<span class="sc">$</span>remX; <span class="fu">dim</span>(fastDDCglass<span class="sc">$</span>remX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 180   4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>nrowsinblock <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb10-2"><a></a>ggpfastDDC <span class="ot">&lt;-</span> <span class="fu">cellMap</span>(</span>
+<span id="cb10-3"><a></a>  <span class="at">D =</span> glass_clean,</span>
+<span id="cb10-4"><a></a>  <span class="at">R =</span> fastDDCglass<span class="sc">$</span>stdResid,</span>
+<span id="cb10-5"><a></a>  <span class="at">indcells =</span> fastDDCglass<span class="sc">$</span>indcells,</span>
+<span id="cb10-6"><a></a>  <span class="at">indrows =</span> fastDDCglass<span class="sc">$</span>indrows,</span>
+<span id="cb10-7"><a></a>  <span class="at">mTitle =</span> <span class="st">"Cellwise Outlier Detection"</span>,</span>
+<span id="cb10-8"><a></a>  <span class="at">nrowsinblock =</span> nrowsinblock,</span>
+<span id="cb10-9"><a></a>  <span class="at">columnangle =</span> <span class="dv">90</span>,</span>
+<span id="cb10-10"><a></a>  <span class="at">sizetitles =</span> <span class="fl">1.5</span>,</span>
+<span id="cb10-11"><a></a>  <span class="at">autolabel =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-12"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>No rowblocklabels were given, so they are constructed automatically.</code></pre>
 </div>
 </div>
 </section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">plot</span>(ggpfastDDC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="outliers-3_files/figure-revealjs/unnamed-chunk-10-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key Takeaways</h2>
 <p><br></p>
 <ul>
-<li><p>Outliers can occur in all variables of an observation or only in certain variables</p></li>
-<li><p>Cellwise paradigm is better is more flexible for high-dimensional data</p></li>
-<li><p>Classical estimators can be optimal but very sensitive to outliers</p></li>
-<li><p>Median is less efficient (≈ 1.57× variance) but more stable under contamination</p></li>
-<li><p>Robustness = trade-off with efficiency</p></li>
+<li><p>In both univariate and multivariate cases, classical estimators are highly sensitive to outliers</p></li>
+<li><p>Robust estimators reduce the influence of extreme observations</p></li>
+<li><p><strong>Rowwise contamination</strong></p>
+<ul>
+<li><p>Methods such as M-estimators and MCD estimate robust multivariate center and scatter</p></li>
+<li><p>These estimates can be used to compute robust Mahalanobis distances to detect outliers</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<ul>
+<li><p><strong>Cellwise contamination</strong></p>
+<ul>
+<li>Methods such as DDC and wrapping detect corrupted cells</li>
+<li>They rely on relationships among variables and are used to compute robust multivariate estimates and flag outliers</li>
+</ul></li>
+<li><p>Robust methods improve both estimation and outlier detection</p></li>
+</ul>
+<p><strong>Beyond Multivariate estimation</strong></p>
+<ul>
+<li>Similar ideas have been used to propose robust regression methods
+<ul>
+<li>e.g., minimizing a robust function of the residuals instead of the sum of squares</li>
+</ul></li>
+<li>Multivariate estimators are essential in unsupervised methods
+<ul>
+<li>e.g., principal component analysis (PCA)</li>
+</ul></li>
 </ul>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Katie Burak, Gabriela V. Cohen Freue">
-  <title>UBC DSCI 200 – outliers-1</title>
+  <title>UBC DSCI 200 – outliers-2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,7 +196,7 @@
 
 
 <section id="section" class="slide level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
-<h2>Outliers I</h2>
+<h2>Outliers II</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
 <p>Last modified – 02 March 2026</p>
@@ -243,251 +243,479 @@
 <p>who contributed greatly to Robust Statistics and beyond …</p>
 <p><br><br></p>
 </section>
-<section id="learning-objectives" class="slide level2 scrollable">
-<h2>Learning Objectives</h2>
-<p><br> By the end of this lesson, you will be able to:</p>
-<div>
+<section id="review" class="slide level2 scrollable">
+<h2>Review</h2>
 <ul>
-<li class="fragment">Determine potential reasons why data contain outliers.</li>
-<li class="fragment">Compare outliers with extreme values generated from heavy-tailed distributions.</li>
-<li class="fragment">Recognize different types of outliers in a data set (e.g., casewise versus cellwise outliers).</li>
-<li class="fragment">Use different methods to detect outliers in a data set and understand differences in the results.</li>
-<li class="fragment">Justify and apply strategies for managing outliers in the data, including transformations and data imputation.</li>
-<li class="fragment">Write a computer script to evaluate the impact that outliers can have on subsequent analyses through simulation.</li>
-<li class="fragment">Reflect on the consequences with regards to the conclusions of the chosen method.</li>
-<li class="fragment">Recognize the importance of utilizing domain knowledge when handling outliers.</li>
+<li><p>An <strong>outlier</strong> is an observation that deviates from the bulk of the data, an atypical observation.</p></li>
+<li><p>As with missing values, outliers require careful diagnosis and appropriate handling before analysis.</p></li>
+<li><p>We defined both casewise and cellwise outliers</p></li>
 </ul>
-</div>
+<p><img data-src="img/glass.png"> - We used simulations to examine 2 univariate estimators: the <strong>mean</strong> and the <strong>median</strong></p>
 </section>
-<section id="what-is-an-outlier" class="slide level2">
-<h2>What is an outlier?</h2>
+<section id="univariate-estimators" class="slide level2">
+<h2>Univariate estimators</h2>
+<p><strong>Data</strong>: n = 180 archeological glass spectra with d = 750 wavelengths (<a href="https://www.tandfonline.com/doi/figure/10.1080/00401706.2017.1340909?scroll=top&amp;needAccess=true">Detecting Deviating Data Cells</a>, Rousseeuw &amp; Van Den Bossche, <em>Technometrics</em> 2018)</p>
+<p>Looking at the values of the wavelength V169:</p>
 
-<img data-src="img/pexels-outlier.png" class="r-stretch"></section>
-<section id="outliers" class="slide level2">
-<h2>Outliers</h2>
-<div title="Definition: Outlier">
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-1-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="robustness-vs-efficiency" class="slide level2">
+<h2>Robustness <em>vs</em> Efficiency</h2>
+<p><br></p>
+<p><img data-src="img/rob-eff.png"> <br></p>
+<h3 id="can-we-achieve-robustness-without-loss-of-efficiency">Can we achieve robustness without loss of efficiency?</h3>
+</section>
+<section id="which-distribution-generated-the-data" class="slide level2">
+<h2>Which distribution generated the data?</h2>
+
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center r-stretch"><p>Suppose that we know which distribution generated the data but we don’t know it’s center, how can we estimated?</p>
+</section>
+<section id="maximum-likelihood-estimator-mle" class="slide level2 scrollable">
+<h2>Maximum Likelihood Estimator (MLE)</h2>
+<ul>
+<li><p>MLE chooses the center <span class="math inline">\(\mu\)</span> that makes the observed data most probable under the assumed distribution</p></li>
+<li><p>The Normal distribution is given by:</p></li>
+</ul>
+<p><span class="math display">\[
+f(x;\mu,\sigma)
+=
+\frac{1}{\sqrt{2\pi}\,\sigma}
+\exp\!\left(
+-\frac{(x-\mu)^2}{2\sigma^2}
+\right)
+\]</span></p>
+<ul>
+<li>If we assume that the data is Normally distributed, with <span class="math inline">\(\sigma = 1\)</span> but <span class="math inline">\(\mu\)</span> unknown, and with some math, we can show that</li>
+</ul>
+<p><span class="math display">\[
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+\]</span></p>
+</section>
+<section id="the-mle" class="slide level2">
+<h2>The MLE</h2>
+<p><span class="math display">\[
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+\]</span></p>
+<div title="Definition">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition: Outlier</strong></p>
+<p><strong>Definition</strong></p>
 </div>
 <div class="callout-content">
-<p>An <strong>outlier</strong> is an observation that deviates from the bulk of the data, an atypical observation.</p>
+<p><span class="math inline">\(\arg\min_{\mu}\)</span> denotes the value of <span class="math inline">\(\mu\)</span> that minimizes the sum of squared deviations.</p>
 </div>
 </div>
 </div>
 </div>
-<h4 id="outliers-may-arise-from">Outliers may arise from:</h4>
-<ul>
-<li><p>errors when collecting or processing data</p></li>
-<li><p>values generated from a different distribution</p></li>
-<li><p>rare cases which may carry valuable information</p></li>
-</ul>
-<p><br></p>
-<p>As with missing values, outliers require careful diagnosis and appropriate handling before analysis.</p>
+<p>Using Calculus, it is easy to show that</p>
+<p><span class="math display">\[\hat{\mu}_{\text{MLE}} = \bar{x}\]</span></p>
+<h4 id="when-the-data-is-normal-the-mle-is-the-sample-mean">when the data is Normal, the MLE is the sample mean</h4>
+<p>Similarly, we can show that</p>
+<h4 id="when-the-data-is-double-exponential-the-mle-is-the-sample-median">when the data is double exponential, the MLE is the sample median</h4>
 </section>
-<section id="casewise-vs-cellwise" class="slide level2">
-<h2>Casewise <em>vs</em> Cellwise</h2>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>But in general, we don’t know the distribution. It may even be a mixture of distributions that generated contaminated data!</p>
 
-<img data-src="img/Case_Cell.png" class="r-stretch"></section>
-<section id="casewise" class="slide level2">
-<h2>Casewise</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<p><img data-src="img/Case.png"></p>
-</div><div class="column v-center" style="width:55%;">
-<p><br><br> In the 1960s Tukey and Huber introduced the <em>casewise</em> (aka rowwise) contamination model</p>
-<ul>
-<li><p>Treats entire rows as contaminated and coming from a different distribution, even if only values of some variables are unusual</p></li>
-<li><p>Assumes that less than 50% of the cases (objects) are contaminated</p></li>
-</ul>
-</div></div>
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-3-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-m-estimators" class="slide level2">
+<h2>The M-estimators</h2>
+<p><span class="math display">\[
+\hat{\mu}_{\text{MLE}}
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\!(x_i-\mu)^2
+\]</span> From the MLE to the M-estimator:</p>
+<p><span class="math display">\[
+\hat{\mu}_M
+=
+\arg\min_{\mu}
+\sum_{i=1}^n
+\rho(x_i-\mu)
+\]</span></p>
+<h4 id="instead-of-of-squaring-deviations-we-measure-them-with-a-differentiable-function-rho">Instead of of squaring deviations, we measure them with a differentiable function <span class="math inline">\(\rho\)</span></h4>
 </section>
-<section id="cellwise" class="slide level2">
-<h2>Cellwise</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<p><img data-src="img/Cell.png"></p>
-</div><div class="column v-center" style="width:55%;">
-<p><br><br></p>
-<p>In 2009, Alqallaf, Van Aelst, Yohai and Zamar introduced the <em>cellwise</em> contamination model</p>
-<ul>
-<li><p>Only individual cells are contaminated, with values coming from a different distribution</p></li>
-<li><p>Any case (row) may contain some contaminated cells</p></li>
-<li><p>More realistic for high-dimensional data</p></li>
-</ul>
-</div></div>
-</section>
-<section id="glass-data" class="slide level2">
-<h2>Glass data</h2>
-
-<img data-src="img/glass.png" class="r-stretch"><p>Data: n = 180 archeological glass spectra with d = 750 wavelengths (<a href="https://www.tandfonline.com/doi/figure/10.1080/00401706.2017.1340909?scroll=top&amp;needAccess=true">Detecting Deviating Data Cells</a>, Rousseeuw &amp; Van Den Bossche, <em>Technometrics</em> 2018)</p>
-</section>
-<section id="univariate-estimators" class="slide level2">
-<h2>Univariate estimators</h2>
-<p>Before analyzing multivariate datasets, we first need to learn how to identify and handle outlying values in a single variable.</p>
-<p>Let’s look at the values of the wavelength V169 in this data</p>
-
-<img data-src="outliers-1_files/figure-revealjs/unnamed-chunk-1-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="robust-estimators" class="slide level2">
-<h2>Robust estimators</h2>
-<ul>
-<li><p>Classical estimators can be highly distorted by outliers</p></li>
-<li><p>Robust estimators are needed to capture the bulk of the data</p></li>
-<li><p>Robust estimators are also needed to flag outliers</p></li>
-</ul>
+<section id="the-rho-function" class="slide level2">
+<h2>The <span class="math inline">\(\rho\)</span> function</h2>
 <p><br></p>
 <table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 15%">
+<col style="width: 23%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Statistic</th>
-<th>Estimate</th>
+<th>Robustness <em>vs</em> Efficiency</th>
+<th></th>
+<th><span class="math inline">\(\rho(r)\)</span></th>
+<th></th>
+<th>Estimator</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td><img data-src="img/mean.png" width="200"></td>
+<td></td>
+<td>square</td>
+<td></td>
 <td>Mean</td>
-<td>5260.72</td>
 </tr>
 <tr class="even">
+<td><img data-src="img/median.png" width="200"></td>
+<td></td>
+<td>absolute</td>
+<td></td>
 <td>Median</td>
-<td>4629</td>
 </tr>
 <tr class="odd">
-<td>SD</td>
-<td>1413.69</td>
-</tr>
-<tr class="even">
-<td>MAD</td>
-<td>470.73</td>
+<td>&nbsp;<br> <img data-src="img/m-estimators.png" width="200"></td>
+<td></td>
+<td>&nbsp;<br><br> differenciable?</td>
+<td></td>
+<td>&nbsp;<br><br> M-estimator</td>
 </tr>
 </tbody>
 </table>
-<p><br></p>
-<h4 id="the-mean-and-sd-are-very-sensitive-to-the-outliers-in-the-data">The mean and SD are very sensitive to the outliers in the data</h4>
-</section>
-<section id="mean-barx-vs-median-tildex" class="slide level2">
-<h2>Mean (<span class="math inline">\(\bar{X}\)</span>) <em>vs</em> Median (<span class="math inline">\(\tilde{X}\)</span>)</h2>
-<p>If the median is less affected by extreme values, why not using it as a default?</p>
-<ul>
-<li><p>if the data contain outliers, the median is more resistant</p></li>
-<li><p>but if the data does not contain outliers, it is less efficient (larger standard error!)</p></li>
-</ul>
-<h4 id="if-data-is-normally-distributed">If data is Normally distributed:</h4>
-<p><span class="math display">\[SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}\]</span></p>
-<p><span class="math display">\[SE(\tilde{X})= \sqrt{\frac{\pi}{2}}\frac{\sigma}{\sqrt{n}}\]</span></p>
-<p>Let’s examine these two points by simulation!</p>
-</section>
-<section id="simulation-design" class="slide level2">
-<h2>Simulation design</h2>
-<h3 id="clean-data">Clean data</h3>
-<ul>
-<li><p>Generate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1</p></li>
-<li><p>Compute the mean and the median</p></li>
-<li><p>Repeat 10000 times</p></li>
-<li><p>Summarize their sampling distributions</p></li>
-</ul>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, {</span>
-<span id="cb1-4"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb1-5"><a></a>  <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x),</span>
-<span id="cb1-6"><a></a>    <span class="at">median =</span> <span class="fu">median</span>(x))</span>
-<span id="cb1-7"><a></a>})</span>
-<span id="cb1-8"><a></a></span>
-<span id="cb1-9"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">t</span>(sim_stats) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb1-10"><a></a></span>
-<span id="cb1-11"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1006556</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1255247</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">sqrt</span>(pi<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span><span class="fl">0.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1253314</code></pre>
-</div>
-</div>
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-
-<img data-src="outliers-1_files/figure-revealjs/unnamed-chunk-3-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="simulation-design-1" class="slide level2">
-<h2>Simulation design</h2>
-<h3 id="contaminated-data">Contaminated data</h3>
-<ul>
-<li><p>Generate a sample of size 100, with 90% from <span class="math inline">\(\mathcal{N}(0,1)\)</span> and 10% from <span class="math inline">\(\mathcal{N}(0,10)\)</span></p></li>
-<li><p>Compute the mean and the median</p></li>
-<li><p>Repeat 10000 times</p></li>
-<li><p>Summarize their sampling distributions</p></li>
-</ul>
-<p><span class="math display">\[\text{Var}(\bar{X}) = \frac{(1-\varepsilon)\sigma^2_1 + \varepsilon \sigma_2^2}{n}\]</span></p>
-<p><span class="math display">\[\mathrm{Var}(\tilde{X}) \approx \frac{\pi}{2n}\;
-\frac{1}{\left(\frac{1-\varepsilon}{\sigma_1}+\frac{\varepsilon}{\sigma_2}\right)^2}\]</span></p>
+<p>Different <span class="math inline">\(M\)</span>-estimators of location have been proposed:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># grid</span></span>
+<span id="cb1-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="at">length.out =</span> <span class="dv">400</span>)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-5"><a></a>  <span class="at">x =</span> x,</span>
+<span id="cb1-6"><a></a>  <span class="at">Mean     =</span> <span class="fl">0.5</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb1-7"><a></a>  <span class="at">Median   =</span> <span class="fu">abs</span>(x),</span>
+<span id="cb1-8"><a></a>  <span class="at">Huber    =</span> <span class="fu">Mpsi</span>(x, <span class="at">psi =</span> <span class="st">"huber"</span>,    <span class="at">cc =</span> <span class="fl">1.5</span>,   <span class="at">deriv =</span> <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb1-9"><a></a>  <span class="at">Bisquare =</span> <span class="fu">Mpsi</span>(x, <span class="at">psi =</span> <span class="st">"bisquare"</span>, <span class="at">cc =</span> <span class="fl">4.685</span>, <span class="at">deriv =</span> <span class="sc">-</span><span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>x, <span class="at">names_to =</span> <span class="st">"type"</span>, <span class="at">values_to =</span> <span class="st">"rho"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mean"</span>, <span class="st">"Huber"</span>, <span class="st">"Median"</span>, <span class="st">"Bisquare"</span>))</span>
+<span id="cb1-12"><a></a>  )</span>
+<span id="cb1-13"><a></a></span>
+<span id="cb1-14"><a></a>cc_lines <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-15"><a></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"Huber"</span>, <span class="st">"Huber"</span>, <span class="st">"Bisquare"</span>, <span class="st">"Bisquare"</span>),</span>
+<span id="cb1-16"><a></a>  <span class="at">xint =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">4.685</span>, <span class="fl">4.685</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> <span class="fu">levels</span>(df<span class="sc">$</span>type)))</span>
+<span id="cb1-18"><a></a></span>
+<span id="cb1-19"><a></a>rho_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, rho)) <span class="sc">+</span></span>
+<span id="cb1-20"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-21"><a></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb1-22"><a></a>    <span class="at">data =</span> cc_lines,</span>
+<span id="cb1-23"><a></a>    <span class="fu">aes</span>(<span class="at">xintercept =</span> xint),</span>
+<span id="cb1-24"><a></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb1-25"><a></a>    <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb1-26"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb1-27"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">rho</span>(x))) <span class="sc">+</span></span>
+<span id="cb1-28"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
+
+<img data-src="outliers-2_files/figure-revealjs/unnamed-chunk-5-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="tuning-constants" class="slide level2">
+<h2>Tuning constants</h2>
+<ul>
+<li><p>The Huber M-estimator: quadratic near 0 and linear in the tails</p></li>
+<li><p>The tuning constant (c) marks the change and controls the robustness–efficiency trade-off.</p></li>
+</ul>
+<h4 id="table-shows-values-v-such-that-varest-v-n">Table shows values V, such that <code>Var(est) = V / n</code></h4>
+<table class="caption-top">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 28%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">c</th>
+<th style="text-align: right;">Estimator</th>
+<th>Efficiency</th>
+<th style="text-align: right;"><span class="math inline">\(\varepsilon=0\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\varepsilon=0.1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">Median</td>
+<td>0.64</td>
+<td style="text-align: right;">1.571</td>
+<td style="text-align: right;">1.897</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Huber M</td>
+<td>0.90</td>
+<td style="text-align: right;">1.107</td>
+<td style="text-align: right;">1.443</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><strong>1.345</strong></td>
+<td style="text-align: right;"><strong>Huber M</strong></td>
+<td><strong>0.95</strong></td>
+<td style="text-align: right;"><strong>1.047</strong></td>
+<td style="text-align: right;"><strong>1.439</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">Huber M</td>
+<td>0.99</td>
+<td style="text-align: right;">1.010</td>
+<td style="text-align: right;">1.549</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(\infty\)</span></td>
+<td style="text-align: right;">Mean</td>
+<td>1</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">10.900</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="for-sigma-unknown" class="slide level2">
+<h2>For <span class="math inline">\(\sigma\)</span> unknown</h2>
+<p>In practice, <span class="math inline">\(\sigma\)</span> (SD of data, aka scale) is usually unknown and must be estimated from the data.</p>
+<ul>
+<li><p>The SD is efficient but not robust to outliers</p></li>
+<li><p>The MAD (median absolute deviation) is highly robust:</p></li>
+</ul>
+<p><span class="math display">\[1.4826 \, \text{median}(|x_i - \text{median}|)\]</span></p>
+<ul>
+<li><p>We can define an M-estimator for the scale (M-scale)</p></li>
+<li><p>We can also estimate location and scale jointly via M-estimation</p></li>
+</ul>
+</section>
+<section id="in-r" class="slide level2">
+<h2>In R</h2>
+<ul>
+<li><p><code>mad(x)</code> computes the MAD</p></li>
+<li><p><code>locScaleM(x)</code> in <code>RobStatTM</code> computes Huber and bisquare M-estimators (jointly for location and scale) at various asymptiotic efficiency values</p></li>
+</ul>
+</section>
+<section id="simulation-design" class="slide level2">
+<h2>Simulation design</h2>
+<ul>
+<li><p>Clean data: Generate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1</p></li>
+<li><p>Contaminated data: Generate a sample of size 100, with 90% from <span class="math inline">\(\mathcal{N}(0,1)\)</span> and 10% from <span class="math inline">\(\mathcal{N}(0,10)\)</span></p></li>
+<li><p>Compute the mean and the median</p></li>
+<li><p>Repeat 10000 times</p></li>
+<li><p>Approximate the variance of the estimators</p></li>
+</ul>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>rcont_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">eps =</span> <span class="fl">0.10</span>, <span class="at">mu0 =</span> <span class="dv">0</span>, </span>
-<span id="cb9-2"><a></a>                       <span class="at">sigma0 =</span> <span class="dv">1</span>, <span class="at">sigma1 =</span> <span class="dv">10</span>) {</span>
-<span id="cb9-3"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma0)</span>
-<span id="cb9-4"><a></a>  </span>
-<span id="cb9-5"><a></a>  k <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(eps <span class="sc">*</span> n)              </span>
-<span id="cb9-6"><a></a>  <span class="cf">if</span> (k <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb9-7"><a></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, k)</span>
-<span id="cb9-8"><a></a>    x[idx] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma1)</span>
-<span id="cb9-9"><a></a>  }</span>
-<span id="cb9-10"><a></a>  x</span>
-<span id="cb9-11"><a></a>}</span>
-<span id="cb9-12"><a></a></span>
-<span id="cb9-13"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb9-14"><a></a></span>
-<span id="cb9-15"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, {</span>
-<span id="cb9-16"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rcont_norm</span>(<span class="dv">100</span>)</span>
-<span id="cb9-17"><a></a>  <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x),</span>
-<span id="cb9-18"><a></a>    <span class="at">median =</span> <span class="fu">median</span>(x))</span>
-<span id="cb9-19"><a></a>})</span>
-<span id="cb9-20"><a></a></span>
-<span id="cb9-21"><a></a>sim_stats <span class="ot">&lt;-</span> <span class="fu">t</span>(sim_stats) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb9-22"><a></a></span>
-<span id="cb9-23"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>rcont_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">eps =</span> <span class="fl">0.10</span>, <span class="at">mu0 =</span> <span class="dv">0</span>, <span class="at">sigma0 =</span> <span class="dv">1</span>, <span class="at">sigma1 =</span> <span class="dv">10</span>) {</span>
+<span id="cb2-4"><a></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma0)</span>
+<span id="cb2-5"><a></a>  </span>
+<span id="cb2-6"><a></a>  k <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(eps <span class="sc">*</span> n)              </span>
+<span id="cb2-7"><a></a>  <span class="cf">if</span> (k <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb2-8"><a></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, k)</span>
+<span id="cb2-9"><a></a>    x[idx] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, <span class="at">mean =</span> mu0, <span class="at">sd =</span> sigma1)</span>
+<span id="cb2-10"><a></a>  }</span>
+<span id="cb2-11"><a></a>  x</span>
+<span id="cb2-12"><a></a>}</span>
+<span id="cb2-13"><a></a></span>
+<span id="cb2-14"><a></a><span class="co">#no contamination</span></span>
+<span id="cb2-15"><a></a></span>
+<span id="cb2-16"><a></a>eps <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb2-17"><a></a>sim <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
+<span id="cb2-18"><a></a>    x <span class="ot">&lt;-</span> <span class="fu">rcont_norm</span>(<span class="dv">100</span>, <span class="at">eps =</span> eps)</span>
+<span id="cb2-19"><a></a>    <span class="fu">c</span>(</span>
+<span id="cb2-20"><a></a>      <span class="at">Mean     =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb2-21"><a></a>      <span class="at">Median   =</span> <span class="fu">median</span>(x),</span>
+<span id="cb2-22"><a></a>      <span class="at">Bisquare_3.44 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.85</span>)<span class="sc">$</span>mu,</span>
+<span id="cb2-23"><a></a>      <span class="at">Bisquare_4.68 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.95</span>)<span class="sc">$</span>mu</span>
+<span id="cb2-24"><a></a>    )</span>
+<span id="cb2-25"><a></a>  })</span>
+<span id="cb2-26"><a></a></span>
+<span id="cb2-27"><a></a>  </span>
+<span id="cb2-28"><a></a>var0  <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">t</span>(sim), <span class="dv">2</span>, var)</span>
+<span id="cb2-29"><a></a></span>
+<span id="cb2-30"><a></a><span class="co">#with contamination</span></span>
+<span id="cb2-31"><a></a>eps <span class="ot">=</span> <span class="fl">0.20</span></span>
+<span id="cb2-32"><a></a>sim <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
+<span id="cb2-33"><a></a>    x <span class="ot">&lt;-</span> <span class="fu">rcont_norm</span>(<span class="dv">100</span>, <span class="at">eps =</span> eps)</span>
+<span id="cb2-34"><a></a>    <span class="fu">c</span>(</span>
+<span id="cb2-35"><a></a>      <span class="at">Mean     =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb2-36"><a></a>      <span class="at">Median   =</span> <span class="fu">median</span>(x),</span>
+<span id="cb2-37"><a></a>      <span class="at">Bisquare_3.44 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.85</span>)<span class="sc">$</span>mu,</span>
+<span id="cb2-38"><a></a>      <span class="at">Bisquare_4.68 =</span> <span class="fu">locScaleM</span>(x, <span class="at">psi=</span><span class="st">"bisquare"</span>, <span class="at">eff=</span><span class="fl">0.95</span>)<span class="sc">$</span>mu</span>
+<span id="cb2-39"><a></a>    )</span>
+<span id="cb2-40"><a></a>  })</span>
+<span id="cb2-41"><a></a>  </span>
+<span id="cb2-42"><a></a>var20 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">t</span>(sim), <span class="dv">2</span>, var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="approximated-variance-of-the-bisquare-m-estimator" class="slide level2">
+<h2>Approximated Variance of the Bisquare M-estimator</h2>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Estimator</th>
+<th style="text-align: center;">Eff</th>
+<th style="text-align: center;">ε = 0</th>
+<th style="text-align: center;">ε = 0.20</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mean</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">0.010</td>
+<td style="text-align: center;">0.208</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Median</td>
+<td style="text-align: center;">0.64</td>
+<td style="text-align: center;">0.016</td>
+<td style="text-align: center;">0.023</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bisquare_3.44</td>
+<td style="text-align: center;">0.85</td>
+<td style="text-align: center;">0.012</td>
+<td style="text-align: center;">0.015</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bisquare_4.68</td>
+<td style="text-align: center;">0.95</td>
+<td style="text-align: center;">0.011</td>
+<td style="text-align: center;">0.016</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="detecting-outliers" class="slide level2">
+<h2>Detecting Outliers</h2>
+<p>How do we know if the data contains outliers?</p>
+<p><br></p>
+<h4 id="the-3-sigma-rule">The <strong>3-<span class="math inline">\(\sigma\)</span> rule</strong></h4>
+<ul>
+<li><p>Classical rule: observations far from the mean are considered outliers</p></li>
+<li><p>What is “far”? We can measure</p></li>
+</ul>
+<p><span class="math display">\[z_i = \frac{x_i-\bar x}{s}\]</span></p>
+<ul>
+<li>Flag as outlier if: <span class="math inline">\(|z_i| &gt; 3\)</span></li>
+</ul>
+</section>
+<section id="iclicker-1-interpretation-of-the-rule" class="slide level2">
+<h2>iClicker 1: interpretation of the rule</h2>
+<p><br></p>
+<p>With the 3-<span class="math inline">\(\sigma\)</span> rule:</p>
+<p><span class="math display">\[|z_i| = \left|\frac{x_i-\bar x}{s}\right| &gt; 3 \]</span></p>
+<p>an observation is flagged as an outlier if</p>
+<ul>
+<li><p>A. The observation is more than 3 standard deviations from the mean</p></li>
+<li><p>B. The observation is in the largest 3% of the data</p></li>
+<li><p>C. The observation is larger than 3 times the mean</p></li>
+<li><p>D. The observation is more than 3 units from the median</p></li>
+</ul>
+</section>
+<section id="iclicker-2-use-the-rule" class="slide level2">
+<h2>iClicker 2: use the rule</h2>
+<p><br></p>
+<p>Which points are flagged as outliers using the 3-<span class="math inline">\(\sigma\)</span> rule?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">13</span>,<span class="dv">20</span>)</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a><span class="fu">mean</span>(x); <span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3307419</code></pre>
+<pre><code>[1] 4.714286</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">sd</span>(sim_stats<span class="sc">$</span>median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1374634</code></pre>
+<pre><code>[1] 8.40068</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>dd <span class="ot">&lt;-</span> (.<span class="dv">9</span><span class="sc">/</span><span class="dv">1</span> <span class="sc">+</span> .<span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb13-2"><a></a><span class="fu">sqrt</span>(pi<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span>dd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>z  <span class="ot">&lt;-</span> (x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">/</span><span class="fu">sd</span>(x)</span>
+<span id="cb6-2"><a></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1377268</code></pre>
+<pre><code>[1] -0.7992550 -0.6802170 -0.5611790 -0.4421411 -0.3231031  0.9863147  1.8195805</code></pre>
 </div>
 </div>
+<ul>
+<li><p>A. Both <span class="math inline">\(x=13\)</span> and <span class="math inline">\(x=20\)</span> are flagged</p></li>
+<li><p>B. Only <span class="math inline">\(x=20\)</span> is flagged</p></li>
+<li><p>C. All points are flagged</p></li>
+<li><p>D. None of points are flagged</p></li>
+</ul>
+</section>
+<section id="masking" class="slide level2">
+<h2>Masking</h2>
+<p><br></p>
+<ul>
+<li><p>The mean and SD are sensitive to outliers</p></li>
+<li><p>Extreme observations pull the mean toward them and inflate the standard deviation, reducing their standardized distance</p></li>
+<li><p>Robust alternative: use median and MAD (or other robust loc-scale estimators)</p></li>
+</ul>
+<h4 id="robust-z-score">Robust z-score:</h4>
+<p><span class="math display">\[z_i^{rob} = \frac{x_i-\text{median}}{\text{MAD}}\]</span></p>
+<p><strong>Rule</strong>: <span class="math inline">\(|z_i^{rob}| &gt; 3\)</span></p>
+</section>
+<section id="iclicker-3-use-the-robust-rule" class="slide level2">
+<h2>iClicker 3: use the robust rule</h2>
+<p><br></p>
+<p>Which points are flagged as outliers using the 3-<span class="math inline">\(\sigma\)</span> rule?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">13</span>,<span class="dv">20</span>)</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a><span class="fu">median</span>(x); <span class="fu">mad</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.9652</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>z  <span class="ot">&lt;-</span> (x<span class="sc">-</span><span class="fu">median</span>(x))<span class="sc">/</span><span class="fu">mad</span>(x)</span>
+<span id="cb11-2"><a></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.0117361 -0.6744908 -0.3372454  0.0000000  0.3372454  4.0469446  6.4076622</code></pre>
+</div>
+</div>
+<ul>
+<li><p>A. Both <span class="math inline">\(x=13\)</span> and <span class="math inline">\(x=20\)</span> are flagged</p></li>
+<li><p>B. Only <span class="math inline">\(x=20\)</span> is flagged</p></li>
+<li><p>C. All points are flagged</p></li>
+<li><p>D. None of points are flagged</p></li>
+</ul>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key Takeaways</h2>
 <p><br></p>
 <ul>
-<li><p>Outliers can occur in all variables of an observation or only in certain variables</p></li>
-<li><p>Cellwise paradigm is better is more flexible for high-dimensional data</p></li>
-<li><p>Classical estimators can be optimal but very sensitive to outliers</p></li>
-<li><p>Median is less efficient (≈ 1.57× variance) but more stable under contamination</p></li>
-<li><p>Robustness = trade-off with efficiency</p></li>
+<li><p>Classical estimators (mean, SD) are highly sensitive to outliers</p></li>
+<li><p>Robust estimators reduce the influence of extreme observations</p></li>
+<li><p>M-estimators provide a flexible compromise between efficiency and robustness</p></li>
+<li><p>The tuning constant controls this trade-off</p></li>
+<li><p>Robust methods improve both estimation and outlier detection</p></li>
 </ul>
 
 

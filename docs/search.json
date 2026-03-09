@@ -644,11 +644,158 @@
     "text": "Key Takeaways\n\n\nDifferent random sampling methods each balance practicality and representativeness in different ways.\nWe covered four random sampling methods (simple random, systematic, stratified, and cluster), each with its own strengths and limitations.\nSelecting an appropriate sampling method can minimize bias, but no method completely eliminates it. Being aware of various types of bias is crucial."
   },
   {
+    "objectID": "schedule/slides/outliers-3.html#section",
+    "href": "schedule/slides/outliers-3.html#section",
+    "title": "UBC DSCI 200",
+    "section": "Outliers III",
+    "text": "Outliers III\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 09 March 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#attribution",
+    "href": "schedule/slides/outliers-3.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\n\nSome examples and references are from Challenges of cellwise outliers, by Raymaekers and Rousseeuw\nRobust Statistics, by Maronna, Martin, Yohai, Salibian-Barrera\n\n\nIn memory of my mentor and friend\nProfessor Ruben Zamar (1949-2023)\nwho contributed greatly to Robust Statistics and beyond …"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#review",
+    "href": "schedule/slides/outliers-3.html#review",
+    "title": "UBC DSCI 200",
+    "section": "Review",
+    "text": "Review\n\nAn outlier is an observation that deviates from the bulk of the data, an atypical observation.\nWe defined both casewise and cellwise outliers but focused on univarite outliers.\n\n We defined and examined by simulations three univariate estimators of location: the mean, the median, the M-estimators.\n\nWe learned about the trade-off between robustness and efficiency."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-1",
+    "href": "schedule/slides/outliers-3.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Definition: Efficiency\n\n\nEfficiency measures how precise an estimator is, the more efficient the estimator, the less it varies across samples.\n\n\n\n\n\nRelative efficiency compares two unbiased estimators by the ratio of their variances.\nSince the sample mean is an optimal estimator (MLE) under the Normal distribution, we measured the efficiency of robust estimators in comparison to the sample mean, for example:\n\n\n\n\n\\[\\frac{\\text{Var}(\\text{sample median})}{\\text{Var}(\\text{sample mean})}\\]"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#from-one-variable-to-an-entire-dataset",
+    "href": "schedule/slides/outliers-3.html#from-one-variable-to-an-entire-dataset",
+    "title": "UBC DSCI 200",
+    "section": "From one variable to an entire dataset",
+    "text": "From one variable to an entire dataset\n\n\n\n\nThree core tasks:\n\nEstimating multivariate paramters (e.g, location and covariance)\nModeling relationships (e.g., regression)\nDiscovering structure (e.g., unsupervised learning)\n\n\nGoal for today\n\n\nWhat is a multivariate parameter?\n\n\nHow do we estimate multivariate location and scatter robustly?\n\n\nHow do we detect multivariate outliers?\n\n\nWhy do cellwise outliers need different tools?"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#from-one-variable-to-many-variables",
+    "href": "schedule/slides/outliers-3.html#from-one-variable-to-many-variables",
+    "title": "UBC DSCI 200",
+    "section": "From one variable to many variables",
+    "text": "From one variable to many variables\n\nFor one variable, typical parameters are:\n\ncenter: mean, median\nspread: variance, SD, MAD\n\n\nWith several variables, we also estimate:\n\nmultivariate center: e.g., vector of means or medians\nmultivariate scatter: e.g., the sample covariance matrix\nassociation: a matix of pairwise correlations"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#correlation-matrix",
+    "href": "schedule/slides/outliers-3.html#correlation-matrix",
+    "title": "UBC DSCI 200",
+    "section": "Correlation matrix",
+    "text": "Correlation matrix\n\n\nEach entry measures pairwise linear association between variables\nDiagonal entries are 1"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#multivariate-estimators-in-r",
+    "href": "schedule/slides/outliers-3.html#multivariate-estimators-in-r",
+    "title": "UBC DSCI 200",
+    "section": "Multivariate estimators in R",
+    "text": "Multivariate estimators in R\nLet’s start by visualizing pair-wise estimates for 4 variables\n\n\nDistribution of each variable in the diagonal\nPairwise scatter plots and correlations off-diagonal\nPairwise sample means shown as red crosses"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-2",
+    "href": "schedule/slides/outliers-3.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Outliers are visible in the (marginal) distribution of V169, so it is not surprising that they affect pairwise summaries too."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#multivariate-outliers",
+    "href": "schedule/slides/outliers-3.html#multivariate-outliers",
+    "title": "UBC DSCI 200",
+    "section": "Multivariate outliers",
+    "text": "Multivariate outliers\n\nSome observations deviate from the overall trend, while others reinforce it."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#robust-multivariate-estimators",
+    "href": "schedule/slides/outliers-3.html#robust-multivariate-estimators",
+    "title": "UBC DSCI 200",
+    "section": "Robust multivariate estimators",
+    "text": "Robust multivariate estimators\n\nM-estimators have also been proposed for the multivariate case.\nEstimators based on the idea of trimming observations are also widely used, for example the Minimum Covariance Determinant (MCD).\n\nAmong many possible groups of \\(h\\) observations, choose the one that forms the tightest cluster of points\nCompute the center and the spread using only that group\n\n\n\n\n\nMCD tries to estimate the bulk of the data, rather than being influenced by extreme observations."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#detecting-outliers",
+    "href": "schedule/slides/outliers-3.html#detecting-outliers",
+    "title": "UBC DSCI 200",
+    "section": "Detecting outliers",
+    "text": "Detecting outliers\nWhen looking at each variable at a time, we used the 3-\\(\\sigma\\) rule:\n\\[\n|z_i| = \\left|\\frac{x_i - \\hat{\\mu}}{\\hat{\\sigma}}\\right| &gt; 3\n\\]\nWith several variables, the analogue is the Mahalanobis distance:\n\\[\nMD(\\mathbf{x}_i) = \\sqrt{(\\mathbf{x}_i - \\hat{\\mathbf{\\mu}})^T \\hat{\\Sigma}^{-1} (\\mathbf{x}_i - \\hat{\\mu})} &gt; \\text{cut-off}\n\\]\n\nIt measures the distance of each point \\(\\mathbf{x}_i\\) to the center \\(\\hat{\\mathbf{\\mu}}\\), taking the correlation between variables into account.\nUsing robust estimates \\(\\hat{\\mu}\\) and \\(\\hat{\\Sigma}\\), we can control masking and define a score to detect outliers.\n\n\nrecall replacing mean/SD by median/MAD in the univariate case"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-3",
+    "href": "schedule/slides/outliers-3.html#section-3",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "#MCD estimator\nmcd &lt;- covMcd(X)\nmd &lt;- mahalanobis(X, mcd$center, mcd$cov)\ncutoff &lt;- qchisq(0.975, ncol(X))\n\nmd_df &lt;- data.frame(\n  obs = seq_along(md),\n  RD2 = md,\n  flag = md &gt; cutoff)\n\n\nPoints (rows) with a squared MD exceeding the cutoff are flagged as rowwise outliers"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#other-estimators",
+    "href": "schedule/slides/outliers-3.html#other-estimators",
+    "title": "UBC DSCI 200",
+    "section": "Other estimators",
+    "text": "Other estimators\n\n# MM-estimator\nmm_multivariate &lt;- covRob(X)\nmm_multivariate$cov\n\n         V29      V30      V61      V62\nV29 8.971398 5.684242 3.804613 3.808414\nV30 5.684242 7.089589 3.545454 3.312801\nV61 3.804613 3.545454 7.475114 4.837979\nV62 3.808414 3.312801 4.837979 7.359527\n\nhead(mm_multivariate$dist)\n\n[1] 3.3765584 1.2505738 0.5629201 1.2960335 4.6633382 4.3703017\n\n\n\n\n\n\n\n\nV29\nV30\nV61\nV62\n\n\n\n\nMean\n13.486\n12.624\n13.160\n13.029\n\n\nMedian\n13.600\n12.325\n12.600\n13.000\n\n\nMCD\n13.334\n12.603\n12.820\n12.739\n\n\nMM\n13.340\n12.508\n13.072\n12.951"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-4",
+    "href": "schedule/slides/outliers-3.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "But what if only a few cells are contaminated in many rows?\n\nevery row may contain at least one bad entry\nrowwise methods can lose too much information\nwe need methods that work more coordinatewise\n\nThis motivates wrapping and DDC."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#ddc-detect-deviating-cells",
+    "href": "schedule/slides/outliers-3.html#ddc-detect-deviating-cells",
+    "title": "UBC DSCI 200",
+    "section": "DDC: Detect Deviating Cells",
+    "text": "DDC: Detect Deviating Cells\nDDC is aimed at cellwise outliers.\n\nuse the relationships among variables\npredict what a cell should look like from the others\nflag cells that deviate strongly from that prediction\n\nDDC looks for suspicious entries, not just suspicious rows.\n\nDDC uses robust correlations to describe relationships among variables\nDDC can also detect missing or implausible values\nflagged cells can be imputed using predictions from other variables\n\nIn high-dimensional data, contamination often occurs cell by cell, not row by row."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#robust-correlation-by-wrapping",
+    "href": "schedule/slides/outliers-3.html#robust-correlation-by-wrapping",
+    "title": "UBC DSCI 200",
+    "section": "Robust correlation by wrapping",
+    "text": "Robust correlation by wrapping\nIn the spirit of Huber’s estimation, wrapping have been proposed to compute robust correlations (fast):\n\n\n\n\n\nrobustly standardize each variable\n\n\ntransform extreme values with a bounded function\n\n\ncompute ordinary correlations on the transformed data\n\n\n\n\n\nSo we keep the speed and matrix structure of classical correlation, but gain robustness.\n\n\nfrom Raymaekers, J., and Rousseeuw, P.J, (Technometrics 2021)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-5",
+    "href": "schedule/slides/outliers-3.html#section-5",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "#uses wrapping to estimate correlations\nfastDDCpars=list(fastDDC=T,silent=F)\n\n#computes DDC algorithm\nfastDDCglass =  DDC(X,fastDDCpars)\n\n \n The input data has 180 rows and 4 columns.\n\n#removes variables without variation\nglass_clean = fastDDCglass$remX; dim(fastDDCglass$remX)\n\n[1] 180   4\n\nnrowsinblock &lt;- 5\nggpfastDDC &lt;- cellMap(\n  D = glass_clean,\n  R = fastDDCglass$stdResid,\n  indcells = fastDDCglass$indcells,\n  indrows = fastDDCglass$indrows,\n  mTitle = \"Cellwise Outlier Detection\",\n  nrowsinblock = nrowsinblock,\n  columnangle = 90,\n  sizetitles = 1.5,\n  autolabel = FALSE\n)\n\nNo rowblocklabels were given, so they are constructed automatically."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-6",
+    "href": "schedule/slides/outliers-3.html#section-6",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "plot(ggpfastDDC)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#key-takeaways",
+    "href": "schedule/slides/outliers-3.html#key-takeaways",
+    "title": "UBC DSCI 200",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\n\nIn both univariate and multivariate cases, classical estimators are highly sensitive to outliers\nRobust estimators reduce the influence of extreme observations\nRowwise contamination\n\nMethods such as M-estimators and MCD estimate robust multivariate center and scatter\nThese estimates can be used to compute robust Mahalanobis distances to detect outliers"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-7",
+    "href": "schedule/slides/outliers-3.html#section-7",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Cellwise contamination\n\nMethods such as DDC and wrapping detect corrupted cells\nThey rely on relationships among variables and are used to compute robust multivariate estimates and flag outliers\n\nRobust methods improve both estimation and outlier detection\n\nBeyond Multivariate estimation\n\nSimilar ideas have been used to propose robust regression methods\n\ne.g., minimizing a robust function of the residuals instead of the sum of squares\n\nMultivariate estimators are essential in unsupervised methods\n\ne.g., principal component analysis (PCA)"
+  },
+  {
     "objectID": "schedule/slides/outliers-1.html#section",
     "href": "schedule/slides/outliers-1.html#section",
     "title": "UBC DSCI 200",
     "section": "Outliers I",
-    "text": "Outliers I\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 23 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+    "text": "Outliers I\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 02 March 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
     "objectID": "schedule/slides/outliers-1.html#attribution",
@@ -739,7 +886,7 @@
     "href": "schedule/slides/outliers-1.html#section-1",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "set.seed(200)\n\nsim_stats &lt;- replicate(10000, {\n  x &lt;- rnorm(100)\n  c(mean = mean(x),\n    median = median(x))\n})\n\nsim_stats &lt;- t(sim_stats) |&gt; as.data.frame()\n\nsd(sim_stats$mean)\n\n[1] 0.1006556\n\n1/sqrt(1000)\n\n[1] 0.03162278\n\nsd(sim_stats$median)\n\n[1] 0.1255247\n\nsqrt(pi/2)*0.001\n\n[1] 0.001253314"
+    "text": "set.seed(200)\n\nsim_stats &lt;- replicate(10000, {\n  x &lt;- rnorm(100)\n  c(mean = mean(x),\n    median = median(x))\n})\n\nsim_stats &lt;- t(sim_stats) |&gt; as.data.frame()\n\nsd(sim_stats$mean)\n\n[1] 0.1006556\n\n1/sqrt(100)\n\n[1] 0.1\n\nsd(sim_stats$median)\n\n[1] 0.1255247\n\nsqrt(pi/2)*0.1\n\n[1] 0.1253314"
   },
   {
     "objectID": "schedule/slides/outliers-1.html#simulation-design-1",
@@ -2763,6 +2910,174 @@
     "title": "UBC DSCI 200",
     "section": "",
     "text": "Many imputation methods exist but it is important to understand the risk of imputing!\nTransparent reporting of imputation decisions is essential for reproducibility and ethical integrity.\n\nCheck additional functions in the Missing Book"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#section",
+    "href": "schedule/slides/outliers-2.html#section",
+    "title": "UBC DSCI 200",
+    "section": "Outliers II",
+    "text": "Outliers II\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 02 March 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#attribution",
+    "href": "schedule/slides/outliers-2.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\n\nSome examples and references are from Challenges of cellwise outliers, by Raymaekers and Rousseeuw\nRobust Statistics, by Maronna, Martin, Yohai, Salibian-Barrera\n\n\nIn memory of my mentor and friend\nProfessor Ruben Zamar (1949-2023)\nwho contributed greatly to Robust Statistics and beyond …"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#review",
+    "href": "schedule/slides/outliers-2.html#review",
+    "title": "UBC DSCI 200",
+    "section": "Review",
+    "text": "Review\n\nAn outlier is an observation that deviates from the bulk of the data, an atypical observation.\nAs with missing values, outliers require careful diagnosis and appropriate handling before analysis.\nWe defined both casewise and cellwise outliers\n\n - We used simulations to examine 2 univariate estimators: the mean and the median"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#univariate-estimators",
+    "href": "schedule/slides/outliers-2.html#univariate-estimators",
+    "title": "UBC DSCI 200",
+    "section": "Univariate estimators",
+    "text": "Univariate estimators\nData: n = 180 archeological glass spectra with d = 750 wavelengths (Detecting Deviating Data Cells, Rousseeuw & Van Den Bossche, Technometrics 2018)\nLooking at the values of the wavelength V169:"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#robustness-vs-efficiency",
+    "href": "schedule/slides/outliers-2.html#robustness-vs-efficiency",
+    "title": "UBC DSCI 200",
+    "section": "Robustness vs Efficiency",
+    "text": "Robustness vs Efficiency\n\n \nCan we achieve robustness without loss of efficiency?"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#which-distribution-generated-the-data",
+    "href": "schedule/slides/outliers-2.html#which-distribution-generated-the-data",
+    "title": "UBC DSCI 200",
+    "section": "Which distribution generated the data?",
+    "text": "Which distribution generated the data?\n\nSuppose that we know which distribution generated the data but we don’t know it’s center, how can we estimated?"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#maximum-likelihood-estimator-mle",
+    "href": "schedule/slides/outliers-2.html#maximum-likelihood-estimator-mle",
+    "title": "UBC DSCI 200",
+    "section": "Maximum Likelihood Estimator (MLE)",
+    "text": "Maximum Likelihood Estimator (MLE)\n\nMLE chooses the center \\(\\mu\\) that makes the observed data most probable under the assumed distribution\nThe Normal distribution is given by:\n\n\\[\nf(x;\\mu,\\sigma)\n=\n\\frac{1}{\\sqrt{2\\pi}\\,\\sigma}\n\\exp\\!\\left(\n-\\frac{(x-\\mu)^2}{2\\sigma^2}\n\\right)\n\\]\n\nIf we assume that the data is Normally distributed, with \\(\\sigma = 1\\) but \\(\\mu\\) unknown, and with some math, we can show that\n\n\\[\n\\hat{\\mu}_{\\text{MLE}}\n=\n\\arg\\min_{\\mu}\n\\sum_{i=1}^n\n\\!(x_i-\\mu)^2\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#the-mle",
+    "href": "schedule/slides/outliers-2.html#the-mle",
+    "title": "UBC DSCI 200",
+    "section": "The MLE",
+    "text": "The MLE\n\\[\n\\hat{\\mu}_{\\text{MLE}}\n=\n\\arg\\min_{\\mu}\n\\sum_{i=1}^n\n\\!(x_i-\\mu)^2\n\\]\n\n\n\n\n\n\n\nDefinition\n\n\n\\(\\arg\\min_{\\mu}\\) denotes the value of \\(\\mu\\) that minimizes the sum of squared deviations.\n\n\n\n\nUsing Calculus, it is easy to show that\n\\[\\hat{\\mu}_{\\text{MLE}} = \\bar{x}\\]\nwhen the data is Normal, the MLE is the sample mean\nSimilarly, we can show that\nwhen the data is double exponential, the MLE is the sample median"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#section-1",
+    "href": "schedule/slides/outliers-2.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "But in general, we don’t know the distribution. It may even be a mixture of distributions that generated contaminated data!"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#the-m-estimators",
+    "href": "schedule/slides/outliers-2.html#the-m-estimators",
+    "title": "UBC DSCI 200",
+    "section": "The M-estimators",
+    "text": "The M-estimators\n\\[\n\\hat{\\mu}_{\\text{MLE}}\n=\n\\arg\\min_{\\mu}\n\\sum_{i=1}^n\n\\!(x_i-\\mu)^2\n\\] From the MLE to the M-estimator:\n\\[\n\\hat{\\mu}_M\n=\n\\arg\\min_{\\mu}\n\\sum_{i=1}^n\n\\rho(x_i-\\mu)\n\\]\nInstead of of squaring deviations, we measure them with a differentiable function \\(\\rho\\)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#the-rho-function",
+    "href": "schedule/slides/outliers-2.html#the-rho-function",
+    "title": "UBC DSCI 200",
+    "section": "The \\(\\rho\\) function",
+    "text": "The \\(\\rho\\) function\n\n\n\n\n\n\n\n\n\n\n\nRobustness vs Efficiency\n\n\\(\\rho(r)\\)\n\nEstimator\n\n\n\n\n\n\nsquare\n\nMean\n\n\n\n\nabsolute\n\nMedian\n\n\n  \n\n  differenciable?\n\n  M-estimator"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#section-2",
+    "href": "schedule/slides/outliers-2.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Different \\(M\\)-estimators of location have been proposed:\n\n# grid\nx &lt;- seq(-6, 6, length.out = 400)\n\ndf &lt;- tibble(\n  x = x,\n  Mean     = 0.5 * x^2,\n  Median   = abs(x),\n  Huber    = Mpsi(x, psi = \"huber\",    cc = 1.5,   deriv = -1),\n  Bisquare = Mpsi(x, psi = \"bisquare\", cc = 4.685, deriv = -1)) |&gt;\n  pivot_longer(-x, names_to = \"type\", values_to = \"rho\") |&gt;\n  mutate(type = factor(type, levels = c(\"Mean\", \"Huber\", \"Median\", \"Bisquare\"))\n  )\n\ncc_lines &lt;- tibble(\n  type = c(\"Huber\", \"Huber\", \"Bisquare\", \"Bisquare\"),\n  xint = c(-1.5, 1.5, -4.685, 4.685)) |&gt;\n  mutate(type = factor(type, levels = levels(df$type)))\n\nrho_plot &lt;- ggplot(df, aes(x, rho)) +\n  geom_line(linewidth = 1) +\n  geom_vline(\n    data = cc_lines,\n    aes(xintercept = xint),\n    linetype = \"dashed\",\n    linewidth = 0.6) +\n  facet_wrap(~ type, ncol = 2, scales = \"free_y\") +\n  labs(x = \"x\", y = expression(rho(x))) +\n  theme_minimal(base_size = 14)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#tuning-constants",
+    "href": "schedule/slides/outliers-2.html#tuning-constants",
+    "title": "UBC DSCI 200",
+    "section": "Tuning constants",
+    "text": "Tuning constants\n\nThe Huber M-estimator: quadratic near 0 and linear in the tails\nThe tuning constant (c) marks the change and controls the robustness–efficiency trade-off.\n\nTable shows values V, such that Var(est) = V / n\n\n\n\n\n\n\n\n\n\n\nc\nEstimator\nEfficiency\n\\(\\varepsilon=0\\)\n\\(\\varepsilon=0.1\\)\n\n\n\n\n0\nMedian\n0.64\n1.571\n1.897\n\n\n1.0\nHuber M\n0.90\n1.107\n1.443\n\n\n1.345\nHuber M\n0.95\n1.047\n1.439\n\n\n2.0\nHuber M\n0.99\n1.010\n1.549\n\n\n\\(\\infty\\)\nMean\n1\n1.000\n10.900"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#for-sigma-unknown",
+    "href": "schedule/slides/outliers-2.html#for-sigma-unknown",
+    "title": "UBC DSCI 200",
+    "section": "For \\(\\sigma\\) unknown",
+    "text": "For \\(\\sigma\\) unknown\nIn practice, \\(\\sigma\\) (SD of data, aka scale) is usually unknown and must be estimated from the data.\n\nThe SD is efficient but not robust to outliers\nThe MAD (median absolute deviation) is highly robust:\n\n\\[1.4826 \\, \\text{median}(|x_i - \\text{median}|)\\]\n\nWe can define an M-estimator for the scale (M-scale)\nWe can also estimate location and scale jointly via M-estimation"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#in-r",
+    "href": "schedule/slides/outliers-2.html#in-r",
+    "title": "UBC DSCI 200",
+    "section": "In R",
+    "text": "In R\n\nmad(x) computes the MAD\nlocScaleM(x) in RobStatTM computes Huber and bisquare M-estimators (jointly for location and scale) at various asymptiotic efficiency values"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#simulation-design",
+    "href": "schedule/slides/outliers-2.html#simulation-design",
+    "title": "UBC DSCI 200",
+    "section": "Simulation design",
+    "text": "Simulation design\n\nClean data: Generate a sample of size 100 from a Normal distribution with mean 0 and standard deviation 1\nContaminated data: Generate a sample of size 100, with 90% from \\(\\mathcal{N}(0,1)\\) and 10% from \\(\\mathcal{N}(0,10)\\)\nCompute the mean and the median\nRepeat 10000 times\nApproximate the variance of the estimators"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#section-4",
+    "href": "schedule/slides/outliers-2.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "set.seed(200)\n\nrcont_norm &lt;- function(n, eps = 0.10, mu0 = 0, sigma0 = 1, sigma1 = 10) {\n  x &lt;- rnorm(n, mean = mu0, sd = sigma0)\n  \n  k &lt;- ceiling(eps * n)              \n  if (k &gt; 0) {\n    idx &lt;- sample(1:n, k)\n    x[idx] &lt;- rnorm(k, mean = mu0, sd = sigma1)\n  }\n  x\n}\n\n#no contamination\n\neps = 0\nsim &lt;- replicate(1000, {\n    x &lt;- rcont_norm(100, eps = eps)\n    c(\n      Mean     = mean(x),\n      Median   = median(x),\n      Bisquare_3.44 = locScaleM(x, psi=\"bisquare\", eff=0.85)$mu,\n      Bisquare_4.68 = locScaleM(x, psi=\"bisquare\", eff=0.95)$mu\n    )\n  })\n\n  \nvar0  &lt;- apply(t(sim), 2, var)\n\n#with contamination\neps = 0.20\nsim &lt;- replicate(1000, {\n    x &lt;- rcont_norm(100, eps = eps)\n    c(\n      Mean     = mean(x),\n      Median   = median(x),\n      Bisquare_3.44 = locScaleM(x, psi=\"bisquare\", eff=0.85)$mu,\n      Bisquare_4.68 = locScaleM(x, psi=\"bisquare\", eff=0.95)$mu\n    )\n  })\n  \nvar20 &lt;- apply(t(sim), 2, var)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#approximated-variance-of-the-bisquare-m-estimator",
+    "href": "schedule/slides/outliers-2.html#approximated-variance-of-the-bisquare-m-estimator",
+    "title": "UBC DSCI 200",
+    "section": "Approximated Variance of the Bisquare M-estimator",
+    "text": "Approximated Variance of the Bisquare M-estimator\n\n\n\n\n\n\nEstimator\nEff\nε = 0\nε = 0.20\n\n\n\n\nMean\n1.00\n0.010\n0.208\n\n\nMedian\n0.64\n0.016\n0.023\n\n\nBisquare_3.44\n0.85\n0.012\n0.015\n\n\nBisquare_4.68\n0.95\n0.011\n0.016"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#detecting-outliers",
+    "href": "schedule/slides/outliers-2.html#detecting-outliers",
+    "title": "UBC DSCI 200",
+    "section": "Detecting Outliers",
+    "text": "Detecting Outliers\nHow do we know if the data contains outliers?\n\nThe 3-\\(\\sigma\\) rule\n\nClassical rule: observations far from the mean are considered outliers\nWhat is “far”? We can measure\n\n\\[z_i = \\frac{x_i-\\bar x}{s}\\]\n\nFlag as outlier if: \\(|z_i| &gt; 3\\)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#iclicker-1-interpretation-of-the-rule",
+    "href": "schedule/slides/outliers-2.html#iclicker-1-interpretation-of-the-rule",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 1: interpretation of the rule",
+    "text": "iClicker 1: interpretation of the rule\n\nWith the 3-\\(\\sigma\\) rule:\n\\[|z_i| = \\left|\\frac{x_i-\\bar x}{s}\\right| &gt; 3 \\]\nan observation is flagged as an outlier if\n\nA. The observation is more than 3 standard deviations from the mean\nB. The observation is in the largest 3% of the data\nC. The observation is larger than 3 times the mean\nD. The observation is more than 3 units from the median"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#iclicker-2-use-the-rule",
+    "href": "schedule/slides/outliers-2.html#iclicker-2-use-the-rule",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 2: use the rule",
+    "text": "iClicker 2: use the rule\n\nWhich points are flagged as outliers using the 3-\\(\\sigma\\) rule?\n\nx &lt;- c(-2,-1,0,1,2,13,20)\n\nmean(x); sd(x)\n\n[1] 4.714286\n\n\n[1] 8.40068\n\nz  &lt;- (x-mean(x))/sd(x)\nz\n\n[1] -0.7992550 -0.6802170 -0.5611790 -0.4421411 -0.3231031  0.9863147  1.8195805\n\n\n\nA. Both \\(x=13\\) and \\(x=20\\) are flagged\nB. Only \\(x=20\\) is flagged\nC. All points are flagged\nD. None of points are flagged"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#masking",
+    "href": "schedule/slides/outliers-2.html#masking",
+    "title": "UBC DSCI 200",
+    "section": "Masking",
+    "text": "Masking\n\n\nThe mean and SD are sensitive to outliers\nExtreme observations pull the mean toward them and inflate the standard deviation, reducing their standardized distance\nRobust alternative: use median and MAD (or other robust loc-scale estimators)\n\nRobust z-score:\n\\[z_i^{rob} = \\frac{x_i-\\text{median}}{\\text{MAD}}\\]\nRule: \\(|z_i^{rob}| &gt; 3\\)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#iclicker-3-use-the-robust-rule",
+    "href": "schedule/slides/outliers-2.html#iclicker-3-use-the-robust-rule",
+    "title": "UBC DSCI 200",
+    "section": "iClicker 3: use the robust rule",
+    "text": "iClicker 3: use the robust rule\n\nWhich points are flagged as outliers using the 3-\\(\\sigma\\) rule?\n\nx &lt;- c(-2,-1,0,1,2,13,20)\n\nmedian(x); mad(x)\n\n[1] 1\n\n\n[1] 2.9652\n\nz  &lt;- (x-median(x))/mad(x)\nz\n\n[1] -1.0117361 -0.6744908 -0.3372454  0.0000000  0.3372454  4.0469446  6.4076622\n\n\n\nA. Both \\(x=13\\) and \\(x=20\\) are flagged\nB. Only \\(x=20\\) is flagged\nC. All points are flagged\nD. None of points are flagged"
+  },
+  {
+    "objectID": "schedule/slides/outliers-2.html#key-takeaways",
+    "href": "schedule/slides/outliers-2.html#key-takeaways",
+    "title": "UBC DSCI 200",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\n\nClassical estimators (mean, SD) are highly sensitive to outliers\nRobust estimators reduce the influence of extreme observations\nM-estimators provide a flexible compromise between efficiency and robustness\nThe tuning constant controls this trade-off\nRobust methods improve both estimation and outlier detection"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#section",
