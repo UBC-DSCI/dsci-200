@@ -203,7 +203,7 @@ head(response_body)
 
 It looks like a bit of a mess...
 
-> *Note: 	The `as` argument is the desired type of output: raw, text or parsed. `content` attempts to automatically figure out which one is most appropriate, based on the content-type.*
+> *Note: 	The `as` argument is the desired type of output: raw, text or parsed. `content` attempts to automatically figure out which one is most appropriate, based on the content-type. In this example, we will show `raw` first to illustrate what is happening under the hood, but in practice you will often want to use text or parsed for working with JSON or text-based API responses.*
 
 ## JSON Data
 
@@ -275,6 +275,27 @@ stations <- data |>
   pluck("data", "stations")
 
 stations
+```
+
+##
+
+Now, we can achieve the same result using the argument `as = "text"`: 
+
+```{r}
+response_text <- content(response, as = "text")
+data <- jsonlite::fromJSON(response_text)
+stations <- data$data$stations
+head(stations)
+```
+
+## 
+
+Or alternatively (since the raw data is in a simple JSON file format already):
+
+```{r}
+data <- fromJSON("https://gbfs.citibikenyc.com/gbfs/en/station_information.json")
+stations <- data$data$stations
+head(stations)
 ```
 
 
