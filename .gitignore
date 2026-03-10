@@ -45,4 +45,6 @@ vignettes/*.pdf
 # R package: bookdown caching files
 /*_files/
 
+### Parquet data ###
 seattle-library-checkouts.csv
+seattle-library-checkouts
