@@ -1887,7 +1887,7 @@
     "href": "schedule/slides/data-acquisition-web-scraping.html#section",
     "title": "UBC DSCI 200",
     "section": "Data Acquisition via Web Scraping",
-    "text": "Data Acquisition via Web Scraping\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 27 February 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+    "text": "Data Acquisition via Web Scraping\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 13 March 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#attribution",
@@ -1992,21 +1992,28 @@
     "href": "schedule/slides/data-acquisition-web-scraping.html#extracting-text-attributes",
     "title": "UBC DSCI 200",
     "section": "Extracting Text & Attributes",
-    "text": "Extracting Text & Attributes\n\n\nUse html_text() or html_text2() to get text content:\n\n\nread_html(html) |&gt; html_element(\"head\") |&gt; html_text()\n\n[1] \"Sample Webpage\"\n\n\n\nYou can use html_attr() to extract attributes like links:\n\n\nhtml &lt;- minimal_html(\"\n  &lt;p&gt;&lt;a href='https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus'&gt;UBC coffee map&lt;/a&gt;&lt;/p&gt;\n\")\n    \nhtml |&gt; \n  html_elements(\"p\") |&gt; \n  html_element(\"a\") |&gt; \n  html_attr(\"href\")\n\n[1] \"https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus\""
+    "text": "Extracting Text & Attributes\n\nUse html_text() or html_text2() to get text content:\n\n\nread_html(html) |&gt; html_element(\"head\") |&gt; html_text()\n\n[1] \"Sample Webpage\"\n\n\n\nThe main difference in these functions is how they treat whitespace/formatting. html_text() returns the raw text and html_text2()tries to return text as it would appear in a web browser. For example:\n\n\nhtml &lt;- \"&lt;p&gt;Here is some sample text. &lt;br&gt;Some useful information...&lt;/p&gt;\"\npage &lt;- read_html(html)\n\npage |&gt; html_element(\"p\") |&gt; html_text()\n\n[1] \"Here is some sample text. Some useful information...\"\n\npage |&gt; html_element(\"p\") |&gt; html_text2() |&gt; writeLines()\n\nHere is some sample text.\nSome useful information..."
+  },
+  {
+    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-2",
+    "href": "schedule/slides/data-acquisition-web-scraping.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "You can use html_attr() to extract attributes like links:\n\n\nhtml &lt;- minimal_html(\"\n  &lt;p&gt;&lt;a href='https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus'&gt;UBC coffee map&lt;/a&gt;&lt;/p&gt;\n\")\n    \nhtml |&gt; \n  html_elements(\"p\") |&gt; \n  html_element(\"a\") |&gt; \n  html_attr(\"href\")\n\n[1] \"https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus\""
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#nesting-selections",
     "href": "schedule/slides/data-acquisition-web-scraping.html#nesting-selections",
     "title": "UBC DSCI 200",
     "section": "Nesting Selections",
-    "text": "Nesting Selections\n\n\nIn most cases, you’ll use html_elements() and html_element() together.\n\nTypically, html_elements() identifies elements that will become observations, and html_element() extracts variables from those elements. Here’s an example using a simple HTML list of coffee shops around UBC:\n\n\nhtml &lt;- read_html(\"\n  &lt;ul&gt;\n    &lt;li&gt;&lt;b&gt;Loafe Cafe&lt;/b&gt; serves &lt;i&gt;coffee and pastries&lt;/i&gt; and has &lt;span class='seating'&gt;indoor & outdoor seating&lt;/span&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;b&gt;Bean Around the World&lt;/b&gt; serves &lt;i&gt;great coffee&lt;/i&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;b&gt;JJ Bean&lt;/b&gt; serves &lt;i&gt;strong espresso&lt;/i&gt; and has &lt;span class='seating'&gt;cozy indoor seating&lt;/span&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;b&gt;The Great Dane&lt;/b&gt; has &lt;span class='seating'&gt;a dog-friendly patio&lt;/span&gt;&lt;/li&gt;\n  &lt;/ul&gt;\n  \")"
+    "text": "Nesting Selections\n\nIn most cases, you’ll use html_elements() and html_element() together.\n\nTypically, html_elements() identifies elements that will become observations, and html_element() extracts variables from those elements. Here’s an example using a simple HTML list of coffee shops around UBC:\n\n\nhtml &lt;- read_html(\"\n  &lt;ul&gt;\n    &lt;li&gt;&lt;b&gt;Loafe Cafe&lt;/b&gt; serves &lt;i&gt;coffee and pastries&lt;/i&gt; and has &lt;span class='seating'&gt;indoor & outdoor seating&lt;/span&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;b&gt;Bean Around the World&lt;/b&gt; serves &lt;i&gt;great coffee&lt;/i&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;b&gt;JJ Bean&lt;/b&gt; serves &lt;i&gt;strong espresso&lt;/i&gt; and has &lt;span class='seating'&gt;cozy indoor seating&lt;/span&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;b&gt;The Great Dane&lt;/b&gt; has &lt;span class='seating'&gt;a dog-friendly patio&lt;/span&gt;&lt;/li&gt;\n  &lt;/ul&gt;\n  \")"
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#extracting-coffee-shop-names",
     "href": "schedule/slides/data-acquisition-web-scraping.html#extracting-coffee-shop-names",
     "title": "UBC DSCI 200",
     "section": "Extracting Coffee Shop Names",
-    "text": "Extracting Coffee Shop Names\n\nWe use html_elements(\"li\") to create a vector where each element represents a different coffee shop:\n\nshops &lt;- html |&gt; html_elements(\"li\")\nshops\n\n{xml_nodeset (4)}\n[1] &lt;li&gt;\\n&lt;b&gt;Loafe Cafe&lt;/b&gt; serves &lt;i&gt;coffee and pastries&lt;/i&gt; and has &lt;span c ...\n[2] &lt;li&gt;\\n&lt;b&gt;Bean Around the World&lt;/b&gt; serves &lt;i&gt;great coffee&lt;/i&gt;\\n&lt;/li&gt;\n[3] &lt;li&gt;\\n&lt;b&gt;JJ Bean&lt;/b&gt; serves &lt;i&gt;strong espresso&lt;/i&gt; and has &lt;span class=\"s ...\n[4] &lt;li&gt;\\n&lt;b&gt;The Great Dane&lt;/b&gt; has &lt;span class=\"seating\"&gt;a dog-friendly pati ...\n\n\nTo extract the name of each shop, we use html_element(\"b\"):\n\nshops |&gt; html_element(\"b\")\n\n{xml_nodeset (4)}\n[1] &lt;b&gt;Loafe Cafe&lt;/b&gt;\n[2] &lt;b&gt;Bean Around the World&lt;/b&gt;\n[3] &lt;b&gt;JJ Bean&lt;/b&gt;\n[4] &lt;b&gt;The Great Dane&lt;/b&gt;"
+    "text": "Extracting Coffee Shop Names\n\nWe use html_elements(\"li\") to create an object of class xml_nodeset where each element represents a different coffee shop:\n\nshops &lt;- html |&gt; html_elements(\"li\")\nshops\n\n{xml_nodeset (4)}\n[1] &lt;li&gt;\\n&lt;b&gt;Loafe Cafe&lt;/b&gt; serves &lt;i&gt;coffee and pastries&lt;/i&gt; and has &lt;span c ...\n[2] &lt;li&gt;\\n&lt;b&gt;Bean Around the World&lt;/b&gt; serves &lt;i&gt;great coffee&lt;/i&gt;\\n&lt;/li&gt;\n[3] &lt;li&gt;\\n&lt;b&gt;JJ Bean&lt;/b&gt; serves &lt;i&gt;strong espresso&lt;/i&gt; and has &lt;span class=\"s ...\n[4] &lt;li&gt;\\n&lt;b&gt;The Great Dane&lt;/b&gt; has &lt;span class=\"seating\"&gt;a dog-friendly pati ...\n\n\nTo extract the name of each shop, we use html_element(\"b\"):\n\nshops |&gt; html_element(\"b\")\n\n{xml_nodeset (4)}\n[1] &lt;b&gt;Loafe Cafe&lt;/b&gt;\n[2] &lt;b&gt;Bean Around the World&lt;/b&gt;\n[3] &lt;b&gt;JJ Bean&lt;/b&gt;\n[4] &lt;b&gt;The Great Dane&lt;/b&gt;"
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#extracting-seating-information",
@@ -2016,11 +2023,11 @@
     "text": "Extracting Seating Information\n\nSuppose we want one seating description for each shop, even if some don’t have seating information.\n\nshops |&gt; html_element(\".seating\")\n\n{xml_nodeset (4)}\n[1] &lt;span class=\"seating\"&gt;indoor &amp; outdoor seating&lt;/span&gt;\n[2] NA\n[3] &lt;span class=\"seating\"&gt;cozy indoor seating&lt;/span&gt;\n[4] &lt;span class=\"seating\"&gt;a dog-friendly patio&lt;/span&gt;"
   },
   {
-    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-2",
-    "href": "schedule/slides/data-acquisition-web-scraping.html#section-2",
+    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-3",
+    "href": "schedule/slides/data-acquisition-web-scraping.html#section-3",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "What if we used html_elements(\".seating\")?\n\n\nshops |&gt; html_elements(\".seating\")\n\n{xml_nodeset (3)}\n[1] &lt;span class=\"seating\"&gt;indoor &amp; outdoor seating&lt;/span&gt;\n[2] &lt;span class=\"seating\"&gt;cozy indoor seating&lt;/span&gt;\n[3] &lt;span class=\"seating\"&gt;a dog-friendly patio&lt;/span&gt;"
+    "text": "What if we used html_elements(\".seating\")?\n\n\nshops |&gt; html_elements(\".seating\")\n\n{xml_nodeset (3)}\n[1] &lt;span class=\"seating\"&gt;indoor &amp; outdoor seating&lt;/span&gt;\n[2] &lt;span class=\"seating\"&gt;cozy indoor seating&lt;/span&gt;\n[3] &lt;span class=\"seating\"&gt;a dog-friendly patio&lt;/span&gt;\n\n\n\nhtml_element() returns one result per input node, whereas html_elements()returns all matches (dropping missing ones)"
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#html-tables",
@@ -2034,7 +2041,7 @@
     "href": "schedule/slides/data-acquisition-web-scraping.html#example-of-an-html-table",
     "title": "UBC DSCI 200",
     "section": "Example of an HTML Table",
-    "text": "Example of an HTML Table\n\nHere’s a simple HTML table with two columns and three rows:\n\nhtml &lt;- read_html(\"\n  &lt;table class='mytable'&gt;\n    &lt;tr&gt;&lt;th&gt;x&lt;/th&gt;   &lt;th&gt;y&lt;/th&gt;&lt;/tr&gt;\n    &lt;tr&gt;&lt;td&gt;1.5&lt;/td&gt; &lt;td&gt;2.7&lt;/td&gt;&lt;/tr&gt;\n    &lt;tr&gt;&lt;td&gt;4.9&lt;/td&gt; &lt;td&gt;1.3&lt;/td&gt;&lt;/tr&gt;\n    &lt;tr&gt;&lt;td&gt;7.2&lt;/td&gt; &lt;td&gt;8.1&lt;/td&gt;&lt;/tr&gt;\n  &lt;/table&gt;\n  \")"
+    "text": "Example of an HTML Table\n\nHere’s a simple HTML table with two columns and three rows:\n\nhtml &lt;- read_html(\"\n  &lt;table class='mytable'&gt;\n    &lt;tr&gt;&lt;th&gt;x&lt;/th&gt;   &lt;th&gt;y&lt;/th&gt;&lt;/tr&gt;\n    &lt;tr&gt;&lt;td&gt;1.5&lt;/td&gt; &lt;td&gt;2.7&lt;/td&gt;&lt;/tr&gt;\n    &lt;tr&gt;&lt;td&gt;4.9&lt;/td&gt; &lt;td&gt;1.3&lt;/td&gt;&lt;/tr&gt;\n    &lt;tr&gt;&lt;td&gt;7.2&lt;/td&gt; &lt;td&gt;8.1&lt;/td&gt;&lt;/tr&gt;\n  &lt;/table&gt;\n  \")\n\nhtml\n\n{html_document}\n&lt;html&gt;\n[1] &lt;body&gt;&lt;table class=\"mytable\"&gt;\\n&lt;tr&gt;\\n&lt;th&gt;x&lt;/th&gt;   &lt;th&gt;y&lt;/th&gt;\\n&lt;/tr&gt;\\n&lt;tr&gt; ..."
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#extracting-tables",
@@ -2072,8 +2079,8 @@
     "text": "The Data\n\n\nLet’s explore the Park’s Canada website that contains information about day hikes in the Lake Louise area:\n\nhttps://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise"
   },
   {
-    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-4",
-    "href": "schedule/slides/data-acquisition-web-scraping.html#section-4",
+    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-5",
+    "href": "schedule/slides/data-acquisition-web-scraping.html#section-5",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "We first need to verify that this website can be scraped (note this is very different than whether the website should be scraped from an ethical or legal perspective).\nTo do this, we can use the paths_allowed() function from the robotstxt package. This function checks if a bot has permissions to access page(s) and returns TRUE if allowed based on the site’s robots.txt file.\n\n\n\npaths_allowed(\"https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise\", warn=FALSE)\n\n[1] TRUE"
@@ -2083,14 +2090,14 @@
     "href": "schedule/slides/data-acquisition-web-scraping.html#load-and-read-html-page",
     "title": "UBC DSCI 200",
     "section": "Load and Read HTML Page",
-    "text": "Load and Read HTML Page\n\nLet’s use rvest to read HTML content from Parks Canada site\n\n\npage &lt;- read_html(\"https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise\")\n\npage\n\n{html_document}\n&lt;html class=\"no-js\" lang=\"en\" dir=\"ltr\"&gt;\n[1] &lt;head&gt;\\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8 ...\n[2] &lt;body class=\"\" vocab=\"http://schema.org/\" typeof=\"WebPage\"&gt;\\r\\n    \\r\\n\\r ..."
+    "text": "Load and Read HTML Page\n\nFirst, use rvest to read HTML content from Parks Canada site (https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise)\n\n\n\npage &lt;- read_html(\"https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise\")\n\npage\n\n{html_document}\n&lt;html class=\"no-js\" lang=\"en\" dir=\"ltr\"&gt;\n[1] &lt;head&gt;\\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8 ...\n[2] &lt;body class=\"\" vocab=\"http://schema.org/\" typeof=\"WebPage\"&gt;\\r\\n    \\r\\n\\r ..."
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#extract-trail-information",
     "href": "schedule/slides/data-acquisition-web-scraping.html#extract-trail-information",
     "title": "UBC DSCI 200",
     "section": "Extract Trail Information",
-    "text": "Extract Trail Information\n\nUse SelectorGadget to obtain the CSS selectors to locate the trail names, the distance and elevation gain.\n\n\ntrails &lt;- page |&gt;\n  html_elements(\"td:nth-child(1)\") |&gt;\n  html_text()\n\ndistances &lt;- page |&gt;\n  html_elements(\"td:nth-child(2)\") |&gt;\n  html_text()\n\nelevations &lt;- page |&gt;\n  html_elements(\"td:nth-child(4)\") |&gt;\n  html_text()"
+    "text": "Extract Trail Information\n\nNow, use SelectorGadget to obtain the CSS selectors to locate the trail names, the distance and elevation gain.\n\n\n\ntrails &lt;- page |&gt;\n  html_elements(\"td:nth-child(1)\") |&gt;\n  html_text()\n\ndistances &lt;- page |&gt;\n  html_elements(\"td:nth-child(2)\") |&gt;\n  html_text()\n\nelevations &lt;- page |&gt;\n  html_elements(\"td:nth-child(4)\") |&gt;\n  html_text()"
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#create-a-data-frame",
@@ -2107,18 +2114,18 @@
     "text": "Clean data\n\n\nGOALS:\n\nExtract numeric values from text fields\nHandle values of “minimal” for elevation\nConvert distances to numeric (in km) in a consistent format\n\nTo achieve these goals, we need to do some string manipulation using the stringr package. This is not a specific learning objective of this course, but some string manipulation may be needed depending on the data. Please consult your instructor or a TA for any additional guidance on working with strings and regular expressions in R."
   },
   {
-    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-5",
-    "href": "schedule/slides/data-acquisition-web-scraping.html#section-5",
+    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-6",
+    "href": "schedule/slides/data-acquisition-web-scraping.html#section-6",
     "title": "UBC DSCI 200",
     "section": "",
     "text": "library(stringr)\n\nhikes_clean &lt;- hikes_raw |&gt;\n  mutate(\n    distance_km = str_extract(distance, \"\\\\d+(\\\\.\\\\d+)?\") |&gt; as.numeric(),\n    elevation_m = case_when(\n      str_detect(elevation, \"minimal\") ~ 0,\n      TRUE ~ str_extract(elevation, \"\\\\d+\") |&gt; as.numeric()\n    )\n  ) |&gt;\n  select(-distance, -elevation)\n\nhead(hikes_clean)\n\n# A tibble: 6 × 3\n  trail                  distance_km elevation_m\n  &lt;chr&gt;                        &lt;dbl&gt;       &lt;dbl&gt;\n1 Lake Louise Lakeshore          2.3           0\n2 Fairview Lookout               1.2         100\n3 Bow River                      5.7           0\n4  Rockpile                      0.7          35\n5 Moraine Lake Lakeshore         1.3           0\n6 Consolation Lakes              2.9         135"
   },
   {
-    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-6",
-    "href": "schedule/slides/data-acquisition-web-scraping.html#section-6",
+    "objectID": "schedule/slides/data-acquisition-web-scraping.html#section-7",
+    "href": "schedule/slides/data-acquisition-web-scraping.html#section-7",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "What are some of the longest day hikes in the Lake Louise area? Now that the data is in a tidy format, we are free to explore!\n\nggplot(hikes_clean, aes(x = reorder(trail, distance_km), y = distance_km)) +\n  geom_col(fill = \"#0570b0\") +\n  coord_flip() +\n  labs(\n    title = \"Bar Chart of Distance by Trail\",\n    x = \"Trail\",\n    y = \"Distance (km)\"\n  ) +\n  theme_minimal()"
+    "text": "Now that the data is in a tidy format, we are free to explore! What are some of the longest day hikes in the Lake Louise area?\n\nggplot(hikes_clean, aes(x = reorder(trail, distance_km), y = distance_km)) +\n  geom_col(fill = \"#0570b0\") +\n  coord_flip() +\n  labs(\n    title = \"Bar Chart of Distance by Trail\",\n    x = \"Trail\",\n    y = \"Distance (km)\"\n  ) +\n  theme_minimal()"
   },
   {
     "objectID": "schedule/slides/data-acquisition-web-scraping.html#a-note-about-workflows",

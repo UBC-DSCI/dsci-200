@@ -239,12 +239,24 @@ read_html(html) |> html_elements("p")
 
 
 ## Extracting Text & Attributes
-<br></br>
 
 - Use `html_text()` or `html_text2()` to get **text content**:
 ```{r}
 read_html(html) |> html_element("head") |> html_text()
 ```
+
+- The main difference in these functions is how they treat whitespace/formatting. `html_text()` returns the raw text and `html_text2()`tries to return text as it would appear in a web browser. For example: 
+
+```{r}
+html <- "<p>Here is some sample text. <br>Some useful information...</p>"
+page <- read_html(html)
+
+page |> html_element("p") |> html_text()
+
+page |> html_element("p") |> html_text2() |> writeLines()
+```
+
+##
 
 
 - You can use `html_attr()` to extract **attributes** like links:
@@ -262,7 +274,6 @@ html |>
 
 
 ## Nesting Selections
-<br></br>
 
 - In most cases, you'll use `html_elements()` and `html_element()` together.  
 - Typically, `html_elements()` identifies elements that will become **observations**, and `html_element()` extracts **variables** from those elements. Here’s an example using a simple HTML list of coffee shops around UBC:
@@ -278,10 +289,11 @@ html <- read_html("
   ")
 ```
 
+
 ## Extracting Coffee Shop Names
 <br></br>
 
-We use `html_elements("li")` to create a vector where each element represents a different coffee shop:
+We use `html_elements("li")` to create an object of class `xml_nodeset` where each element represents a different coffee shop:
 
 ```{r}
 shops <- html |> html_elements("li")
@@ -311,6 +323,9 @@ What if we used `html_elements(".seating")`?
 shops |> html_elements(".seating")
 ```
 
+
+> `html_element()` returns one result per input node, whereas `html_elements()`returns all matches (dropping missing ones)
+
 ## HTML Tables
 <br></br>
 
@@ -335,6 +350,8 @@ html <- read_html("
     <tr><td>7.2</td> <td>8.1</td></tr>
   </table>
   ")
+
+html
 ```
 
 ## Extracting Tables
@@ -411,20 +428,23 @@ paths_allowed("https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lak
 
 ## Load and Read HTML Page
 
-- Let's use `rvest` to read HTML content from Parks Canada site  
+- First, use `rvest` to read HTML content from Parks Canada site (https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise)
 
+
+::: {.fragment}
 ```{r}
 page <- read_html("https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise")
 
 page
 ```
+:::
 
 ## Extract Trail Information
 
 
-- Use SelectorGadget to obtain the CSS selectors to locate the trail names, the distance and elevation gain. 
+- Now, use SelectorGadget to obtain the CSS selectors to locate the trail names, the distance and elevation gain. 
 
-
+::: {.fragment}
 ```{r}
 trails <- page |>
   html_elements("td:nth-child(1)") |>
@@ -438,7 +458,7 @@ elevations <- page |>
   html_elements("td:nth-child(4)") |>
   html_text()
 ```
-
+:::
 
 ## Create a data frame
 
@@ -483,7 +503,7 @@ head(hikes_clean)
 
 ## 
 
-What are some of the longest day hikes in the Lake Louise area? Now that the data is in a tidy format, we are free to explore! 
+Now that the data is in a tidy format, we are free to explore! What are some of the longest day hikes in the Lake Louise area? 
 
 ```{r}
 ggplot(hikes_clean, aes(x = reorder(trail, distance_km), y = distance_km)) +
@@ -496,6 +516,8 @@ ggplot(hikes_clean, aes(x = reorder(trail, distance_km), y = distance_km)) +
   ) +
   theme_minimal()
 ```
+
+
 
 ## A Note about Workflows
 

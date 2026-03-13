@@ -199,7 +199,7 @@
 <h2>Data Acquisition via Web Scraping</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
-<p>Last modified – 27 February 2026</p>
+<p>Last modified – 13 March 2026</p>
 <p><span class="math display">\[
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -474,7 +474,6 @@
 </section>
 <section id="extracting-text-attributes" class="slide level2">
 <h2>Extracting Text &amp; Attributes</h2>
-<p><br><br></p>
 <ul>
 <li>Use <code>html_text()</code> or <code>html_text2()</code> to get <strong>text content</strong>:</li>
 </ul>
@@ -485,17 +484,37 @@
 </div>
 </div>
 <ul>
+<li>The main difference in these functions is how they treat whitespace/formatting. <code>html_text()</code> returns the raw text and <code>html_text2()</code>tries to return text as it would appear in a web browser. For example:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>html <span class="ot">&lt;-</span> <span class="st">"&lt;p&gt;Here is some sample text. &lt;br&gt;Some useful information...&lt;/p&gt;"</span></span>
+<span id="cb13-2"><a></a>page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(html)</span>
+<span id="cb13-3"><a></a></span>
+<span id="cb13-4"><a></a>page <span class="sc">|&gt;</span> <span class="fu">html_element</span>(<span class="st">"p"</span>) <span class="sc">|&gt;</span> <span class="fu">html_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Here is some sample text. Some useful information..."</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>page <span class="sc">|&gt;</span> <span class="fu">html_element</span>(<span class="st">"p"</span>) <span class="sc">|&gt;</span> <span class="fu">html_text2</span>() <span class="sc">|&gt;</span> <span class="fu">writeLines</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Here is some sample text.
+Some useful information...</code></pre>
+</div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<ul>
 <li>You can use <code>html_attr()</code> to extract <strong>attributes</strong> like links:</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>html <span class="ot">&lt;-</span> <span class="fu">minimal_html</span>(<span class="st">"</span></span>
-<span id="cb13-2"><a></a><span class="st">  &lt;p&gt;&lt;a href='https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus'&gt;UBC coffee map&lt;/a&gt;&lt;/p&gt;</span></span>
-<span id="cb13-3"><a></a><span class="st">"</span>)</span>
-<span id="cb13-4"><a></a>    </span>
-<span id="cb13-5"><a></a>html <span class="sc">|&gt;</span> </span>
-<span id="cb13-6"><a></a>  <span class="fu">html_elements</span>(<span class="st">"p"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb13-7"><a></a>  <span class="fu">html_element</span>(<span class="st">"a"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb13-8"><a></a>  <span class="fu">html_attr</span>(<span class="st">"href"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>html <span class="ot">&lt;-</span> <span class="fu">minimal_html</span>(<span class="st">"</span></span>
+<span id="cb17-2"><a></a><span class="st">  &lt;p&gt;&lt;a href='https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus'&gt;UBC coffee map&lt;/a&gt;&lt;/p&gt;</span></span>
+<span id="cb17-3"><a></a><span class="st">"</span>)</span>
+<span id="cb17-4"><a></a>    </span>
+<span id="cb17-5"><a></a>html <span class="sc">|&gt;</span> </span>
+<span id="cb17-6"><a></a>  <span class="fu">html_elements</span>(<span class="st">"p"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-7"><a></a>  <span class="fu">html_element</span>(<span class="st">"a"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-8"><a></a>  <span class="fu">html_attr</span>(<span class="st">"href"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "https://wiki.ubc.ca/Map_of_Coffee_Places_on_Campus"</code></pre>
 </div>
@@ -503,30 +522,29 @@
 </section>
 <section id="nesting-selections" class="slide level2">
 <h2>Nesting Selections</h2>
-<p><br><br></p>
 <ul>
 <li>In most cases, you’ll use <code>html_elements()</code> and <code>html_element()</code> together.<br>
 </li>
 <li>Typically, <code>html_elements()</code> identifies elements that will become <strong>observations</strong>, and <code>html_element()</code> extracts <strong>variables</strong> from those elements. Here’s an example using a simple HTML list of coffee shops around UBC:</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"</span></span>
-<span id="cb15-2"><a></a><span class="st">  &lt;ul&gt;</span></span>
-<span id="cb15-3"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;Loafe Cafe&lt;/b&gt; serves &lt;i&gt;coffee and pastries&lt;/i&gt; and has &lt;span class='seating'&gt;indoor &amp; outdoor seating&lt;/span&gt;&lt;/li&gt;</span></span>
-<span id="cb15-4"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;Bean Around the World&lt;/b&gt; serves &lt;i&gt;great coffee&lt;/i&gt;&lt;/li&gt;</span></span>
-<span id="cb15-5"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;JJ Bean&lt;/b&gt; serves &lt;i&gt;strong espresso&lt;/i&gt; and has &lt;span class='seating'&gt;cozy indoor seating&lt;/span&gt;&lt;/li&gt;</span></span>
-<span id="cb15-6"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;The Great Dane&lt;/b&gt; has &lt;span class='seating'&gt;a dog-friendly patio&lt;/span&gt;&lt;/li&gt;</span></span>
-<span id="cb15-7"><a></a><span class="st">  &lt;/ul&gt;</span></span>
-<span id="cb15-8"><a></a><span class="st">  "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"</span></span>
+<span id="cb19-2"><a></a><span class="st">  &lt;ul&gt;</span></span>
+<span id="cb19-3"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;Loafe Cafe&lt;/b&gt; serves &lt;i&gt;coffee and pastries&lt;/i&gt; and has &lt;span class='seating'&gt;indoor &amp; outdoor seating&lt;/span&gt;&lt;/li&gt;</span></span>
+<span id="cb19-4"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;Bean Around the World&lt;/b&gt; serves &lt;i&gt;great coffee&lt;/i&gt;&lt;/li&gt;</span></span>
+<span id="cb19-5"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;JJ Bean&lt;/b&gt; serves &lt;i&gt;strong espresso&lt;/i&gt; and has &lt;span class='seating'&gt;cozy indoor seating&lt;/span&gt;&lt;/li&gt;</span></span>
+<span id="cb19-6"><a></a><span class="st">    &lt;li&gt;&lt;b&gt;The Great Dane&lt;/b&gt; has &lt;span class='seating'&gt;a dog-friendly patio&lt;/span&gt;&lt;/li&gt;</span></span>
+<span id="cb19-7"><a></a><span class="st">  &lt;/ul&gt;</span></span>
+<span id="cb19-8"><a></a><span class="st">  "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="extracting-coffee-shop-names" class="slide level2">
 <h2>Extracting Coffee Shop Names</h2>
 <p><br><br></p>
-<p>We use <code>html_elements("li")</code> to create a vector where each element represents a different coffee shop:</p>
+<p>We use <code>html_elements("li")</code> to create an object of class <code>xml_nodeset</code> where each element represents a different coffee shop:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>shops <span class="ot">&lt;-</span> html <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">"li"</span>)</span>
-<span id="cb16-2"><a></a>shops</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>shops <span class="ot">&lt;-</span> html <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">"li"</span>)</span>
+<span id="cb20-2"><a></a>shops</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (4)}
 [1] &lt;li&gt;\n&lt;b&gt;Loafe Cafe&lt;/b&gt; serves &lt;i&gt;coffee and pastries&lt;/i&gt; and has &lt;span c ...
@@ -537,7 +555,7 @@
 </div>
 <p>To extract the name of each shop, we use <code>html_element("b")</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>shops <span class="sc">|&gt;</span> <span class="fu">html_element</span>(<span class="st">"b"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>shops <span class="sc">|&gt;</span> <span class="fu">html_element</span>(<span class="st">"b"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (4)}
 [1] &lt;b&gt;Loafe Cafe&lt;/b&gt;
@@ -552,7 +570,7 @@
 <p><br><br></p>
 <p>Suppose we want one seating description for each shop, even if some don’t have seating information.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>shops <span class="sc">|&gt;</span> <span class="fu">html_element</span>(<span class="st">".seating"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>shops <span class="sc">|&gt;</span> <span class="fu">html_element</span>(<span class="st">".seating"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (4)}
 [1] &lt;span class="seating"&gt;indoor &amp;amp; outdoor seating&lt;/span&gt;
@@ -562,13 +580,13 @@
 </div>
 </div>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <p><br><br></p>
 <p>What if we used <code>html_elements(".seating")</code>?</p>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>shops <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">".seating"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>shops <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">".seating"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (3)}
 [1] &lt;span class="seating"&gt;indoor &amp;amp; outdoor seating&lt;/span&gt;
@@ -576,6 +594,9 @@
 [3] &lt;span class="seating"&gt;a dog-friendly patio&lt;/span&gt;</code></pre>
 </div>
 </div>
+<blockquote>
+<p><code>html_element()</code> returns one result per input node, whereas <code>html_elements()</code>returns all matches (dropping missing ones)</p>
+</blockquote>
 </div>
 </section>
 <section id="html-tables" class="slide level2">
@@ -594,14 +615,21 @@
 <p><br><br></p>
 <p>Here’s a simple HTML table with two columns and three rows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"</span></span>
-<span id="cb24-2"><a></a><span class="st">  &lt;table class='mytable'&gt;</span></span>
-<span id="cb24-3"><a></a><span class="st">    &lt;tr&gt;&lt;th&gt;x&lt;/th&gt;   &lt;th&gt;y&lt;/th&gt;&lt;/tr&gt;</span></span>
-<span id="cb24-4"><a></a><span class="st">    &lt;tr&gt;&lt;td&gt;1.5&lt;/td&gt; &lt;td&gt;2.7&lt;/td&gt;&lt;/tr&gt;</span></span>
-<span id="cb24-5"><a></a><span class="st">    &lt;tr&gt;&lt;td&gt;4.9&lt;/td&gt; &lt;td&gt;1.3&lt;/td&gt;&lt;/tr&gt;</span></span>
-<span id="cb24-6"><a></a><span class="st">    &lt;tr&gt;&lt;td&gt;7.2&lt;/td&gt; &lt;td&gt;8.1&lt;/td&gt;&lt;/tr&gt;</span></span>
-<span id="cb24-7"><a></a><span class="st">  &lt;/table&gt;</span></span>
-<span id="cb24-8"><a></a><span class="st">  "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"</span></span>
+<span id="cb28-2"><a></a><span class="st">  &lt;table class='mytable'&gt;</span></span>
+<span id="cb28-3"><a></a><span class="st">    &lt;tr&gt;&lt;th&gt;x&lt;/th&gt;   &lt;th&gt;y&lt;/th&gt;&lt;/tr&gt;</span></span>
+<span id="cb28-4"><a></a><span class="st">    &lt;tr&gt;&lt;td&gt;1.5&lt;/td&gt; &lt;td&gt;2.7&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb28-5"><a></a><span class="st">    &lt;tr&gt;&lt;td&gt;4.9&lt;/td&gt; &lt;td&gt;1.3&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb28-6"><a></a><span class="st">    &lt;tr&gt;&lt;td&gt;7.2&lt;/td&gt; &lt;td&gt;8.1&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb28-7"><a></a><span class="st">  &lt;/table&gt;</span></span>
+<span id="cb28-8"><a></a><span class="st">  "</span>)</span>
+<span id="cb28-9"><a></a></span>
+<span id="cb28-10"><a></a>html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{html_document}
+&lt;html&gt;
+[1] &lt;body&gt;&lt;table class="mytable"&gt;\n&lt;tr&gt;\n&lt;th&gt;x&lt;/th&gt;   &lt;th&gt;y&lt;/th&gt;\n&lt;/tr&gt;\n&lt;tr&gt; ...</code></pre>
+</div>
 </div>
 </section>
 <section id="extracting-tables" class="slide level2">
@@ -611,9 +639,9 @@
 <li>You can use the <code>rvest</code> package to extract tables from HTML pages:</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>html <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a></a>  <span class="fu">html_element</span>(<span class="st">".mytable"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb25-3"><a></a>  <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>html <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a></a>  <span class="fu">html_element</span>(<span class="st">".mytable"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb30-3"><a></a>  <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
       x     y
@@ -649,7 +677,7 @@
 </ul>
 
 <img data-src="img/selectorgadget.png" class="r-stretch"></section>
-<section id="section-3" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <div style="text-align: center; margin: 0; padding: 0;">
 <p><img src="img/selector.gif" style="width: 75%; margin: 0; padding: 0;"></p>
@@ -670,7 +698,7 @@
 </ul>
 <p><a href="https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise">https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise</a></p>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <ul>
 <li>We first need to verify that this website <em>can</em> be scraped (note this is very different than whether the website <em>should</em> be scraped from an ethical or legal perspective).</li>
@@ -678,7 +706,7 @@
 </ul>
 <p><br><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">paths_allowed</span>(<span class="st">"https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise"</span>, <span class="at">warn=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">paths_allowed</span>(<span class="st">"https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise"</span>, <span class="at">warn=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -687,12 +715,13 @@
 <section id="load-and-read-html-page" class="slide level2">
 <h2>Load and Read HTML Page</h2>
 <ul>
-<li>Let’s use <code>rvest</code> to read HTML content from Parks Canada site</li>
+<li>First, use <code>rvest</code> to read HTML content from Parks Canada site (https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise)</li>
 </ul>
+<div class="fragment">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise"</span>)</span>
-<span id="cb29-2"><a></a></span>
-<span id="cb29-3"><a></a>page</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"https://parks.canada.ca/pn-np/ab/banff/activ/randonnee-hiking/lakelouise"</span>)</span>
+<span id="cb34-2"><a></a></span>
+<span id="cb34-3"><a></a>page</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{html_document}
 &lt;html class="no-js" lang="en" dir="ltr"&gt;
@@ -700,36 +729,39 @@
 [2] &lt;body class="" vocab="http://schema.org/" typeof="WebPage"&gt;\r\n    \r\n\r ...</code></pre>
 </div>
 </div>
+</div>
 </section>
 <section id="extract-trail-information" class="slide level2">
 <h2>Extract Trail Information</h2>
 <ul>
-<li>Use SelectorGadget to obtain the CSS selectors to locate the trail names, the distance and elevation gain.</li>
+<li>Now, use SelectorGadget to obtain the CSS selectors to locate the trail names, the distance and elevation gain.</li>
 </ul>
+<div class="fragment">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>trails <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
-<span id="cb31-2"><a></a>  <span class="fu">html_elements</span>(<span class="st">"td:nth-child(1)"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a></a>  <span class="fu">html_text</span>()</span>
-<span id="cb31-4"><a></a></span>
-<span id="cb31-5"><a></a>distances <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
-<span id="cb31-6"><a></a>  <span class="fu">html_elements</span>(<span class="st">"td:nth-child(2)"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb31-7"><a></a>  <span class="fu">html_text</span>()</span>
-<span id="cb31-8"><a></a></span>
-<span id="cb31-9"><a></a>elevations <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
-<span id="cb31-10"><a></a>  <span class="fu">html_elements</span>(<span class="st">"td:nth-child(4)"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb31-11"><a></a>  <span class="fu">html_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>trails <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a></a>  <span class="fu">html_elements</span>(<span class="st">"td:nth-child(1)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a></a>  <span class="fu">html_text</span>()</span>
+<span id="cb36-4"><a></a></span>
+<span id="cb36-5"><a></a>distances <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
+<span id="cb36-6"><a></a>  <span class="fu">html_elements</span>(<span class="st">"td:nth-child(2)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-7"><a></a>  <span class="fu">html_text</span>()</span>
+<span id="cb36-8"><a></a></span>
+<span id="cb36-9"><a></a>elevations <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
+<span id="cb36-10"><a></a>  <span class="fu">html_elements</span>(<span class="st">"td:nth-child(4)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-11"><a></a>  <span class="fu">html_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
 <section id="create-a-data-frame" class="slide level2">
 <h2>Create a data frame</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>hikes_raw <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb32-2"><a></a>  <span class="at">trail =</span> trails,</span>
-<span id="cb32-3"><a></a>  <span class="at">distance =</span> distances,</span>
-<span id="cb32-4"><a></a>  <span class="at">elevation =</span> elevations</span>
-<span id="cb32-5"><a></a>)</span>
-<span id="cb32-6"><a></a></span>
-<span id="cb32-7"><a></a><span class="fu">head</span>(hikes_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>hikes_raw <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb37-2"><a></a>  <span class="at">trail =</span> trails,</span>
+<span id="cb37-3"><a></a>  <span class="at">distance =</span> distances,</span>
+<span id="cb37-4"><a></a>  <span class="at">elevation =</span> elevations</span>
+<span id="cb37-5"><a></a>)</span>
+<span id="cb37-6"><a></a></span>
+<span id="cb37-7"><a></a><span class="fu">head</span>(hikes_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   trail                  distance     elevation
@@ -757,22 +789,22 @@
 </ul>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">library</span>(stringr)</span>
-<span id="cb34-2"><a></a></span>
-<span id="cb34-3"><a></a>hikes_clean <span class="ot">&lt;-</span> hikes_raw <span class="sc">|&gt;</span></span>
-<span id="cb34-4"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb34-5"><a></a>    <span class="at">distance_km =</span> <span class="fu">str_extract</span>(distance, <span class="st">"</span><span class="sc">\\</span><span class="st">d+(</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+)?"</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>(),</span>
-<span id="cb34-6"><a></a>    <span class="at">elevation_m =</span> <span class="fu">case_when</span>(</span>
-<span id="cb34-7"><a></a>      <span class="fu">str_detect</span>(elevation, <span class="st">"minimal"</span>) <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb34-8"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">str_extract</span>(elevation, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>()</span>
-<span id="cb34-9"><a></a>    )</span>
-<span id="cb34-10"><a></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb34-11"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>distance, <span class="sc">-</span>elevation)</span>
-<span id="cb34-12"><a></a></span>
-<span id="cb34-13"><a></a><span class="fu">head</span>(hikes_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">library</span>(stringr)</span>
+<span id="cb39-2"><a></a></span>
+<span id="cb39-3"><a></a>hikes_clean <span class="ot">&lt;-</span> hikes_raw <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb39-5"><a></a>    <span class="at">distance_km =</span> <span class="fu">str_extract</span>(distance, <span class="st">"</span><span class="sc">\\</span><span class="st">d+(</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+)?"</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>(),</span>
+<span id="cb39-6"><a></a>    <span class="at">elevation_m =</span> <span class="fu">case_when</span>(</span>
+<span id="cb39-7"><a></a>      <span class="fu">str_detect</span>(elevation, <span class="st">"minimal"</span>) <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb39-8"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">str_extract</span>(elevation, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb39-9"><a></a>    )</span>
+<span id="cb39-10"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb39-11"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>distance, <span class="sc">-</span>elevation)</span>
+<span id="cb39-12"><a></a></span>
+<span id="cb39-13"><a></a><span class="fu">head</span>(hikes_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   trail                  distance_km elevation_m
@@ -786,22 +818,22 @@
 </div>
 </div>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
-<p>What are some of the longest day hikes in the Lake Louise area? Now that the data is in a tidy format, we are free to explore!</p>
+<p>Now that the data is in a tidy format, we are free to explore! What are some of the longest day hikes in the Lake Louise area?</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">ggplot</span>(hikes_clean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(trail, distance_km), <span class="at">y =</span> distance_km)) <span class="sc">+</span></span>
-<span id="cb36-2"><a></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0570b0"</span>) <span class="sc">+</span></span>
-<span id="cb36-3"><a></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb36-4"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb36-5"><a></a>    <span class="at">title =</span> <span class="st">"Bar Chart of Distance by Trail"</span>,</span>
-<span id="cb36-6"><a></a>    <span class="at">x =</span> <span class="st">"Trail"</span>,</span>
-<span id="cb36-7"><a></a>    <span class="at">y =</span> <span class="st">"Distance (km)"</span></span>
-<span id="cb36-8"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb36-9"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">ggplot</span>(hikes_clean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(trail, distance_km), <span class="at">y =</span> distance_km)) <span class="sc">+</span></span>
+<span id="cb41-2"><a></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0570b0"</span>) <span class="sc">+</span></span>
+<span id="cb41-3"><a></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb41-4"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb41-5"><a></a>    <span class="at">title =</span> <span class="st">"Bar Chart of Distance by Trail"</span>,</span>
+<span id="cb41-6"><a></a>    <span class="at">x =</span> <span class="st">"Trail"</span>,</span>
+<span id="cb41-7"><a></a>    <span class="at">y =</span> <span class="st">"Distance (km)"</span></span>
+<span id="cb41-8"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb41-9"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="data-acquisition-web-scraping_files/figure-revealjs/unnamed-chunk-19-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="data-acquisition-web-scraping_files/figure-revealjs/unnamed-chunk-20-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="a-note-about-workflows" class="slide level2">
 <h2>A Note about Workflows</h2>
 <div>
