@@ -22,8 +22,8 @@
 |11 Mar 26 | Data Acquisition     |[Slides](slides/data-acquisition.qmd)   | Outliers Worksheet Due March 13th at 11:59pm         |
 |16 Mar 26 | Data Acquisition     |[Slides](slides/data-acquisition-web-scraping.qmd)   | Case Study 2 Due at 11:59pm          |
 |18 Mar 26 | Data Acquisition      |[Worksheet data](data/currency-data.html)  |      |
-|23 Mar 26 | Data Ownership     |[Slides]()   |          |
-|25 Mar 26 | Data Ownership    |[Slides]()     |  Data Acquisition Worksheet Due at 11:59pm     |
+|23 Mar 26 | Data Ownership     |[Slides](slides/data-ownership.qmd)   |          |
+|25 Mar 26 | Data Ownership    | Guest lecture     |  Data Acquisition Worksheet Due at 11:59pm     |
 |30 Mar 26 |  Data Privacy    |[Slides]()   |          |
 |01 Apr 26 |  Data Privacy    |[Slides](); [Worksheet data](data/web-data.html)   |          |
 |06 Apr 26 |      |HOLIDAY      |          |
