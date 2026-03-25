@@ -64,6 +64,8 @@ In this case study several data sources are available for you to work with. You 
 
 -   The `Spotify Web API` is a set of web services that gives access to Spotify music streaming service and its vast catalog of content. Visit [here](https://developer.spotify.com/documentation/web-api).
 
+> NOTE: It seems that as of February 2026 (after the case study was created) Spotify changed their policies so that you must have a premium account to access Spotify's web API. This is NOT an expectation of the assignment and student's have no expectation to obtain a premium account to access this API. Also, as discussed in class, please refrain from hard coding personal access tokens into your assignments and/or pushing these credentials to GitHub.
+
 ### Parquet files
 
 **5. NYC TLC Trip Record Data**
@@ -160,9 +162,9 @@ In this task, add noise to one numerical variable by introducing small random va
 
 ### Task 6: Applying Privacy Models: k-Anonymity and l-Diversity (10 points)
 
-19. **(Reasoning 3 points + Coding 2 points)** Try to apply the concept of $k$-anonymity using a combination of quasi-identifiers in your data set. If you were able to apply it, describe your approach and results. If not, explain why achieving $k$-anonymity is not applicable in your case. Responses should be justified with supporting code. 
+19. **(Reasoning 3 points + Coding 2 points)** Try to apply the concept of $k$-anonymity using a combination of quasi-identifiers in your data set. If you were able to apply it, describe your approach and results. If not, explain why achieving $k$-anonymity is not applicable in your case. Responses should be justified with supporting code.
 
-20. **(Reasoning 3 points + Coding 2 points)** Consider whether your data set could satisfy $l$-diversity with respect to a sensitive attribute. If possible, explain how you tested it. If not, describe what makes this technique unsuitable for your data set. Responses should be justified with supporting code. 
+20. **(Reasoning 3 points + Coding 2 points)** Consider whether your data set could satisfy $l$-diversity with respect to a sensitive attribute. If possible, explain how you tested it. If not, describe what makes this technique unsuitable for your data set. Responses should be justified with supporting code.
 
 ## Reproducibility and Organization Checklist (5 points)
 
