@@ -46,31 +46,30 @@ In this case study several data sources are available for you to work with. You 
 
 ### Web Scraping
 
-**1. Books to Scrape**
+
+**Books to Scrape**
 
 -   The `Books to Scrape` website loves to be scraped! It is a fictional e‑commerce style website intentionally designed as a safe sandbox for practicing web scraping, offering 1,000 book listings complete with titles, prices, availability, ratings, and artwork. Note that all content is randomly generated and holds no real commercial value. Visit [here](https://books.toscrape.com/index.html).
 
-**2. Board Game Geek (BGG)**
-
--   The `Board Game Geek (BGG)` website is a board game database and a collection or catalog of data and information on traditional board games. This information is freely accessible. The hotness board presents the top 50 trending games for today. Visit [here](https://boardgamegeek.com/hotness).
-
 ### APIs
 
-**3. NASA API**
+**NASA API**
 
 -   The `NASA API` website lets anyone accesss data related to space and universe! This includes images from Mars rovers, the daily space photo, or details about asteroids and other astronomical objects. Visit [here](https://api.nasa.gov/).
 
-**4. Spotify Web API**
+**Spotify Web API**
 
 -   The `Spotify Web API` is a set of web services that gives access to Spotify music streaming service and its vast catalog of content. Visit [here](https://developer.spotify.com/documentation/web-api).
 
+> NOTE: It seems that as of February 2026 (after the case study was created) Spotify changed their policies so that you must have a premium account to access Spotify's web API. This is NOT an expectation of the assignment and student's have no expectation to obtain a premium account to access this API. Also, as discussed in class, please refrain from hard coding personal access tokens into your assignments and/or pushing these credentials to GitHub.
+
 ### Parquet files
 
-**5. NYC TLC Trip Record Data**
+**NYC TLC Trip Record Data**
 
 -   The `NYC TLC Trip Record Data` is a publicly available data set provided by the New York City Taxi and Limousine Commission (NYC TLC). It contains information such as pickup and drop-off dates and times, locations, trip distances, fares, and payment types collected from taxis in New York City (Both Yellow and Green taxi). This data set is used for transportation analysis, urban planning, and research on mobility patterns in New York City. Visit [here](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
 
-**6. BTS TranStats Data**
+**BTS TranStats Data**
 
 -   The `BTS TranStats Data` is a comprehensive repository of U.S. transportation statistics maintained by the Bureau of Transportation Statistics (BTS). It includes detailed data sets on airline on-time performance, flight delays, and other key aviation metrics. Visit [here](https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FGJ&QO_fu146_anzr=b0-gvzr).
 
@@ -160,9 +159,9 @@ In this task, add noise to one numerical variable by introducing small random va
 
 ### Task 6: Applying Privacy Models: k-Anonymity and l-Diversity (10 points)
 
-19. **(Reasoning 3 points + Coding 2 points)** Try to apply the concept of $k$-anonymity using a combination of quasi-identifiers in your data set. If you were able to apply it, describe your approach and results. If not, explain why achieving $k$-anonymity is not applicable in your case. Responses should be justified with supporting code. 
+19. **(Reasoning 3 points + Coding 2 points)** Try to apply the concept of $k$-anonymity using a combination of quasi-identifiers in your data set. If you were able to apply it, describe your approach and results. If not, explain why achieving $k$-anonymity is not applicable in your case. Responses should be justified with supporting code.
 
-20. **(Reasoning 3 points + Coding 2 points)** Consider whether your data set could satisfy $l$-diversity with respect to a sensitive attribute. If possible, explain how you tested it. If not, describe what makes this technique unsuitable for your data set. Responses should be justified with supporting code. 
+20. **(Reasoning 3 points + Coding 2 points)** Consider whether your data set could satisfy $l$-diversity with respect to a sensitive attribute. If possible, explain how you tested it. If not, describe what makes this technique unsuitable for your data set. Responses should be justified with supporting code.
 
 ## Reproducibility and Organization Checklist (5 points)
 
