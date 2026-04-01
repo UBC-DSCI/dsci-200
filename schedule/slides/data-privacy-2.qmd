@@ -66,7 +66,7 @@ By the end of today's lesson, you should be able to:
 
 - $k$-anonymity and $l$-diversity are **statistical approaches** that quantify the level of identifiability within a tabular dataset.  
 - They focus on how variables combined can lead to identification.  
-- These approaches are complementary: a dataset can be simultaneously $k$-anonymous, $l$-diverse, and $t$-close, where $k$, $l$, and $t$ represent numeric thresholds.
+- These approaches are complementary: a dataset can be simultaneously $k$-anonymous and $l$-diverse, where $k$ and $l$represent numeric thresholds.
 -  $k$-anonymity and $l$-diversity are typically used to de-identify tabular datasets *before* sharing.
 - They work best on relatively large datasets, where enough observations are present to preserve useful detail while still protecting privacy.
 
