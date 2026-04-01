@@ -102,19 +102,19 @@ Now that you have chosen and explored your data sets, it’s time to collect the
 
 Before doing so, you are expected to consider the ethical and legal aspects of accesssing the data. This includes checking whether the data can be scraped or accesssed automatically, reviewing the website’s terms of service, and thinking critically about what you intend to extract.
 
-Once confirmed, you will write `R` code to read and clean the data, and produce a well-defined data frame to work with in future tasks. Be thoughtful and precise in both your reasoning and your code. Be sure to answer all questions in this task.
+Once confirmed, you will write `R` code to read and clean the data, and produce a well-defined data frame to work with in future tasks. Be thoughtful and precise in both your reasoning and your code. Be sure to answer all questions in this task for **both data sets**, except for 2.6 which focuses on a single data set.
 
 3.  **(Coding 3 points + Reasoning 3 points)** Use tools like the `robotstxt` package (as shown in lecture) and also review the website’s terms of service to see if it is possible and permitted to read data. Clearly explain your reasoning for each resource.
 
-4.  **(Writing 5 points)** Once you confirmed that reading from the online resource you selected is allowed, explain what is your goal when you read this data set? In other words, clearly explain the target `tibble` that you are imagining to have. This includes what variables you are reading.
+4.  **(Writing 5 points)** Once you confirmed that reading from the online resource you selected is allowed, explain what is your goal when you read in these data sets? In other words, clearly explain the target `tibble` that you are imagining to have. This includes what variables you are reading. 
 
-5.  **(Coding 15 points)** Write an `R` code to read and clean your data set using the tools we covered in class (e.g. using packages `rvest`, `arrow` or API calls). Save the result in a `tibble`, and make sure the data is tidy and ready for analysis. Save your raw scraped or API data to a local file.
+5.  **(Coding 15 points)** Write an `R` code to read and clean your data sets using the tools we covered in class (e.g. using packages `rvest`, `arrow` or API calls). Save the result in a `tibble`, and make sure the data is tidy and ready for analysis. Save your raw scraped or API data to a local file.
 
-6.  **(Coding 6 points + Writing 3 points)** Maybe not a bad idea to review our EDA skills from previous case studies?! Think about one plot that you can create here to answer a question. First think about a question and then generate a plot that can help to answer that question. In your answer include the question you ask, `R` code to generate plot, and the answer to your question.
+6.  **(Coding 6 points + Writing 3 points)** Maybe not a bad idea to review our EDA skills from previous case studies?! Think about one plot that you can create here to answer a question from either data set. First think about a question and then generate a plot that can help to answer that question. In your answer include the question you ask, `R` code to generate plot, and the answer to your question.
 
 ### Task 3: Data Ownership (14 points)
 
-You have now selected and begun working with two data sets from the options provided. In this task, you will reflect on the ownership, licensing, and ethical use of those data sources. These questions are meant to help you critically apply the concepts discussed in lecture. Be sure to answer all questions.
+You have now selected and begun working with two data sets from the options provided. In this task, you will reflect on the ownership, licensing, and ethical use of those data sources. These questions are meant to help you critically apply the concepts discussed in lecture. Be sure to answer all questions in this task.
 
 7.  **(Reasoning 2 points)** Does the fact that these data sets are publicly available mean that anyone is allowed to use them for anything? Why or why not? Briefly reflect on the difference between having accesss to data and having rights to use, redistribute, or profit from it.
 
