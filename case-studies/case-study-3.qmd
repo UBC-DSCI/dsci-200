@@ -106,7 +106,7 @@ Once confirmed, you will write `R` code to read and clean the data, and produce 
 
 3.  **(Coding 3 points + Reasoning 3 points)** Use tools like the `robotstxt` package (as shown in lecture) and also review the website’s terms of service to see if it is possible and permitted to read data. Clearly explain your reasoning for each resource.
 
-4.  **(Writing 5 points)** Once you confirmed that reading from the online resource you selected is allowed, explain what is your goal when you read in these data sets? In other words, clearly explain the target `tibble` that you are imagining to have. This includes what variables you are reading. 
+4.  **(Writing 5 points)** Once you confirmed that reading from the online resource you selected is allowed, explain what is your goal when you read in these data sets? In other words, clearly explain the target `tibble` that you are imagining to have. This includes what variables you are reading.
 
 5.  **(Coding 15 points)** Write an `R` code to read and clean your data sets using the tools we covered in class (e.g. using packages `rvest`, `arrow` or API calls). Save the result in a `tibble`, and make sure the data is tidy and ready for analysis. Save your raw scraped or API data to a local file.
 
@@ -140,15 +140,15 @@ In this task, you will identify and classify variables based on their privacy ri
 
 12. **(Reasoning 3 points + Writing 2 points)** Apply generalization to at least one quasi-identifier variable to reduce identifiability. Explain your reasoning and any trade-offs.
 
-13. **(Reasoning 3 points + Writing 2 points)** Discretize one continuous numerical sensitive attribute into meaningful groups (e.g., income ranges, score bands).
+13. **(Coding 5 points)** Discretize one continuous numerical sensitive attribute into meaningful groups (e.g., income ranges, score bands).
 
-14. **(Reasoning 3 points + Writing 2 points)** Apply suppression to any variable that you believe increases re-identification risk. Justify your decision.
+14. **(Coding 5 points)** Apply suppression to any variable that you believe increases re-identification risk. Justify your decision.
 
 15. **(Reasoning 3 points + Writing 2 points)** Reflect on whether the transformed variables you used (generalized, discretized, suppressed, etc.) might still pose a risk of re-identification when combined with other information. Provide reasoning without referring to specific lecture examples.
 
 ### Task 5: Add Noise and Evaluate Privacy Risks (10 points)
 
-In this task, add noise to one numerical variable by introducing small random variations using a Normal distribution. Then, discuss how this protects privacy and any drawbacks for analysis. Finally reflect on any remaining privacy risks that may persist even after anonymization techniques are applied. Answer **two out of three questions** within this task.
+In this task, add noise to one numerical variable by introducing small random variations using a Normal distribution. Then, discuss how this protects privacy and any drawbacks for analysis. Finally reflect on any remaining privacy risks that may persist even after anonymization techniques are applied. Answer question 16 (mandatory) and then **one of questions 17 and 18** within this task.
 
 16. **(Coding 5 points)** Add noise to one numerical variable in your data set by introducing small random variations, as we learned in the lecture. For this question you can consider a Normal distribution with your choice for the mean of distribution and a standard deviation of 1.
 
