@@ -1,30 +1,27 @@
 |Date      |Topic |Material     |Deadlines |
 |:---------|:-----|:------------|:---------|
-|05 Jan 26 | Intro Class; Exploratory Data Analysis |[Slides](slides/eda-1.qmd)   |          |
-|07 Jan 26 | Exploratory Data Analysis |[Slides](slides/eda-2.qmd)   |          |
-|12 Jan 26 | Fundamentals of Sampling and Variability |[Slides](slides/sampling-fundamentals.qmd)  |          |
-|14 Jan 26 | Random Variables and Distributions |[Slides](slides/prob-distributions.qmd)   |  EDA Worksheet Due at 11:59pm |
-|19 Jan 26 | Simulation I  |[Slides](slides/simulation-1.qmd)   |          |
-|21 Jan 26 | Simulation II |[Slides](slides/simulation-2.qmd)   |    Sampling Worksheet Due at 11:59pm      |
-|26 Jan 26 | Sampling Design  |[Slides](slides/sampling-design.qmd)   |          |
-|28 Jan 26 | Study Design  |[Slides](slides/study-design.qmd)   |   Simulation I Worksheet (deadline extended to Feb 6 at 11:59pm)        |
-|02 Feb 26 | Case Study 1 Work Period  |[Slides]()   |          |
-|04 Feb 26 | Missing Data  |[Slides](slides/missing-1.qmd)   |  Case Study I Due at 11:59pm        |
-|09 Feb 26 | Missing Data   |[Slides](slides/missing-2.qmd)   |          |
-|11 Feb 26 | Midterm Review     |[Slides]()   | Missing Data Worksheet Due at 11:59pm    |
-|16 Feb 26 |      |READING WEEK |          |
-|18 Feb 26 |     |READING WEEK |          |
-|23 Feb 26 | Outliers and Data Anomalies   |[Imputation](slides/imputation.qmd);[Slides](slides/outliers-1.qmd)   |          |
-|25 Feb 26 | Outliers and Data Anomalies and Case Study 2 Work Period |[Slides](slides/outliers-1.qmd)   |          |
-|02 Mar 26 | Outliers and Data Anomalies    |[Slides](slides/outliers-2.qmd)   |          |
-|04 Mar 26 | Simulation II and Case Study 2 Work Period   |[Slides]()   |          |
-|09 Mar 26 | Outliers and Data Anomalies       |[Slides](slides/outliers-3.qmd)   |          |
-|11 Mar 26 | Data Acquisition     |[Slides](slides/data-acquisition.qmd)   | Outliers Worksheet Due March 13th at 11:59pm         |
-|16 Mar 26 | Data Acquisition     |[Slides](slides/data-acquisition-web-scraping.qmd)   | Case Study 2 Due at 11:59pm          |
-|18 Mar 26 | Data Acquisition      |[Worksheet data](data/currency-data.html)  |      |
-|23 Mar 26 | Data Ownership     |[Slides](slides/data-ownership.qmd)   |          |
-|25 Mar 26 | Data Ownership    | Guest lecture     |  Data Acquisition Worksheet Due at 11:59pm     |
-|30 Mar 26 |  Data Privacy    |[Slides](slides/data-privacy-1.qmd)   |          |
-|01 Apr 26 |  Data Privacy    |[Slides](slides/data-privacy-2.qmd)    |          |
-|06 Apr 26 |      |HOLIDAY      |          |
-|08 Apr 26 | Case Study 3 Work Period     | [Worksheet data](data/web-data.html)  | Case Study 3 and Data Privacy Worksheet Due at 11:59pm |
+|10 Sept 26 | Intro Class; Exploratory Data Analysis |[Slides](slides/eda-1.qmd)   |          |
+|15 Sept 26 | Exploratory Data Analysis |[Slides]()   |          |
+|17 Sept 26 | Fundamentals of Sampling and Variability |[Slides]()  |          |
+|22 Sept 26 | Random Variables and Distributions |[Slides]()   |  EDA Worksheet Due at 11:59pm |
+|24 Sept 26 | Simulation I  |[Slides]()   |          |
+|29 Sept 26 | Simulation II |[Slides]()   |    Sampling Worksheet Due at 11:59pm      |
+|01 Oct 26 | Sampling Design  |[Slides]()   |          |
+|06 Oct 26 | Study Design  |[Slides]()   |   Simulation I Worksheet Due at 11:59pm        |
+|08 Oct 26 | Case Study 1 Work Period  |[Slides]()   |          |
+|13 Oct 26 | Missing Data  |[Slides]()   |  Case Study I Due at 11:59pm        |
+|15 Oct 26 | Missing Data   |[Slides]()   |          |
+|20 Oct 26 | Imputation     |[Slides]()   | Missing Data Worksheet Due at 11:59pm    |
+|22 Oct 26 |  Midterm Review    | |          |
+|27 Oct 26 | Outliers and Data Anomalies I  |[Slides]()   |          |
+|29 Oct 26 26 | Outliers and Data Anomalies II |[Slides]()   |          |
+|03 Nov 26 | Outliers and Data Anomalies III  |[Slides]()   |          |
+|05 Nov 26 | Data Acquisition I  |[Slides]()   |      Outliers Worksheet Due at 11:59pm    |
+|10 Nov 26 |     |Midterm Break |          |
+|12 Nov 26 | Case Study 2 Work Period     |[Slides]()   |          |
+|17 Nov 26 | Data Acquisition II   |[Slides]()   | Case Study 2 Due at 11:59pm          |
+|19 Nov 26 | Data Acquisition III   |[Slides]()  |      |
+|24 Nov 26 | Data Ownership     |[Slides]()   |  Data Acquisition Worksheet Due at 11:59pm         |
+|26 Nov 26 | Data Ownership    | Guest lecture     |      |
+|01 Dec 26 |  Data Privacy    |[Slides]()   |          |
+|03 Dec 26 |  Data Privacy    |[Slides]()    | Case Study 3 and Data Privacy Worksheet Due at 11:59pm |         
