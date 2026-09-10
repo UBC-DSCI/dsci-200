@@ -4,13 +4,13 @@ title: "{{< fa user-shield >}} Syllabus"
 
 
 ::: {.callout-note appearance="minimal"}
-## Term 2025 Winter 2: January - April 2026
+## Term 2026 Winter 1: Sept - Dec 2026
 :::
 
  
 ## Course info
 __Instructors__:\
-Katie Burak\
+Katie Burak (currently on leave)\
 Website: <https://katieburak.github.io/>\
 Email: <kburak@stat.ubc.ca>\
 
@@ -153,7 +153,25 @@ A more detailed description of academic integrity, including the University’s 
 
 ### Use of GenAI
 
-Generative AI tools, such as large language models like ChatGPT, Claude, or Gemini, can be useful for exploring ideas, reviewing concepts, and troubleshooting problems. In this course, you may use these tools for those purposes, provided that any use of AI assistance in your coursework is properly cited. However, it is not permitted to complete assignments by copying and pasting AI-generated responses. All submitted work must reflect your own understanding and original effort.
+Generative AI tools, such as large language models like ChatGPT, Claude, or Gemini, can be useful for exploring ideas, reviewing concepts, and troubleshooting problems. In this course, **you may use these tools for** those purposes, provided that any use of AI assistance in your coursework is properly cited. 
+
+- To best support learning, try the problems yourself first. If you are having trouble, you can ask the instructor, a TA or a peer in the class. You can ask a chatbot to clarify the question, remind you of the steps, alternative example to compare, or provide hints on how to solve the problem
+
+- Solutions must be based on content covered in the course.
+
+- You can use GenAI to plan the project stages and gather background information on the topic (be sure to verify all sources)
+
+**It is not permitted to ask GenAI to**:
+
+- Solve the problem for you, which won’t necessarily help you to understand how to do so
+
+- Complete assignments by copying and pasting AI-generated responses. All submitted work must reflect your own understanding 
+
+- Generate complete functions, scripts, or solutions for you to submit as your own
+
+- Draft or rewrite the text of your assignments or report: while you are welcome to get feedback from GenAI on drafts, start by writing the drafts yourself. **Final wording must reflect your research and ideas, as well as group discussions for the report.**
+
+Ultimately, this course is designed to help students practice creative and critical thinking, and the ability to construct well-reasoned written arguments based on data analysis. Using generative AI tools to produce entire written assignments will stifle independent thinking and undermine development of these valuable skills. If you have questions around the acceptable or unacceptable use of generative AI tools, we encourage you to speak to your instructor. 
 
 ### Plagiarism
 
