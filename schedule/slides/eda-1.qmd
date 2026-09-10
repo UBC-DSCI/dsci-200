@@ -23,7 +23,7 @@ wildfire <- read_csv("data/wildfire.csv")
 :::: columns
 
 ::: column
-- **Dr. Katie Burak**  
+- **Dr. Katie Burak**  (currently on leave)
 - [kburak@stat.ubc.ca](mailto:kburak@stat.ubc.ca){.email}  
 - <https://katieburak.github.io/>  
 - Assistant Professor of Teaching, Department of Statistics
