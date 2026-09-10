@@ -59,7 +59,7 @@ wildfire <- read_csv("data/wildfire.csv")
 | Final                  | 50%           |
 | **Bonus regrade percent** | **1%**        |
 
-## Coruse-level Learning Objectives
+## Course-level Learning Objectives
 
 :::incremental
 - Conduct exploratory data analysis using statistical and visualization tools to generate hypotheses.
@@ -399,7 +399,7 @@ print(results)
 
 ## iClicker question
 
-The following is a histogram of relative humidity. Which statement is true?
+The following is a histogram of temperature. Which statement is true?
 
 ```{r}
 #| echo: false
