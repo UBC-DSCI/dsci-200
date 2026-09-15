@@ -261,7 +261,7 @@ donut_df |>
 :::incremental
 - Assumes both variables are continuous
 - Pearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables
-- Alternatives exist : 
+- Alternatives exist: 
 	- Spearman’s rho (for ordinal or ranked data)
 	- Kendall's tau (for ordinal or ranked data)
 	- Phi coefficient (for two binary variables)

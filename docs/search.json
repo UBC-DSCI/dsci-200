@@ -858,7 +858,7 @@
     "href": "schedule/slides/eda-2.html#limitations-of-pearson-correlation-1",
     "title": "UBC DSCI 200",
     "section": "Limitations of Pearson Correlation",
-    "text": "Limitations of Pearson Correlation\n\n\nAssumes both variables are continuous\nPearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables\nAlternatives exist :\n\nSpearman’s rho (for ordinal or ranked data)\nKendall’s tau (for ordinal or ranked data)\nPhi coefficient (for two binary variables)"
+    "text": "Limitations of Pearson Correlation\n\n\nAssumes both variables are continuous\nPearson correlation requires numeric variables; it’s not appropriate to compute it directly between categorical and numerical variables or between two categorical variables\nAlternatives exist:\n\nSpearman’s rho (for ordinal or ranked data)\nKendall’s tau (for ordinal or ranked data)\nPhi coefficient (for two binary variables)"
   },
   {
     "objectID": "schedule/slides/eda-2.html#scenario",
