@@ -54,7 +54,7 @@ Words like **probability, chance, and odds** are commonly used to express uncert
 
 - 2025-26 Stanley Cup odds: Avalanche, Hurricanes, Lightning lead favorites [(ESPN, Jan 2026)](https://www.espn.com/nfl/story/_/id/47600644/sources-mike-tomlin-step-steelers-head-coach)
 
-- The odds of winning the Powerball lottery with single ticket is about 1 in 300 million.
+- The odds of winning the Powerball lottery with a single ticket are about 1 in 300 million.
 :::
 
 ::: {style="font-size: 13px; margin-top: -30px; color: grey;"}
@@ -67,7 +67,7 @@ More stories in [eBook by K. Ross](https://bookdown.org/kevin_davisross/probsim-
 
 **Randomness** can come from:
 
-- physical events (e.g, flipping a coin)
+- physical events (e.g., flipping a coin)
 - selection mechanisms (e.g., selecting individuals from a population)
 - experimental designs (random assignment in a randomized experiment)
 - complex systems (e.g., stock market fluctuations)
@@ -82,17 +82,17 @@ More stories in [eBook by K. Ross](https://bookdown.org/kevin_davisross/probsim-
 
 <br>
 
-- **Outcomes**: possible results of the random phenomenon, not necessarily numeric (e.g, side of a coin, students selected for a survey)
+- **Outcomes**: possible results of the random phenomenon, not necessarily numeric (e.g., side of a coin, students selected for a survey)
 
-- **Events**: a collection of outcomes (e.g, winning all games of the season) 
+- **Events**: a collection of outcomes (e.g., winning all games of the season) 
 
 - **Probability of events**: a number between 0 and 1 that measures the uncertainty of an event, how likely an event is to occur.
 
 ::: {.callout-note}
-In many situations, we won't be focus on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible
+In many situations, we won't be focused on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible
 :::
 
-## Example of random phenomenom: 
+## Example of random phenomenon: 
 
 <br>
 
@@ -118,12 +118,12 @@ $$P(H) = P(\text{event}) = \frac{(\text{number of outcomes in the event})} {(\te
 #### The interpretation of probability as *frequency* applies to many real examples. 
 > For example, probability of high temperature in wildfires randomly selected from all fires in Alberta
 
-## A different example of a random phenomenom
+## A different example of a random phenomenon
 
 ::: {.columns}
 
 ::: {.column width="55%"}
-### Student arrival to class
+### Arrival time to class
 
 The exact arrival time is uncertain and depends on many unpredictable factors (traffic, delays, decisions).
 
@@ -152,8 +152,7 @@ We can't compute the probability of the event using frequencies.
 
 ## Random variables
 
-
-- **Random variables**:  a number assigned to each outcome, representing a quantity of interest (e.g., age of students selected, temperature the day of a fire)
+- **Random variable**:  a numerical quantity defined from the outcome of a random phenomenon (e.g., number of heads when tossing 2 coins, temperature the day of a fire)
 
 - It can take on multiple possible values, some potentially more likely than others.
 
@@ -183,7 +182,7 @@ Example: tossing a coin
 
 <br>
 
-The **distribution of a random variable**: is a function that describes the variability of the random variable.
+The **distribution of a random variable** is a function that describes the variability of the random variable.
 
 :::incremental
 - We write this as: $$X \sim \text{Distribution}(\text{parameters})$$
@@ -193,30 +192,15 @@ The **distribution of a random variable**: is a function that describes the vari
 
 - In some cases, but not always, the distribution is defined by a specific formula. 
 
-- Some distributions have have special names (e.g., Bernoulli, Normal)
+- Some distributions have special names (e.g., Bernoulli, Normal)
 :::
 
-## Finite vs Model-Based 
-
-In Statistics and Data Science:
-
-- rows of data can be thought as realizations of outcomes
-
-- columns of data can be thought as realizations of random variables
-
-| Finite Population         | Model-Based Approach                           |
-|-------------------------------------------|------------------------------------------------|
-| Finite population    | Data generated from a probability model         |
-| Outcomes are a subset of actual units         | Outcomes are generated from a distribution         |
-| Finite sample space         | Infinite or Finite sample space         |
-| Variability comes from the sampling | Variability comes from randomness in the model  |
-| Probability as frequencies | Model-based probability |
 
 ## Discrete vs Continuous Random Variables
 
 - Random variables are classified based on the type of values they can take:	
 	- Discrete: values are countable (e.g., 0, 1, 2, ...)
-	- Continuous: values fall in a range and can take infinitely many possibilities
+	- Continuous: values fall in a range and can take infinitely many possible values
 - Examples:
 	- Discrete: number of heads in 10 coin tosses
 	- Continuous: height of a randomly selected student
@@ -242,7 +226,7 @@ Today, we’ll look at three types of discrete random variables:
 - Notation:
 $$X \sim \text{Bernoulli}(p)$$
 
-where $p$ is the probability of success fixed in advance (so $1 - p$ is failure).
+where $p$ is the probability of success (and $1 - p$ is the probability of failure).
 
 $$x = \left\{ \begin{array}{ll}
          1 & \text{if oucome = success};\\
@@ -321,7 +305,7 @@ We'll describe the type of data each models and how we use parameters to define 
 where:
 
 - $a$ is the minimum value  
-- $b$ the maximum value  
+- $b$ is the maximum value  
 - $X$ takes any value in the interval $[a, b]$
 
 ## 
@@ -355,7 +339,7 @@ ggplot(data.frame(x = c(0, 1)), aes(x)) +
 
 where:
 
-- $\lambda$ is rate parameter (average number of events per unit time)  
+- $\lambda$ is the rate parameter (average number of events per unit time)  
 - $X$ represents the time until the next event
 
   
@@ -439,7 +423,7 @@ E. Normal
 
 ## iClicker 2 
 <br>
-Your data science team is analyzing the number of times customers log into an app during a single day. Login events happen independently, and you want to model the how many logins there are per user per day.
+Your data science team is analyzing the number of times customers log into an app during a single day. Login events happen independently, and you want to model how many logins there are per user per day.
 
 Which random variable would best represent the number of logins in a day?
 

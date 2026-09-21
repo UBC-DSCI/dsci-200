@@ -1040,7 +1040,7 @@
     "href": "schedule/slides/prob-distributions.html#section",
     "title": "UBC DSCI 200",
     "section": "Random Variables and Distributions",
-    "text": "Random Variables and Distributions\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 14 January 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+    "text": "Random Variables and Distributions\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 21 September 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#attribution",
@@ -1068,42 +1068,42 @@
     "href": "schedule/slides/prob-distributions.html#randomness-beyond-sampling",
     "title": "UBC DSCI 200",
     "section": "Randomness beyond sampling",
-    "text": "Randomness beyond sampling\nWords like probability, chance, and odds are commonly used to express uncertainty:\n\n\n‘Very high’ probability that Canada will see coronavirus, says Toronto respirologist, (CBC News, Jan, 2020)\nCDC says flu activity probably has not peaked amid record-breaking season (CNN, Jan 2026)\nThe riskiest asteroid on record now has near-zero chance of hitting Earth (CNN, Feb 2025)\nThe probability of a recession has fallen to 40%, (JP Morgan, May 2025)\n2025-26 Stanley Cup odds: Avalanche, Hurricanes, Lightning lead favorites (ESPN, Jan 2026)\nThe odds of winning the Powerball lottery with single ticket is about 1 in 300 million.\n\n\n\nMore stories in eBook by K. Ross\n\nEach story reflects a case where the outcome is uncertain, capturing randomness."
+    "text": "Randomness beyond sampling\nWords like probability, chance, and odds are commonly used to express uncertainty:\n\n\n‘Very high’ probability that Canada will see coronavirus, says Toronto respirologist, (CBC News, Jan, 2020)\nCDC says flu activity probably has not peaked amid record-breaking season (CNN, Jan 2026)\nThe riskiest asteroid on record now has near-zero chance of hitting Earth (CNN, Feb 2025)\nThe probability of a recession has fallen to 40%, (JP Morgan, May 2025)\n2025-26 Stanley Cup odds: Avalanche, Hurricanes, Lightning lead favorites (ESPN, Jan 2026)\nThe odds of winning the Powerball lottery with a single ticket are about 1 in 300 million.\n\n\n\nMore stories in eBook by K. Ross\n\nEach story reflects a case where the outcome is uncertain, capturing randomness."
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#section-1",
     "href": "schedule/slides/prob-distributions.html#section-1",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "Randomness can come from:\n\nphysical events (e.g, flipping a coin)\nselection mechanisms (e.g., selecting individuals from a population)\nexperimental designs (random assignment in a randomized experiment)\ncomplex systems (e.g., stock market fluctuations)\nsimulations or algorithms (e.g., random number generator in software)\nbiological processes (e.g., random assortment of chromosomes)\n\n\nIn a random phenomenon there is uncertainty about which of several potential outcomes will take place. Outcomes or events may not be equally likely."
+    "text": "Randomness can come from:\n\nphysical events (e.g., flipping a coin)\nselection mechanisms (e.g., selecting individuals from a population)\nexperimental designs (random assignment in a randomized experiment)\ncomplex systems (e.g., stock market fluctuations)\nsimulations or algorithms (e.g., random number generator in software)\nbiological processes (e.g., random assortment of chromosomes)\n\n\nIn a random phenomenon there is uncertainty about which of several potential outcomes will take place. Outcomes or events may not be equally likely."
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#terminology",
     "href": "schedule/slides/prob-distributions.html#terminology",
     "title": "UBC DSCI 200",
     "section": "Terminology",
-    "text": "Terminology\n\n\nOutcomes: possible results of the random phenomenon, not necessarily numeric (e.g, side of a coin, students selected for a survey)\nEvents: a collection of outcomes (e.g, winning all games of the season)\nProbability of events: a number between 0 and 1 that measures the uncertainty of an event, how likely an event is to occur.\n\n\n\n\n\n\n\nNote\n\n\nIn many situations, we won’t be focus on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible"
+    "text": "Terminology\n\n\nOutcomes: possible results of the random phenomenon, not necessarily numeric (e.g., side of a coin, students selected for a survey)\nEvents: a collection of outcomes (e.g., winning all games of the season)\nProbability of events: a number between 0 and 1 that measures the uncertainty of an event, how likely an event is to occur.\n\n\n\n\n\n\n\nNote\n\n\nIn many situations, we won’t be focused on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible"
   },
   {
-    "objectID": "schedule/slides/prob-distributions.html#example-of-random-phenomenom",
-    "href": "schedule/slides/prob-distributions.html#example-of-random-phenomenom",
+    "objectID": "schedule/slides/prob-distributions.html#example-of-random-phenomenon",
+    "href": "schedule/slides/prob-distributions.html#example-of-random-phenomenon",
     "title": "UBC DSCI 200",
-    "section": "Example of random phenomenom:",
-    "text": "Example of random phenomenom:\n\n\n\nTossing a Coin\n\nAll possible outcomes (aka sample space): {H, T}\nEvent: Toss a head = {H}\n\n\n\n\nSince the coin is fair, both outcomes are equally likely\n\\[P(H) = P(\\text{event}) = \\frac{(\\text{number of outcomes in the event})} {(\\text{total number of possible outcomes})} = \\frac{1}{2} = 0.5\\]\nThe interpretation of probability as frequency applies to many real examples.\n\nFor example, probability of high temperature in wildfires randomly selected from all fires in Alberta"
+    "section": "Example of random phenomenon:",
+    "text": "Example of random phenomenon:\n\n\n\nTossing a Coin\n\nAll possible outcomes (aka sample space): {H, T}\nEvent: Toss a head = {H}\n\n\n\n\nSince the coin is fair, both outcomes are equally likely\n\\[P(H) = P(\\text{event}) = \\frac{(\\text{number of outcomes in the event})} {(\\text{total number of possible outcomes})} = \\frac{1}{2} = 0.5\\]\nThe interpretation of probability as frequency applies to many real examples.\n\nFor example, probability of high temperature in wildfires randomly selected from all fires in Alberta"
   },
   {
-    "objectID": "schedule/slides/prob-distributions.html#a-different-example-of-a-random-phenomenom",
-    "href": "schedule/slides/prob-distributions.html#a-different-example-of-a-random-phenomenom",
+    "objectID": "schedule/slides/prob-distributions.html#a-different-example-of-a-random-phenomenon",
+    "href": "schedule/slides/prob-distributions.html#a-different-example-of-a-random-phenomenon",
     "title": "UBC DSCI 200",
-    "section": "A different example of a random phenomenom",
-    "text": "A different example of a random phenomenom\n\n\nStudent arrival to class\nThe exact arrival time is uncertain and depends on many unpredictable factors (traffic, delays, decisions).\n\nAll possible outcomes: any time of the day\nEvent: times in the interval [8:55, 9:05]\n\n\n\n\nPhoto by Dominic Kurniawan Suryaputra, Unsplash\n\n\n\nWe can’t compute the probability of the event using frequencies.\nInstead, we rely on a model-based approach: assume a distribution to reflect uncertainty about the arrival time."
+    "section": "A different example of a random phenomenon",
+    "text": "A different example of a random phenomenon\n\n\nArrival time to class\nThe exact arrival time is uncertain and depends on many unpredictable factors (traffic, delays, decisions).\n\nAll possible outcomes: any time of the day\nEvent: times in the interval [8:55, 9:05]\n\n\n\n\nPhoto by Dominic Kurniawan Suryaputra, Unsplash\n\n\n\nWe can’t compute the probability of the event using frequencies.\nInstead, we rely on a model-based approach: assume a distribution to reflect uncertainty about the arrival time."
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#random-variables",
     "href": "schedule/slides/prob-distributions.html#random-variables",
     "title": "UBC DSCI 200",
     "section": "Random variables",
-    "text": "Random variables\n\nRandom variables: a number assigned to each outcome, representing a quantity of interest (e.g., age of students selected, temperature the day of a fire)\nIt can take on multiple possible values, some potentially more likely than others.\nBefore we observe it, the value is unknown. After observation, it is fixed.\n\n\n\n\n\n\n\n\n\nWhy is it called a random variable?\n\n\nTechnically, random variables are functions that assign numbers to outcomes. The name reflects two ideas: the value can change (it’s a variable), and it’s uncertain which value it will take (it’s random)."
+    "text": "Random variables\n\nRandom variable: a numerical quantity defined from the outcome of a random phenomenon (e.g., number of heads when tossing 2 coins, temperature the day of a fire)\nIt can take on multiple possible values, some potentially more likely than others.\nBefore we observe it, the value is unknown. After observation, it is fixed.\n\n\n\n\n\n\n\n\n\nWhy is it called a random variable?\n\n\nTechnically, random variables are functions that assign numbers to outcomes. The name reflects two ideas: the value can change (it’s a variable), and it’s uncertain which value it will take (it’s random)."
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#random-variable-notation",
@@ -1117,21 +1117,14 @@
     "href": "schedule/slides/prob-distributions.html#distribution",
     "title": "UBC DSCI 200",
     "section": "Distribution",
-    "text": "Distribution\n\nThe distribution of a random variable: is a function that describes the variability of the random variable.\n\n\nWe write this as: \\[X \\sim \\text{Distribution}(\\text{parameters})\\]\nJust like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible values\nDistributions can be used to calculate probabilities associated with random variables.\nIn some cases, but not always, the distribution is defined by a specific formula.\nSome distributions have have special names (e.g., Bernoulli, Normal)"
-  },
-  {
-    "objectID": "schedule/slides/prob-distributions.html#finite-vs-model-based",
-    "href": "schedule/slides/prob-distributions.html#finite-vs-model-based",
-    "title": "UBC DSCI 200",
-    "section": "Finite vs Model-Based",
-    "text": "Finite vs Model-Based\nIn Statistics and Data Science:\n\nrows of data can be thought as realizations of outcomes\ncolumns of data can be thought as realizations of random variables\n\n\n\n\n\n\n\n\nFinite Population\nModel-Based Approach\n\n\n\n\nFinite population\nData generated from a probability model\n\n\nOutcomes are a subset of actual units\nOutcomes are generated from a distribution\n\n\nFinite sample space\nInfinite or Finite sample space\n\n\nVariability comes from the sampling\nVariability comes from randomness in the model\n\n\nProbability as frequencies\nModel-based probability"
+    "text": "Distribution\n\nThe distribution of a random variable is a function that describes the variability of the random variable.\n\n\nWe write this as: \\[X \\sim \\text{Distribution}(\\text{parameters})\\]\nJust like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible values\nDistributions can be used to calculate probabilities associated with random variables.\nIn some cases, but not always, the distribution is defined by a specific formula.\nSome distributions have special names (e.g., Bernoulli, Normal)"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#discrete-vs-continuous-random-variables",
     "href": "schedule/slides/prob-distributions.html#discrete-vs-continuous-random-variables",
     "title": "UBC DSCI 200",
     "section": "Discrete vs Continuous Random Variables",
-    "text": "Discrete vs Continuous Random Variables\n\nRandom variables are classified based on the type of values they can take:\n\nDiscrete: values are countable (e.g., 0, 1, 2, …)\nContinuous: values fall in a range and can take infinitely many possibilities\n\nExamples:\n\nDiscrete: number of heads in 10 coin tosses\nContinuous: height of a randomly selected student"
+    "text": "Discrete vs Continuous Random Variables\n\nRandom variables are classified based on the type of values they can take:\n\nDiscrete: values are countable (e.g., 0, 1, 2, …)\nContinuous: values fall in a range and can take infinitely many possible values\n\nExamples:\n\nDiscrete: number of heads in 10 coin tosses\nContinuous: height of a randomly selected student"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#discrete-random-variables",
@@ -1145,7 +1138,7 @@
     "href": "schedule/slides/prob-distributions.html#bernoulli",
     "title": "UBC DSCI 200",
     "section": "Bernoulli",
-    "text": "Bernoulli\n\nA Bernoulli random variable assigns a numeric value to the outcome of a single trial with two possible results:\n\nThe event of interest occurs → we call this a success\nThe event of interest does not occur → we call this a failure\n\nNotation: \\[X \\sim \\text{Bernoulli}(p)\\]\n\nwhere \\(p\\) is the probability of success fixed in advance (so \\(1 - p\\) is failure).\n\\[x = \\left\\{ \\begin{array}{ll}\n         1 & \\text{if oucome = success};\\\\\n         0 & \\text{if oucome = failure}\\end{array} \\right.\\]\n\nfor example: did a user click on an ad? (yes = 1, no = 0)"
+    "text": "Bernoulli\n\nA Bernoulli random variable assigns a numeric value to the outcome of a single trial with two possible results:\n\nThe event of interest occurs → we call this a success\nThe event of interest does not occur → we call this a failure\n\nNotation: \\[X \\sim \\text{Bernoulli}(p)\\]\n\nwhere \\(p\\) is the probability of success (and \\(1 - p\\) is the probability of failure).\n\\[x = \\left\\{ \\begin{array}{ll}\n         1 & \\text{if oucome = success};\\\\\n         0 & \\text{if oucome = failure}\\end{array} \\right.\\]\n\nfor example: did a user click on an ad? (yes = 1, no = 0)"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#binomial",
@@ -1180,7 +1173,7 @@
     "href": "schedule/slides/prob-distributions.html#uniform-distribution",
     "title": "UBC DSCI 200",
     "section": "Uniform Distribution",
-    "text": "Uniform Distribution\n\nAll values in a given interval are equally likely\nThe graph of the distribution is a flat horizontal line\nNotation: \\[X \\sim \\text{Uniform}(a, b)\\]\n\nwhere:\n\n\\(a\\) is the minimum value\n\n\\(b\\) the maximum value\n\n\\(X\\) takes any value in the interval \\([a, b]\\)"
+    "text": "Uniform Distribution\n\nAll values in a given interval are equally likely\nThe graph of the distribution is a flat horizontal line\nNotation: \\[X \\sim \\text{Uniform}(a, b)\\]\n\nwhere:\n\n\\(a\\) is the minimum value\n\n\\(b\\) is the maximum value\n\n\\(X\\) takes any value in the interval \\([a, b]\\)"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#examples-of-a-uniform-random-variable",
@@ -1194,7 +1187,7 @@
     "href": "schedule/slides/prob-distributions.html#exponential-distribution",
     "title": "UBC DSCI 200",
     "section": "Exponential Distribution",
-    "text": "Exponential Distribution\n\nModels waiting times between independent events that happen at a constant average rate.\nEvents are memoryless, meaning that the past doesn’t affect the future.\nNotation:\n\\[X \\sim \\text{Exponential}(\\lambda)\\]\n\nwhere:\n\n\\(\\lambda\\) is rate parameter (average number of events per unit time)\n\n\\(X\\) represents the time until the next event"
+    "text": "Exponential Distribution\n\nModels waiting times between independent events that happen at a constant average rate.\nEvents are memoryless, meaning that the past doesn’t affect the future.\nNotation:\n\\[X \\sim \\text{Exponential}(\\lambda)\\]\n\nwhere:\n\n\\(\\lambda\\) is the rate parameter (average number of events per unit time)\n\n\\(X\\) represents the time until the next event"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#examples-of-an-exponential-random-variable",
@@ -1236,7 +1229,7 @@
     "href": "schedule/slides/prob-distributions.html#iclicker-2",
     "title": "UBC DSCI 200",
     "section": "iClicker 2",
-    "text": "iClicker 2\n Your data science team is analyzing the number of times customers log into an app during a single day. Login events happen independently, and you want to model the how many logins there are per user per day.\nWhich random variable would best represent the number of logins in a day?\n\nA. Binomial\nB. Bernoulli\nC. Poisson\nD. Uniform\nE. Normal"
+    "text": "iClicker 2\n Your data science team is analyzing the number of times customers log into an app during a single day. Login events happen independently, and you want to model how many logins there are per user per day.\nWhich random variable would best represent the number of logins in a day?\n\nA. Binomial\nB. Bernoulli\nC. Poisson\nD. Uniform\nE. Normal"
   },
   {
     "objectID": "schedule/slides/prob-distributions.html#iclicker-3",

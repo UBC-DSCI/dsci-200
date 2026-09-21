@@ -134,7 +134,7 @@
 <h2>Random Variables and Distributions</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
-<p>Last modified – 14 January 2026</p>
+<p>Last modified – 21 September 2026</p>
 <p><span class="math display">\[
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -210,7 +210,7 @@
 <li class="fragment"><p>The riskiest asteroid on record now has near-zero chance of hitting Earth <a href="https://www.cnn.com/2025/02/24/science/asteroid-2024-yr4-impact-risk-decrease">(CNN, Feb 2025)</a></p></li>
 <li class="fragment"><p>The probability of a recession has fallen to 40%, <a href="https://www.jpmorgan.com/insights/global-research/economy/recession-probability">(JP Morgan, May 2025)</a></p></li>
 <li class="fragment"><p>2025-26 Stanley Cup odds: Avalanche, Hurricanes, Lightning lead favorites <a href="https://www.espn.com/nfl/story/_/id/47600644/sources-mike-tomlin-step-steelers-head-coach">(ESPN, Jan 2026)</a></p></li>
-<li class="fragment"><p>The odds of winning the Powerball lottery with single ticket is about 1 in 300 million.</p></li>
+<li class="fragment"><p>The odds of winning the Powerball lottery with a single ticket are about 1 in 300 million.</p></li>
 </ul>
 </div>
 <div style="font-size: 13px; margin-top: -30px; color: grey;">
@@ -222,7 +222,7 @@
 <h2></h2>
 <p><strong>Randomness</strong> can come from:</p>
 <ul>
-<li>physical events (e.g, flipping a coin)</li>
+<li>physical events (e.g., flipping a coin)</li>
 <li>selection mechanisms (e.g., selecting individuals from a population)</li>
 <li>experimental designs (random assignment in a randomized experiment)</li>
 <li>complex systems (e.g., stock market fluctuations)</li>
@@ -236,8 +236,8 @@
 <h2>Terminology</h2>
 <p><br></p>
 <ul>
-<li><p><strong>Outcomes</strong>: possible results of the random phenomenon, not necessarily numeric (e.g, side of a coin, students selected for a survey)</p></li>
-<li><p><strong>Events</strong>: a collection of outcomes (e.g, winning all games of the season)</p></li>
+<li><p><strong>Outcomes</strong>: possible results of the random phenomenon, not necessarily numeric (e.g., side of a coin, students selected for a survey)</p></li>
+<li><p><strong>Events</strong>: a collection of outcomes (e.g., winning all games of the season)</p></li>
 <li><p><strong>Probability of events</strong>: a number between 0 and 1 that measures the uncertainty of an event, how likely an event is to occur.</p></li>
 </ul>
 <div class="callout callout-note callout-titled callout-style-default">
@@ -249,13 +249,13 @@
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>In many situations, we won’t be focus on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible</p>
+<p>In many situations, we won’t be focused on defining the set of all possible outcomes (aka sample space). However, it can help us understand what is plausible</p>
 </div>
 </div>
 </div>
 </section>
-<section id="example-of-random-phenomenom" class="slide level2">
-<h2>Example of random phenomenom:</h2>
+<section id="example-of-random-phenomenon" class="slide level2">
+<h2>Example of random phenomenon:</h2>
 <p><br></p>
 <div class="columns">
 <div class="column" style="width:65%;">
@@ -274,11 +274,11 @@
 <p>For example, probability of high temperature in wildfires randomly selected from all fires in Alberta</p>
 </blockquote>
 </section>
-<section id="a-different-example-of-a-random-phenomenom" class="slide level2">
-<h2>A different example of a random phenomenom</h2>
+<section id="a-different-example-of-a-random-phenomenon" class="slide level2">
+<h2>A different example of a random phenomenon</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
-<h3 id="student-arrival-to-class">Student arrival to class</h3>
+<h3 id="arrival-time-to-class">Arrival time to class</h3>
 <p>The exact arrival time is uncertain and depends on many unpredictable factors (traffic, delays, decisions).</p>
 <ul>
 <li><p>All possible outcomes: any time of the day</p></li>
@@ -297,7 +297,7 @@
 <section id="random-variables" class="slide level2">
 <h2>Random variables</h2>
 <ul>
-<li><p><strong>Random variables</strong>: a number assigned to each outcome, representing a quantity of interest (e.g., age of students selected, temperature the day of a fire)</p></li>
+<li><p><strong>Random variable</strong>: a numerical quantity defined from the outcome of a random phenomenon (e.g., number of heads when tossing 2 coins, temperature the day of a fire)</p></li>
 <li><p>It can take on multiple possible values, some potentially more likely than others.</p></li>
 <li><p>Before we observe it, the value is unknown. After observation, it is fixed.</p></li>
 </ul>
@@ -337,58 +337,16 @@
 <section id="distribution" class="slide level2">
 <h2>Distribution</h2>
 <p><br></p>
-<p>The <strong>distribution of a random variable</strong>: is a function that describes the variability of the random variable.</p>
+<p>The <strong>distribution of a random variable</strong> is a function that describes the variability of the random variable.</p>
 <div>
 <ul>
 <li class="fragment"><p>We write this as: <span class="math display">\[X \sim \text{Distribution}(\text{parameters})\]</span></p></li>
 <li class="fragment"><p>Just like we can have parameters from a finite population, a distribution takes parameters that describe the behavior of a random variable across all possible values</p></li>
 <li class="fragment"><p>Distributions can be used to calculate probabilities associated with random variables.</p></li>
 <li class="fragment"><p>In some cases, but not always, the distribution is defined by a specific formula.</p></li>
-<li class="fragment"><p>Some distributions have have special names (e.g., Bernoulli, Normal)</p></li>
+<li class="fragment"><p>Some distributions have special names (e.g., Bernoulli, Normal)</p></li>
 </ul>
 </div>
-</section>
-<section id="finite-vs-model-based" class="slide level2">
-<h2>Finite vs Model-Based</h2>
-<p>In Statistics and Data Science:</p>
-<ul>
-<li><p>rows of data can be thought as realizations of outcomes</p></li>
-<li><p>columns of data can be thought as realizations of random variables</p></li>
-</ul>
-<table class="caption-top">
-<colgroup>
-<col style="width: 47%">
-<col style="width: 52%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Finite Population</th>
-<th>Model-Based Approach</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Finite population</td>
-<td>Data generated from a probability model</td>
-</tr>
-<tr class="even">
-<td>Outcomes are a subset of actual units</td>
-<td>Outcomes are generated from a distribution</td>
-</tr>
-<tr class="odd">
-<td>Finite sample space</td>
-<td>Infinite or Finite sample space</td>
-</tr>
-<tr class="even">
-<td>Variability comes from the sampling</td>
-<td>Variability comes from randomness in the model</td>
-</tr>
-<tr class="odd">
-<td>Probability as frequencies</td>
-<td>Model-based probability</td>
-</tr>
-</tbody>
-</table>
 </section>
 <section id="discrete-vs-continuous-random-variables" class="slide level2">
 <h2>Discrete vs Continuous Random Variables</h2>
@@ -396,7 +354,7 @@
 <li>Random variables are classified based on the type of values they can take:
 <ul>
 <li>Discrete: values are countable (e.g., 0, 1, 2, …)</li>
-<li>Continuous: values fall in a range and can take infinitely many possibilities</li>
+<li>Continuous: values fall in a range and can take infinitely many possible values</li>
 </ul></li>
 <li>Examples:
 <ul>
@@ -425,7 +383,7 @@
 </ul></li>
 <li><p>Notation: <span class="math display">\[X \sim \text{Bernoulli}(p)\]</span></p></li>
 </ul>
-<p>where <span class="math inline">\(p\)</span> is the probability of success fixed in advance (so <span class="math inline">\(1 - p\)</span> is failure).</p>
+<p>where <span class="math inline">\(p\)</span> is the probability of success (and <span class="math inline">\(1 - p\)</span> is the probability of failure).</p>
 <p><span class="math display">\[x = \left\{ \begin{array}{ll}
          1 &amp; \text{if oucome = success};\\
          0 &amp; \text{if oucome = failure}\end{array} \right.\]</span></p>
@@ -529,7 +487,7 @@
 <ul>
 <li><span class="math inline">\(a\)</span> is the minimum value<br>
 </li>
-<li><span class="math inline">\(b\)</span> the maximum value<br>
+<li><span class="math inline">\(b\)</span> is the maximum value<br>
 </li>
 <li><span class="math inline">\(X\)</span> takes any value in the interval <span class="math inline">\([a, b]\)</span></li>
 </ul>
@@ -559,7 +517,7 @@
 </ul>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(\lambda\)</span> is rate parameter (average number of events per unit time)<br>
+<li><span class="math inline">\(\lambda\)</span> is the rate parameter (average number of events per unit time)<br>
 </li>
 <li><span class="math inline">\(X\)</span> represents the time until the next event</li>
 </ul>
@@ -665,7 +623,7 @@ E. Normal</p>
 </section>
 <section id="iclicker-2" class="slide level2">
 <h2>iClicker 2</h2>
-<p><br> Your data science team is analyzing the number of times customers log into an app during a single day. Login events happen independently, and you want to model the how many logins there are per user per day.</p>
+<p><br> Your data science team is analyzing the number of times customers log into an app during a single day. Login events happen independently, and you want to model how many logins there are per user per day.</p>
 <p>Which random variable would best represent the number of logins in a day?</p>
 <p><br></p>
 <p>A. Binomial<br>
