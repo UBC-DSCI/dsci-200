@@ -196,10 +196,10 @@
 
 
 <section id="section" class="slide level2 large" data-background-image="img/smooths.png" data-background-opacity="0.3" data-background-size="50%">
-<h2>Simulations-II</h2>
+<h2>Simulations - part I</h2>
 <p><span class="secondary">DSCI 200</span></p>
 <p><span class="secondary">Katie Burak, Gabriela V. Cohen Freue</span></p>
-<p>Last modified – 28 September 2026</p>
+<p>Last modified – 29 September 2026</p>
 <p><span class="math display">\[
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -291,26 +291,73 @@
 <span id="cb1-2"><a></a><span class="fu">library</span>(infer)</span>
 <span id="cb1-3"><a></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a>wildfire <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wildfire.csv"</span>)</span>
+<span id="cb1-5"><a></a>wildfire <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/UBC-DSCI/dsci-200/master/schedule/slides/data/wildfire.csv"</span>) </span>
 <span id="cb1-6"><a></a></span>
 <span id="cb1-7"><a></a><span class="fu">head</span>(wildfire)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 35
-   year fire_number current_size size_class latitude longitude fire_origin    
-  &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;          
-1  2006 PWF001              0.1  A              56.2     -117. Land Owner     
-2  2006 EWF002              0.2  B              53.6     -116. Fire Department
-3  2006 EWF001              0.5  B              53.6     -116. Fire Department
-4  2006 EWF003              0.01 A              53.6     -116. Industry       
-5  2006 PWF002              0.1  A              56.2     -117. Fire Department
-6  2006 CWF001              0.2  B              51.2     -115. Fire Department
-# ℹ 28 more variables: general_cause &lt;chr&gt;, responsible_group &lt;chr&gt;,
-#   activity_class &lt;chr&gt;, true_cause &lt;chr&gt;, fire_start_date &lt;dttm&gt;,
-#   detection_agent_type &lt;chr&gt;, detection_agent &lt;chr&gt;,
-#   assessment_hectares &lt;dbl&gt;, fire_spread_rate &lt;dbl&gt;, fire_type &lt;chr&gt;,
-#   fire_position_on_slope &lt;chr&gt;, weather_conditions_over_fire &lt;chr&gt;,
-#   temperature &lt;dbl&gt;, relative_humidity &lt;dbl&gt;, wind_direction &lt;chr&gt;,
-#   wind_speed &lt;dbl&gt;, fuel_type &lt;chr&gt;, initial_action_by &lt;chr&gt;, …</code></pre>
+<pre><code>  year fire_number current_size size_class latitude longitude     fire_origin
+1 2006      PWF001         0.10          A    56.25   -117.18      Land Owner
+2 2006      EWF002         0.20          B    53.61   -115.92 Fire Department
+3 2006      EWF001         0.50          B    53.61   -115.59 Fire Department
+4 2006      EWF003         0.01          A    53.61   -115.61        Industry
+5 2006      PWF002         0.10          A    56.25   -117.05 Fire Department
+6 2006      CWF001         0.20          B    51.15   -115.03 Fire Department
+   general_cause responsible_group activity_class      true_cause
+1       Resident          Resident          Grass  Permit Related
+2     Incendiary            Others Lighting Fires Arson Suspected
+3     Incendiary            Others Lighting Fires Arson Suspected
+4     Incendiary            Others Lighting Fires Arson Suspected
+5 Other Industry         Employees         Refuse  Permit Related
+6       Resident          Resident   Unclassified     Unsafe Fire
+      fire_start_date detection_agent_type detection_agent assessment_hectares
+1 2006-04-02 12:00:00                  UNP             310                0.01
+2 2006-04-03 12:10:00                  UNP             310                0.20
+3 2006-04-03 12:15:00                  UNP             310                0.50
+4 2006-04-03 12:10:00                  UNP             PUB                0.01
+5 2006-04-03 17:00:00                  UNP             LFS                0.10
+6 2006-04-02 14:25:00                  UNP             310                0.20
+  fire_spread_rate fire_type fire_position_on_slope
+1              0.0   Surface                   Flat
+2              0.0   Surface              Lower 1/3
+3              0.0   Surface                 Bottom
+4              0.0   Surface                   Flat
+5              0.1   Surface                   Flat
+6              0.0   Surface                   Flat
+  weather_conditions_over_fire temperature relative_humidity wind_direction
+1                        Clear          18                10             SW
+2                        Clear          12                22             SW
+3                        Clear          12                22             SW
+4                        Clear          12                22             SW
+5                        Clear           6                37             SW
+6                        Clear          11                32              S
+  wind_speed fuel_type initial_action_by ia_arrival_at_fire_date ia_access
+1          2       O1a        Land Owner                    &lt;NA&gt;   Unknown
+2         10       O1a   Fire Department                    &lt;NA&gt;   Unknown
+3         10       O1a   Fire Department                    &lt;NA&gt;   Unknown
+4         10       O1b          Industry                    &lt;NA&gt;   Unknown
+5          2   Unknown   Fire Department                    &lt;NA&gt;   Unknown
+6         20       O1b   Fire Department                    &lt;NA&gt;   Unknown
+  fire_fighting_start_date fire_fighting_start_size bucketing_on_fire
+1                     &lt;NA&gt;                     0.02           Unknown
+2                     &lt;NA&gt;                     0.02           Unknown
+3                     &lt;NA&gt;                     0.02           Unknown
+4                     &lt;NA&gt;                     0.02           Unknown
+5                     &lt;NA&gt;                     0.02           Unknown
+6                     &lt;NA&gt;                     0.02           Unknown
+        first_bh_date first_bh_size       first_uc_date first_uc_size
+1 2006-04-02 22:00:00          0.01 2006-04-02 22:00:00          0.01
+2 2006-04-03 13:20:00          0.20 2006-04-03 13:20:00          0.20
+3 2006-04-03 13:23:00          0.50 2006-04-03 13:23:00          0.50
+4 2006-04-03 14:08:00          0.01 2006-04-03 14:08:00          0.01
+5 2006-04-03 19:57:00          0.10 2006-04-03 20:19:00          0.10
+6 2006-04-02 16:00:01          0.20 2006-04-02 16:00:01          0.20
+  first_ex_size_perimeter
+1                    0.10
+2                    0.20
+3                    0.50
+4                    0.01
+5                    0.10
+6                    0.20</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">dim</span>(wildfire)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -332,10 +379,8 @@
 <span id="cb5-8"><a></a>    <span class="at">max_temp =</span> <span class="fu">max</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb5-9"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 6
-  mean_temp med_temp var_temp sd_temp min_temp max_temp
-      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1      17.9       19     60.1    7.75      -39       45</code></pre>
+<pre><code>  mean_temp med_temp var_temp  sd_temp min_temp max_temp
+1   17.8787       19 60.13478 7.754662      -39       45</code></pre>
 </div>
 </div>
 </section>
@@ -420,13 +465,17 @@
 <span id="cb9-4"><a></a> <span class="fu">select</span>(temperature)  <span class="sc">|&gt;</span></span>
 <span id="cb9-5"><a></a> <span class="fu">drop_na</span>()  </span>
 <span id="cb9-6"><a></a></span>
-<span id="cb9-7"><a></a>n <span class="ot">&lt;-</span> <span class="dv">7000</span></span>
-<span id="cb9-8"><a></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(pop_temp_complete)</span>
-<span id="cb9-9"><a></a></span>
-<span id="cb9-10"><a></a><span class="co"># sample_mean_reps &lt;- pop_temp_complete |&gt;</span></span>
-<span id="cb9-11"><a></a><span class="co"># ...(size = ..., reps = ...) |&gt; </span></span>
-<span id="cb9-12"><a></a><span class="co">#   group_by(...) |&gt; </span></span>
-<span id="cb9-13"><a></a><span class="co">#   summarise(temp_mean = ...(..., na.rm=TRUE))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a></a><span class="co"># sample size</span></span>
+<span id="cb9-8"><a></a>sample_size <span class="ot">&lt;-</span> <span class="dv">7000</span></span>
+<span id="cb9-9"><a></a><span class="co"># population size</span></span>
+<span id="cb9-10"><a></a>pop_size <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pop_temp_complete)</span>
+<span id="cb9-11"><a></a><span class="co"># number or replicates</span></span>
+<span id="cb9-12"><a></a>n_reps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb9-13"><a></a></span>
+<span id="cb9-14"><a></a>sample_mean_reps <span class="ot">&lt;-</span> pop_temp_complete <span class="sc">|&gt;</span></span>
+<span id="cb9-15"><a></a> <span class="fu">rep_sample_n</span>(<span class="at">size =</span> sample_size, <span class="at">reps =</span> n_reps) <span class="sc">|&gt;</span> </span>
+<span id="cb9-16"><a></a>    <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span> </span>
+<span id="cb9-17"><a></a>    <span class="fu">summarise</span>(<span class="at">sample_mean_temp =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <h4 id="we-now-have-a-list-of-1000-sample-mean-temperatures">We now have a list of 1000 sample mean temperatures!</h4>
 </section>
@@ -437,8 +486,16 @@
 <p>Let’s approximate the SE computing the standard deviation of the sample estimates</p>
 </blockquote>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># se_simulation &lt;- ...(sampling_dist$sample_mean)</span></span>
-<span id="cb10-2"><a></a><span class="co"># se_formula &lt;- ...(pop_temp_complete$...)/...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co">#SE of X_bar by simulation</span></span>
+<span id="cb10-2"><a></a>(se_simulation <span class="ot">&lt;-</span> <span class="fu">sd</span>(sample_mean_reps<span class="sc">$</span>sample_mean_temp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07564706</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co">#SE of X_bar by formula</span></span>
+<span id="cb12-2"><a></a>(se_formula <span class="ot">&lt;-</span> <span class="fu">sd</span>(pop_temp_complete<span class="sc">$</span>temperature)<span class="sc">/</span><span class="fu">sqrt</span>(sample_size))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09268594</code></pre>
+</div>
 </div>
 <h4 id="something-seems-off-.">Something seems off ….</h4>
 </section>
@@ -449,62 +506,67 @@
 <li><p>The variability of the sample mean is smaller than in model-based sampling.</p></li>
 <li><p>This reduction in variability is captured by the finite population correction (FPC):</p></li>
 </ul>
-<p><span class="math display">\[ SE(\bar{x})= \frac{\sigma}{\sqrt{n}}*\sqrt{1-\frac{n}{N}} \]</span></p>
+<p><span class="math display">\[ SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}*\sqrt{1-\frac{n}{N}}
+\]</span></p>
 <p>where <span class="math inline">\(N\)</span> and <span class="math inline">\(n\)</span> are the population and the sample sizes, respectively.</p>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb11-2"><a></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb11-3"><a></a></span>
-<span id="cb11-4"><a></a>cum_sd <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
-<span id="cb11-5"><a></a>  <span class="fu">seq_along</span>(sample_mean_reps<span class="sc">$</span>temp_mean),</span>
-<span id="cb11-6"><a></a>  <span class="cf">function</span>(k) <span class="fu">sd</span>(sample_mean_reps<span class="sc">$</span>temp_mean[<span class="dv">1</span><span class="sc">:</span>k])</span>
-<span id="cb11-7"><a></a>)</span>
-<span id="cb11-8"><a></a></span>
-<span id="cb11-9"><a></a>mean_temp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-10"><a></a>  <span class="at">runs =</span> <span class="fu">seq_along</span>(sample_mean_reps<span class="sc">$</span>temp_mean),</span>
-<span id="cb11-11"><a></a>  <span class="at">se_mean_temp  =</span> cum_sd</span>
-<span id="cb11-12"><a></a>)</span>
-<span id="cb11-13"><a></a></span>
-<span id="cb11-14"><a></a>mean_temp_long <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
-<span id="cb11-15"><a></a>  mean_temp_df,</span>
-<span id="cb11-16"><a></a>  <span class="sc">-</span>runs,</span>
-<span id="cb11-17"><a></a>  <span class="at">names_to =</span> <span class="st">"event"</span>,</span>
-<span id="cb11-18"><a></a>  <span class="at">values_to =</span> <span class="st">"estimate"</span></span>
-<span id="cb11-19"><a></a>)</span>
-<span id="cb11-20"><a></a></span>
-<span id="cb11-21"><a></a>fcp <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> (n <span class="sc">/</span> N))</span>
-<span id="cb11-22"><a></a>se_corrected_fpc <span class="ot">&lt;-</span> se_formula <span class="sc">*</span>fcp</span>
-<span id="cb11-23"><a></a></span>
-<span id="cb11-24"><a></a>ref_lines <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-25"><a></a>  <span class="at">se =</span> <span class="fu">c</span>(se_simulation, se_corrected_fpc, se_formula),</span>
-<span id="cb11-26"><a></a>  <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"Simulation SD"</span>, <span class="st">"FPC-corrected formula"</span>, <span class="st">"Uncorrected formula"</span>)</span>
-<span id="cb11-27"><a></a>)</span>
-<span id="cb11-28"><a></a></span>
-<span id="cb11-29"><a></a>t_long_run <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mean_temp_long, <span class="fu">aes</span>(<span class="at">x =</span> runs, <span class="at">y =</span> estimate, <span class="at">color =</span> event)) <span class="sc">+</span></span>
-<span id="cb11-30"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb11-31"><a></a>  <span class="fu">geom_hline</span>(</span>
-<span id="cb11-32"><a></a>    <span class="at">data =</span> ref_lines,</span>
-<span id="cb11-33"><a></a>    <span class="fu">aes</span>(<span class="at">yintercept =</span> se, <span class="at">color =</span> method),</span>
-<span id="cb11-34"><a></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span></span>
-<span id="cb11-35"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb11-36"><a></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb11-37"><a></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb11-38"><a></a>      <span class="st">"Simulation SD"</span> <span class="ot">=</span> <span class="st">"#F8766D"</span>,        </span>
-<span id="cb11-39"><a></a>      <span class="st">"FPC-corrected formula"</span> <span class="ot">=</span> <span class="st">"#00BA38"</span>, </span>
-<span id="cb11-40"><a></a>      <span class="st">"Uncorrected formula"</span> <span class="ot">=</span> <span class="st">"#619CFF"</span> </span>
-<span id="cb11-41"><a></a>    )</span>
-<span id="cb11-42"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb11-43"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-44"><a></a>    <span class="at">x =</span> <span class="st">"Number of simulation runs"</span>,</span>
-<span id="cb11-45"><a></a>    <span class="at">y =</span> <span class="st">"Estimated SE"</span>,</span>
-<span id="cb11-46"><a></a>    <span class="at">color =</span> <span class="st">""</span>,</span>
-<span id="cb11-47"><a></a>    <span class="at">title =</span> <span class="st">"Estimated SE of mean temperature"</span></span>
-<span id="cb11-48"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-2"><a></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb14-3"><a></a></span>
+<span id="cb14-4"><a></a>cum_sd <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
+<span id="cb14-5"><a></a>  <span class="fu">seq_along</span>(sample_mean_reps<span class="sc">$</span>sample_mean_temp),</span>
+<span id="cb14-6"><a></a>  <span class="cf">function</span>(k) <span class="fu">sd</span>(sample_mean_reps<span class="sc">$</span>sample_mean_temp[<span class="dv">1</span><span class="sc">:</span>k])</span>
+<span id="cb14-7"><a></a>)</span>
+<span id="cb14-8"><a></a></span>
+<span id="cb14-9"><a></a>sample_mean_temp_sequence <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-10"><a></a>  <span class="at">runs =</span> <span class="fu">seq_along</span>(sample_mean_reps<span class="sc">$</span>sample_mean_temp),</span>
+<span id="cb14-11"><a></a>  <span class="at">se_mean_temp  =</span> cum_sd</span>
+<span id="cb14-12"><a></a>)</span>
+<span id="cb14-13"><a></a></span>
+<span id="cb14-14"><a></a>sample_mean_temp_long <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb14-15"><a></a>  sample_mean_temp_sequence,</span>
+<span id="cb14-16"><a></a>  <span class="sc">-</span>runs,</span>
+<span id="cb14-17"><a></a>  <span class="at">names_to =</span> <span class="st">"event"</span>,</span>
+<span id="cb14-18"><a></a>  <span class="at">values_to =</span> <span class="st">"estimate"</span></span>
+<span id="cb14-19"><a></a>)</span>
+<span id="cb14-20"><a></a></span>
+<span id="cb14-21"><a></a>fcp <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> (sample_size <span class="sc">/</span> pop_size))</span>
+<span id="cb14-22"><a></a>se_corrected_fpc <span class="ot">&lt;-</span> se_formula <span class="sc">*</span>fcp</span>
+<span id="cb14-23"><a></a></span>
+<span id="cb14-24"><a></a>ref_lines <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-25"><a></a>  <span class="at">se =</span> <span class="fu">c</span>(se_simulation, se_corrected_fpc, se_formula),</span>
+<span id="cb14-26"><a></a>  <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"By simulation"</span>, <span class="st">"FPC-corrected formula"</span>, <span class="st">"Uncorrected formula"</span>)</span>
+<span id="cb14-27"><a></a>)</span>
+<span id="cb14-28"><a></a></span>
+<span id="cb14-29"><a></a>plot_n_reps <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sample_mean_temp_long, <span class="fu">aes</span>(<span class="at">x =</span> runs, <span class="at">y =</span> estimate, <span class="at">color =</span> event)) <span class="sc">+</span></span>
+<span id="cb14-30"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb14-31"><a></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb14-32"><a></a>    <span class="at">data =</span> ref_lines,</span>
+<span id="cb14-33"><a></a>    <span class="fu">aes</span>(<span class="at">yintercept =</span> se, <span class="at">color =</span> method),</span>
+<span id="cb14-34"><a></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span></span>
+<span id="cb14-35"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb14-36"><a></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb14-37"><a></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb14-38"><a></a>      <span class="st">"By simulation"</span> <span class="ot">=</span> <span class="st">"#F8766D"</span>,        </span>
+<span id="cb14-39"><a></a>      <span class="st">"FPC-corrected formula"</span> <span class="ot">=</span> <span class="st">"#00BA38"</span>, </span>
+<span id="cb14-40"><a></a>      <span class="st">"Uncorrected formula"</span> <span class="ot">=</span> <span class="st">"#619CFF"</span> </span>
+<span id="cb14-41"><a></a>    )</span>
+<span id="cb14-42"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb14-43"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-44"><a></a>    <span class="at">x =</span> <span class="st">"Number of simulation runs"</span>,</span>
+<span id="cb14-45"><a></a>    <span class="at">y =</span> <span class="st">"Estimated SE"</span>,</span>
+<span id="cb14-46"><a></a>    <span class="at">color =</span> <span class="st">""</span>,</span>
+<span id="cb14-47"><a></a>    <span class="at">title =</span> <span class="st">"Estimated SE of mean temperature"</span></span>
+<span id="cb14-48"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+
+<img data-src="simulation-2_files/figure-revealjs/unnamed-chunk-7-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="generating-values-from-a-distribution" class="slide level2">
 <h2>Generating values from a distribution</h2>
 <p>Another way of generating randon numbers is using well-known probability distributions like the Normal, Poisson, and binomial.</p>
@@ -531,16 +593,16 @@
 <section id="example" class="slide level2">
 <h2>Example</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">5</span>) </span>
-<span id="cb12-2"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">5</span>) </span>
+<span id="cb15-2"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 3.601317 3.751295 3.768735 4.073120 4.001994 4.517881 4.134800 2.289504
- [9] 3.571474 2.706052</code></pre>
+<pre><code> [1] 2.145213 3.497129 4.741089 2.368110 4.608956 4.584238 3.140547 3.082035
+ [9] 2.058829 3.558137</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  2.290   3.579   3.760   3.642   4.055   4.518 </code></pre>
+  2.059   2.547   3.319   3.378   4.328   4.741 </code></pre>
 </div>
 </div>
 <h4 id="everytime-we-run-this-code-it-generates-new-values">Everytime we run this code, it generates new values</h4>
@@ -548,37 +610,37 @@
 <section id="setting-the-seed" class="slide level2">
 <h2>Setting the seed</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb16-2"><a></a></span>
-<span id="cb16-3"><a></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb19-2"><a></a></span>
+<span id="cb19-3"><a></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.601317 3.751295 3.768735 4.073120 4.001994</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1.983119 -2.603497</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">rbinom</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">rbinom</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0 0 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># changing the sequence</span></span>
-<span id="cb22-2"><a></a></span>
-<span id="cb22-3"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb22-4"><a></a></span>
-<span id="cb22-5"><a></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># changing the sequence</span></span>
+<span id="cb25-2"><a></a></span>
+<span id="cb25-3"><a></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb25-4"><a></a></span>
+<span id="cb25-5"><a></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.601317 3.751295 3.768735 4.073120 4.001994</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1.983119 -2.603497</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">rpois</span>(<span class="dv">4</span>,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">rpois</span>(<span class="dv">4</span>,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7 6 8 6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">rbinom</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">rbinom</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0 0 0</code></pre>
 </div>
@@ -605,22 +667,27 @@
 </ol></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb30-2"><a></a></span>
-<span id="cb30-3"><a></a><span class="co"># Model spec</span></span>
-<span id="cb30-4"><a></a>lm_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb30-5"><a></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb30-6"><a></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>)</span>
-<span id="cb30-7"><a></a></span>
-<span id="cb30-8"><a></a><span class="co"># Recipe for Model </span></span>
-<span id="cb30-9"><a></a><span class="co">#lm_recipe &lt;- recipe(y ~ x, data = sim_data)</span></span>
-<span id="cb30-10"><a></a></span>
-<span id="cb30-11"><a></a><span class="co"># Workflow for Model </span></span>
-<span id="cb30-12"><a></a><span class="co">#lm_fit &lt;- workflow() |&gt;</span></span>
-<span id="cb30-13"><a></a><span class="co">#  add_recipe(lm_recipe) |&gt;</span></span>
-<span id="cb30-14"><a></a><span class="co">#  add_model(lm_spec) |&gt;</span></span>
-<span id="cb30-15"><a></a> <span class="co"># fit(data = sim_data)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb33-2"><a></a></span>
+<span id="cb33-3"><a></a><span class="co"># Model spec</span></span>
+<span id="cb33-4"><a></a>lm_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
+<span id="cb33-5"><a></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-6"><a></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>)</span>
+<span id="cb33-7"><a></a></span>
+<span id="cb33-8"><a></a><span class="co"># Recipe for Model </span></span>
+<span id="cb33-9"><a></a><span class="co">#lm_recipe &lt;- recipe(y ~ x, data = sim_data)</span></span>
+<span id="cb33-10"><a></a></span>
+<span id="cb33-11"><a></a><span class="co"># Workflow for Model </span></span>
+<span id="cb33-12"><a></a><span class="co">#lm_fit &lt;- workflow() |&gt;</span></span>
+<span id="cb33-13"><a></a><span class="co">#  add_recipe(lm_recipe) |&gt;</span></span>
+<span id="cb33-14"><a></a><span class="co">#  add_model(lm_spec) |&gt;</span></span>
+<span id="cb33-15"><a></a> <span class="co"># fit(data = sim_data)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ul>
+<li><ol start="4" type="1">
+<li>Compare the estimated coefficients with the ones you used to generate the data.</li>
+</ol></li>
+</ul>
 <blockquote>
 <p>Check <a href="https://setosa.io/ev/ordinary-least-squares-regression/">this application</a> to recall LS estimation</p>
 </blockquote>

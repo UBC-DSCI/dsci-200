@@ -1,9 +1,9 @@
 ---
-lecture: "Simulations-II"
+lecture: "Simulations - part I"
 format: revealjs
 metadata-files: 
   - _metadata.yml
----
+---  
 
 {{< include _titleslide.qmd >}}
 
@@ -63,7 +63,7 @@ library(tidyverse)
 library(infer)
 library(readr)
 
-wildfire <- read_csv("data/wildfire.csv")
+wildfire <- read.csv("https://raw.githubusercontent.com/UBC-DSCI/dsci-200/master/schedule/slides/data/wildfire.csv") 
 
 head(wildfire)
 dim(wildfire)
@@ -161,13 +161,17 @@ pop_temp_complete <- wildfire |>
  select(temperature)  |>
  drop_na()  
 
-n <- 7000
-N <- length(pop_temp_complete)
+# sample size
+sample_size <- 7000
+# population size
+pop_size <- nrow(pop_temp_complete)
+# number or replicates
+n_reps <- 1000
 
-# sample_mean_reps <- pop_temp_complete |>
-# ...(size = ..., reps = ...) |> 
-#	group_by(...) |> 
-#	summarise(temp_mean = ...(..., na.rm=TRUE))
+sample_mean_reps <- pop_temp_complete |>
+ rep_sample_n(size = sample_size, reps = n_reps) |> 
+	group_by(replicate) |> 
+	summarise(sample_mean_temp = mean(temperature, na.rm=TRUE))
 ```
 
 
@@ -183,8 +187,11 @@ sampling variability.
 
 
 ```{r}
-# se_simulation <- ...(sampling_dist$sample_mean)
-# se_formula <- ...(pop_temp_complete$...)/...
+#SE of X_bar by simulation
+(se_simulation <- sd(sample_mean_reps$sample_mean_temp))
+
+#SE of X_bar by formula
+(se_formula <- sd(pop_temp_complete$temperature)/sqrt(sample_size))
 ```
 
 #### Something seems off ....
@@ -197,42 +204,43 @@ sampling variability.
 
 - This reduction in variability is captured by the finite population correction (FPC):
 
-$$ SE(\bar{x})= \frac{\sigma}{\sqrt{n}}*\sqrt{1-\frac{n}{N}} $$
+$$ SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}*\sqrt{1-\frac{n}{N}}
+$$
 
 where $N$ and $n$ are the population and the sample sizes, respectively.
 
 ##
 
-```{r eval = FALSE}
+```{r}
 library(ggplot2)
 library(tidyr)
 
 cum_sd <- sapply(
-  seq_along(sample_mean_reps$temp_mean),
-  function(k) sd(sample_mean_reps$temp_mean[1:k])
+  seq_along(sample_mean_reps$sample_mean_temp),
+  function(k) sd(sample_mean_reps$sample_mean_temp[1:k])
 )
 
-mean_temp_df <- data.frame(
-  runs = seq_along(sample_mean_reps$temp_mean),
+sample_mean_temp_sequence <- data.frame(
+  runs = seq_along(sample_mean_reps$sample_mean_temp),
   se_mean_temp  = cum_sd
 )
 
-mean_temp_long <- tidyr::pivot_longer(
-  mean_temp_df,
+sample_mean_temp_long <- tidyr::pivot_longer(
+  sample_mean_temp_sequence,
   -runs,
   names_to = "event",
   values_to = "estimate"
 )
 
-fcp <- sqrt(1 - (n / N))
+fcp <- sqrt(1 - (sample_size / pop_size))
 se_corrected_fpc <- se_formula *fcp
 
 ref_lines <- data.frame(
   se = c(se_simulation, se_corrected_fpc, se_formula),
-  method = c("Simulation SD", "FPC-corrected formula", "Uncorrected formula")
+  method = c("By simulation", "FPC-corrected formula", "Uncorrected formula")
 )
 
-t_long_run <- ggplot(mean_temp_long, aes(x = runs, y = estimate, color = event)) +
+plot_n_reps <- ggplot(sample_mean_temp_long, aes(x = runs, y = estimate, color = event)) +
   geom_line() +
   geom_hline(
     data = ref_lines,
@@ -241,7 +249,7 @@ t_long_run <- ggplot(mean_temp_long, aes(x = runs, y = estimate, color = event))
   ) +
   scale_color_manual(
     values = c(
-      "Simulation SD" = "#F8766D",        
+      "By simulation" = "#F8766D",        
       "FPC-corrected formula" = "#00BA38", 
       "Uncorrected formula" = "#619CFF" 
     )
@@ -252,6 +260,17 @@ t_long_run <- ggplot(mean_temp_long, aes(x = runs, y = estimate, color = event))
     color = "",
     title = "Estimated SE of mean temperature"
   )
+```
+
+##
+
+```{r}
+#| fig-width: 11
+#| fig-height: 5
+#| echo: false
+
+# visualize approximations as number or replicates increases
+plot_n_reps
 ```
 
 ## Generating values from a distribution
@@ -301,6 +320,7 @@ rpois(4,10)
 rbinom(3, 1, 0.5)
 ```
 
+
 ## Simulate a simple linear regression (SLR) {.scrollable}
 ::: {style="font-size: 13px; margin-top: -30px; color: red;"}
 Scroll down to see full content
@@ -334,6 +354,9 @@ lm_spec <- linear_reg() |>
 #  add_model(lm_spec) |>
  # fit(data = sim_data)
 ```
+
+- 4. Compare the estimated coefficients with the ones you used to generate the data.
+
 > Check [this application](https://setosa.io/ev/ordinary-least-squares-regression/) to recall LS estimation
 
 ## Key takeaways
