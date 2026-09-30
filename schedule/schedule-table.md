@@ -12,7 +12,7 @@
 |13 Oct 26 | Missing Data  |[Slides]()   |  Case Study I Due at 11:59pm        |
 |15 Oct 26 | Missing Data   |[Slides]()   |          |
 |20 Oct 26 | Imputation     |[Slides]()   | Missing Data Worksheet Due at 11:59pm    |
-|22 Oct 26 |  Midterm Review    | |          |
+|22 Oct 26 |  Midterm Review    | |  **MIDTERM**: Oct 22-24 at ORCA        |
 |27 Oct 26 | Outliers and Data Anomalies I  |[Slides]()   |          |
 |29 Oct 26 26 | Outliers and Data Anomalies II |[Slides]()   |          |
 |03 Nov 26 | Outliers and Data Anomalies III  |[Slides]()   |          |
