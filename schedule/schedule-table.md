@@ -6,7 +6,7 @@
 |22 Sept 26 | Random Variables and Distributions |[Slides](slides/prob-distributions.qmd)   |  EDA Worksheet Due at 11:59pm |
 |24 Sept 26 | Simulation I  |[Slides](slides/simulation-1.qmd)   |          |
 |29 Sept 26 | Simulation II |[Slides](slides/simulation-2.qmd)   |         |
-|01 Oct 26 | Sampling Design  |[Slides](slides/sampling_design.qmd)   |   Sampling Worksheet **Due Oct 4th at 11:59pm**         |
+|01 Oct 26 | Sampling Design  |[Slides](slides/sampling-design.qmd)   |   Sampling Worksheet **Due Oct 4th at 11:59pm**         |
 |06 Oct 26 | Study Design  |[Slides]()   |          |
 |08 Oct 26 | Case Study 1 Work Period  |[Slides]()   |       Simulation I Worksheet Due at 11:59pm   |
 |13 Oct 26 | Missing Data  |[Slides]()   |  Case Study I Due at 11:59pm        |
