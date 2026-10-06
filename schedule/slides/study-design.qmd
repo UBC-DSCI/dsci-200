@@ -1,5 +1,5 @@
 ---
-lecture: "Data Privacy II"
+lecture: "Study Design"
 format: revealjs
 metadata-files: 
   - _metadata.yml
