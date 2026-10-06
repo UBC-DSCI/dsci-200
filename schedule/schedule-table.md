@@ -7,7 +7,7 @@
 |24 Sept 26 | Simulation I  |[Slides](slides/simulation-1.qmd)   |          |
 |29 Sept 26 | Simulation II |[Slides](slides/simulation-2.qmd)   |         |
 |01 Oct 26 | Sampling Design  |[Slides](slides/sampling-design.qmd)   |   Sampling Worksheet **Due Oct 4th at 11:59pm**         |
-|06 Oct 26 | Study Design  |[Slides]()   |          |
+|06 Oct 26 | Study Design  |[Slides](slides/study-design.qmd)   |          |
 |08 Oct 26 | Case Study 1 Work Period  |[Slides]()   |       Simulation I Worksheet **Due Oct 12th at 11:59pm**   |
 |13 Oct 26 | Missing Data  |[Slides]()   |  Case Study I Due at 11:59pm        |
 |15 Oct 26 | Missing Data   |[Slides]()   |          |
