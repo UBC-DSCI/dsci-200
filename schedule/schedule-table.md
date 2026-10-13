@@ -9,8 +9,8 @@
 |01 Oct 26 | Sampling Design  |[Slides](slides/sampling-design.qmd)   |   Sampling Worksheet **Due Oct 4th at 11:59pm**         |
 |06 Oct 26 | Study Design  |[Slides](slides/study-design.qmd)   |          |
 |08 Oct 26 | Case Study 1 Work Period  |[Slides]()   |       Simulation I Worksheet **Due Oct 12th at 11:59pm**   |
-|13 Oct 26 | Missing Data  |[Slides]()   |  Case Study I Due at 11:59pm        |
-|15 Oct 26 | Missing Data   |[Slides]()   |          |
+|13 Oct 26 | Missing Data  |[Slides](slides/missing-1.qmd)   |          |
+|15 Oct 26 | Missing Data   |[Slides]()   |   Case Study I **Due Oct 15th at 11:59pm **      |
 |20 Oct 26 | Imputation     |[Slides]()   | Missing Data Worksheet Due at 11:59pm    |
 |22 Oct 26 |  Midterm Review    | |  **MIDTERM**: Oct 22-24 at ORCA        |
 |27 Oct 26 | Outliers and Data Anomalies I  |[Slides]()   |          |
