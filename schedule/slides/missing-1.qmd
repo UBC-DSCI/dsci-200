@@ -355,7 +355,7 @@ NHANES %>%
 
 #
 
-```{r, echo=TRUE, fig.align="center", fig.width=10, fig.height=5}
+```{r, echo=TRUE, fig.align="center", fig.width=10, fig.height=5, dev="png", dpi=300}
 #Heatmap
 vis_miss(NHANES) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 6))
@@ -363,7 +363,7 @@ vis_miss(NHANES) +
 
 #
 
-```{r, echo=FALSE, fig.align="center", fig.width=10, fig.height=5}
+```{r, echo=FALSE, fig.align="center", fig.width=10, fig.height=5, dev="png", dpi=300}
 #Heatmap for subset of variables
 vis_miss(NHANES %>% select(Age, AgeDecade, AgeMonths, Race1, Race3, 
   Testosterone, TVHrsDay, CompHrsDay, TVHrsDayChild, CompHrsDayChild))+
@@ -377,7 +377,7 @@ Look at a subset of variables to understand missingness patterns
 
 #
 
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3, dev="png", dpi=300}
 NHANES %>%
   select(BMI, Age, Weight, Height, Pulse, BPSysAve, BPDiaAve) %>%
   vis_miss() +
@@ -389,7 +389,7 @@ NHANES %>%
 
 ## When blood pressure is missing, what else is missing?
 
-```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3}
+```{r, echo=FALSE, fig.align="center", fig.width=6, fig.height=3, dev="png", dpi=300}
 
 bp_miss <- NHANES %>%
   filter(is.na(BPSysAve), is.na(BPDiaAve))
