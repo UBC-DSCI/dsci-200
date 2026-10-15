@@ -1,0 +1,440 @@
+---
+lecture: "Missing Data II"
+format: revealjs
+metadata-files: 
+  - _metadata.yml
+---
+
+{{< include _titleslide.qmd >}}
+
+## Attribution
+<br><br>
+
+This material is based on content from the following sources:
+
+- [*Chapter 4 of Advanced modeling and data challenges (Vol.3)*](https://link.springer.com/book/9783032017185) 
+- [*The Missing Book*](https://tmb.njtierney.com)
+- [*Flexible Imputation of Missing Data](https://stefvanbuuren.name/fimd/)
+
+<br><br>
+
+## Learning Objectives 
+<br><br>
+By the end of this lesson, you will be able to:
+
+:::incremental
+- Determine potential reasons why data are missing.
+- Detect instances of missing observations in a data set using a computer script and visualization.
+- Justify and apply strategies for managing the missing data.
+- Write a computer script to impute missing values when appropriate
+- Write a computer script to evaluate the impact that missing data can have on subsequent analyses through simulation.
+- Reflect on the consequences with regards to the conclusions of the chosen method.
+- Recognize the importance of utilizing domain knowledge when handling missing data.
+:::
+
+## Review
+
+Last class we introduced the problem of missing data and learned that 
+
+:::incremental
+- missing data can reduce the sample size if only complete-cases are considered
+
+- missing data can distort who is represented and how variables are related if not handled appropiately
+
+- different missing data mechanisms need to be addressed differently
+
+- diagnosing visualizations and summary statistics are critical tools for making assumptions about missingness mechanisms
+
+- `naniar` package provides useful R functions which nicely integrate into the tidyverse workflow
+
+:::
+
+## Review
+
+Last class we introduced the problem of missing data and learned that 
+
+- missing data can reduce the sample size if only complete-cases are considered
+
+- missing data can distort who is represented and how variables are related if not handled appropiately
+
+- different missing data mechanisms need to be addressed differently
+
+- diagnosing visualizations and summary statistics are critical tools for making assumptions about missingness mechanisms
+
+- `naniar` package provides useful R functions which nicely integrate into the tidyverse workflow
+
+#### Today, we'll focus on how to analyze data with missing values
+
+## Missing values in R 
+<br>
+
+Missingness can appear in different ways:
+
+- `NA`
+
+- `NaN`
+
+- `NULL`
+
+- 99, 9999, 888, or a similar out-of-range number
+
+- "Missing", "Unknown" or another character string
+
+- "" empty cell, or  " " blank space
+
+
+Although all correspond to missing information, each have different effects on subsequent analyses.
+
+### You can convert these to `NA` at import or data wrangling stages
+
+##  Missing missing values
+
+If you fail to account for missing values, some functions will return `NA`. For example,
+
+```{r}
+x <- c(-1, 0, 4, NA, 2)
+mean(x)
+```
+
+The base R function `na.omit()` or the tidyr function `drop_na()` remove rows from data with any missing values
+
+
+```{r}
+na.omit(x)
+```
+
+The boolean argument `na.rm` can be used in many functions to handle missing values
+
+```{r}
+mean(x, na.rm = TRUE)
+```
+
+# Analysis with missing data
+
+## Simulating data with missing values 
+
+```{r echo = TRUE}
+library(naniar)
+library(visdat)
+library(ggplot2)
+
+set.seed(123)
+
+n <- 100 #sample size
+x1 <- rnorm(n) 
+x2 <- rnorm(n) + x1
+y <- 2 * x1 + 1.5 * x2 + rnorm(n)
+```
+
+## The simulated data
+
+```{r echo=FALSE}
+#| label: interactive-3d-true-plane
+#| fig-width: 8
+#| fig-height: 8
+
+# Load plotly
+library(plotly)
+
+# Grid for the true plane
+grid_n <- 30
+x1g <- seq(min(x1), max(x1), length.out = grid_n)
+x2g <- seq(min(x2), max(x2), length.out = grid_n)
+
+# TRUE conditional mean surface
+zg <- outer(
+  x1g, x2g,
+  FUN = function(a, c) 2*a + 1.5*c
+)
+
+plot_ly() |>
+  add_markers(
+    x = x1, y = x2, z = y,
+    type = "scatter3d", mode = "markers",
+    marker = list(size = 4),
+    name = "observed data"
+  ) |>
+  add_surface(
+    x = x1g, y = x2g, z = zg,
+    opacity = 0.6,
+    name = "true regression plane",
+    showscale = FALSE
+  ) |>
+  layout(
+    title = "Simulated data with true regression plane",
+    scene = list(
+      xaxis = list(title = "x1"),
+      yaxis = list(title = "x2"),
+      zaxis = list(title = "y")
+    )
+  )
+
+```
+
+## Adding missingness at random (MAR)
+
+```{r echo=TRUE}
+m <- sum(x1 > 0)
+
+set.seed(123)
+missing_idx <- sample(seq_len(m), size = round(0.5 * m))  # 50% missing
+
+# introduce missingness
+x2[x1 > 0][missing_idx] <- NA
+
+#not in worksheet
+x1[x1 > 0][head(missing_idx)] <- NA
+
+simulated_data <- data.frame(x1, x2, y)
+```
+
+## Identifying and quantifying
+
+```{r echo=TRUE}
+#percent of missing values in all data
+pct_miss(simulated_data)
+
+# percent of rows with any value missing (`n_complete()` for counts)
+pct_miss_case(simulated_data)   
+
+simulated_data %>% 
+  miss_var_summary()
+```  
+
+
+## A quick visualization
+
+```{r echo=TRUE}
+simulated_data %>% gg_miss_var() 
+```
+
+We can see the amount of missingness for each variable, but this summary does not show whether missing values occur together in the same observations.
+
+## Joint missigness
+
+```{r echo = TRUE}
+gg_miss_upset(simulated_data)
+```
+
+##
+
+```{r echo = TRUE}
+library(visdat)
+vis_miss(simulated_data)
+```
+
+## Missing Mechanism?
+
+```{r echo = TRUE}
+# data frame with shadow columns
+shadowed_sim <- simulated_data %>% bind_shadow()
+
+ggplot(data = shadowed_sim, aes(x = x1, y = x2)) + 
+       geom_miss_point() + theme(legend.position = "bottom")
+```  
+
+The plot suggests that data is **not** missing completely at random! but ...
+
+## iClicker 1: can we rule out MNAR?
+
+- A. We can't rule out MNAR
+
+- B. The plot suggests MAR and thus we rule out MNAR
+
+- C. We can rule out MAR
+
+- D. We can't rule out MCAR
+
+##
+
+```{r echo=TRUE}
+set.seed(123)
+
+n <- 100
+x1 <- rnorm(n)
+x2 <- rnorm(n) + x1
+y  <- 2 * x1 + 1.5 * x2 + rnorm(n)
+
+set.seed(123)
+
+# introduce missingness to top values in x2
+cut <- quantile(x2, 0.9, na.rm = TRUE)
+
+idx <- which(x2 >= cut)
+x2[sample(idx, size = 10)] <- NA
+
+simulated_data <- data.frame(x1, x2, y)
+```
+
+## MAR vs MNAR
+
+```{r echo=TRUE}
+shadowed_sim <- simulated_data %>% bind_shadow()
+
+ggplot(data = shadowed_sim, aes(x = x1, y = x2)) + 
+       geom_miss_point() + theme(legend.position = "bottom")
+```
+
+Because `x1` and `x2` are correlated, the missingness can appear to be related to `x1`. However, the missingness mechanism depends on the value of `x2` itself, which makes it MNAR.
+
+::: callout-caution
+Visualizations can help rule out MCAR, but they cannot reliably distinguish MAR from MNAR.  
+When variables are correlated, an MNAR mechanism may look like MAR in plots.
+:::
+
+# CUTOFF FOR MIDTERM!
+
+# Imputation
+
+## Can we complete missing data?
+
+:::incremental
+- Imputation is not always the solution to missing data
+
+- Imputation can reinforce existing biases.
+  - For example, imputing variables like, age, race, gender may introduce biases to the analysis, particularly if missingness is related to social factors.
+
+- In other cases, imputation may mask trends in the data over time.
+
+- The percentage of missing data matters: <span style="color: green;">less than 5%</span> is generally considered safe to impute; <span style="color: orange;">5%–20%</span> is often acceptable but requires careful diagnostics; <span style="color: brown;">20%–40%</span> calls for caution; and <span style="color: red;">more than 40%</span> are typically unreliable.  
+
+- When missing data cannot be recovered, it is important to understand why the data are missing and to analyze them accordingly.
+:::
+
+## Types of imputation
+
+- **Listwise Deletion**: retain only complete observations
+  - Simple and widely used 
+  - Unbiased under MCAR
+  - Biased under MAR in many cases
+  - Inefficient (larger standard errors due to smaller sample size)
+  - Discards potentially useful data
+
+##
+
+- **Deterministic Methods**: Mean, Median, Mode Imputation
+  - Replaces missing values with the mean, median, or mode of the observed data
+  - Simple and fast to apply
+  - Reduces variance 
+  - Introduces bias in relationships among variables
+  - Ignores imputation uncertainty
+
+```{r echo=FALSE}
+library(simputation)
+
+simulated_data %>% 
+  nabular() %>% 
+  mutate(across(everything(), impute_mean)) %>% 
+  ggplot(aes(x = x1,
+             y = x2,
+             colour = x2_NA)) + 
+  geom_point()
+```
+
+##
+
+- **Deterministic Methods**: Statistical Prediction Models
+  - Replaces missing values with predictions from an estimated model (e.g., linear regression) using observed values of other variables.
+  - Preserves relationships between variables
+  - Assumes relationships that may not be valid
+  - Ignores imputation uncertainty.
+
+
+```{r echo=FALSE}
+simulated_imp_lm <- simulated_data %>%
+  nabular() %>%
+  add_label_shadow() %>%
+  impute_lm(x2 ~ x1 + y)
+
+ggplot(simulated_imp_lm,
+       aes(x = x2,
+           y = x1,
+           colour = any_missing)) +
+  geom_point()
+```
+
+## Multiple imputation (MI)
+
+![](https://stefvanbuuren.name/fimd/fig/ch01-miflow-1.png)
+
+::: {style="font-size: 20px; margin-top: -30px; color: grey;"}
+Figure from [*Flexible Imputation of Missing Data](https://stefvanbuuren.name/fimd/)
+:::
+
+## MI
+
+- Assumes that missing data is either Missing Completely at Random (MCAR) or Missing at Random (MAR).
+
+- Reflects the uncertainty inherent in the missing data by introducing many randomly imputed values. 
+
+- Gives unbiased parameter estimates
+
+- Retain the statistical relationships present in the data
+
+## MICE: Multivariate Imputation via Chained Equations
+
+**Initialization**: Replace missing values with simple initial guesses (e.g., mean or median of observed values).
+
+**Imputation**: For each variable with missing values, impute it using the other variables as predictors, based on a specified method (e.g., PMM, regression, tree-based methods), including random variation.
+
+**Iteration (`maxit`)**: Cycle through all variables multiple times to update the imputations.
+
+**Multiple Imputations**: Repeat to create `m` complete datasets.
+
+##
+
+```{r echo=TRUE}
+library(mice)
+mice_imp <- simulated_data %>%
+    mice(m = 5, maxit = 10, seed = 123, printFlag =  FALSE)
+
+#one dataset
+comp_case <- complete(mice_imp, action = 1)
+
+model_mice1 <- lm(y ~ x1 + x2, data = comp_case)
+answer14 <- summary(model_mice1)
+answer14
+```
+
+## Visualizing imputation
+
+```{r echo = FALSE}
+library(dplyr)
+library(mice)
+
+sim_with_flag <- simulated_data %>%
+  mutate(any_missing = if_any(everything(), is.na))
+
+mice_imp <- mice(sim_with_flag, m = 5, maxit = 10,
+                 seed = 123, printFlag = FALSE)
+
+comp_case <- complete(mice_imp, action = 1)
+
+ggplot(comp_case,
+       aes(x = x2, y = x1, colour = any_missing)) +
+  geom_point()
+```
+
+## Key Takeaways
+
+- Missing data do more than reduce sample size, they can distort who is represented and how variables are related
+
+- Diagnosing why data are missing is essential before choosing how to handle them
+
+- Complete-case analysis is a simple way to handle missingness but is unbiased only under MCAR and often fails otherwise  
+
+- MNAR poses the greatest risk of bias when handled incorrectly
+
+- Visualization and diagnostics are critical tools for identifying missingness mechanisms
+
+- `naniar` integrates missing-data summaries and visualizations into the tidyverse workflow using tidy data principles
+
+##
+
+- Many imputation methods exist but it is important to understand the risk of imputing!
+
+- Transparent reporting of imputation decisions is essential for reproducibility and ethical integrity.
+
+#### Check additional functions in the [Missing Book](https://tmb.njtierney.com/representing-missings)
+
+![](https://static.wikia.nocookie.net/narnia/images/4/4b/NarniaWardrobe.jpg){fig-align="center" width=100%}
