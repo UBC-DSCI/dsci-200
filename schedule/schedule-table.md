@@ -14,7 +14,7 @@
 |20 Oct 26 | Midterm Review     |[Slides]()   | Missing Data Worksheet Due at 11:59pm    |
 |22 Oct 26 |  Imputation    | |  **MIDTERM**: Oct 22-24 at ORCA        |
 |27 Oct 26 | Outliers and Data Anomalies I  |[Slides](slides/outliers-1.qmd)   |          |
-|29 Oct 26 26 | Outliers and Data Anomalies II |[Slides]()   |          |
+|29 Oct 26 26 | Outliers and Data Anomalies II |[Slides](slides/outliers-2.qmd)   |          |
 |03 Nov 26 | Outliers and Data Anomalies III  |[Slides]()   |          |
 |05 Nov 26 | Data Acquisition I  |[Slides]()   |      Outliers Worksheet Due at 11:59pm    |
 |10 Nov 26 |     |Midterm Break |          |

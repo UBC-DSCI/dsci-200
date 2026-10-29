@@ -643,7 +643,7 @@
 <span id="cb19-20"><a></a>  <span class="at">xint =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">4.685</span>, <span class="fl">4.685</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb19-21"><a></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> <span class="fu">levels</span>(df<span class="sc">$</span>type)))</span>
 <span id="cb19-22"><a></a></span>
-<span id="cb19-23"><a></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, rho)) <span class="sc">+</span></span>
+<span id="cb19-23"><a></a>mest_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, rho)) <span class="sc">+</span></span>
 <span id="cb19-24"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb19-25"><a></a>  <span class="fu">geom_vline</span>(</span>
 <span id="cb19-26"><a></a>    <span class="at">data =</span> cc_lines,</span>
@@ -653,9 +653,12 @@
 <span id="cb19-30"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
 <span id="cb19-31"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">rho</span>(x))) <span class="sc">+</span></span>
 <span id="cb19-32"><a></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
 </div>
-<img data-src="outliers-1_files/figure-revealjs/unnamed-chunk-9-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="outliers-1_files/figure-revealjs/unnamed-chunk-10-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="the-huber-m-estimator" class="slide level2">
 <h2>The Huber M-estimator</h2>
 <ul>
@@ -787,7 +790,7 @@
 <span id="cb20-43"><a></a>var20 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">t</span>(sim), <span class="dv">2</span>, var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>variance_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>

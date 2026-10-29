@@ -823,7 +823,7 @@
     "href": "schedule/slides/outliers-1.html#section-4",
     "title": "UBC DSCI 200",
     "section": "",
-    "text": "Different \\(M\\)-estimators of location have been proposed:\n\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(robustbase)\n\n# grid\nx &lt;- seq(-6, 6, length.out = 400)\n\ndf &lt;- tibble(\n  x = x,\n  Mean     = 0.5 * x^2,\n  Median   = abs(x),\n  Huber    = Mpsi(x, psi = \"huber\",    cc = 1.5,   deriv = -1),\n  Bisquare = Mpsi(x, psi = \"bisquare\", cc = 4.685, deriv = -1)) |&gt;\n  pivot_longer(-x, names_to = \"type\", values_to = \"rho\") |&gt;\n  mutate(type = factor(type, levels = c(\"Mean\", \"Huber\", \"Median\", \"Bisquare\"))\n  )\n\ncc_lines &lt;- tibble(\n  type = c(\"Huber\", \"Huber\", \"Bisquare\", \"Bisquare\"),\n  xint = c(-1.5, 1.5, -4.685, 4.685)) |&gt;\n  mutate(type = factor(type, levels = levels(df$type)))\n\nggplot(df, aes(x, rho)) +\n  geom_line(linewidth = 1) +\n  geom_vline(\n    data = cc_lines,\n    aes(xintercept = xint),\n    linetype = \"dashed\",\n    linewidth = 0.6) +\n  facet_wrap(~ type, ncol = 2, scales = \"free_y\") +\n  labs(x = \"x\", y = expression(rho(x))) +\n  theme_minimal(base_size = 14)"
+    "text": "Different \\(M\\)-estimators of location have been proposed:\n\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(robustbase)\n\n# grid\nx &lt;- seq(-6, 6, length.out = 400)\n\ndf &lt;- tibble(\n  x = x,\n  Mean     = 0.5 * x^2,\n  Median   = abs(x),\n  Huber    = Mpsi(x, psi = \"huber\",    cc = 1.5,   deriv = -1),\n  Bisquare = Mpsi(x, psi = \"bisquare\", cc = 4.685, deriv = -1)) |&gt;\n  pivot_longer(-x, names_to = \"type\", values_to = \"rho\") |&gt;\n  mutate(type = factor(type, levels = c(\"Mean\", \"Huber\", \"Median\", \"Bisquare\"))\n  )\n\ncc_lines &lt;- tibble(\n  type = c(\"Huber\", \"Huber\", \"Bisquare\", \"Bisquare\"),\n  xint = c(-1.5, 1.5, -4.685, 4.685)) |&gt;\n  mutate(type = factor(type, levels = levels(df$type)))\n\nmest_plot &lt;- ggplot(df, aes(x, rho)) +\n  geom_line(linewidth = 1) +\n  geom_vline(\n    data = cc_lines,\n    aes(xintercept = xint),\n    linetype = \"dashed\",\n    linewidth = 0.6) +\n  facet_wrap(~ type, ncol = 2, scales = \"free_y\") +\n  labs(x = \"x\", y = expression(rho(x))) +\n  theme_minimal(base_size = 14)"
   },
   {
     "objectID": "schedule/slides/outliers-1.html#the-huber-m-estimator",
@@ -2651,5 +2651,12 @@
     "title": "UBC DSCI 200",
     "section": "Key takeaways",
     "text": "Key takeaways\n\n\nSimulations can be used to:\n\napproximate probabilities,\nstudy properties of estimators,\napproximate distributions\n\nRandomness can be introduced using code that:\n\nmimics physical processes\nrandomly select outcomes from a finite population\ngenerates random values from a distribution"
+  },
+  {
+    "objectID": "schedule/slides/outliers-1.html#section-6",
+    "href": "schedule/slides/outliers-1.html#section-6",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "variance_table &lt;- cbind(\n  \"No contamination\" = var0,\n  \"20% contamination\" = var20\n)\n\nknitr::kable(\n  variance_table,\n  digits = 4,\n  caption = \"Sampling variance of location estimators\"\n)\n\n\nSampling variance of location estimators\n\n\n\nNo contamination\n20% contamination\n\n\n\n\nMean\n0.0103\n0.2078\n\n\nMedian\n0.0159\n0.0227\n\n\nBisquare_3.44\n0.0117\n0.0153\n\n\nBisquare_4.68\n0.0106\n0.0157\n\n\n\n\n\nRelative efficiency (RE) can be computed as the ratio of the variances of two estimators under the same conditions."
   }
 ]
