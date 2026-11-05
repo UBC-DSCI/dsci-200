@@ -325,15 +325,6 @@ B) Change the HTTP verb to `POST`
 C) Rewrite the base URL
 D) Convert the response to Unicode
 
-## 
-
-<p align="center">
-  <img src="https://i1.wp.com/www.jumpingrivers.com/blog/parquet-file-format-big-data-r/parquet-logo.png" style="max-width: 100%; height: auto;" />
-  <br/>
-  <span style="font-size: 12px;">
-    Source: <a href="https://i1.wp.com/www.jumpingrivers.com/blog/parquet-file-format-big-data-r/parquet-logo.png" class="text-secondary">https://i1.wp.com/www.jumpingrivers.com/blog/parquet-file-format-big-data-r/parquet-logo.png</a>
-  </span>
-</p>
 
 ## Apache Parquet
 
@@ -391,7 +382,7 @@ library(arrow)
 - The data is ~41 million rows (9GB CSV) so this step takes some time! 
 
 
-```{r,eval=TRUE}
+```{r,eval=FALSE}
 #| cache: true
 dir.create("data", showWarnings = FALSE) # create a data folder in your working directory
 
@@ -482,7 +473,7 @@ seattle_csv |>
   - `format`: file format (e.g., parquet)  
   
 ```{r}
-#| cache: true
+#| cache: false
 
 pq_path <- "data/seattle-library-checkouts"
 
