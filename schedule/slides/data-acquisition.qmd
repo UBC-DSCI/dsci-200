@@ -391,7 +391,7 @@ library(arrow)
 - The data is ~41 million rows (9GB CSV) so this step takes some time! 
 
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 #| cache: true
 dir.create("data", showWarnings = FALSE) # create a data folder in your working directory
 
