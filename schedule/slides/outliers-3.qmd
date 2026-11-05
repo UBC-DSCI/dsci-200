@@ -246,31 +246,35 @@ An observation can be unusual **jointly** even if none of its individual values 
 
 - The threshold is determined based on how this distance is expected to behave when the data follow a Normal distribution.
 
+- Note that we use the square root of the squared Mahalanobis distance to express distance on its original scale.
+
+<br>
 
 ```{r}
 # MCD estimator
 mcd <- covMcd(X)
-md <- mahalanobis(X, mcd$center, mcd$cov)
-cutoff <- qchisq(0.975, ncol(X))
+rmd <- sqrt(mahalanobis(X, mcd$center, mcd$cov))
+cutoff <- sqrt(qchisq(0.975, ncol(X)))
 
-md_df <- data.frame(
-  obs = seq_along(md),
-  rob_MD = md,
-  flagged = md > cutoff)
+rmd_df <- data.frame(
+  obs = seq_along(rmd),
+  rob_MD = rmd,
+  flagged = rmd > cutoff)
 ```
 
 
 ##
 
 ```{r}
-ggplot(md_df, aes(x = obs, y = rob_MD)) +
+ggplot(rmd_df, aes(x = obs, y = rob_MD)) +
   geom_point(aes(shape = flagged, color = flagged), size = 2) +
   scale_shape_manual(values = c(16, 17)) +
   scale_color_manual(values = c("black", "blue")) +
-  geom_hline(yintercept = cutoff, linetype = "dashed")
+  geom_hline(yintercept = cutoff, linetype = "dashed") +
+  labs(y = "Mahalanobis distance")
 ```
 
-#### Data points (rows) with a squared MD exceeding the cutoff are flagged as rowwise outliers
+#### Data points (rows) with a MD exceeding the cutoff are flagged as rowwise outliers
 
 
 # Cellwise outliers
@@ -343,8 +347,110 @@ from Raymaekers, J., and Rousseeuw, P.J, (Technometrics 2021)
 ```{r}
 locScaleX <- estLocScale(X, precScale = 1e-12)
 
-Xw  <- wrap(X, locScaleX$loc, locScaleX$scale)$Xw
+#wrap the data using robust estimates of location and scale
+w <- cellWise::wrap(
+  X, locScaleX$loc, locScaleX$scale
+)
+
+#get the wrapped object
+Xw <- w$Xw
+Xw.mean <- colMeans(Xw)
+Xw.cov  <- cov(Xw)
+
+# Mahalanobis distance of wrapped data
+rmd_w <- sqrt(mahalanobis(Xw, center = Xw.mean, cov = Xw.cov))
+cutoff <- sqrt(qchisq(0.975, ncol(Xw)))
 ```
+
+```{r echo=FALSE}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 3.5
+#| out-width: 95%
+#| fig-align: center
+
+rmd_wrap <- data.frame(
+  obs = seq_along(rmd_w),
+  rob_MD = rmd_w,
+  flagged = rmd_w > cutoff)
+
+ggplot(rmd_wrap, aes(x = obs, y = rob_MD)) +
+  geom_point(aes(shape = flagged, color = flagged), size = 2) +
+  scale_shape_manual(values = c(16, 17)) +
+  scale_color_manual(values = c("black", "blue")) +
+  geom_hline(yintercept = cutoff, linetype = "dashed") +
+  labs(y = "Mahalanobis distance")
+```
+
+## 
+
+```{r echo=FALSE}
+locScaleX <- estLocScale(glass_df, precScale = 1e-12)
+
+#wrap the data using robust estimates of location and scale
+w <- cellWise::wrap(
+  glass_df, locScaleX$loc, locScaleX$scale
+)
+
+#get the wrapped object
+Xw <- w$Xw
+
+Zw <- scale(
+  Xw,
+  center = locScaleX$loc[w$colInWrap],
+  scale = locScaleX$scale[w$colInWrap]
+)
+
+# parameters
+n <- nrow(Zw)
+d <- ncol(Zw)
+
+rowlabels <- rep("", ceiling(n / 5))
+rowlabels[c(1, length(rowlabels))] <- c("1", "n")
+
+columnlabels <- rep("", ceiling(d / 5))
+columnlabels[c(1, length(columnlabels))] <- c("1", "d")
+
+
+# Run the fast DDC algorithm
+fastDDCglass <- DDC(Xw, list(fastDDC = TRUE, silent = TRUE))
+
+# Create the cellMap
+n <- nrow(fastDDCglass$stdResid)
+d <- ncol(fastDDCglass$stdResid)
+
+# Labels for groups of 5 cells
+rowlabels <- rep("", floor(n / 5))
+rowlabels[1] <- "1"
+rowlabels[length(rowlabels)] <- "n"
+
+columnlabels <- rep("", floor(d / 5))
+columnlabels[1] <- "1"
+columnlabels[length(columnlabels)] <- "d"
+
+#plot
+
+cellmap_wrap <- cellWise::cellMap(
+  R = fastDDCglass$stdResid,
+  indcells = fastDDCglass$indcells,
+  indrows = fastDDCglass$indrows,
+  nrowsinblock = 5,
+  ncolumnsinblock = 5,
+  rowblocklabels = rowlabels,
+  columnblocklabels = columnlabels,
+  rowtitle = "glass samples",
+  columntitle = "wavelengths",
+  mTitle = "cellMap after wrapping",
+  columnangle = 0
+)
+
+```
+
+```{r}
+cellmap_wrap
+```
+
+#### Wrapping removes most of the cellwise outliers.
 
 ## Detecting cellwise outliers
 
@@ -371,7 +477,7 @@ DDC combines robust correlation and regression to flag outlying cells.
 # Run the fast DDC algorithm
 fastDDCglass <- DDC(X, list(fastDDC = TRUE, silent = TRUE))
 
-# Create the cell map
+# Create the cellMap
 ggpfastDDC <- cellMap(
   R = fastDDCglass$stdResid,
   indcells = fastDDCglass$indcells,
@@ -387,7 +493,7 @@ ggpfastDDC <- cellMap(
 - `indrows`: rows flagged as unusual.
 
 
-## The cell map
+## The cellMap
 
 Let's visualize the suspicious entries in the Glass data.
 

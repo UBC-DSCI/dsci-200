@@ -1,0 +1,226 @@
+[
+  {
+    "objectID": "schedule/slides/outliers-3.html#section",
+    "href": "schedule/slides/outliers-3.html#section",
+    "title": "UBC DSCI 200",
+    "section": "Outliers III",
+    "text": "Outliers III\nDSCI 200\nKatie Burak, Gabriela V. Cohen Freue\nLast modified – 05 November 2026\n\\[\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\minimize}{minimize}\n\\DeclareMathOperator*{\\maximize}{maximize}\n\\DeclareMathOperator*{\\find}{find}\n\\DeclareMathOperator{\\st}{subject\\,\\,to}\n\\newcommand{\\E}{E}\n\\newcommand{\\Expect}[1]{\\E\\left[ #1 \\right]}\n\\newcommand{\\Var}[1]{\\mathrm{Var}\\left[ #1 \\right]}\n\\newcommand{\\Cov}[2]{\\mathrm{Cov}\\left[#1,\\ #2\\right]}\n\\newcommand{\\given}{\\ \\vert\\ }\n\\newcommand{\\X}{\\mathbf{X}}\n\\newcommand{\\x}{\\mathbf{x}}\n\\newcommand{\\y}{\\mathbf{y}}\n\\newcommand{\\P}{\\mathcal{P}}\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\\newcommand{\\snorm}[1]{\\lVert #1 \\rVert}\n\\newcommand{\\tr}[1]{\\mbox{tr}(#1)}\n\\newcommand{\\brt}{\\widehat{\\beta}^R_{s}}\n\\newcommand{\\brl}{\\widehat{\\beta}^R_{\\lambda}}\n\\newcommand{\\bls}{\\widehat{\\beta}_{ols}}\n\\newcommand{\\blt}{\\widehat{\\beta}^L_{s}}\n\\newcommand{\\bll}{\\widehat{\\beta}^L_{\\lambda}}\n\\newcommand{\\U}{\\mathbf{U}}\n\\newcommand{\\D}{\\mathbf{D}}\n\\newcommand{\\V}{\\mathbf{V}}\n\\]"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#attribution",
+    "href": "schedule/slides/outliers-3.html#attribution",
+    "title": "UBC DSCI 200",
+    "section": "Attribution",
+    "text": "Attribution\n\n\nSome examples and references are from Challenges of cellwise outliers, by Raymaekers and Rousseeuw\nRobust Statistics, by Maronna, Martin, Yohai, Salibian-Barrera\n\n\nIn memory of my mentor and friend\nProfessor Ruben Zamar (1949-2023)\nwho contributed greatly to Robust Statistics and beyond …"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#review",
+    "href": "schedule/slides/outliers-3.html#review",
+    "title": "UBC DSCI 200",
+    "section": "Review",
+    "text": "Review\n\nAn outlier is an observation that deviates from the bulk of the data, an atypical observation.\nWe defined both casewise and cellwise outliers in a dataset, but focused on univariate outliers.\nWe examined by simulations three univariate estimators of location: the mean, the median, and the M-estimators.\nWe learned about the trade-off between robustness and efficiency.\nWe also learned about masking and robust outlier detection based on the median and MAD."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#from-one-variable-to-an-entire-dataset",
+    "href": "schedule/slides/outliers-3.html#from-one-variable-to-an-entire-dataset",
+    "title": "UBC DSCI 200",
+    "section": "From one variable to an entire dataset",
+    "text": "From one variable to an entire dataset\n\n\n\n\nThree core tasks:\n\nEstimating multivariate parameters (e.g., location and covariance)\nModeling relationships (e.g., regression)\nDiscovering structure (e.g., unsupervised learning)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#goal-for-today",
+    "href": "schedule/slides/outliers-3.html#goal-for-today",
+    "title": "UBC DSCI 200",
+    "section": "Goal for today",
+    "text": "Goal for today\n\nHow do we detect outliers when we have several variables?\nWhat happens when outliers affect regression? Can M-estimators help?\nIdentify different type of outliers: rowwise, cellwise and outlies in regression\nWhy do cellwise outliers need different tools?"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#from-one-variable-to-many-variables",
+    "href": "schedule/slides/outliers-3.html#from-one-variable-to-many-variables",
+    "title": "UBC DSCI 200",
+    "section": "From one variable to many variables",
+    "text": "From one variable to many variables\n\nFor one variable, we describe:\n\ncenter: mean, median\nspread: variance, SD, MAD\n\nFor several variable, we describe:\n\nmultivariate center: the typical combination of values across variables.\nmultivariate scatter: how observations spread around the center, accounting for relationships between variables."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-1",
+    "href": "schedule/slides/outliers-3.html#section-1",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "The center locates the data cloud, while scatter describes its shape and orientation."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#robust-multivariate-estimators",
+    "href": "schedule/slides/outliers-3.html#robust-multivariate-estimators",
+    "title": "UBC DSCI 200",
+    "section": "Robust multivariate estimators",
+    "text": "Robust multivariate estimators\nWe want to estimate the center and spread of the data without being overly influenced by outliers.\nTwo possible strategies:\n\n\nM-estimators: give less weight to observations that are far from the main cloud of data, reducing their influence on the estimated center and scatter.\n\n\nMinimum covariace determinant (MCD): select the 50% of observations (or other) that form the most compact multivariate cloud. Estimate the center and spread using that group.\n\n\n\n\n\n\n\n\n\nImportant\n\n\nUnlike coordinate-wise estimates and pairwise correlations, these methods consider all variables jointly to estimate the center and scatter."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-2",
+    "href": "schedule/slides/outliers-3.html#section-2",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "X &lt;- glass_df[, c(\"V29\", \"V30\", \"V125\", \"V175\", \"V180\")]\n\n# Classical estimates\ncenter_mean &lt;- colMeans(X)\ncenter_median &lt;- sapply(X, median)\ncov_classical &lt;- cov(X)\ncor_classical &lt;- cor(X)\n\n# Robust estimates (MCD)\nmcd &lt;- robustbase::covMcd(X)\ncenter_MCD &lt;- mcd$center\ncov_MCD &lt;- mcd$cov\ncor_MCD &lt;- mcd$cor\n\n# Multivariate MM-estimator\nmest &lt;- covRob(as.matrix(X), type = \"MM\", corr = TRUE)\n\ncenter_MMest &lt;- mest$center\ncov_MMest &lt;- mest$cov\ncor_MMest &lt;- mest$cor\n\n# Compare estimated centers\nround(rbind(\n  Mean = center_mean,\n  Median = center_median,\n  MM = center_MMest,\n  MCD = center_MCD\n), 2)\n\n         V29   V30  V125    V175   V180\nMean   13.49 12.62 94.40 2013.37 511.22\nMedian 13.60 12.32 84.88 1754.15 466.60\nMM     12.76 11.87 82.35 1729.24 450.51\nMCD    12.46 11.63 79.33 1724.55 447.41"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-3",
+    "href": "schedule/slides/outliers-3.html#section-3",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "V125–V175: the apparent positive relationship largely disappears with robust estimation.\nV175–V180: The correlation remains very strong across all methods.\n\nUnusual observations can strongly affect estimated correlations when using classical estimators."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#distance-measure",
+    "href": "schedule/slides/outliers-3.html#distance-measure",
+    "title": "UBC DSCI 200",
+    "section": "Distance measure",
+    "text": "Distance measure\nFor univariate detection: a robust z-score\n\\[z_i^{\\text{rob}} = \\frac{x_i-\\text{median}}{\\text{MAD}}\\]\nFor multivariate detection: the Mahalanobis distance\n\nWe need a distance measure that accounts for the variability of each variable and the relationships between variables.\n\n\n\n\nAccounting for how the data vary, being far from the center does not necessarily mean being unusual.\nUsing robust estimates of center and scatter can help control masking.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nAn observation can be unusual jointly even if none of its individual values is extreme."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#detecting-rowwise-outliers",
+    "href": "schedule/slides/outliers-3.html#detecting-rowwise-outliers",
+    "title": "UBC DSCI 200",
+    "section": "Detecting rowwise outliers",
+    "text": "Detecting rowwise outliers\n\nWe can use the MCD or MM- estimates to calculate robust Mahalanobis distances (MD) of each data point.\nThe threshold is determined based on how this distance is expected to behave when the data follow a Normal distribution.\nNote that we use the square root of the squared Mahalanobis distance to express distance on its original scale.\n\n\n\n# MCD estimator\nmcd &lt;- covMcd(X)\nrmd &lt;- sqrt(mahalanobis(X, mcd$center, mcd$cov))\ncutoff &lt;- sqrt(qchisq(0.975, ncol(X)))\n\nrmd_df &lt;- data.frame(\n  obs = seq_along(rmd),\n  rob_MD = rmd,\n  flagged = rmd &gt; cutoff)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-4",
+    "href": "schedule/slides/outliers-3.html#section-4",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "ggplot(rmd_df, aes(x = obs, y = rob_MD)) +\n  geom_point(aes(shape = flagged, color = flagged), size = 2) +\n  scale_shape_manual(values = c(16, 17)) +\n  scale_color_manual(values = c(\"black\", \"blue\")) +\n  geom_hline(yintercept = cutoff, linetype = \"dashed\") +\n  labs(y = \"Mahalanobis distance\")\n\n\nData points (rows) with a MD exceeding the cutoff are flagged as rowwise outliers"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-5",
+    "href": "schedule/slides/outliers-3.html#section-5",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Cellwise outliers\n\nIn high-dimensional data, contamination often occurs cell by cell, not row by row.\nEvery row may contain at least one bad entry\nRemoving or downweighting entire rows with rowwise methods may discard useful information.\n\n\nWrapping extends the idea of robust estimation to individual cells."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#robust-correlation-by-wrapping",
+    "href": "schedule/slides/outliers-3.html#robust-correlation-by-wrapping",
+    "title": "UBC DSCI 200",
+    "section": "Robust correlation by wrapping",
+    "text": "Robust correlation by wrapping\nIn the spirit of Huber’s estimation, wrapping have been proposed to compute robust correlations (fast):\n\n\n\n\n\nrobustly standardize each variable\n\n\ntransform extreme values with a bounded function\n\n\ncompute ordinary correlations on the transformed data\n\n\n\n\n\nSo we keep the speed and structure of classical correlation, but gain robustness.\n\n\nfrom Raymaekers, J., and Rousseeuw, P.J, (Technometrics 2021)"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#estimation-and-wrapping",
+    "href": "schedule/slides/outliers-3.html#estimation-and-wrapping",
+    "title": "UBC DSCI 200",
+    "section": "Estimation and wrapping",
+    "text": "Estimation and wrapping\n\nlocScaleX &lt;- estLocScale(X, precScale = 1e-12)\n\n#wrap the data using robust estimates of location and scale\nw &lt;- cellWise::wrap(\n  X, locScaleX$loc, locScaleX$scale\n)\n\n#get the wrapped object\nXw &lt;- w$Xw\nXw.mean &lt;- colMeans(Xw)\nXw.cov  &lt;- cov(Xw)\n\n# Mahalanobis distance of wrapped data\nrmd_w &lt;- sqrt(mahalanobis(Xw, center = Xw.mean, cov = Xw.cov))\ncutoff &lt;- sqrt(qchisq(0.975, ncol(Xw)))"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#detecting-cellwise-outliers",
+    "href": "schedule/slides/outliers-3.html#detecting-cellwise-outliers",
+    "title": "UBC DSCI 200",
+    "section": "Detecting cellwise outliers",
+    "text": "Detecting cellwise outliers\n\nDDC: Detect Deviating Cells\nDDC combines robust correlation and regression to flag outlying cells.\n\nRobust correlations identify related variables.\nRobust regressions estimate relationships between pairs of variables.\nThese relationships are used to predict individual cell values.\nCells that deviate substantially from their predictions are flagged.\nMissing and flagged values can be replaced by predicted values.\n\nDDC identifies unusual cells without discarding entire rows."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#applying-ddc-to-the-glass-data",
+    "href": "schedule/slides/outliers-3.html#applying-ddc-to-the-glass-data",
+    "title": "UBC DSCI 200",
+    "section": "Applying DDC to the Glass data",
+    "text": "Applying DDC to the Glass data\n\n\n# Run the fast DDC algorithm\nfastDDCglass &lt;- DDC(X, list(fastDDC = TRUE, silent = TRUE))\n\n# Create the cellMap\nggpfastDDC &lt;- cellMap(\n  R = fastDDCglass$stdResid,\n  indcells = fastDDCglass$indcells,\n  indrows = fastDDCglass$indrows,\n  nrowsinblock = 5,\n  mTitle = \"\",\n  columnangle = 90\n)\n\nNo rowblocklabels were given, so they are constructed automatically.\n\n\n\nstdResid: standardized differences between observed and predicted values.\nindcells: cells flagged as unusual.\nindrows: rows flagged as unusual."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#the-cell-map",
+    "href": "schedule/slides/outliers-3.html#the-cell-map",
+    "title": "UBC DSCI 200",
+    "section": "The cell map",
+    "text": "The cell map\nLet’s visualize the suspicious entries in the Glass data.\n\nYellow: regular cells. Red: unusually high values. Blue: unusually low values."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#from-multivariate-outliers-to-regression",
+    "href": "schedule/slides/outliers-3.html#from-multivariate-outliers-to-regression",
+    "title": "UBC DSCI 200",
+    "section": "From multivariate outliers to regression",
+    "text": "From multivariate outliers to regression\n\nthree_panel_reg\n\n\nOutliers can strongly influence regression estimates"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#least-squares-regression",
+    "href": "schedule/slides/outliers-3.html#least-squares-regression",
+    "title": "UBC DSCI 200",
+    "section": "Least squares regression",
+    "text": "Least squares regression\n\\[\n\\begin{equation*}\n\\frac{1}{n} \\ \\sum_{i=1}^n (\\underbrace{y_i - {\\color{blue}{a}} - {\\color{blue}{b}} x_i\n}_{\\text{Residual}})^2\n\\end{equation*}\n\\]\n\nLS finds \\({\\color{blue}{a}}\\) and \\({\\color{blue}{b}}\\) that minimizes the sum of the squared residuals.\nPoints with large residuals contribute heavily to the sum of squared residuals, pulling the LS fit toward them.\n\n\n\n\n\n\n\nAttribution: slides 23-25 are based on lecture notes from Prof. Salibian-Barrera"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-6",
+    "href": "schedule/slides/outliers-3.html#section-6",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "cellmap_wrap\n\n\nWrapping removes most of the cellwise outliers."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#robust-regression-for-rowwise-outliers",
+    "href": "schedule/slides/outliers-3.html#robust-regression-for-rowwise-outliers",
+    "title": "UBC DSCI 200",
+    "section": "Robust regression (for rowwise outliers)",
+    "text": "Robust regression (for rowwise outliers)\nM-estimators\nReplace square with a robust function \\(\\rho(r)\\) to limit the influence of outliers.\n\nwhen \\(\\sigma\\) is unknown, we can use MM-estimation, which first estimates the scale robustly.\n\n\\[\n\\begin{equation*}\n\\frac{1}{n} \\ \\sum_{i=1}^n \\rho \\left(\\frac{y_i - {\\color{blue}{a}} - {\\color{blue}{b}} x_i\n}{\\sigma}\\right)\n\\end{equation*}\n\\]\nLeast Trimmed Squares (LTS)\nMinimizes the sum of the 50% smallest squared residuals (or other proportion)."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-7",
+    "href": "schedule/slides/outliers-3.html#section-7",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Least squares:\nMinimizes the sum of squared residuals.\n\n\n\n\n\n\n\n\n\n\nRobust regression:\nLimits the influence of large residuals."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#outliers-detection-in-regression",
+    "href": "schedule/slides/outliers-3.html#outliers-detection-in-regression",
+    "title": "UBC DSCI 200",
+    "section": "Outliers detection in regression",
+    "text": "Outliers detection in regression\n\n# Add observation numbers\ndat &lt;- dat |&gt;\n  mutate(id = row_number())\n\n# Compute fitted values and standardized residuals\ndiag_dat &lt;- bind_rows(\n  dat |&gt;\n    mutate(\n      Method = \"Least squares\",\n      fitted = fitted(reg_ls),\n      std_resid = resid(reg_ls) / sigma(reg_ls)\n    ),\n  dat |&gt;\n    mutate(\n      Method = \"MM-estimation\",\n      fitted = fitted(reg_mm),\n      std_resid = resid(reg_mm) / reg_mm$scale\n    ),\n  dat |&gt;\n    mutate(\n      Method = \"LTS\",\n      fitted = reg_lts$raw.coefficients[1] +\n               reg_lts$raw.coefficients[2] * V125,\n      std_resid = (V175 - fitted) / reg_lts$raw.scale\n    )\n) |&gt;\n  mutate(\n    Method = factor(Method,\n      levels = c(\"Least squares\", \"MM-estimation\", \"LTS\")),\n    flag = abs(std_resid) &gt; 2.5\n  )\n\n# Select observations to label\nlab_dat &lt;- diag_dat |&gt;\n  filter(flag) |&gt;\n  group_by(Method) |&gt;\n  slice_max(abs(std_resid), n = 3, with_ties = FALSE) |&gt;\n  ungroup()"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-8",
+    "href": "schedule/slides/outliers-3.html#section-8",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "set.seed(123)\n\nreg_ls  &lt;- lm(V175 ~ V125, data = dat)\nreg_mm &lt;- lmrob(V175 ~ V125, data = dat)\nreg_lts &lt;- ltsReg(V175 ~ V125, data = dat, alpha = 0.5)\n\n\n\nAttribution: based on lecture notes from Prof. Salibian-Barrera"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#regression-outliers-residuals-and-leverage",
+    "href": "schedule/slides/outliers-3.html#regression-outliers-residuals-and-leverage",
+    "title": "UBC DSCI 200",
+    "section": "Regression outliers: residuals and leverage",
+    "text": "Regression outliers: residuals and leverage\n\nVertical residual: an observation far vertically from the fitted line.\nHigh-leverage observation has an unusual value of the predictor, good or bad, depending on whether they follow the main data pattern.\n\n\ntwo_panel_reg"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#key-takeaways",
+    "href": "schedule/slides/outliers-3.html#key-takeaways",
+    "title": "UBC DSCI 200",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nIn both univariate and multivariate cases, classical estimators can be sensitive to outliers.\nRobust estimators reduce the influence of extreme observations, while aiming to maintain high efficiency under Normality.\nRowwise contamination\n\nMethods such as M-estimators and MCD estimate robust multivariate center and scatter\nThese estimates can be used to compute robust Mahalanobis distances to detect outliers"
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-9",
+    "href": "schedule/slides/outliers-3.html#section-9",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Least squares can mask outliers because they pull the fitted line toward themselves, reducing their residuals."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#cellmap-of-whole-wrapped-data",
+    "href": "schedule/slides/outliers-3.html#cellmap-of-whole-wrapped-data",
+    "title": "UBC DSCI 200",
+    "section": "cellMap of whole wrapped data",
+    "text": "cellMap of whole wrapped data\n\ncellmap_wrap\n\n\nWrapping removes most of the cellwise outliers."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#section-10",
+    "href": "schedule/slides/outliers-3.html#section-10",
+    "title": "UBC DSCI 200",
+    "section": "",
+    "text": "Cellwise contamination\n\nMethods such as DDC and wrapping detect corrupted cells\nThey rely on relationships among variables and are used to compute robust multivariate estimates and flag outliers\n\nRobust methods improve both estimation and outlier detection\nRegression:\n\nM-estimators extend the robust-loss idea to residuals\nLTS uses all data points to select a subset of points with smallest residuals\nOutliers can be identified using residual plots from robust regression fits.\nLarge residuals and high leverage are different."
+  },
+  {
+    "objectID": "schedule/slides/outliers-3.html#the-cellmap",
+    "href": "schedule/slides/outliers-3.html#the-cellmap",
+    "title": "UBC DSCI 200",
+    "section": "The cellMap",
+    "text": "The cellMap\nLet’s visualize the suspicious entries in the Glass data.\n\nYellow: regular cells. Red: unusually high values. Blue: unusually low values."
+  }
+]
