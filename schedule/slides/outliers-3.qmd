@@ -341,7 +341,7 @@ from Raymaekers, J., and Rousseeuw, P.J, (Technometrics 2021)
 ## Estimation and wrapping
 
 ```{r}
-locScaleX <- estLocScale(dogWalker_dat, precScale = 1e-12)
+locScaleX <- estLocScale(X, precScale = 1e-12)
 
 Xw  <- wrap(data_filled, locScaleX$loc, locScaleX$scale)$Xw
 ```
