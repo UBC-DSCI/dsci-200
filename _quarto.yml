@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: docs
   lib-dir: site_libs
+resources:
+    - schedule/data/currency-data.html
   render:
     - index.qmd
     - faq.qmd
