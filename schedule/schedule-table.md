@@ -16,12 +16,12 @@
 |27 Oct 26 | Outliers and Data Anomalies I  |[Slides](slides/outliers-1.qmd)   |          |
 |29 Oct 26 26 | Outliers and Data Anomalies II |[Slides](slides/outliers-2.qmd)   |          |
 |03 Nov 26 | Outliers and Data Anomalies III  |[Slides](slides/outliers-3.qmd)   |          |
-|05 Nov 26 | Data Acquisition I  |[Slides](slides/data-acquisition.qmd)   |      Outliers Worksheet Due at 11:59pm    |
+|05 Nov 26 | Data Acquisition I  |[Slides](slides/data-acquisition.qmd)   |      Outliers Worksheet Due Nov 7th at 11:59pm    |
 |10 Nov 26 |     |Midterm Break |          |
 |12 Nov 26 | Case Study 2 Work Period     |[Slides]()   |          |
-|17 Nov 26 | Data Acquisition II   |[Slides]()   | Case Study 2 Due at 11:59pm          |
-|19 Nov 26 | Data Acquisition III   |[Slides]()  |      |
+|17 Nov 26 | Data Acquisition II   |[Slides]()   |           |
+|19 Nov 26 | Data Acquisition III   |[Slides]()  | Case Study 2 Due at 11:59pm     |
 |24 Nov 26 | Data Ownership     |[Slides]()   |  Data Acquisition Worksheet Due at 11:59pm         |
-|26 Nov 26 | Data Ownership    | Guest lecture     |      |
+|26 Nov 26 | Data Privacy    |   [Slides]()     |      |
 |01 Dec 26 |  Data Privacy    |[Slides]()   |          |
-|03 Dec 26 |  Data Privacy    |[Slides]()    | Case Study 3 and Data Privacy Worksheet Due at 11:59pm |         
+|03 Dec 26 | Indigenous Data   | Guest lecture  | Case Study 3 and Data Privacy Worksheet Due **Dec 7th at 11:59pm** |         

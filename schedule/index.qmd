@@ -32,13 +32,15 @@ Instructions to create `.pdf`s of the lecture slides (works in Google Chrome or 
 
 ## Midterm exam
 
-The midterm exam is tentatively set to occur in the window of October 22-24, 2026 at ORCA. See instructions on Canvas to make a reservation to take the exam.
+The midterm exam is set to occur in the window of October 22-24, 2026 at ORCA. See instructions on Canvas to make a reservation to take the exam.
 
 
 ## Final exam
 
 ::: {.callout-important}
-Do not make any plans to leave Vancouver before the final exam date is announced.
+Final Exam is scheduled on Dec 16-18, 2026 at ORCA. Make a reservation and start working on the cheatsheet.  See instructions on Canvas.
+
+Do not make any plans to leave Vancouver before the final exam period is over in case of cancellations.
 :::
 
 * In person attendance is required (per Faculty of Science guidelines)
