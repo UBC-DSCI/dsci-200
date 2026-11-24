@@ -20,8 +20,8 @@
 |10 Nov 26 |     |Midterm Break |          |
 |12 Nov 26 | Case Study 2 Work Period     |[Slides]()   |          |
 |17 Nov 26 | Data Acquisition II   |[Slides](slides/data-acquisition-web-scraping.qmd)   |           |
-|19 Nov 26 | Data Acquisition III   |[Slides]()  | Case Study 2 Due at 11:59pm     |
-|24 Nov 26 | Data Ownership     |[Slides]()   |  Data Acquisition Worksheet Due at 11:59pm         |
+|19 Nov 26 | Data Acquisition III   |[Slides](slides/data-acquisition-web-scraping.qmd)  | Case Study 2 Due at 11:59pm     |
+|24 Nov 26 | Data Ownership     |[Slides](slides/data-ownership.qmd)   |  Data Acquisition Worksheet Due at 11:59pm         |
 |26 Nov 26 | Data Privacy    |   [Slides]()     |      |
 |01 Dec 26 |  Data Privacy    |[Slides]()   |          |
 |03 Dec 26 | Indigenous Data   | Guest lecture  | Case Study 3 and Data Privacy Worksheet Due **Dec 7th at 11:59pm** |         
